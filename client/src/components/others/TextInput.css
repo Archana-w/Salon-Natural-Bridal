@@ -1,0 +1,37 @@
+.text-input-container{
+
+}
+
+.text-input{
+    overflow: auto;
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 40px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    background: rgb(228, 228, 228);
+}
+
+.text-input input{
+    outline: none;
+    border: none;
+    background: none;
+    width: 100%;
+    font-size: 16px;
+}
+
+.text-input-live-bar{
+    position: absolute;
+    bottom: 0;
+    transition: 0.1s;
+    width: 0%;
+    height: 2px;
+    background: rgb(48, 120, 255);
+}
+
+.text-input input:focus + .text-input-live-bar{
+    width: 100%;
+}
+
