@@ -1,6 +1,7 @@
 var express = require("express");
 var dotenv = require("dotenv");
 var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
 
 var app = express();
 dotenv.config({ path: "./config.env" });
@@ -8,7 +9,14 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 
-
+//connect mongo db
+var DB_URI = process.env.ATLAS_URI;
+var option = { dbName:"sms"};
+mongoose.connect(DB_URI, option).then(()=>{
+    console.log("Database connected!!!");
+}).catch((error)=>{
+    console.log("Db connect failed - "+error);
+});
 
 //default page
 app.get("*",(req,res)=>{
