@@ -4,42 +4,44 @@
     box-shadow: 0px 0.5px 5px 0px gray;
 }
 
-.header-top{
+.header-top {
+    width: 100%;
     height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
 }
 
-.header-top .logo{
+.header-top .logo {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 50px;
 }
 
-.header-top .logo img{
-    height: 25px;
+.header-top .logo img {
+    height: 40px;
     object-fit: cover;
 }
 
-.header-nav{
+.header-nav {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 }
 
-.nav-btn-container{
+.nav-btn-container {
     cursor: pointer;
     padding-top: 15px;
     padding-right: 30px;
 }
 
-.nav-btn-container:hover .nav-btn-normal .nav-btn-active-bar{
+.nav-btn-container:hover .nav-btn-normal .nav-btn-active-bar {
     display: block;
 }
 
-.nav-btn-normal{
+.nav-btn-normal {
     color: gray;
     position: relative;
     height: 30px;
@@ -48,7 +50,7 @@
     font-size: 13px;
 }
 
-.nav-btn-normal .nav-btn-active-bar{
+.nav-btn-normal .nav-btn-active-bar {
     display: none;
     position: absolute;
     bottom: 0;
@@ -60,7 +62,7 @@
 }
 
 .nav-btn-active {
-    color: #243afd;
+    color: black;
     position: relative;
     height: 30px;
     display: flex;
@@ -76,21 +78,46 @@
     height: 4px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
-    background: #243afd;
+    background: black;
 }
 
 .header-top .header-right {
+
     display: flex;
     align-items: center;
 }
 
-.header-button-container{
+/*header signup button*/
+.signup-button {
+
+    width: 100%;
+    height: 40px;
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Poppins';
+}
+
+.signup-button:hover {
+
+    background-color: black;
+}
+
+.div-btn {
+
+    width: 80px;
+    padding: 5px;
+
+}
+
+.header-button-container {
     position: relative;
     padding-left: 5px;
     padding-right: 5px;
 }
 
-.header-button-container .header-button{
+.header-button-container .header-button {
     position: relative;
     cursor: pointer;
     width: 45px;
@@ -114,11 +141,11 @@
     justify-content: center;
 }
 
-.header-button-container .header-button:hover{
+.header-button-container .header-button:hover {
     background: #e6e6e6;
 }
 
-.header-button-badge{
+.header-button-badge {
     position: absolute;
     top: 7px;
     right: 7px;
@@ -128,17 +155,17 @@
     background: red;
 }
 
-.profile{
+.profile {
     padding-left: 20px;
 }
 
-.profile-picture{
+.profile-picture {
     width: 40px;
     height: 40px;
     border-radius: 100%;
 }
 
-.profile-picture img{
+.profile-picture img {
     width: 100%;
     height: 100%;
     border-radius: 100%;
