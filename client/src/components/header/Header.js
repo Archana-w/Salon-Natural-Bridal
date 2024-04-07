@@ -21,16 +21,16 @@ function Header() {
         navigate(id);
     }
 
-    function onCartButtonClick() {
+    function onSignUpButtonClick() {
         navigate("signup");
     }
-    function onSignUpButtonClick() {
+    function onLoginButtonClick() {
         navigate("login");
     }
-    function onLoginButtonClick() {
+    function onNotificationButtonClick() {
         navigate("notification");
     }
-    function onProfileButtonClick() {
+    function onCartButtonClick() {
         navigate("cart");
     }
     return (
@@ -41,16 +41,17 @@ function Header() {
                 </div>
                 <div className="header-right">
 
-                    <div className='div-btn'id="signup" activeId={activePage} onClick={onSignUpButtonClick}>
+                    <div className='div-btn' id="signup" activeId={activePage} onClick={onSignUpButtonClick}>
                         <button className='signup-button'>Sign Up</button>
                     </div>
                     <div className='div-btn' id="login" activeId={activePage} onClick={onLoginButtonClick}>
                         <button className='signup-button'>Login</button>
                     </div>
-                    <HeaderButton id="notification" activeId={activePage} onClick={onCartButtonClick}>
+
+                    <HeaderButton id="notification" activeId={activePage} onClick={onNotificationButtonClick}>
                         <span className="material-icons-outlined">notifications</span>
                     </HeaderButton>
-                    <HeaderButton id="cart" activeId={activePage} onClick={onProfileButtonClick}>
+                    <HeaderButton id="cart" activeId={activePage} onClick={onCartButtonClick}>
                         <span className="material-icons-outlined">shopping_bag</span>
                     </HeaderButton>
 
