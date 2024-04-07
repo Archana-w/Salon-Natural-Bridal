@@ -4,23 +4,26 @@
     font-size: 1.5rem;
     font-weight: bold;
 }
-   
-  .primary-button {
+  .card {
+    box-shadow: 0 0 2px gray;
+  
+  }
+  
+  .primary-button-login {
   
     background-color: black;
     color: white;
     height: 50px;
-    width: 92%;
+    width: 94%;
     font-size: 18px;
     margin-top: 20px;
     margin-bottom: 20px;
-    margin-left: 20px;
+    margin-left: 5px;
     border-radius: 5px;
     border: none  !important;
-   
   }
   
-  .primary-button:hover {
+  .primary-button-login:hover {
   
     background-color: rgb(73, 72, 72);
   
@@ -41,9 +44,9 @@
   
   }
   
-  .bg-image {
+  .bg-image-login {
   
-    background-image: url(../../images/img5.jpg);
+    background-image: url(../../images/img8.jpg);
     width: 100%;
     min-height: 800px;
     background-position: center;
@@ -61,62 +64,51 @@
   
   /*authentication pages*/
   
-  .authentication {
-
+  .authentication-login {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    right: 0;
-    padding-right: 200px;
-    padding-top: 20px;
-  
+    text-align: center;
+    color: black;
   }
   
-  .authentication-form {
-
+  .authentication-form-login {
     background-color: rgba(175, 175, 175, 0.353);
     backdrop-filter:blur(30px);
-    width: 500px;
+    width: 600px;
     color: black;
-    padding: 10px;
     border-radius: 10px;
+    padding: 5px;
     border: none  !important;
     outline: none !important;
     box-shadow: none !important;
-
   }
   
-  .authentication .card-title {
+  .authentication-login.card-title {
     text-align: center;
     color: black;
   }
   
   /* antd override */
-  .signup_input  {
-    background-color: white !important;
-    border: white !important;
-    height: 50px;
-    color: black;
-    font-weight: bold;
-  }
-    
-  .signup_input:focus {
-    
-    outline: none !important;
-    box-shadow: none !important;
-    background-color: rgb(202, 201, 201) !important;
-  }
   
+  .login_input  {
+    background-color: white;
+      border: white !important;
+      height: 50px;
+      color: black;
+      font-weight: bold;
+    }
+    
+    .login_input:focus {
+    
+      outline: none !important;
+      box-shadow: none !important;
+      background-color: rgb(202, 201, 201) !important;
+    }
+    
   .ant-form-item {
     margin: 10px 0 !important;
     padding: 0 20px !important;
     font-weight: bold;
-  
-  }
-  
-  .ant-input {
-  
-    background-color: rgba(0, 0, 0, 0.3);
   }

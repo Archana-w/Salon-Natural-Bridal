@@ -25,7 +25,7 @@ function Header() {
         navigate("/signup"); // This will navigate to the SignUp page when the button is clicked
     }
     function onLoginButtonClick() {
-        navigate("login");
+        navigate("/login");// This will navigate to the Login page when the button is clicked
     }
     function onNotificationButtonClick() {
         navigate("notification");
