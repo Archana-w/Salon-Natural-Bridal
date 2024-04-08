@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '../../App.css'
 import '../../pages/store/Store.css'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
   
  
 import pic3 from '../../images/Store/3.png'
@@ -19,8 +20,7 @@ import pic27 from '../../images/Store/27.png'
 import pic28 from '../../images/Store/28.png'
 import pic25 from '../../images/Store/25.png'
 import pic30 from '../../images/Store/31.png'
- import pic32 from '../../images/Store/banner.jpg'
- import pic34 from '../../images/Store/hair.png'
+  import pic34 from '../../images/Store/hair.png'
  import pic35 from '../../images/Store/skin.png'
  import pic36 from '../../images/Store/lips.png'
 
@@ -28,6 +28,7 @@ import pic30 from '../../images/Store/31.png'
 
 function Store () { 
 
+  
  
  
    const handleProductDetails = () => {
@@ -38,15 +39,12 @@ function Store () {
       
   <body>
 
- 
+  
 <div class ="Search">
      <input type="text" placeholder="Search.." id="myInput" />
       
  </div> 
  <br></br> <br></br>
- 
- 
- 
 
  <div class="dv1">
   <div class="roundicon">
