@@ -3,7 +3,7 @@
     background-color: black;
     position: absolute;
     top: 0;
-    height: 95vh;
+    height: auto;
     padding: 0 20px;
     transition: all 1s;
     left: -100%;
