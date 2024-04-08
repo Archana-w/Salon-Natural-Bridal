@@ -30,11 +30,15 @@ function Header() {
         navigate("/login");// This will navigate to the Login page when the button is clicked
     }
     function onNotificationButtonClick() {
-        navigate("notification");
+        navigate("/notification");
     }
     function onCartButtonClick() {
-        navigate("cart");
+        navigate("/cart");
     }
+    function onSignOutClick(){
+        navigate("/signout");
+    }
+
     return (
         <div className="header">
             <div className="header-top">
@@ -58,6 +62,11 @@ function Header() {
                     ):(
 
                         <>
+
+                                <div className='div-btn' id="signout" onClick={onSignOutClick}>
+                                    <button className='signout-button'>Sign Out</button>
+                                </div>
+                                
                                 <HeaderButton id="notification" activeid={activePage} onClick={onNotificationButtonClick}>
                                     <span className="material-icons-outlined">notifications</span>
                                 </HeaderButton>
@@ -80,8 +89,8 @@ function Header() {
 
                 <HeaderNavButton id="" activeId={activePage} name="Home" onClick={(id) => { navItemClick(id) }} />
                 <HeaderNavButton id="create-app" activeId={activePage} name="Create Appoinment" onClick={(id) => { navItemClick(id) }} />
-                <HeaderNavButton id="store" activeId={activePage} name="Our Store" onClick={(id) => { navItemClick(id) }} />
                 <HeaderNavButton id="service" activeId={activePage} name="Our Service" onClick={(id) => { navItemClick(id) }} />
+                <HeaderNavButton id="store" activeId={activePage} name="Our Store" onClick={(id) => { navItemClick(id) }} />
                 <HeaderNavButton id="contact" activeId={activePage} name="Contact Us" onClick={(id) => { navItemClick(id) }} />
 
             </div>

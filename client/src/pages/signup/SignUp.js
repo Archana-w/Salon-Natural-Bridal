@@ -4,14 +4,25 @@ import React from 'react';
 import { Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import './SignUp.css';
+import {useNavigate} from 'react-router-dom';
 
 
 function SignUp() {
+
+  var navigate = useNavigate();
+
   const onFinish = (values) => {
     axios.post('http://localhost:5000/user/register',values)
       .then(function (response) {
+        
         var data = response.data;
-        alert(JSON.stringify(data));
+        var status = data.status;
+        if(status == "success"){
+          navigate("/login");
+        }else{
+          alert(JSON.stringify(data));
+        }
+
       })
       .catch(function (error) {
         alert(error);
