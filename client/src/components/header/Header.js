@@ -22,10 +22,10 @@ function Header() {
     }
 
     function onSignUpButtonClick() {
-        navigate("signup");
+        navigate("/signup"); // This will navigate to the SignUp page when the button is clicked
     }
     function onLoginButtonClick() {
-        navigate("login");
+        navigate("/login");// This will navigate to the Login page when the button is clicked
     }
     function onNotificationButtonClick() {
         navigate("notification");
@@ -41,17 +41,17 @@ function Header() {
                 </div>
                 <div className="header-right">
 
-                    <div className='div-btn' id="signup" activeId={activePage} onClick={onSignUpButtonClick}>
+                    <div className='div-btn' id="signup" activeid={activePage} onClick={onSignUpButtonClick}>
                         <button className='signup-button'>Sign Up</button>
                     </div>
-                    <div className='div-btn' id="login" activeId={activePage} onClick={onLoginButtonClick}>
+                    <div className='div-btn' id="login" activeid={activePage} onClick={onLoginButtonClick}>
                         <button className='signup-button'>Login</button>
                     </div>
 
-                    <HeaderButton id="notification" activeId={activePage} onClick={onNotificationButtonClick}>
+                    <HeaderButton id="notification" activeid={activePage} onClick={onNotificationButtonClick}>
                         <span className="material-icons-outlined">notifications</span>
                     </HeaderButton>
-                    <HeaderButton id="cart" activeId={activePage} onClick={onCartButtonClick}>
+                    <HeaderButton id="cart" activeid={activePage} onClick={onCartButtonClick}>
                         <span className="material-icons-outlined">shopping_bag</span>
                     </HeaderButton>
 

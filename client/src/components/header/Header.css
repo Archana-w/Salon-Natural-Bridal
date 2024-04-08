@@ -5,7 +5,7 @@
 }
 
 .header-top {
-    width: 100%;
+    
     height: 50px;
     display: flex;
     flex-direction: row;
@@ -95,7 +95,7 @@
     background-color: gray;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     font-family: 'Poppins';
 }
 

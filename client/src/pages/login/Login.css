@@ -1,0 +1,114 @@
+/* common styling */
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+  .card {
+    box-shadow: 0 0 2px gray;
+  
+  }
+  
+  .primary-button-login {
+  
+    background-color: black;
+    color: white;
+    height: 50px;
+    width: 94%;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 5px;
+    border-radius: 5px;
+    border: none  !important;
+  }
+  
+  .primary-button-login:hover {
+  
+    background-color: rgb(73, 72, 72);
+  
+  }
+  
+  .anchor {
+  
+    color: black !important;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+  
+  }
+  
+  .anchor:hover {
+  
+    text-decoration: underline !important;
+  
+  }
+  
+  .bg-image-login {
+  
+    background-image: url(../../images/customer_appointment/login.jpg);
+    width: 100%;
+    min-height: 800px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .para {
+  
+    color: black;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  /*authentication pages*/
+  
+  .authentication-login {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: black;
+  }
+  
+  .authentication-form-login {
+    background-color: rgba(175, 175, 175, 0.353);
+    backdrop-filter:blur(30px);
+    width: 600px;
+    color: black;
+    border-radius: 10px;
+    padding: 5px;
+    border: none  !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  
+  .authentication-login.card-title {
+    text-align: center;
+    color: black;
+  }
+  
+  /* antd override */
+  
+  .login_input  {
+    background-color: white;
+      border: white !important;
+      height: 50px;
+      color: black;
+      font-weight: bold;
+    }
+    
+    .login_input:focus {
+    
+      outline: none !important;
+      box-shadow: none !important;
+      background-color: rgb(202, 201, 201) !important;
+    }
+    
+  .ant-form-item {
+    margin: 10px 0 !important;
+    padding: 0 20px !important;
+    font-weight: bold;
+  }
