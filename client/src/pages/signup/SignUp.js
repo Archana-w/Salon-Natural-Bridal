@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-/*import axios from 'axios';*/
+import axios from 'axios';
 import React from 'react';
 import { Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
@@ -8,8 +8,18 @@ import './SignUp.css';
 
 function SignUp() {
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    axios.post('http://localhost:5000/user/register',values)
+      .then(function (response) {
+        var data = response.data;
+        alert(JSON.stringify(data));
+      })
+      .catch(function (error) {
+        alert(error);
+      });
+
   }
+
+ 
 
   return (
     <div className='bg-image'>
@@ -22,31 +32,30 @@ function SignUp() {
 
           <Form layout='vertical' onFinish={onFinish}>
 
-            <Form.Item label='Name' name='name'
+            <Form.Item label='First Name' name='first_name'
               rules={[
                 {
                   required: true,
-                  message: 'Please input your Name!',
+                  message: 'Please input your First Name!',
                 },
               ]}>
 
-              <Input className='signup_input' placeholder='Name' />
+              <Input className='signup_input' placeholder='First Name' />
 
             </Form.Item>
 
-            <Form.Item label='Address' name='address'
+            <Form.Item label='Last Name' name='last_name'
               rules={[
                 {
                   required: true,
-                  message: 'Please input your Address!',
+                  message: 'Please input your Last Name!',
                 },
               ]}>
 
-              <Input className='signup_input' placeholder='Address' />
+              <Input className='signup_input' placeholder='Last Name' />
 
             </Form.Item>
-
-            <Form.Item label='Contact Number' name='contact number'
+            <Form.Item label='Contact Number' name='mobile_number'
 
               rules={[
                 {
@@ -63,7 +72,7 @@ function SignUp() {
               rules={[
                 {
                   required: true,
-                  message: 'Please input your Contact Email!',
+                  message: 'Please input your Email!',
                 },
               ]}>
 
