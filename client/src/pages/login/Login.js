@@ -4,11 +4,50 @@ import React from 'react';
 import { Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import './Login.css';
+import axios from 'axios';
+import {useCookies} from 'react-cookie';
+import {useNavigate} from 'react-router-dom';
 
 function Login() {
 
+  const[cookies,setCookies] = useCookies(["auth_token","user_type"]);
+  var navigate = useNavigate();
+
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+
+    axios.post("http://localhost:5000/user/login",values).then((response)=>{
+      
+      var data = response.data;
+      var status = data.status;
+      if(status == "success"){
+      
+        var token = data.access_token;
+        var type = data.type;
+
+        //save access token in cookie
+        setCookies("auth_token",token);
+        setCookies("user_type",type);
+
+        //redirect user
+        if(type == "client"){
+          //redirect client home
+          navigate("/");
+        }else if(type == "employee"){
+          //redirect employye home
+        
+        }
+
+      } else if (status == "invalid_user"){
+        var message = data.message;
+        alert(message);
+      }else{
+        alert(JSON.stringify(data));
+      }
+
+    }).catch((error)=>{
+      alert("Error - "+error);
+    });
+
   };
 
   return (
