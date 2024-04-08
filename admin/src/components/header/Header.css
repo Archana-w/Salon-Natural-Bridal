@@ -1,0 +1,40 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: black;
+
+}
+
+header {
+    width: 100%;
+    padding: 30px;
+    background-color: black;
+    height: 40px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+    color: white;
+}
+
+.headerLogo {
+    width: 20%;
+    height: 40px;
+    float: left;
+    padding-left: 20px;
+}
+
+.headerDes {
+    width: 70%;
+    height: 40px;
+    float: left;
+}
+
+.logosalon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    width: 150px;
+
+}
