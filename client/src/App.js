@@ -4,6 +4,7 @@ import Header from './components/header/Header'
 import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
 import SignOut from './pages/signout/SignOut';
+import AdminLogin from './pages/admin_login/AdminLogin';
 
 function App() {
   
@@ -17,7 +18,12 @@ function App() {
       <Routes>
         <Route path="/signup" Component={SignUp} />
         <Route path="/login" Component={Login} />
-        <Route path="signout" Component={SignOut}/>
+        <Route path="/signout" Component={SignOut}/>
+        
+        <Route path="/admin">
+          <Route path=':token' Component={AdminLogin} />
+        </Route>
+
       </Routes>
 
     </BrowserRouter>

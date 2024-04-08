@@ -1,9 +1,11 @@
 var express = require("express");
 var dotenv = require("dotenv");
 var bodyParser = require("body-parser");
+var cors = require('cors');
 var mongoose = require("mongoose");
+var tokenRoute = require("./routes/token_route");
 var userRoute = require("./routes/user_route");
-var cors = require('cors')
+
 
 var app = express();
 dotenv.config({ path: "./config.env" });
@@ -21,7 +23,7 @@ mongoose.connect(DB_URI, option).then(()=>{
 });
 
 //routes
-
+app.use("/token", tokenRoute);
 app.use("/user",userRoute);
 
 

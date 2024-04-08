@@ -24,17 +24,21 @@ function Login() {
         var token = data.access_token;
         var type = data.type;
 
-        //save access token in cookie
-        setCookies("auth_token",token);
-        setCookies("user_type",type);
-
         //redirect user
         if(type == "client"){
+          
+          //save access token in cookie
+          setCookies("auth_token", token);
+          setCookies("user_type", type);
           //redirect client home
           navigate("/");
+
         }else if(type == "employee"){
           //redirect employye home
         
+        }else if(type == "admin"){
+          //redirect admin
+          navigate("/admin/" + token);
         }
 
       } else if (status == "invalid_user"){
