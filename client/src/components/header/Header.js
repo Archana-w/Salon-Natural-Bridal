@@ -6,9 +6,11 @@ import 'material-icons/iconfont/material-icons.css';
 import Logo from '../../images/logo.png';
 import ProfileVector from '../../images/default_profile_vector.webp';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuthToken } from '../../auth';
 
 function Header() {
-
+    
+    var authToken = useAuthToken();
     const [activePage, setActivePage] = useState(null);
     var location = useLocation();
     var navigate = useNavigate();
@@ -41,25 +43,36 @@ function Header() {
                 </div>
                 <div className="header-right">
 
-                    <div className='div-btn' id="signup" activeid={activePage} onClick={onSignUpButtonClick}>
-                        <button className='signup-button'>Sign Up</button>
-                    </div>
-                    <div className='div-btn' id="login" activeid={activePage} onClick={onLoginButtonClick}>
-                        <button className='signup-button'>Login</button>
-                    </div>
+                    {(authToken == null) ? 
+                    (
+                    
+                        <>
+                                <div className='div-btn' id="login" onClick={onLoginButtonClick}>
+                                    <button className='signin-button'>Login</button>
+                                </div>
+                                <div className='div-btn' id="signup" onClick={onSignUpButtonClick}>
+                                    <button className='signup-button'>Sign Up</button>
+                                </div>
+                        </>
 
-                    <HeaderButton id="notification" activeid={activePage} onClick={onNotificationButtonClick}>
-                        <span className="material-icons-outlined">notifications</span>
-                    </HeaderButton>
-                    <HeaderButton id="cart" activeid={activePage} onClick={onCartButtonClick}>
-                        <span className="material-icons-outlined">shopping_bag</span>
-                    </HeaderButton>
+                    ):(
 
-                    <div className="profile">
-                        <div className="profile-picture">
-                            <img src={ProfileVector} />
-                        </div>
-                    </div>
+                        <>
+                                <HeaderButton id="notification" activeid={activePage} onClick={onNotificationButtonClick}>
+                                    <span className="material-icons-outlined">notifications</span>
+                                </HeaderButton>
+                                <HeaderButton id="cart" activeid={activePage} onClick={onCartButtonClick}>
+                                    <span className="material-icons-outlined">shopping_bag</span>
+                                </HeaderButton>
+
+                                <div className="profile">
+                                    <div className="profile-picture">
+                                        <img src={ProfileVector} />
+                                    </div>
+                                </div>
+                        </>
+
+                    )}
 
                 </div>
             </div>

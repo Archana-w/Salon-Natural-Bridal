@@ -88,27 +88,33 @@
 }
 
 /*header signup button*/
-.signup-button {
+.div-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
 
-    width: 100%;
+.signup-button {
+    width: 100px;
     height: 40px;
-    background-color: gray;
+    background-color: rgb(0, 60, 255);
     color: white;
     border: none;
     border-radius: 20px;
     font-family: 'Poppins';
+    cursor: pointer;
 }
 
-.signup-button:hover {
-
-    background-color: black;
-}
-
-.div-btn {
-
-    width: 80px;
-    padding: 5px;
-
+.signin-button {
+    width: 100px;
+    height: 40px;
+    background: none;
+    border: 2px solid rgb(0, 60, 255);
+    color: rgb(0, 60, 255);
+    border-radius: 20px;
+    font-family: 'Poppins';
+    cursor: pointer;
 }
 
 .header-button-container {
