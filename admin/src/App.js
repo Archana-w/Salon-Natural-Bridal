@@ -7,6 +7,7 @@ import Customer from './pages/customer/Customer';
 import Appoinment from './pages/appoinment/Appoinment';
 
 
+
 function App() {
 
 
@@ -22,6 +23,7 @@ function App() {
           <Route path='/adminhome' Component={Adminhome}></Route>
           <Route path='/customer' Component={Customer}></Route>
           <Route path='/appoinment' Component={Appoinment}></Route>
+        
 
         </Routes>
 
