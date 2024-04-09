@@ -6,6 +6,8 @@ import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
 import SignOut from './pages/signout/SignOut';
 import AdminLogin from './pages/admin_login/AdminLogin';
+import Customer_affair from './pages/customer_affair/Customer_affair';
+
 
 function App() {
   
@@ -17,11 +19,13 @@ function App() {
       <Header />
 
       <Routes>
+
         <Route path="/signup" Component={SignUp} />
         <Route path="/login" Component={Login} />
         <Route path="/signout" Component={SignOut}/>
           <Route path="/store" Component={Store}/>
-        
+          <Route path="/contact" Component={Customer_affair} />
+    
         <Route path="/admin">
           <Route path=':token' Component={AdminLogin} />
         </Route>
