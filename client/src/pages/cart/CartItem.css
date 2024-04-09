@@ -14,12 +14,14 @@
 .product-image{
     width: 75px;
     height: 75px;
+    border: 1px solid silver;
     border-radius: 20px;
     background-size: cover;
     background-position: center;
 }
 
 .product-details{
+    width: 30%;
     flex-grow: 2;
     padding-left: 20px;
 }
