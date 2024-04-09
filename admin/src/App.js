@@ -32,7 +32,7 @@ function App() {
       <div className='main'>
 
         <Routes>
-          <Route path="login/:token" Component={Login} />
+          <Route path="/login/:token" Component={Login} />
           <Route path="/signout" Component={SignOut} />
           <Route path='/adminhome' Component={Adminhome}></Route>
           <Route path='/customer' Component={Customer}></Route>
