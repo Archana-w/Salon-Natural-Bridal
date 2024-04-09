@@ -41,7 +41,7 @@ function Store () {
 
   
 <div class ="Search">
-     <input type="text" placeholder="Search.." id="myInput" />
+     <input className='storeinput'type="text" placeholder="Search.." id="myInput" />
       
  </div> 
  <br></br> <br></br>
