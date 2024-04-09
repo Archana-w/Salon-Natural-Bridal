@@ -5,6 +5,7 @@ var cors = require('cors');
 var mongoose = require("mongoose");
 var tokenRoute = require("./routes/token_route");
 var userRoute = require("./routes/user_route");
+var productRoute = require("./routes/product_route")
 
 
 var app = express();
@@ -25,6 +26,7 @@ mongoose.connect(DB_URI, option).then(()=>{
 //routes
 app.use("/token", tokenRoute);
 app.use("/user",userRoute);
+app.use("/product", productRoute);
 
 
 //default page
