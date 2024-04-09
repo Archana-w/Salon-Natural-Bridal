@@ -1,0 +1,62 @@
+.sidenav {
+    width: 220px;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    height: auto;
+    padding: 0 20px;
+    transition: all 1s;
+    left: -100%;
+    margin-top: 96px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+.sidenav.active {
+    left: 0;
+}
+
+ul {
+    padding: 0;
+
+}
+
+ul li {
+    list-style-type: none;
+    margin: 20px 0;
+}
+
+ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+ul li a:hover,
+ul li a.active {
+
+    background-color: rgb(175, 174, 174, 0.4);
+}
+
+.dropdown-menu {
+
+    padding: 5px;
+    border-radius: 6px;
+
+}
+
+.employee_div {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+.dropdown-arrow {
+
+    margin-left: 80px;
+}
