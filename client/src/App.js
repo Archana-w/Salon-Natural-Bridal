@@ -6,9 +6,10 @@ import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
 import SignOut from './pages/signout/SignOut';
 import AdminLogin from './pages/admin_login/AdminLogin';
+import Home from './pages/home/Home';
 
 function App() {
-  
+
   //<Route path="/" Component={Home} />
 
   return (
@@ -19,9 +20,10 @@ function App() {
       <Routes>
         <Route path="/signup" Component={SignUp} />
         <Route path="/login" Component={Login} />
-        <Route path="/signout" Component={SignOut}/>
-          <Route path="/store" Component={Store}/>
-        
+        <Route path="/signout" Component={SignOut} />
+        <Route path="/store" Component={Store} />
+        <Route path="/" Component={Home} />
+
         <Route path="/admin">
           <Route path=':token' Component={AdminLogin} />
         </Route>
