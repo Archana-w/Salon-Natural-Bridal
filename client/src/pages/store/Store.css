@@ -1,9 +1,9 @@
-.Search{
+.Searchbar{
   padding-left: 1050px;
   padding-top: 10px;
   }
 
-  input[type = text]{
+  .inSearch{
     width: 250px;
     padding: 15px;
     border-radius: 20px;
@@ -68,10 +68,10 @@ div.gallery {
     
   }
 
-  h1{
+  .heading{
       font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
      text-align: center;
-     padding-top: 20px;
+     padding-top: 10px;
   }
 
 

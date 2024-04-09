@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/header/Header'
 import Store from './pages/store/Store';
+import ProductDetails from './pages/store/ProductDetails';
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
 
       <Routes>
       <Route path="/store" Component={Store}/>
-
+      <Route path ="/store/ProductDetails" Component={ProductDetails}/>
+ 
       </Routes>
 
     </BrowserRouter>

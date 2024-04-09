@@ -32,7 +32,7 @@ function Store () {
  
  
    const handleProductDetails = () => {
-     window.location.href = '/store/productDetails';
+     window.location.href = '/store/ProductDetails';
    };
     
     return (
@@ -40,8 +40,8 @@ function Store () {
   <body>
 
   
-<div class ="Search">
-     <input type="text" placeholder="Search.." id="myInput" />
+<div class ="Searchbar">
+     <input type="text" class="inSearch" placeholder="Search.." id="myInput" />
       
  </div> 
  <br></br> <br></br>
@@ -70,7 +70,7 @@ function Store () {
 
 <hr></hr>
 
-  <h1>Skin Care Products</h1>
+  <h1 class="heading">Skin Care Products</h1>
 
  <div class="gallery">
    <a target="_blank" href="C:\Users\User\Desktop\Project1\SalonManagementSystem\client\src\images\Store\3.png">
@@ -79,7 +79,7 @@ function Store () {
   <p>Facial Wash</p>
   <p>Rs.650</p>
   <div class="desc"> 
-  <Link to="/productDetails">
+  <Link to="/ProductDetails">
   <button class="button b6" onClick={handleProductDetails}>Place Order</button>
   </Link>
   </div>
@@ -93,8 +93,9 @@ function Store () {
   <p>Facial Scrub</p>
   <p>Rs.2950</p>
   <div class="desc"> 
-  <button class="button b7">Place Order</button>
-  </div>
+  <Link to="/ProductDetails">
+  <button class="button b7" onClick={handleProductDetails}>Place Order</button>
+  </Link>  </div>
 </div>
 
 <div class="gallery">
@@ -106,8 +107,9 @@ function Store () {
   <p>Gold Face Mask</p>
   <p>Rs.900</p>
   <div class="desc"> 
-  <button class="button b8">Place Order</button>
-  </div>
+  <Link to="/ProductDetails">
+  <button class="button b8" onClick={handleProductDetails}>Place Order</button>
+  </Link>  </div>
 </div>
 
 <div class="gallery">
@@ -117,8 +119,9 @@ function Store () {
   <p>Specialist Toner</p>
   <p>Rs.3600</p>
   <div class="desc"> 
-  <button class="button b9">Place Order</button>
-  </div>
+  <Link to="/ProductDetails">
+  <button class="button b9" onClick={handleProductDetails}>Place Order</button>
+  </Link>  </div>
 </div>
  
 <div class="gallery">
@@ -130,8 +133,9 @@ function Store () {
   <p>Face Mask & Face Pack</p>
   <p>Rs.1850</p>
   <div class="desc"> 
-  <button class="button b10">Place Order</button>
-  </div>
+  <Link to="/ProductDetails">
+  <button class="button b10" onClick={handleProductDetails}>Place Order</button>
+  </Link>  </div>
 </div>
 
 <div class="gallery">
@@ -143,12 +147,13 @@ function Store () {
   <p>Face & Body Scrub</p>
   <p>Rs.1650</p>
   <div class="desc"> 
-  <button class="button b11">Place Order</button>
-  </div>
+  <Link to="/ProductDetails">
+  <button class="button b11" onClick={handleProductDetails}>Place Order</button>
+  </Link>  </div>
 </div>
 <br></br>
 <br></br>
-<h1>Hair Care Products</h1>
+<h1 class="heading">Hair Care Products</h1>
 
 <div class="gallery">
   <a target="_blank" href="C:\Users\User\Desktop\Project1\SalonManagementSystem\client\src\images\Store\14.png">
@@ -157,8 +162,9 @@ function Store () {
   <p>Anti-Dandruff Shampoo</p>
   <p>Rs.690</p>
   <div class="desc"> 
-  <button class="button b1 ">Place Order</button>
-  </div>
+  <Link to="/ProductDetails">
+  <button class="button b1" onClick={handleProductDetails}>Place Order</button>
+  </Link>  </div>
   </div>
 
  <div class="gallery">
@@ -168,8 +174,9 @@ function Store () {
   <p>Color Rescue Shampoo</p>
   <p>Rs.790</p>
    <div class="desc"> 
-  <button class="button b16">Place Order</button>
-  </div>
+   <Link to="/ProductDetails">
+  <button class="button b16" onClick={handleProductDetails}>Place Order</button>
+  </Link>  </div>
  </div>
 
 <div class="gallery">
@@ -178,8 +185,9 @@ function Store () {
   </a>
   <p>Keratin Shampoo</p>
   <p>Rs.630</p>  <div class="desc"> 
-  <button class="button b2">Place Order</button>
-  </div>
+  <Link to="/ProductDetails">
+  <button class="button b2" onClick={handleProductDetails}>Place Order</button>
+  </Link>  </div>
 </div>
 
 <div class="gallery">
@@ -191,8 +199,9 @@ function Store () {
   <p>Hair Serum</p>
   <p>Rs.650</p>
   <div class="desc"> 
-  <button class="button b3">Place Order</button>
-  </div>
+  <Link to="/ProductDetails">
+  <button class="button b3" onClick={handleProductDetails}>Place Order</button>
+  </Link>  </div>
   </div>
  
 <div class="gallery">
@@ -204,8 +213,9 @@ function Store () {
   <p>Hair Straightener Cream</p>
   <p>Rs.1800</p>
   <div class="desc"> 
-  <button class="button b4">Place Order</button>
-  </div>
+  <Link to="/ProductDetails">
+  <button class="button b4" onClick={handleProductDetails}>Place Order</button>
+  </Link>  </div>
 </div>
 
 <div class="gallery">
@@ -217,12 +227,13 @@ function Store () {
   <p>Hair Gel</p>
   <p>Rs.3500</p>
   <div class="desc"> 
-  <button class="button b5">Place Order</button>
-  </div>
+  <Link to="/ProductDetails">
+  <button class="button b5" onClick={handleProductDetails}>Place Order</button>
+  </Link>  </div>
 </div>
 
 <br></br><br></br>
- <h1>Lips Care Products</h1>
+ <h1 class="heading">Lips Care Products</h1>
 
 
 <div class="gallery">
@@ -233,8 +244,9 @@ function Store () {
   <p>Lip Balm</p>
   <p>Rs.1480</p>
   <div class="desc"> 
-  <button class="button b12">Place Order</button>
-  </div>
+  <Link to="/ProductDetails">
+  <button class="button b12" onClick={handleProductDetails}>Place Order</button>
+  </Link>  </div>
 </div>
 
  <div class="gallery">
@@ -246,8 +258,9 @@ function Store () {
   <p>Vseline Lip Balm</p>
   <p>Rs.300</p>
   <div class="desc"> 
-  <button class="button b13">Place Order</button>
-  </div>
+  <Link to="/ProductDetails">
+  <button class="button b13" onClick={handleProductDetails}>Place Order</button>
+  </Link>  </div>
 </div>
 
  
@@ -260,8 +273,9 @@ function Store () {
   <p>Lipstick</p>
   <p>Rs.1000</p>
     <div class="desc"> 
-  <button class="button b14">Place Order</button>
-  </div>
+    <Link to="/ProductDetails">
+  <button class="button b14" onClick={handleProductDetails}>Place Order</button>
+  </Link>  </div>
 </div>
 
 

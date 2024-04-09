@@ -1,0 +1,54 @@
+.image{
+    background-image: url( 'C:\Users\Udeshika Balasooriya\Desktop\salon\Salon-Natural-Bridal\client\src\images\Store/bg2.jpg');
+    background-size: cover; /* Cover the entire component */
+    background-position: center; /* Center the background image */
+    padding: 10px; /* Add padding as needed */
+     
+ }
+
+ .topic{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+ }
+form {
+     max-width: 600px;
+    margin: 20px auto;
+    padding: 40px;
+    background-color: #dadadac2;
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.form-group {
+    margin-bottom: 10px;
+}
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+.inarea{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.btn {
+    padding: 10px 30px;
+    background-color: #0e1011;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 250px;
+ }
+button[type="submit"] {
+    background-color: #7e8083;
+
+}
+ 
+button:hover {
+    background-color: #090b0c;
+}
