@@ -9,7 +9,7 @@ function SignOut(){
 
     useEffect(function(){
 
-        setCookies("auth_token", null);
+        setCookies("admin_auth_token", null);
 
         //redirect login
         window.location.href = "http://localhost:3000/login";
