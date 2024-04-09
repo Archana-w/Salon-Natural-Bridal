@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Login(){
 
-    const [cookies, setCookies] = useCookies(["auth_token"]);
+    const [cookies, setCookies] = useCookies(["admin_auth_token"]);
     var params = useParams();
     var navigate = useNavigate();
 
@@ -25,7 +25,7 @@ function Login(){
                 var type = user.type;
 
                 if(type == "admin"){
-                    setCookies("auth_token", token);
+                    setCookies("admin_auth_token", token);
                     navigate("/");
                 }else{
                     alert("You can not access.");

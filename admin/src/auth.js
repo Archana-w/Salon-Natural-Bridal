@@ -2,7 +2,7 @@ import { useCookies } from 'react-cookie';
 
 function useAuthToken(){
 
-    const[cookies,setCookies] = useCookies(["auth_token"]);
+    const [cookies, setCookies] = useCookies(["admin_auth_token"]);
     var authToken = cookies.auth_token;
     
     if(authToken == undefined){
