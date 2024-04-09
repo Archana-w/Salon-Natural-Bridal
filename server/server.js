@@ -8,7 +8,8 @@ var Device = require("./models/Device");
 var User = require("./models/User");
 var tokenRoute = require("./routes/token_route");
 var userRoute = require("./routes/user_route");
-var productRoute = require("./routes/product_route")
+var productRoute = require("./routes/product_route");
+var cartRoute = require("./routes/cart_route");
 
 
 var app = express();
@@ -83,6 +84,7 @@ app.use((req, res, next) => {
 app.use("/token", tokenRoute);
 app.use("/user",userRoute);
 app.use("/product", productRoute);
+app.use("/cart", cartRoute);
 
 //give access image 
 app.get("/image/:imageName", (req, res) => {

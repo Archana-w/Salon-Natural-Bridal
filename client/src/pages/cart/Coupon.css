@@ -1,0 +1,21 @@
+.coupon-container{
+    padding-left: 20px;
+}
+
+.coupon{
+    border-radius: 40px;
+    background: #f3f3f3;
+}
+
+.coupon-content{
+    padding: 40px;
+}
+
+.checkoutsummery-content h3 {
+    padding-bottom: 20px;
+}
+
+.coupon-text{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}

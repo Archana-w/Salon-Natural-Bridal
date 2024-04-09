@@ -67,10 +67,10 @@ function Header() {
                                     <button className='signout-button'>Sign Out</button>
                                 </div>
                                 
-                                <HeaderButton id="notification" activeid={activePage} onClick={onNotificationButtonClick}>
+                                <HeaderButton id="notification" activeId={activePage} onClick={onNotificationButtonClick}>
                                     <span className="material-icons-outlined">notifications</span>
                                 </HeaderButton>
-                                <HeaderButton id="cart" activeid={activePage} onClick={onCartButtonClick}>
+                                <HeaderButton id="cart" activeId={activePage} onClick={onCartButtonClick}>
                                     <span className="material-icons-outlined">shopping_bag</span>
                                 </HeaderButton>
 
