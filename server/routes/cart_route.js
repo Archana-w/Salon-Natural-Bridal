@@ -14,6 +14,7 @@ router.route("/get").post((req,res)=>{
 
             var array = new Array();
 
+            var t = 0;
             for(i = 0; i < doc.length; i++){
 
                 var item = doc[i];
@@ -22,14 +23,16 @@ router.route("/get").post((req,res)=>{
                 obj.quantity = item.quantity;
                 obj.total = item.total;
 
+                t = t + Number(item.total);
+
                 const productId = item.product_id;
-               
                 const product = await Product.findOne({_id:productId});
                 obj.product = product;
                 array.push(obj);
+
             }
-            
-            res.send(array);
+
+            res.send({ status: "success", cart: { total: t, item: array } });
 
         }).catch((e)=>{
             res.send("error - "+e);

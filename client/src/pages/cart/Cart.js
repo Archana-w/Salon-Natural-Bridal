@@ -1,6 +1,6 @@
 import './Cart.css';
 import CartItem from './CartItem';
-import Coupon from './Coupon';
+import EmptyCartIllustration from '../../images/illustration/empty_cart.webp';
 import CheckOut from './CheckOut';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
@@ -10,22 +10,46 @@ import { useAuthToken } from '../../auth';
 
 function Cart(){
 
+    var shippingCost = 375;
     var token = useAuthToken();
-    var nav = useNavigate();
+    var navigate = useNavigate();
     const [total,setTotal] = useState(0);
     const [isLoading,setLoading] = useState(true);
     const [cartData,setCartData] = useState([]);
     const [update,setUpdate] = useState(1);
 
-    var totalPrice = "Rs "+total;
+    var esTotal = 0;
+    if(total > 0){
+        esTotal = shippingCost + total;
+    }
 
     useEffect(()=>{
 
-        axios.post("http://localhost:5000/cart/get", { token: token }).then((response)=>{
-            var data = response.data;
-            setCartData(data);
-            setLoading(false);
-        });
+        if (token != null){
+
+            axios.post("http://localhost:5000/cart/get", { token: token }).then((response) => {
+
+                var data = response.data;
+                var status = data.status;
+                if (status == "success") {
+                    var cart = data.cart;
+                    setTotal(cart.total);
+                    setCartData(cart.item);
+                    setLoading(false);
+                } else if (status == "token_expired" || status == "auth_failed") {
+                    navigate("/signout");
+                }else{
+                    var message = data.message;
+                    alert("Error - " + message);
+                }
+
+            }).catch((error)=>{
+                alert("Error 2 - "+error);
+            });
+
+        }else{
+            navigate("/login");
+        }
 
     }, [update]);
 
@@ -46,9 +70,25 @@ function Cart(){
 
     }
 
+    function deleteCartItem(cartId){
+        
+        setLoading(true);
+        axios.post("http://localhost:5000/cart/delete", { token: token, id: cartId}).then((response) => {
+            var data = response.data;
+            var status = data.status;
+            if (status == "success") {
+                setUpdate(update + 1);
+            }
+        });
+
+    }
+
     function onCheckoutClick(){
-        nav("/cart");
-        setTotal(total+1);
+        if (total > 0){
+            navigate("/checkout");
+        }else{
+            alert("Please add your item in to the cart.");
+        }
     }
 
     if(isLoading){
@@ -70,30 +110,41 @@ function Cart(){
                 <div className="cart-content">
                     <div className="cart-item-container">
 
-                        {cartData.map((item)=>
+                        {(cartData.length == 0)?(
 
-                            <CartItem
-                                onAddQut={() => updateProductQut(item.cart_id, Number(item.quantity)+1)}
-                                onRemoveQut={() => updateProductQut(item.cart_id, Number(item.quantity) - 1)}
-                                key={item.cart_id}
-                                thumbnail={item.product.thumbnail}
-                                name={item.product.product_name}
-                                price={item.product.price}
-                                total={item.total}
-                                quantity={item.quantity}
+                            <div className="cart_empty_container">
+                                <img src={EmptyCartIllustration} />
+                                <label>Cart Empty</label>
+                            </div>
+
+                        ):(
+
+                            cartData.map((item) =>
+
+                                <CartItem
+                                    onDelete={() => deleteCartItem(item.cart_id)}
+                                    onAddQut={() => updateProductQut(item.cart_id, Number(item.quantity) + 1)}
+                                    onRemoveQut={() => updateProductQut(item.cart_id, Number(item.quantity) - 1)}
+                                    key={item.cart_id}
+                                    thumbnail={item.product.thumbnail}
+                                    name={item.product.product_name}
+                                    price={item.product.price}
+                                    total={item.total}
+                                    quantity={item.quantity}
                                 />
+                            )
+
                         )}
 
                     </div>
                     <div className="cart-right">
 
                         <CheckOut
-                            shippingCost="Rs 375"
-                            totalCost={totalPrice}
+                            esTotal={esTotal}
+                            shippingCost={375}
+                            totalCost={total}
                             onCheckoutClick={onCheckoutClick}
                         />
-
-                        <Coupon />
 
                     </div>
                 </div>

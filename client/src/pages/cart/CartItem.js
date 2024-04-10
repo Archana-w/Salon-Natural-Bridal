@@ -1,7 +1,7 @@
 import ImageButton from '../../components/others/ImageButton';
 import './CartItem.css';
 
-function CartItem({ thumbnail, name, price, total, quantity, onAddQut = null, onRemoveQut = null }){
+function CartItem({ thumbnail, name, price, total, quantity, onDelete = null, onAddQut = null, onRemoveQut = null }){
 
     var productName = "";
     if(name.length > 50){
@@ -19,6 +19,12 @@ function CartItem({ thumbnail, name, price, total, quantity, onAddQut = null, on
     function onClickRemoveQutBtn() {
         if (onRemoveQut != null) {
             onRemoveQut();
+        }
+    }
+
+    function onClickDeleteBtn(){
+        if (onDelete != null){
+            onDelete();
         }
     }
 
@@ -48,7 +54,7 @@ function CartItem({ thumbnail, name, price, total, quantity, onAddQut = null, on
                     </div>
                     <div className="product-action">
 
-                        <ImageButton background="#ffaaaa" backgroundActive="#fa8d8d">
+                        <ImageButton onClick={onClickDeleteBtn} background="#ffaaaa" backgroundActive="#fa8d8d">
                             <span className="material-icons-outlined">delete</span>
                         </ImageButton>
 
