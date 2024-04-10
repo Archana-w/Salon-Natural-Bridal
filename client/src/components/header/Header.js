@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthToken } from '../../auth';
 
 function Header() {
-    
+
     var authToken = useAuthToken();
     const [activePage, setActivePage] = useState(null);
     var location = useLocation();
@@ -35,8 +35,11 @@ function Header() {
     function onCartButtonClick() {
         navigate("/cart");
     }
-    function onSignOutClick(){
+    function onSignOutClick() {
         navigate("/signout");
+    }
+    function onProfileButtonClick() {
+        navigate("/profile");
     }
 
     return (
@@ -47,26 +50,25 @@ function Header() {
                 </div>
                 <div className="header-right">
 
-                    {(authToken == null) ? 
-                    (
-                    
-                        <>
+                    {(authToken == null) ?
+                        (
+
+                            <>
                                 <div className='div-btn' id="login" onClick={onLoginButtonClick}>
                                     <button className='signin-button'>Login</button>
                                 </div>
                                 <div className='div-btn' id="signup" onClick={onSignUpButtonClick}>
                                     <button className='signup-button'>Sign Up</button>
                                 </div>
-                        </>
+                            </>
 
-                    ):(
+                        ) : (
 
-                        <>
+                            <>
 
                                 <div className='div-btn' id="signout" onClick={onSignOutClick}>
                                     <button className='signout-button'>Sign Out</button>
                                 </div>
-                                
                                 <HeaderButton id="notification" activeId={activePage} onClick={onNotificationButtonClick}>
                                     <span className="material-icons-outlined">notifications</span>
                                 </HeaderButton>
@@ -74,14 +76,14 @@ function Header() {
                                     <span className="material-icons-outlined">shopping_bag</span>
                                 </HeaderButton>
 
-                                <div className="profile">
+                                <div className="profile" onClick={onProfileButtonClick}>
                                     <div className="profile-picture">
                                         <img src={ProfileVector} />
                                     </div>
                                 </div>
-                        </>
+                            </>
 
-                    )}
+                        )}
 
                 </div>
             </div>
@@ -91,7 +93,7 @@ function Header() {
                 <HeaderNavButton id="create-app" activeId={activePage} name="Create Appoinment" onClick={(id) => { navItemClick(id) }} />
                 <HeaderNavButton id="service" activeId={activePage} name="Our Service" onClick={(id) => { navItemClick(id) }} />
                 <HeaderNavButton id="store" activeId={activePage} name="Our Store" onClick={(id) => { navItemClick(id) }} />
-                 <HeaderNavButton id="contact" activeId={activePage} name="Contact Us" onClick={(id) => { navItemClick(id) }} />
+                <HeaderNavButton id="contact" activeId={activePage} name="Contact Us" onClick={(id) => { navItemClick(id) }} />
 
             </div>
         </div>

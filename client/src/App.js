@@ -9,6 +9,8 @@ import AdminLogin from './pages/admin_login/AdminLogin';
 import Home from './pages/home/Home';
 import Cart from './pages/cart/Cart';
 import Checkout from './pages/checkout/Checkout';
+import Profile from './pages/profile/Profile';
+
 
 function App() {
 
@@ -27,7 +29,8 @@ function App() {
         <Route path="/" Component={Home} />
         <Route path="/cart" Component={Cart}/>
         <Route path="/checkout" Component={Checkout}/>
-
+        <Route path="/profile" Component={Profile} />
+        
         <Route path="/admin">
           <Route path=':token' Component={AdminLogin} />
         </Route>

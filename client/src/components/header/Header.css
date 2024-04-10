@@ -179,6 +179,7 @@
 
 .profile {
     padding-left: 20px;
+    cursor: pointer;
 }
 
 .profile-picture {
