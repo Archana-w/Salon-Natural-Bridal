@@ -10,6 +10,7 @@ var tokenRoute = require("./routes/token_route");
 var userRoute = require("./routes/user_route");
 var productRoute = require("./routes/product_route");
 var cartRoute = require("./routes/cart_route");
+var checkoutRoute = require("./routes/checkout_route");
 
 
 var app = express();
@@ -85,6 +86,7 @@ app.use("/token", tokenRoute);
 app.use("/user",userRoute);
 app.use("/product", productRoute);
 app.use("/cart", cartRoute);
+app.use("/checkout", checkoutRoute);
 
 //give access image 
 app.get("/image/:imageName", (req, res) => {

@@ -1,10 +1,10 @@
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
-function Login(){
+function Login() {
 
     const [cookies, setCookies] = useCookies(["admin_auth_token"]);
     var params = useParams();
@@ -12,10 +12,11 @@ function Login(){
 
     const token = params.token;
 
-    useEffect(()=>{
-        
+    useEffect(() => {
+
         //validate token
-        axios.post("http://localhost:5000/token/validate",{token:token}).then((response)=>{
+        /*
+        axios.post("http://localhost:5000/token/validate", { token: token }).then((response) => {
 
             var data = response.data;
             var status = data.status;
@@ -24,10 +25,10 @@ function Login(){
                 var user = data.user;
                 var type = user.type;
 
-                if(type == "admin"){
+                if (type == "admin") {
                     setCookies("admin_auth_token", token);
                     navigate("/");
-                }else{
+                } else {
                     alert("You can not access.");
                 }
 
@@ -38,13 +39,14 @@ function Login(){
                 alert(JSON.stringify(data));
             }
 
-        }).catch((error)=>{
-            alert("Error - "+error);
+        }).catch((error) => {
+            alert("Error - " + error);
         });
+        */
 
     });
 
-    return(
+    return (
         <>
             Auto login....
         </>
