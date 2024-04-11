@@ -10,7 +10,7 @@ import {useNavigate} from 'react-router-dom';
 
 function Login() {
 
-  const[cookies,setCookies] = useCookies(["auth_token","user_type"]);
+  const [cookies, setCookies] = useCookies(["auth_token", "user_type", "admin_auth_token"]);
   var navigate = useNavigate();
 
   const onFinish = (values) => {
@@ -38,7 +38,8 @@ function Login() {
         
         }else if(type == "admin"){
           //redirect admin
-          navigate("/admin/" + token);
+          setCookies("admin_auth_token", token);
+          window.location.href = "http://localhost:3001/";
         }
 
       } else if (status == "invalid_user"){

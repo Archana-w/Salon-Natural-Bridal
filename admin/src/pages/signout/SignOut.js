@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 function SignOut(){
 
-    const[cookies,setCookies] = useCookies(["auth_token"]);
+    const [cookies, setCookies] = useCookies(["admin_auth_token"]);
     var navigate = useNavigate();
 
     useEffect(function(){

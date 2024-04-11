@@ -1,7 +1,6 @@
 import './App.css';
 import {useState} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './pages/login/Login';
 import Header from './components/header/Header';
 import Adminhome from './pages/adminhome/Adminhome';
 import Customer from './pages/customer/Customer';
@@ -15,10 +14,7 @@ import Emp_leaves from './pages/emp_leaves/Emp_leaves';
 
 function App() {
 
-  const[isOpenNavMenu,setNavMenuOpen] = useState(false);
-
   var token = useAuthToken();
-  /*
   if(token == null){
     return(
       <>
@@ -26,19 +22,17 @@ function App() {
       </>
     );
   }
-  */
 
   return (
 
     <BrowserRouter>
     
-      <Header
-        setSideMenuState={setNavMenuOpen}/>
+      <Header/>
 
       <div className='main'>
 
         <Routes>
-          <Route path="/login/:token" Component={Login} />
+
           <Route path="/signout" Component={SignOut} />
           <Route path='/adminhome' Component={Adminhome}></Route>
           <Route path='/customer' Component={Customer}></Route>

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import logosalon from '../../images/logo.png'
 
 
-function Header({setSideMenuState}) {
+function Header() {
 
   var menu = [
     {
