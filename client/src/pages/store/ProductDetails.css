@@ -10,15 +10,23 @@
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
  }
-form {
-     max-width: 600px;
-    margin: 20px auto;
-    padding: 40px;
+ .formout{
+    max-width: 600px;
+    margin: 10px auto;
+    padding: 35px;
     background-color: #dadadac2;
     border-radius: 10px;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', seri
+ }
+form {
+     max-width: 600px;
+     padding: 25px;
+    background-color: #beb9b9;
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
+  }
 .form-group {
     margin-bottom: 10px;
 }
@@ -45,10 +53,11 @@ label {
     margin-left: 250px;
  }
 button[type="submit"] {
-    background-color: #7e8083;
+    background-color: #090b0c;
 
 }
  
 button:hover {
-    background-color: #090b0c;
+    background-color: #7e8083;
+
 }

@@ -31,9 +31,10 @@ function ProductDetails(){
   
       return (
         <div class="image">
+        <div class="formout">
+        <h1 class="topic"> Place Order Product</h1>
 
           <form id="productForm" onSubmit={handleSubmit}>
-            <h1 class="topic"> Place Order Product</h1>
               <div className="form-group">
                   <label for ="productName">Name:</label>
                   <input type="text" class="inarea" id="productName" name="productName" value={productName} onChange={(e) => setProductName(e.target.value)} required />
@@ -61,6 +62,7 @@ function ProductDetails(){
                   <button type="submit" class="btn">Save</button><br /><br />
               </div>
           </form>
+          </div>
           </div>
       );
   };
