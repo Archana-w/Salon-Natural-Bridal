@@ -6,9 +6,11 @@ import 'material-icons/iconfont/material-icons.css';
 import Logo from '../../images/logo.png';
 import ProfileVector from '../../images/default_profile_vector.webp';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuthToken } from '../../auth';
 
 function Header() {
-
+    
+    var authToken = useAuthToken();
     const [activePage, setActivePage] = useState(null);
     var location = useLocation();
     var navigate = useNavigate();
@@ -22,17 +24,21 @@ function Header() {
     }
 
     function onSignUpButtonClick() {
-        navigate("signup");
+        navigate("/signup"); // This will navigate to the SignUp page when the button is clicked
     }
     function onLoginButtonClick() {
-        navigate("login");
+        navigate("/login");// This will navigate to the Login page when the button is clicked
     }
     function onNotificationButtonClick() {
-        navigate("notification");
+        navigate("/notification");
     }
     function onCartButtonClick() {
-        navigate("cart");
+        navigate("/cart");
     }
+    function onSignOutClick(){
+        navigate("/signout");
+    }
+
     return (
         <div className="header">
             <div className="header-top">
@@ -41,25 +47,41 @@ function Header() {
                 </div>
                 <div className="header-right">
 
-                    <div className='div-btn' id="signup" activeId={activePage} onClick={onSignUpButtonClick}>
-                        <button className='signup-button'>Sign Up</button>
-                    </div>
-                    <div className='div-btn' id="login" activeId={activePage} onClick={onLoginButtonClick}>
-                        <button className='signup-button'>Login</button>
-                    </div>
+                    {(authToken == null) ? 
+                    (
+                    
+                        <>
+                                <div className='div-btn' id="login" onClick={onLoginButtonClick}>
+                                    <button className='signin-button'>Login</button>
+                                </div>
+                                <div className='div-btn' id="signup" onClick={onSignUpButtonClick}>
+                                    <button className='signup-button'>Sign Up</button>
+                                </div>
+                        </>
 
-                    <HeaderButton id="notification" activeId={activePage} onClick={onNotificationButtonClick}>
-                        <span className="material-icons-outlined">notifications</span>
-                    </HeaderButton>
-                    <HeaderButton id="cart" activeId={activePage} onClick={onCartButtonClick}>
-                        <span className="material-icons-outlined">shopping_bag</span>
-                    </HeaderButton>
+                    ):(
 
-                    <div className="profile">
-                        <div className="profile-picture">
-                            <img src={ProfileVector} />
-                        </div>
-                    </div>
+                        <>
+
+                                <div className='div-btn' id="signout" onClick={onSignOutClick}>
+                                    <button className='signout-button'>Sign Out</button>
+                                </div>
+                                
+                                <HeaderButton id="notification" activeid={activePage} onClick={onNotificationButtonClick}>
+                                    <span className="material-icons-outlined">notifications</span>
+                                </HeaderButton>
+                                <HeaderButton id="cart" activeid={activePage} onClick={onCartButtonClick}>
+                                    <span className="material-icons-outlined">shopping_bag</span>
+                                </HeaderButton>
+
+                                <div className="profile">
+                                    <div className="profile-picture">
+                                        <img src={ProfileVector} />
+                                    </div>
+                                </div>
+                        </>
+
+                    )}
 
                 </div>
             </div>
@@ -67,6 +89,7 @@ function Header() {
 
                 <HeaderNavButton id="" activeId={activePage} name="Home" onClick={(id) => { navItemClick(id) }} />
                 <HeaderNavButton id="create-app" activeId={activePage} name="Create Appoinment" onClick={(id) => { navItemClick(id) }} />
+                <HeaderNavButton id="service" activeId={activePage} name="Our Service" onClick={(id) => { navItemClick(id) }} />
                 <HeaderNavButton id="store" activeId={activePage} name="Our Store" onClick={(id) => { navItemClick(id) }} />
                  <HeaderNavButton id="contact" activeId={activePage} name="Contact Us" onClick={(id) => { navItemClick(id) }} />
 

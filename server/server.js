@@ -1,13 +1,17 @@
 var express = require("express");
 var dotenv = require("dotenv");
 var bodyParser = require("body-parser");
+var cors = require('cors');
 var mongoose = require("mongoose");
+var tokenRoute = require("./routes/token_route");
+var userRoute = require("./routes/user_route");
+
 
 var app = express();
 dotenv.config({ path: "./config.env" });
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-
+app.use(cors());
 
 //connect mongo db
 var DB_URI = process.env.ATLAS_URI;
@@ -17,6 +21,11 @@ mongoose.connect(DB_URI, option).then(()=>{
 }).catch((error)=>{
     console.log("Db connect failed - "+error);
 });
+
+//routes
+app.use("/token", tokenRoute);
+app.use("/user",userRoute);
+
 
 //default page
 app.get("*",(req,res)=>{
