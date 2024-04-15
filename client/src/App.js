@@ -8,6 +8,7 @@ import SignOut from './pages/signout/SignOut';
 import AdminLogin from './pages/admin_login/AdminLogin';
 import Home from './pages/home/Home';
 import Profile from './pages/profile/Profile';
+import Appointment from './pages/appointment/Appointment';
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
         <Route path="/store" Component={Store} />
         <Route path="/" Component={Home} />
         <Route path="/profile" Component={Profile} />
-
+        <Route path="/create-app" Component={Appointment} />
         <Route path="/admin">
           <Route path=':token' Component={AdminLogin} />
         </Route>
