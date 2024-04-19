@@ -110,10 +110,24 @@ router.route("/profile").post((req,res)=>{
     if (req.current_user != null) {
 
         const userId = req.current_user.user_id;
-        User.findOne({ _id: userId }).then((result)=>{
-
-       
+        User.findOne({ _id: userId }).then((result)=>{       
             res.send({ status: "success", first_name: result.first_name, last_name: result.last_name });
+        });
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
+router.route("/delete").post((req, res) => {
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userId = req.current_user.user_id;
+        User.deleteOne({ _id: userId }).then((result)=>{
+            res.send({ status: "success", message: "User profile is deleted." });
         });
 
     } else {

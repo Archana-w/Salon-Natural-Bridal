@@ -44,6 +44,29 @@ function Profile() {
 
     },[]);
 
+    function deleteProfile(){
+        
+        setLoading(true);
+
+        axios.post("http://localhost:5000/user/delete", { token: token }).then((response) => {
+
+            var data = response.data;
+            var status = data.status;
+            if (status == "success") {
+                navigate("/signout");
+            } else if (status == "token_expired" || status == "auth_failed") {
+                navigate("/signout");
+            } else {
+                var message = data.message;
+                alert("Error - " + message);
+            }
+
+        }).catch((error) => {
+            alert("Error 2 - " + error);
+        });
+        
+    }
+
     const normFile = (e) => {
         if (Array.isArray(e)) {
             return e;
@@ -131,7 +154,7 @@ function Profile() {
 
 
                                 <Button className='edit-profile' type="primary">Edit Profile</Button>
-                                <Button className='delete' type="primary">Delete Account</Button>
+                                <Button className='delete' onClick={deleteProfile} type="primary">Delete Account</Button>
 
                             </Flex>
 
