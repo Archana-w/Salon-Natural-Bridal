@@ -11,6 +11,7 @@ var userRoute = require("./routes/user_route");
 var productRoute = require("./routes/product_route");
 var cartRoute = require("./routes/cart_route");
 var checkoutRoute = require("./routes/checkout_route");
+var orderRoute = require("./routes/order_route");
 
 
 var app = express();
@@ -87,6 +88,7 @@ app.use("/user",userRoute);
 app.use("/product", productRoute);
 app.use("/cart", cartRoute);
 app.use("/checkout", checkoutRoute);
+app.use("/order", orderRoute);
 
 //give access image 
 app.get("/image/:imageName", (req, res) => {
