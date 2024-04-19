@@ -103,6 +103,24 @@ router.route("/register").post((req,res)=>{
 
 });
 
+//get user profile
+router.route("/profile").post((req,res)=>{
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userId = req.current_user.user_id;
+        User.findOne({ _id: userId }).then((result)=>{
+
+       
+            res.send({ status: "success", first_name: result.first_name, last_name: result.last_name });
+        });
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
 
 function makeid(length) {
     let result = '';
