@@ -75,20 +75,6 @@
   padding-top: 10px;
 }
 
-.upper-img h1 {
-
-  text-align: center;
-  color: white;
-  font-family: 'Merriweather';
-}
-
-.upper-img h3 {
-
-  text-align: center;
-  color: white;
-  font-family: 'Merriweather';
-}
-
 .form {
 
   background-color: rgb(233, 235, 236);
@@ -100,7 +86,7 @@
   height: 200px;
   border-radius: 50%;
   padding: 5px;
-  transform: translate(5%, 10%);
+  transform: translate(5%, 2%);
 
 }
 

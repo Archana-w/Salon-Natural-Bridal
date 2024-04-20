@@ -8,11 +8,9 @@ function HeaderButton({id = null, children, activeId = null, onClick=null, badge
     }
 
     function onBtnClick(e){
-        console.log(e);
         if (onClick != null) {
             onClick();
         }
-
     }
 
     return(

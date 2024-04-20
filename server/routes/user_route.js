@@ -51,7 +51,6 @@ router.route("/login").post((req, res) => {
 
 });
 
-
 //register API endpoint
 router.route("/register").post((req,res)=>{
 
@@ -103,6 +102,70 @@ router.route("/register").post((req,res)=>{
 
 });
 
+//get user profile
+router.route("/profile").post((req,res)=>{
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userId = req.current_user.user_id;
+        User.findOne({ _id: userId }).then((result)=>{    
+            
+            var profilePic = null;
+            if (result.profile_pic != undefined){
+                profilePic = result.profile_pic;
+            }
+            
+            res.send({ status: "success", profile_pic: profilePic, first_name: result.first_name, last_name: result.last_name });
+        });
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
+router.route("/delete").post((req, res) => {
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userId = req.current_user.user_id;
+        User.deleteOne({ _id: userId }).then((result)=>{
+            res.send({ status: "success", message: "User profile is deleted." });
+        });
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
+router.route("/edit/avatar").post((req, res) => {
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userId = req.current_user.user_id;
+        const image = req.files[0];
+
+        //validate image thumbnail
+        if (image == null || image.fieldname != "image") {
+            res.send({ status: "required_failed", "message": "Required values are not received." });
+            return;
+        }
+
+        User.updateOne({ _id: userId }, { profile_pic: image.filename}).then(()=>{
+            res.send({ status: "success", "message": "Profile picture updated." });
+        }).catch((error)=>{
+            res.send(error);
+        });
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
 
 function makeid(length) {
     let result = '';
