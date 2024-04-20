@@ -3,7 +3,7 @@ import axios from 'axios';
 import React from 'react';
 import { Form, Input, Flex, Button, Upload } from 'antd';
 import './Profile.css';
-import ProfileImage from '../../images/customer_appointment/profile_img.jpg';
+import ProfileVector from '../../images/default_profile_vector.webp';
 import { PlusOutlined } from '@ant-design/icons';
 import { useAuthToken } from '../../auth';
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,15 @@ function Profile() {
     var navigate = useNavigate();
     const [isLoading, setLoading] = useState(true);
     const[profileDetails,setProfileDetails] = useState({});
-    
+
+    //handle profile picture
+    var profilePictureUrl = ProfileVector;
+    if (profileDetails.profile_pic != null){
+        profilePictureUrl = "http://localhost:5000/image/" + profileDetails.profile_pic;
+    }
+
+    console.log(profileDetails);
+
     useEffect(()=>{
 
         if (token != null) {
@@ -92,7 +100,7 @@ function Profile() {
             <div className='upper-img'>
 
                 <div className='image-container'>
-                    <img className='profile_img' src={ProfileImage} alt="profile" height="100px" width="100px" />
+                    <img className='profile_img' src={profilePictureUrl} alt="profile" height="100px" width="100px" />
                 </div>
 
                 <div className="lower-container">
