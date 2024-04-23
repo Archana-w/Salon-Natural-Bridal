@@ -5,7 +5,7 @@ var Appointment = require("../models/Appointment");
 router.route("/create").post((req, res) => {
 
     const date = new Date();
-    const time = date.getTime();
+    const currentTime = date.getTime();
 
     //check authentication
     if (req.current_user != null) {
@@ -15,26 +15,32 @@ router.route("/create").post((req, res) => {
 
         if (userType == "client") {
 
-            const serviceId = req.body.service_id;
-            const range = req.body.range;
+            const time = req.body.time;
             const date = req.body.date;
+            const mobileNumber = req.body.mobile_number;
+            const hairCare = req.body.hair_care;
+            const nailCare = req.body.nail_care;
+            const skinCare = req.body.skin_care;
 
-            if(range == null || range == "" ||
-                serviceId == null || serviceId == "" ||
-                date == null || date == ""){
+            if (time == null || time == "" ||
+                date == null || date == "" ||
+                mobileNumber == null || mobileNumber == ""){
                 res.send({ status: "required_failed", "message": "Required values are not received." });
                return; 
             }
 
-            Appointment.findOne({ time_range: range }).then((doc)=>{
+            Appointment.findOne({ appoinment_time: time, appoinment_date: date }).then((doc)=>{
                 if(doc == null){
 
                     var a = new Appointment();
-                    a.time_range = range;
-                    a.time = time;
-                    a.date = date;
+                    a.appoinment_time = time;
+                    a.appoinment_date = date;
+                    a.time = currentTime;
+                    a.contact_number = mobileNumber;
                     a.user_id = userId;
-                    a.service_id = serviceId;
+                    a.hair_care = hairCare;
+                    a.skin_care = skinCare;
+                    a.nail_care = nailCare;
                     a.status = "reserved";
 
                     a.save().then(() => {
