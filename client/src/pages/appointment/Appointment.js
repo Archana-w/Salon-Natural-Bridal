@@ -109,8 +109,11 @@ function Appointment() {
                                 </div>
                             </div>
                             <div className='forminfo'>
-                                <Form.Item label='Name' name='name' rules={[{ required: true, message: 'Please input your Name!' }]}>
-                                    <Input className='appn_input' placeholder='Name' />
+                                <Form.Item label='First Name' name='first_name' rules={[{ required: true, message: 'Please input your Name!' }]}>
+                                    <Input className='appn_input' placeholder='First Name' />
+                                </Form.Item>
+                                <Form.Item label='Last Name' name='last_name' rules={[{ required: true, message: 'Please input your Name!' }]}>
+                                    <Input className='appn_input' placeholder='Last Name' />
                                 </Form.Item>
                                 <Form.Item label='Contact Number' name='contactNumber' rules={[{ required: true, message: 'Please input your Contact Number!' }]}>
                                     <Input className='appc_input' placeholder='Contact Number' />
