@@ -8,6 +8,39 @@ import NailImage from '../../images/customer_appointment/nailcare.jpg';
 
 function Appointment() {
   
+    const [selectedServices, setSelectedServices] = useState({
+        hairCare: [],
+        skinCare: [],
+        nailCare: []
+    });
+
+    const onFinish = async (values) => {
+        try {
+            const formData = {
+                ...values,
+                ...selectedServices
+            };
+
+            console.log('Form values:', formData); // Log the form values
+
+            // Make an HTTP POST request to your backend endpoint
+            const response = await axios.post('/api/appointments', formData);
+            console.log('Appointment created:', response.data);
+
+            // Optionally, you can show a success message or redirect the user
+        } catch (error) {
+            console.error('Error creating appointment:', error);
+            // Handle error, show error message to the user, etc.
+        }
+    };
+
+    const handleServiceSelection = (category, selectedValues) => {
+        setSelectedServices(prevState => ({
+            ...prevState,
+            [category]: selectedValues
+        }));
+    };
+
     const { Option } = Select;
 
     return (
@@ -24,14 +57,14 @@ function Appointment() {
                     <h1 className='card_title'>Appointment Form</h1>
                     <h3 className='sub_title'>Select Your Services</h3>
                     <div className='bottomsection'>
-                        <Form layout='horizontal'>
+                        <Form layout='horizontal' onFinish={onFinish}>
                             <div className='type-services'>
                                 <div className='typediv'>
                                     <div className='typeimg'> <img src={HairImage} alt="hair" /></div>
                                     <div className="type">
                                         <div className="desc">Hair Care</div>
                                         <div className="categories">
-                                            <Checkbox.Group>
+                                            <Checkbox.Group onChange={(values) => handleServiceSelection('hairCare', values)}>
                                                 <Checkbox value="Hair straight">Hair straight</Checkbox>
                                                 <Checkbox value="Hair perm">Hair perm</Checkbox>
                                                 <Checkbox value="Hair rebonding">Hair rebonding</Checkbox>
@@ -48,7 +81,7 @@ function Appointment() {
                                     <div className="type">
                                         <div className="desc">Skin Care</div>
                                         <div className="categories">
-                                            <Checkbox.Group>
+                                            <Checkbox.Group onChange={(values) => handleServiceSelection('skinCare', values)}>
                                                 <Checkbox value="Facial">Facial</Checkbox>
                                                 <Checkbox value="Cleanup">Cleanup</Checkbox>
                                                 <Checkbox value="Bridal makeup">Bridal makeup</Checkbox>
@@ -66,7 +99,7 @@ function Appointment() {
                                     <div className="type">
                                         <div className="desc">Nail Care</div>
                                         <div className="categories">
-                                            <Checkbox.Group>
+                                            <Checkbox.Group onChange={(values) => handleServiceSelection('nailCare', values)}>
                                                 <Checkbox value="Nail polish">Nail polish</Checkbox>
                                                 <Checkbox value="Pedicure">Pedicure</Checkbox>
                                                 <Checkbox value="Manicure">Manicure</Checkbox>
