@@ -1,19 +1,10 @@
-.content{
+.content h2{
 
-  
-    margin-left: 100px;
-}
-
-h2{
-    padding-left: 200px; 
     text-align: center;
     
-}
+  }
+  
 
-.ant-divider{
-    padding-left: 200px;
-    
-}
 .ant-divider-inner-text{
     font-weight: bold;
     font-size: 20px;
@@ -21,8 +12,8 @@ h2{
 
 .ant-table-wrapper{
 
-    width: 980dp;
-    padding-left: 200px;
+    width: 1000dp;
+    margin: 30px;
 }
 
 .start_btn{
@@ -47,10 +38,11 @@ h2{
 }
 
 .search {
-    margin-left: 200px;
+    
     width: 300px;
     height: 40px;
     border-radius: 10px;
+    margin-left: 30px;
     border: 1px solid rgb(157, 157, 157);
     background-color: rgb(225, 226, 228);
     outline: none !important;

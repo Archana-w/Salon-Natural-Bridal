@@ -1,19 +1,9 @@
-.content{
+.content h2{
 
-  
-    margin-left: 100px;
-}
-
-h2{
-    padding-left: 200px; 
     text-align: center;
     
-}
-
-.ant-divider{
-    padding-left: 200px;
-    
-}
+  }
+  
 .ant-divider-inner-text{
     font-weight: bold;
     font-size: 20px;
@@ -21,8 +11,8 @@ h2{
 
 .ant-table-wrapper{
 
-    width: 980dp;
-    padding-left: 200px;
+    width: 1000dp;
+    margin: 30px;
 }
 
 .edt_btn{
@@ -61,14 +51,17 @@ h2{
 }
 
 .add_emp_btn{
-    margin-left: 700px;
+    
      width:150px;
      height: 40px;
+     display: block !important;
+     margin: auto !important;
      background-color: black;
      color:white;
      font-size: 14px;
      border-radius: 5px;
      border: none !important;
+     margin-bottom: 20px !important;
  }
 
  
@@ -78,10 +71,12 @@ h2{
   
 }
 .report_empLeaves_btn{
-    margin-top: 20px;
-    margin-left: 700px;
+   
      width:150px;
      height: 40px;
+
+     display: block !important;
+     margin: auto !important;
      background-color: black;
      color:white;
      font-size: 14px;
@@ -95,10 +90,11 @@ h2{
  
  }
  .search {
-    margin-left: 200px;
+    
     width: 300px;
     height: 40px;
     border-radius: 10px;
+    margin-left: 30px;
     border: 1px solid rgb(157, 157, 157);
     background-color: rgb(225, 226, 228);
     outline: none !important;
