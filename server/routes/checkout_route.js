@@ -175,4 +175,29 @@ router.route("/address/get").post((req, res) => {
 
 });
 
+router.route("/address/delete").post((req, res) => {
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userId = req.current_user.user_id;
+        const id = req.body.id;
+        
+        //validate data
+        if (id == null || id == "") {
+            res.send({ status: "required_failed", "message": "Required values are not received." });
+            return;
+        }
+
+        Address.deleteOne({_id:id}).then(()=>{
+            res.send({ status: "success", message: "Address deleted." });
+        });
+        
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
+
 module.exports = router;
