@@ -12,7 +12,7 @@ var productRoute = require("./routes/product_route");
 var cartRoute = require("./routes/cart_route");
 var checkoutRoute = require("./routes/checkout_route");
 var orderRoute = require("./routes/order_route");
-var appoinmentRoute = require("./routes/appoinment_route");
+var appoinmentRoute = require("./routes/appointment_route");
 var empRoute = require("./routes/emp_route");
 
 
