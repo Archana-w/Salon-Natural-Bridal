@@ -12,6 +12,7 @@ var userSchema = new Schema(
         password:{type:String,required:true},
         type:{type:String,required:true},
         emp_type: { type: String },
+        profile_pic:{type:String},
         nic: { type: String }
     }
 );
