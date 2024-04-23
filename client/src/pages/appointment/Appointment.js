@@ -162,7 +162,7 @@ function Appointment() {
                                     <Form.Item name="DatePicker" label="Select Date" rules={[{ required: true, message: 'Please select a date!' }]}>
                                         <DatePicker className='datepic' />
                                     </Form.Item>
-                                    <Form.Item name="time-picker" label="Select Time" rules={[{ required: true, message: 'Please select a time!' }]}>
+                                    <Form.Item name="time_picker" label="Select Time" rules={[{ required: true, message: 'Please select a time!' }]}>
                                         <TimePicker className='timepic' format='HH:mm' />
                                     </Form.Item>
                                     <Form.Item name="select" label="Select Stylist" hasFeedback rules={[{ required: true, message: 'Please select your Stylist!' }]}>
