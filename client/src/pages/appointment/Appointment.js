@@ -73,7 +73,7 @@ function Appointment() {
     };
 
     const { Option } = Select;
-
+   
     if (isLoading) {
 
         return (
@@ -150,12 +150,15 @@ function Appointment() {
                                     </div>
                                 </div>
                                 <div className='forminfo'>
+                                    
                                     <Form.Item label='First Name' name='first_name' rules={[{ required: true, message: 'Please input your Name!' }]}>
                                         <Input className='appn_input' placeholder='First Name' />
                                     </Form.Item>
+
                                     <Form.Item label='Last Name' name='last_name' rules={[{ required: true, message: 'Please input your Name!' }]}>
                                         <Input className='appn_input' placeholder='Last Name' />
                                     </Form.Item>
+                                     
                                     <Form.Item label='Contact Number' name='contactNumber' rules={[{ required: true, message: 'Please input your Contact Number!' }]}>
                                         <Input className='appc_input' placeholder='Contact Number' />
                                     </Form.Item>
@@ -163,7 +166,7 @@ function Appointment() {
                                         <DatePicker className='datepic' />
                                     </Form.Item>
                                     <Form.Item name="time_picker" label="Select Time" rules={[{ required: true, message: 'Please select a time!' }]}>
-                                        <TimePicker className='timepic' format='HH:mm' />
+                                        <TimePicker className='timepic' format='HH:mm'/>
                                     </Form.Item>
                                     <Form.Item name="select" label="Select Stylist" hasFeedback rules={[{ required: true, message: 'Please select your Stylist!' }]}>
                                         <Select className='selecta' placeholder="Please select a Stylist">
