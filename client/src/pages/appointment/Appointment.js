@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Checkbox, DatePicker, TimePicker, Select, Flex, Button, Input } from 'antd';
 import axios from 'axios'; // Import Axios for making HTTP requests
+import moment from 'moment'; // Import moment for date and time handling
 import './Appointment.css';
 import HairImage from '../../images/customer_appointment/haircare.jpg';
 import SkinImage from '../../images/customer_appointment/skincare.jpg';
@@ -103,6 +104,10 @@ function Appointment() {
     };
 
     const { Option } = Select;
+
+    const disabledDate = (currentDate) => {
+        return currentDate && currentDate < moment().startOf('day');
+    };
    
     if (isLoading) {
 
@@ -181,25 +186,21 @@ function Appointment() {
                                 </div>
                                 <div className='forminfo'>
                                     
-                                    <Form.Item label='First Name' name='first_name' rules={[{ required: true, message: 'Please input your Name!' }]}>
-                                        <Input className='appn_input' placeholder='First Name' />
-                                    </Form.Item>
-
-                                    <Form.Item label='Last Name' name='last_name' rules={[{ required: true, message: 'Please input your Name!' }]}>
-                                        <Input className='appn_input' placeholder='Last Name' />
-                                    </Form.Item>
-                                     
-                                    <Form.Item label='Contact Number' name='contactNumber' rules={[{ required: true, message: 'Please input your Contact Number!' }]}>
-                                        <Input className='appc_input' placeholder='Contact Number' />
-                                    </Form.Item>
+                                   
                                     <Form.Item name="DatePicker" label="Select Date" rules={[{ required: true, message: 'Please select a date!' }]}>
-                                        <DatePicker className='datepic' />
+                                        <DatePicker className='datepic' disabledDate={disabledDate}/>
                                     </Form.Item>
-                                    <Form.Item name="time_picker" label="Select Time" rules={[{ required: true, message: 'Please select a time!' }]}>
-                                        <TimePicker className='timepic' format='HH:mm'/>
+                                    <Form.Item name="select" label="Select time" hasFeedback rules={[{ required: true, message: 'Please select your time!' }]}>
+                                        <Select className='selectt' placeholder="Please select a time">
+                                        <Option value="time1"> 8 a.m. - 10 a.m.</Option>
+                                        <Option value="time2">10 a.m. - 12 a.m.</Option>
+                                        <Option value="time3">12 p.m. - 14 p.m.</Option>
+                                        <Option value="time4">14 p.m. - 16 p.m.</Option>
+                                        <Option value="time5">16 p.m. - 18 p.m.</Option>
+                                        </Select>
                                     </Form.Item>
                                     <Form.Item name="select" label="Select Stylist" hasFeedback rules={[{ required: true, message: 'Please select your Stylist!' }]}>
-                                        <Select className='selecta' placeholder="Please select a Stylist">
+                                        <Select className='selects' placeholder="Please select a Stylist">
                                             {stylish.map((item)=>
                                                 <Option value={item.employee_id}>{item.name}</Option>
                                             )}
