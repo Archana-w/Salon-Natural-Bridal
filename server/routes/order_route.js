@@ -45,7 +45,7 @@ router.route("/get").post(async (req, res) => {
             //get address
             var address = await Address.findOne({ _id: addressId });
             
-            res.send({ status: "success", total: total, discount: discount, status: status, paymentStatus: paymentStatus, paymentMethod: paymentMethod, date: date,address: address, products: itemArray });
+            res.send({ status: "success", order_id: orderId, total: total, discount: discount, order_status: status, paymentStatus: paymentStatus, paymentMethod: paymentMethod, date: date,address: address, products: itemArray });
 
         }).catch((error)=>{
             res.send({ status: "invalid_order_id", message: "Please enter valid order id." });

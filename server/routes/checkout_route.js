@@ -19,14 +19,14 @@ router.route("/place").post(async (req,res)=>{
 
         if (addressId == null || addressId == "" ||
             paymentMethod == null || paymentMethod == ""){
-            res.send({ status: "required_failed", "message": "Required values are not received." });
+            res.send({ status: "required_failed", "message": "Required values are not received 1." });
             return;
         }
 
         //validate payment method
         if (paymentMethod != "cash_on_delivery" && 
             paymentMethod != "card"){
-            res.send({ status: "required_failed", "message": "Required values are not received." });
+            res.send({ status: "required_failed", "message": "Required values are not received 2." });
             return;
         }
 
@@ -54,7 +54,7 @@ router.route("/place").post(async (req,res)=>{
                 cardNumber == null || cardNumber == "" ||
                 cardExpire == null || cardExpire == "" ||
                 cardSecurityCode == null || cardSecurityCode == ""){
-                res.send({ status: "required_failed", "message": "Required values are not received." });
+                res.send({ status: "required_failed", "message": "Required values are not received. 3" });
                 return;
             }
 
@@ -112,6 +112,9 @@ router.route("/place").post(async (req,res)=>{
 
         //update order
         await Order.findOneAndUpdate({ _id: orderResult._id }, { total: total,status:"pending"});
+
+        res.send({ status: "success", order_id: orderResult._id, message: "Order placed." });
+        return;
 
         //clear cart
         Cart.deleteMany({ user_id: userId }).then((result)=>{

@@ -10,6 +10,7 @@ import Cart from './pages/cart/Cart';
 import Checkout from './pages/checkout/Checkout';
 import Profile from './pages/profile/Profile';
 import Appointment from './pages/appointment/Appointment';
+import OrderDetails from './pages/order_details/OrderDetails';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/checkout" Component={Checkout}/>
         <Route path="/profile" Component={Profile} />
         <Route path="/create-app" Component={Appointment} />
+        <Route path="/invoice/:id" Component={OrderDetails}/>
 
       </Routes>
 
