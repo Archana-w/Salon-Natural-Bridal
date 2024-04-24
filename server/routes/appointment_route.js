@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var Appointment = require("../models/Appointment");
+var User = require("../models/User");
 
 router.route("/create").post((req, res) => {
 
@@ -146,8 +147,13 @@ router.route("/get").post((req, res) => {
 
         if (userType == "client") {
             
-            Appointment.find({ user_id: userId }).then((doc)=>{
+            Appointment.find({ user_id: userId }).then(async (doc)=>{
+
+                var stylishId = doc.stylist_id;
                 res.send({ status: "success", data: doc });
+            
+            
+            
             });
 
         } else {

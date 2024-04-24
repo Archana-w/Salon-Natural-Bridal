@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/header/Header';
 import Adminhome from './pages/adminhome/Adminhome';
 import Customer from './pages/customer/Customer';
-import Appoinment from './pages/appoinment/Appoinment';
+import Appointment from './pages/appointment/Appointment';
 import { useAuthToken } from './auth';
 import SignOut from './pages/signout/SignOut';
 import Emp_details from './pages/emp_details/Emp_details';
@@ -36,7 +36,7 @@ function App() {
           <Route path="/signout" Component={SignOut} />
           <Route path='/adminhome' Component={Adminhome}></Route>
           <Route path='/customer' Component={Customer}></Route>
-          <Route path='/appoinment' Component={Appoinment}></Route>
+          <Route path='/appointment' Component={Appointment}></Route>
           <Route path='/emp_details' Component={Emp_details}></Route>
           <Route path='/emp_attendance' Component={Emp_attendance}></Route>
           <Route path='/emp_salary' Component={Emp_salary}></Route>

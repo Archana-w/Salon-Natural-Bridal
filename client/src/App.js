@@ -11,7 +11,7 @@ import Checkout from './pages/checkout/Checkout';
 import Profile from './pages/profile/Profile';
 import Appointment from './pages/appointment/Appointment';
 import OrderDetails from './pages/order_details/OrderDetails';
-
+import AppointmentList from './pages/appointment/AppointmentList';
 
 function App() {
 
@@ -32,6 +32,7 @@ function App() {
         <Route path="/profile" Component={Profile} />
         <Route path="/create-app" Component={Appointment} />
         <Route path="/invoice/:id" Component={OrderDetails}/>
+        <Route path="/create-app/AppointmentList" Component={AppointmentList}/>
 
       </Routes>
 

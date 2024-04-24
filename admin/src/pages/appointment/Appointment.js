@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import React from 'react';
 import { Divider, Table} from 'antd';
-import './Appoinment.css'
+import './Appointment.css'
 
 
 
-function Appoinment(){
+function Appointment(){
   const columns = [
     {
       title: 'Appoinment ID',
@@ -105,4 +105,4 @@ function Appoinment(){
     );
 }
 
-export default Appoinment;
+export default Appointment;

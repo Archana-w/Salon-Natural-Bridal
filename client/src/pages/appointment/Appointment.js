@@ -67,13 +67,13 @@ function Appointment() {
 
                 setLoading(true);
 
-                axios.post("http://localhost:5000/appointment/create", { token: token, stylist_id: formData.select, time: formData.time_picker, date: formData.DatePicker, mobile_number: formData.contactNumber, hair_care: formData.hairCare, nail_care: formData.nailCare, skin_care: formData.skinCare, }).then((response) => {
+                axios.post("http://localhost:5000/appointment/create", { token: token, stylist_id: formData.select, time: formData.time_range, date: formData.DatePicker, hair_care: formData.hairCare, nail_care: formData.nailCare, skin_care: formData.skinCare, }).then((response) => {
 
                     var data = response.data;
                     var status = data.status;
                     if (status == "success") {
                         alert("Appointment created...");
-                        setLoading(false);
+                        navigate("/create-app/AppointmentList");
                     } else if (status == "token_expired" || status == "auth_failed") {
                         navigate("/signout");
                     } else {
@@ -108,7 +108,7 @@ function Appointment() {
     const disabledDate = (currentDate) => {
         return currentDate && currentDate < moment().startOf('day');
     };
-   
+
     if (isLoading) {
 
         return (
@@ -192,11 +192,16 @@ function Appointment() {
                                     </Form.Item>
                                     <Form.Item name="time_range" label="Select time" hasFeedback rules={[{ required: true, message: 'Please select your time!' }]}>
                                         <Select className='selectt' placeholder="Please select a time">
-                                        <Option value="time1"> 8 a.m. - 10 a.m.</Option>
-                                        <Option value="time2">10 a.m. - 12 a.m.</Option>
-                                        <Option value="time3">12 p.m. - 14 p.m.</Option>
-                                        <Option value="time4">14 p.m. - 16 p.m.</Option>
-                                        <Option value="time5">16 p.m. - 18 p.m.</Option>
+                                        <Option value="time1">8 a.m. - 9 a.m.</Option>
+                                        <Option value="time2">9 a.m. - 10 a.m.</Option>
+                                        <Option value="time1">10 a.m. - 11 a.m.</Option>
+                                        <Option value="time2">11 a.m. - 12 p.m.</Option>
+                                        <Option value="time3">12 p.m. - 13 p.m.</Option>
+                                        <Option value="time4">13 p.m. - 14 p.m.</Option>
+                                        <Option value="time5">14 p.m. - 15 p.m.</Option>
+                                        <Option value="time3">15 p.m. - 16 p.m.</Option>
+                                        <Option value="time4">16 p.m. - 17 p.m.</Option>
+                                        <Option value="time5">17 p.m. - 18 p.m.</Option>
                                         </Select>
                                     </Form.Item>
                                     <Form.Item name="select" label="Select Stylist" hasFeedback rules={[{ required: true, message: 'Please select your Stylist!' }]}>
@@ -208,8 +213,7 @@ function Appointment() {
                                     </Form.Item>
                                     <Flex gap="small" wrap="wrap">
                                         <Button className='submit' type="primary" htmlType='submit'>Submit</Button>
-                                        <Button className='edit' type="primary">Edit Details</Button>
-                                        <Button className='cancel' type="primary">Cancel</Button>
+                                    
 
                                     </Flex>
                                 </div>

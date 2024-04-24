@@ -106,6 +106,7 @@
     color: black;
     border-radius: 10px;
     padding: 20px;
+    overflow: hidden;
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
