@@ -52,3 +52,25 @@
     margin-top: 20px;
     text-align: right;
 }
+
+.con-shopping{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.continue-shopping-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.continue-shopping-button:hover {
+    background-color: #0056b3;
+}

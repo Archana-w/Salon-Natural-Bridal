@@ -3,7 +3,7 @@ import axios from 'axios';
 import {useEffect,useState} from 'react';
 import {useParams} from 'react-router-dom';
 import { useAuthToken } from '../../auth';
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import PageLoading from '../../components/loading/PageLoading';
 
 function OrderDetails(){
@@ -59,48 +59,58 @@ function OrderDetails(){
     }else{
         return (
 
-            <div className="invoice-container">
-                <div className="invoice-header">
-                    <h2>Invoice</h2>
-                    <p>Order ID: {order.order_id}</p>
-                    <p>Order Date: {dateString}</p>
-                </div>
-                <div className="invoice-address">
-                    <h3>Delivery Address:</h3>
-                    <p>{order.address.name}</p>
-                    <p>{order.address.address}</p>
-                    <p>{order.address.phone_number}</p>
-                </div>
-                <div className="invoice-payment">
-                    <h3>Payment Details:</h3>
-                    <p>Method: {order.paymentMethod}</p>
-                    <p>Status: {order.paymentStatus}</p>
-                </div>
-                <div className="invoice-details">
-                    <h3>Order Details:</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {order.products.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.product_name}</td>
-                                    <td>{item.quantity}</td>
-                                    <td>Rs {item.total}</td>
+            <>
+
+                <div className="invoice-container">
+                    <div className="invoice-header">
+                        <h2>Order Invoice</h2>
+                        <p>Order ID: {order.order_id}</p>
+                        <p>Order Date: {dateString}</p>
+                    </div>
+                    <div className="invoice-address">
+                        <h3>Delivery Address:</h3>
+                        <p>{order.address.name}</p>
+                        <p>{order.address.address}</p>
+                        <p>{order.address.phone_number}</p>
+                    </div>
+                    <div className="invoice-payment">
+                        <h3>Payment Details:</h3>
+                        <p>Method: {order.paymentMethod}</p>
+                        <p>Status: {order.paymentStatus}</p>
+                    </div>
+                    <div className="invoice-details">
+                        <h3>Order Details:</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                    <div className="total">
-                        <h3>Total: Rs {order.total}</h3>
+                            </thead>
+                            <tbody>
+                                {order.products.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.product_name}</td>
+                                        <td>{item.quantity}</td>
+                                        <td>Rs {item.total}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                        <div className="total">
+                            <h3>Total: Rs {order.total}</h3>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <div className="con-shopping">
+                    <Link to="/store"><button className="continue-shopping-button">Continue Shopping</button></Link>
+                </div>
+            
+            </>
+
+            
 
         );
     }
