@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Checkbox, DatePicker, TimePicker, Select, Flex, Button, Input } from 'antd';
 import axios from 'axios'; // Import Axios for making HTTP requests
 import './Appointment.css';
@@ -15,7 +15,8 @@ function Appointment() {
 
     var token = useAuthToken();
     var navigate = useNavigate();
-    const [isLoading, setLoading] = useState(false);
+    const [isLoading, setLoading] = useState(true);
+    const[stylish,setStylish] = useState({});
 
   
     const [selectedServices, setSelectedServices] = useState({
@@ -23,6 +24,35 @@ function Appointment() {
         skinCare: [],
         nailCare: []
     });
+
+    useEffect(()=>{
+
+        if (token != null) {
+
+            //load tylish details
+            axios.post("http://localhost:5000/emp/get_employee", { token: token, employee_type:"66288da18da7ebc59fc96a2b" }).then((response) => {
+
+                var data = response.data;
+                var status = data.status;
+                if (status == "success") {
+                    setStylish(data.data);
+                    setLoading(false);
+                } else if (status == "token_expired" || status == "auth_failed") {
+                    navigate("/signout");
+                } else {
+                    var message = data.message;
+                    alert("Error - " + message);
+                }
+
+            }).catch((error) => {
+                alert("Error 2 - " + error);
+            });
+
+        } else {
+            navigate("/login");
+        }
+
+    },[]);
 
     const onFinish = async (values) => {
 
@@ -36,7 +66,7 @@ function Appointment() {
 
                 setLoading(true);
 
-                axios.post("http://localhost:5000/appointment/create", { token: token, time: formData.time_picker, date: formData.DatePicker, mobile_number: formData.contactNumber, hair_care: formData.hairCare, nail_care: formData.nailCare, skin_care: formData.skinCare, }).then((response) => {
+                axios.post("http://localhost:5000/appointment/create", { token: token, stylist_id: formData.select, time: formData.time_picker, date: formData.DatePicker, mobile_number: formData.contactNumber, hair_care: formData.hairCare, nail_care: formData.nailCare, skin_care: formData.skinCare, }).then((response) => {
 
                     var data = response.data;
                     var status = data.status;
@@ -170,10 +200,9 @@ function Appointment() {
                                     </Form.Item>
                                     <Form.Item name="select" label="Select Stylist" hasFeedback rules={[{ required: true, message: 'Please select your Stylist!' }]}>
                                         <Select className='selecta' placeholder="Please select a Stylist">
-                                            <Option value="stylist1">Stylist 1</Option>
-                                            <Option value="stylist2">Stylist 2</Option>
-                                            <Option value="stylist3">Stylist 3</Option>
-                                            <Option value="stylist4">Stylist 4</Option>
+                                            {stylish.map((item)=>
+                                                <Option value={item.employee_id}>{item.name}</Option>
+                                            )}
                                         </Select>
                                     </Form.Item>
                                     <Flex gap="small" wrap="wrap">

@@ -131,6 +131,59 @@ route.route("/get").post((req,res)=>{
     
 });
 
+route.route("/get_employee").post((req,res)=>{
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userId = req.current_user.user_id;
+        const empType = req.body.employee_type;
+
+        //validate details
+        if (empType == null || empType == "") {
+            res.send({ "status": "required_failed", "message": "Please send required details." });
+            return;
+        }
+
+        User.find({ type: "employee", emp_type: empType  }).then(async (doc) => {
+
+            var dataArray = new Array();
+            for (var i = 0; i < doc.length; i++) {
+
+                var empDoc = doc[i];
+
+                var employeeType = empDoc.emp_type;
+                var fullName = empDoc.first_name + " " + empDoc.last_name;
+
+                //get employee type
+                var empTypeResult = await EmployeeType.findOne({ _id: employeeType });
+
+
+                var emp = {
+                    employee_id: empDoc._id,
+                    name: fullName,
+                    contact_number: empDoc.mobile_number,
+                    job_role: empTypeResult.type,
+                    email: empDoc.email,
+                    password: empDoc.password
+                };
+                dataArray.push(emp);
+
+            }
+
+            res.send({ status: "success", data: dataArray });
+
+        }).catch((e) => {
+            res.send(e);
+        });
+
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
 route.route("/atts").post((req,res)=>{
 
     //check authentication

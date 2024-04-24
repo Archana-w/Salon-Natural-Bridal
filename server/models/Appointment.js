@@ -6,7 +6,7 @@ var appShcema = new Schema(
         appoinment_time:{type:String,required:true},
         appoinment_date:{type:String,required:true},
         time:{type:Number,required:true},
-        contact_number:{type:String,required:true},
+        stylist_id:{type:String,required:true},
         user_id:{type:String,required:true},
         status:{type:String,required:true},
         hair_care:{type:Array},

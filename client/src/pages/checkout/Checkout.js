@@ -10,25 +10,55 @@ function Checkout(){
     var token = useAuthToken();
     var navigate = useNavigate();
     const[update,setUpdate] = useState(0);
-    const[isLoading, setLoading] = useState(true);
+    const[isLoading, setLoading] = useState(false);
     const[addressData,setAddressData] = useState([]);
     const [addressName, setAddressName] = useState(null);
     const[addressText,setAddressText] = useState(null);
     const [addressPhoneNumber, setAddressPhoneNumber] = useState(null);
+    const [total, setTotal] = useState(0);
+    const [cartData, setCartData] = useState([]);
 
     const[deliveryAddressId,setDeliveryAddressId] = useState(null);
+
+    const [paymentMethod, setPaymentMethod] = useState('COD');
+    const [cardDetails, setCardDetails] = useState({
+        cardHolderName:'',
+        cardNumber: '',
+        expiryDate: '',
+        cvv: ''
+    });
+
+    const handlePaymentMethodChange = (event) => {
+        setPaymentMethod(event.target.value);
+    };
+
+    const handleCardDetailsChange = (event) => {
+        const { name, value } = event.target;
+        setCardDetails({
+            ...cardDetails,
+            [name]: value
+        });
+    };
 
     useEffect(() => {
 
         if (token != null) {
 
-            axios.post("http://localhost:5000/checkout/address/get", { token: token }).then((response) => {
+            setLoading(true);
+
+            //get cart
+            axios.post("http://localhost:5000/cart/get", { token: token }).then((response) => {
 
                 var data = response.data;
                 var status = data.status;
                 if (status == "success") {
-                    setAddressData(data.data);
-                    setLoading(false);
+                    var cart = data.cart;
+                    setTotal(cart.total);
+                    setCartData(cart.item);
+                    
+                    //load user address
+                    loadUserAddress();
+
                 } else if (status == "token_expired" || status == "auth_failed") {
                     navigate("/signout");
                 } else {
@@ -40,11 +70,34 @@ function Checkout(){
                 alert("Error 2 - " + error);
             });
 
+
         } else {
             navigate("/login");
         }
 
     }, [update]);
+
+    function loadUserAddress(){
+
+        axios.post("http://localhost:5000/checkout/address/get", { token: token }).then((response) => {
+
+            var data = response.data;
+            var status = data.status;
+            if (status == "success") {
+                setAddressData(data.data);
+                setLoading(false);
+            } else if (status == "token_expired" || status == "auth_failed") {
+                navigate("/signout");
+            } else {
+                var message = data.message;
+                alert("Error - " + message);
+            }
+
+        }).catch((error) => {
+            alert("Error 2 - " + error);
+        });
+
+    }
 
     function closeAddAddressWindows(){
         var addAddressWindows = document.getElementById('addAddressWindows');
@@ -107,6 +160,35 @@ function Checkout(){
 
     }
 
+    function placeOrder(){
+        
+        var requestBody;
+        if (paymentMethod == "COD"){
+            requestBody = { token: token, address_id: deliveryAddressId, payment_method:"cash_on_delivery" };    
+        }else{
+            requestBody = { token: token, address_id: deliveryAddressId, payment_method: "card", card_holder_name: cardDetails.cardHolderName, card_number: cardDetails.cardNumber, card_expire: cardDetails.expiryDate, card_security_code: cardDetails.cvv};    
+        }
+
+        axios.post("http://localhost:5000/checkout/place", requestBody).then((response) => {
+
+            var data = response.data;
+            var status = data.status;
+            if (status == "success") {
+                var orderId = data.order_id;
+                navigate("/invoice/" + orderId);
+            } else if (status == "token_expired" || status == "auth_failed") {
+                navigate("/signout");
+            } else {
+                var message = data.message;
+                alert("Error - " + message);
+            }
+
+        }).catch((error) => {
+            alert("Error 2 - " + error);
+        });
+    
+    }
+
 
     if (isLoading) {
 
@@ -134,7 +216,7 @@ function Checkout(){
                             <div className="address-container">
 
                                 <div className="address-header">
-                                    <label>Delivery address</label>
+                                    <label>Delivery Address</label>
                                     <button onClick={openAddAddressWindow}>Add New Address</button>
                                 </div>
 
@@ -156,7 +238,75 @@ function Checkout(){
 
                                 )}
 
+                            </div>
 
+                            <div className="payment-method-container">
+
+                                <div className="payment-method-header">
+                                    <label>Payment Method</label>
+                                </div>
+
+                                <form className="checkout-form">
+                                    <div className="payment-method">
+                                        <input
+                                            type="radio"
+                                            id="cod"
+                                            name="paymentMethod"
+                                            value="COD"
+                                            checked={paymentMethod === 'COD'}
+                                            onChange={handlePaymentMethodChange}
+                                        />
+                                        <label htmlFor="cod">Cash On Delivery</label>
+                                    </div>
+                                    <div className="payment-method">
+                                        <input
+                                            type="radio"
+                                            id="card"
+                                            name="paymentMethod"
+                                            value="Card"
+                                            checked={paymentMethod === 'Card'}
+                                            onChange={handlePaymentMethodChange}
+                                        />
+                                        <label htmlFor="card">Card</label>
+                                    </div>
+                                    {paymentMethod === 'Card' && (
+                                        <div className="card-details">
+                                            <label htmlFor="cardNumber">Card Holder Name</label>
+                                            <input
+                                                type="text"
+                                                id="cardHolderName"
+                                                name="cardHolderName"
+                                                value={cardDetails.cardHolderName}
+                                                onChange={handleCardDetailsChange}
+                                            />
+                                            <label htmlFor="cardNumber">Card Number</label>
+                                            <input
+                                                type="text"
+                                                id="cardNumber"
+                                                name="cardNumber"
+                                                value={cardDetails.cardNumber}
+                                                onChange={handleCardDetailsChange}
+                                            />
+                                            <label htmlFor="expiryDate">Expiry Date</label>
+                                            <input
+                                                placeholder='MM/YY'
+                                                type="text"
+                                                id="expiryDate"
+                                                name="expiryDate"
+                                                value={cardDetails.expiryDate}
+                                                onChange={handleCardDetailsChange}
+                                            />
+                                            <label htmlFor="cvv">CVV</label>
+                                            <input
+                                                type="text"
+                                                id="cvv"
+                                                name="cvv"
+                                                value={cardDetails.cvv}
+                                                onChange={handleCardDetailsChange}
+                                            />
+                                        </div>
+                                    )}
+                                </form>
 
                             </div>
 
@@ -164,6 +314,12 @@ function Checkout(){
 
                         <div className="checkout-right-container">
 
+                            <div className="order-summary">
+                                <h3>Order Summary</h3>
+                                {/* Your order summary content goes here */}
+                                <p>Total: Rs {total}</p>
+                                <button onClick={placeOrder} className="place-order-button">Place Order</button>
+                            </div>
 
                         </div>
 

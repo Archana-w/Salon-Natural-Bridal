@@ -17,14 +17,14 @@ router.route("/create").post((req, res) => {
 
             const time = req.body.time;
             const date = req.body.date;
-            const mobileNumber = req.body.mobile_number;
+            const stylistId = req.body.stylist_id;
             const hairCare = req.body.hair_care;
             const nailCare = req.body.nail_care;
             const skinCare = req.body.skin_care;
 
             if (time == null || time == "" ||
                 date == null || date == "" ||
-                mobileNumber == null || mobileNumber == ""){
+                stylistId == null || stylistId == ""){
                 res.send({ status: "required_failed", "message": "Required values are not received." });
                return; 
             }
@@ -36,7 +36,7 @@ router.route("/create").post((req, res) => {
                     a.appoinment_time = time;
                     a.appoinment_date = date;
                     a.time = currentTime;
-                    a.contact_number = mobileNumber;
+                    a.stylist_id = stylistId;
                     a.user_id = userId;
                     a.hair_care = hairCare;
                     a.skin_care = skinCare;
