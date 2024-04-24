@@ -190,7 +190,7 @@ function Appointment() {
                                     <Form.Item name="DatePicker" label="Select Date" rules={[{ required: true, message: 'Please select a date!' }]}>
                                         <DatePicker className='datepic' disabledDate={disabledDate}/>
                                     </Form.Item>
-                                    <Form.Item name="select" label="Select time" hasFeedback rules={[{ required: true, message: 'Please select your time!' }]}>
+                                    <Form.Item name="time_range" label="Select time" hasFeedback rules={[{ required: true, message: 'Please select your time!' }]}>
                                         <Select className='selectt' placeholder="Please select a time">
                                         <Option value="time1"> 8 a.m. - 10 a.m.</Option>
                                         <Option value="time2">10 a.m. - 12 a.m.</Option>
