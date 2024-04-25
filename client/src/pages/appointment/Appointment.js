@@ -194,14 +194,14 @@ function Appointment() {
                                         <Select className='selectt' placeholder="Please select a time">
                                         <Option value="time1">8 a.m. - 9 a.m.</Option>
                                         <Option value="time2">9 a.m. - 10 a.m.</Option>
-                                        <Option value="time1">10 a.m. - 11 a.m.</Option>
-                                        <Option value="time2">11 a.m. - 12 p.m.</Option>
-                                        <Option value="time3">12 p.m. - 13 p.m.</Option>
-                                        <Option value="time4">13 p.m. - 14 p.m.</Option>
-                                        <Option value="time5">14 p.m. - 15 p.m.</Option>
-                                        <Option value="time3">15 p.m. - 16 p.m.</Option>
-                                        <Option value="time4">16 p.m. - 17 p.m.</Option>
-                                        <Option value="time5">17 p.m. - 18 p.m.</Option>
+                                        <Option value="time3">10 a.m. - 11 a.m.</Option>
+                                        <Option value="time4">11 a.m. - 12 p.m.</Option>
+                                        <Option value="time5">12 p.m. - 13 p.m.</Option>
+                                        <Option value="time6">13 p.m. - 14 p.m.</Option>
+                                        <Option value="time7">14 p.m. - 15 p.m.</Option>
+                                        <Option value="time8">15 p.m. - 16 p.m.</Option>
+                                        <Option value="time9">16 p.m. - 17 p.m.</Option>
+                                        <Option value="time10">17 p.m. - 18 p.m.</Option>
                                         </Select>
                                     </Form.Item>
                                     <Form.Item name="select" label="Select Stylist" hasFeedback rules={[{ required: true, message: 'Please select your Stylist!' }]}>
