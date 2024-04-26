@@ -7,11 +7,13 @@ import HairImage from '../../images/customer_appointment/haircare.jpg';
 import SkinImage from '../../images/customer_appointment/skincare.jpg';
 import NailImage from '../../images/customer_appointment/nailcare.jpg';
 import { useAuthToken } from '../../auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PageLoading from '../../components/loading/PageLoading';
 
 function Appointment() {
 
+    var { id } = useParams();
+    
     var token = useAuthToken();
     var navigate = useNavigate();
     const [isLoading, setLoading] = useState(true);
