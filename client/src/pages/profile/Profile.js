@@ -16,11 +16,11 @@ function Profile() {
     var navigate = useNavigate();
     const [isLoading, setLoading] = useState(true);
     const [profileDetails, setProfileDetails] = useState({});
+    const [profilePictureUrl, setProfilePictureUrl] = useState(ProfileVector); // State to store profile picture URL
 
     //handle profile picture
-    var profilePictureUrl = ProfileVector;
     if (profileDetails.profile_pic != null) {
-        profilePictureUrl = "http://localhost:5000/image/" + profileDetails.profile_pic;
+        setProfilePictureUrl("http://localhost:5000/image/" + profileDetails.profile_pic);
     }
 
     console.log(profileDetails);
@@ -83,7 +83,14 @@ function Profile() {
         return e?.fileList;
     };
 
+  
+    const handleProfilePictureUpload = () => {
+       
+    };
 
+    const editProfile = () => {
+       
+    };
 
     if (isLoading) {
 
@@ -105,7 +112,11 @@ function Profile() {
 
                         <div className='image-container'>
                             <img className='profile_img' src={profilePictureUrl} alt="profile" height="100px" width="100px" />
-                            <Upload className='camera-upload' showUploadList={false}>
+                            <Upload
+                                className='camera-upload'
+                                showUploadList={false}
+                                customRequest={handleProfilePictureUpload} 
+                            >
                                 <Button className='camera-button'>
                                     <img src={Camera} alt="camera" />
                                 </Button>
@@ -158,7 +169,7 @@ function Profile() {
                                     <Flex className='profile_btn' gap="small" wrap="wrap">
 
 
-                                        <Button className='edit-profile' type="primary">Edit Profile</Button>
+                                        <Button className='edit-profile' type="primary" onClick={editProfile}>Edit Profile</Button>
                                         <Button className='delete' onClick={deleteProfile} type="primary">Delete Account</Button>
 
                                     </Flex>
