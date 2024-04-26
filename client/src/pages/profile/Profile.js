@@ -4,6 +4,7 @@ import React from 'react';
 import { Form, Input, Flex, Button, Upload } from 'antd';
 import './Profile.css';
 import ProfileVector from '../../images/default_profile_vector.webp';
+import Camera from '../../images/customer_appointment/camera.png'
 import { PlusOutlined } from '@ant-design/icons';
 import { useAuthToken } from '../../auth';
 import { useNavigate } from "react-router-dom";
@@ -14,22 +15,22 @@ function Profile() {
     var token = useAuthToken();
     var navigate = useNavigate();
     const [isLoading, setLoading] = useState(true);
-    const[profileDetails,setProfileDetails] = useState({});
+    const [profileDetails, setProfileDetails] = useState({});
 
     //handle profile picture
     var profilePictureUrl = ProfileVector;
-    if (profileDetails.profile_pic != null){
+    if (profileDetails.profile_pic != null) {
         profilePictureUrl = "http://localhost:5000/image/" + profileDetails.profile_pic;
     }
 
     console.log(profileDetails);
 
-    useEffect(()=>{
+    useEffect(() => {
 
         if (token != null) {
 
             axios.post("http://localhost:5000/user/profile", { token: token }).then((response) => {
-               
+
                 var data = response.data;
                 var status = data.status;
                 if (status == "success") {
@@ -50,10 +51,10 @@ function Profile() {
             navigate("/login");
         }
 
-    },[]);
+    }, []);
 
-    function deleteProfile(){
-        
+    function deleteProfile() {
+
         setLoading(true);
 
         axios.post("http://localhost:5000/user/delete", { token: token }).then((response) => {
@@ -72,7 +73,7 @@ function Profile() {
         }).catch((error) => {
             alert("Error 2 - " + error);
         });
-        
+
     }
 
     const normFile = (e) => {
@@ -86,7 +87,7 @@ function Profile() {
 
     if (isLoading) {
 
-        return(
+        return (
             <>
                 <PageLoading />
             </>
@@ -99,85 +100,84 @@ function Profile() {
 
             <div className='upper-img'>
 
-                <div className='image-container'>
-                    <img className='profile_img' src={profilePictureUrl} alt="profile" height="100px" width="100px" />
-                </div>
+                <div className='profile-container'>
+                    <div className='upper-container'>
 
-                <div className="lower-container">
+                        <div className='image-container'>
+                            <img className='profile_img' src={profilePictureUrl} alt="profile" height="100px" width="100px" />
+                            <Upload className='camera-upload' showUploadList={false}>
+                            <Button className='camera-button'>
+                                <img src={Camera} alt="camera" />
+                            </Button>
+                        </Upload>
+                        </div>
 
-                    <div className='profile-form'>
+                        <div className='img_text'>
 
-                        <h1 className='pcard-title'>{profileDetails.first_name + " " + profileDetails.last_name}</h1>
-                        <h3 className='sub-title'>User Information</h3>
+                            <h1 className='pcard-title'>{profileDetails.first_name + " " + profileDetails.last_name}</h1>
 
-                        <Form className='form' layout='horizontal'>
+                        </div>
 
-                            <Form.Item label='Name' name='name'>
-
-                                <Input className='profile_input' id='pname' placeholder='Name' />
-
-                            </Form.Item>
-
-                            <Form.Item label='Address' name='address'>
-
-                                <Input className='profile_input' id='paddress' placeholder='Address' />
-
-                            </Form.Item>
-
-                            <Form.Item label='Contact Number' name='contact number'>
-
-                                <Input className='profile_input' id='pnumber' placeholder='Contact Number' />
-
-                            </Form.Item>
-
-                            <Form.Item label='Email' name='email'>
-
-                                <Input className='profile_input' id='pemail' placeholder='Email' />
-
-                            </Form.Item>
-
-
-
-                            <Form.Item label="Upload" valuePropName="fileList" getValueFromEvent={normFile}>
-                                <Upload className='upload' action="/upload.do" listType="picture-card">
-                                    <button
-                                        style={{
-                                            border: 0,
-                                            background: 'none',
-                                        }}
-                                        type="button"
-                                    >
-                                        <PlusOutlined />
-                                        <div
-                                            style={{
-                                                marginTop: 8,
-                                            }}
-                                        >
-                                            Upload
-                                        </div>
-                                    </button>
-                                </Upload>
-                            </Form.Item>
-                            <Flex className='profile_btn' gap="small" wrap="wrap">
-
-
-                                <Button className='edit-profile' type="primary">Edit Profile</Button>
-                                <Button className='delete' onClick={deleteProfile} type="primary">Delete Account</Button>
-
-                            </Flex>
-
-
-                        </Form>
                     </div>
 
+                    <div className="lower-container">
+
+                        <div className="profile_details">
+                            <div className="profile_details-form card p-2">
+                                <h1 className="card-title">User Information</h1>
+                                <Form layout="vertical" >
+                                    <Form.Item
+                                        label="First Name"
+                                        name="first_name"
+
+                                    >
+                                        <Input className="profile_input" placeholder="First Name" />
+                                    </Form.Item>
+                                    <Form.Item
+                                        label="Last Name"
+                                        name="last_name"
+
+                                    >
+                                        <Input className="profile_input" placeholder="Last Name" />
+                                    </Form.Item>
+                                    <Form.Item
+                                        label="Contact Number"
+                                        name="mobile_number"
+
+                                    >
+                                        <Input className="profile_input" placeholder="Contact Number" />
+                                    </Form.Item>
+                                    <Form.Item
+                                        label="Email"
+                                        name="email"
+
+                                    >
+                                        <Input className="profile_input" placeholder="Email" />
+                                    </Form.Item>
+
+                                    <Flex className='profile_btn' gap="small" wrap="wrap">
+
+
+                                        <Button className='edit-profile' type="primary">Edit Profile</Button>
+                                        <Button className='delete' onClick={deleteProfile} type="primary">Delete Account</Button>
+
+                                    </Flex>
+
+
+
+                                </Form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
 
         );
 
     }
 
-   
+
 }
 
 export default Profile;

@@ -1,40 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 
-.profile-form {
-  background-color: white;
-  width: 600px;
-  color: black;
-  padding-top: 20px;
-  border-radius: 10px;
-  margin-top: -200px;
-  border: none !important;
-  outline: none !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
-
-}
-
-.pcard-title {
-  text-align: center;
-  color: black !important;
-  padding-top: 120px;
-
-}
-
-.sub-title {
-  padding-top: 20px;
-  text-align: center;
-  color: black !important;
-  padding-bottom: 10px;
-}
-
 .edit-profile {
   background-color: black;
   color: white;
   height: 50px;
   width: 40%;
   font-size: 18px;
-  margin: 20px;
+  margin-top: 15px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-right: 35px;
   border-radius: 5px;
   border: none !important;
 
@@ -52,7 +28,8 @@
   height: 50px;
   width: 40%;
   font-size: 18px;
-  margin: 20px;
+  margin-top: 15px;
+  margin-bottom: 20px;
   border-radius: 5px;
   border: none !important;
 
@@ -65,19 +42,41 @@
 }
 
 .upper-img {
-
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../images/customer_appointment/upper_img.jpg);
-  height: 60%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../images/customer_appointment/upper_img.jpg');
+  height: 100%;
+  min-height: 1000px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: relative;
-  padding-top: 10px;
+  display: flex; 
+  align-items: center; 
+}
+.profile-container{
+
+  width: 800px;
+  height: 600px;
+  margin: auto;
+  border-radius: 20px;
+  margin-top: 50px;
+  background-color: white;
 }
 
-.form {
+.upper-container{
+  width: 780px;
+  height: 250px;
+  background-color: rgba(175, 175, 175, 0.353);
+  border-radius: 20px; 
+  margin: 10px;
 
-  background-color: rgb(233, 235, 236);
+}
+
+.image-container{
+  float:left;
+  width:200px;
+  position: relative;
+  margin-left: 20px;
+  
+ 
 }
 
 .image-container img {
@@ -86,78 +85,119 @@
   height: 200px;
   border-radius: 50%;
   padding: 5px;
-  transform: translate(5%, 2%);
+  transform: translate(1%, 10%);
 
 }
 
-.profile_img {
-  border: 2px solid rgb(198, 198, 198);
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  object-fit: cover;
+.camera-upload {
+  position: absolute;
+  top: 40px;
+  left: 150px;
+ 
+}
 
+.camera-button {
+  background: transparent;
+  border: none;
+
+}
+.camera-button:hover{
+  background: transparent !important;
+  border: none;
+}
+
+.camera-button img {
+  width: 30px;
+  height: 30px;
+}
+.img_text{
+  float: left;
+  width: 460px;
+
+}
+
+.pcard-title {
+  text-align: center;
+  color: black !important;
+  font-family: 'Merriweather';
+  padding-top: 100px;
 
 }
 
 .lower-container {
-  margin-top: 60px;
-  height: 300px;
-  background: white;
+
+  width: 800px;
+  height: 550px;
+  background-color: white;
   text-align: center;
   font-family: 'Merriweather';
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   color: black;
+  padding-top: 40px;
+  border-bottom-right-radius: 20px; 
+  border-bottom-left-radius: 20px;
 }
 
-.profile_input {
+.profile_details {
 
-  background-color: white;
+
+  height: 500px;
+  display: flex;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: black;
+
+}
+
+.profile_details-form {
+
+  background-color: rgba(175, 175, 175, 0.353);
+  backdrop-filter:blur(30px);
+  width: 500px;
+  padding-left: 140px;
+  padding-right: 140px;
+  color: black;
+  padding-top: 20px;
+  border-radius: 10px;
+  border: none  !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+}
+
+.authentication .card-title {
+  text-align: center;
+  color: black;
+
+}
+
+/* antd override */
+.profile_input  {
+  background-color: white !important;
   border: white !important;
-  width: 400px;
   height: 50px;
   color: black;
   font-weight: bold;
-  margin-top: 20px;
+}
+  
+.profile_input:focus {
+  
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: rgb(202, 201, 201) !important;
 }
 
-#pname {
-
-  margin-left: 80px;
-}
-
-#paddress {
-
-  margin-left: 70px;
-}
-
-#pnumber {
-
-  margin-left: 10px;
-}
-
-#pemail {
-
-  margin-left: 80px;
-}
-
-.ant-upload {
-
-  background-color: white;
+.ant-form-item {
+  margin: 10px 0 !important;
+  padding: 0 20px !important;
+  font-weight: bold;
 
 }
 
-.upload {
+.ant-input {
 
-  padding-left: 85px;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
-.profile_btn {
-  align-items: center;
-  justify-content: center;
 
-}
