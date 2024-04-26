@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/header/Header'
+import Leave from './pages/leave/Leave';
 import Store from './pages/store/Store';
 import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
@@ -22,6 +23,8 @@ function App() {
       <Header />
 
       <Routes>
+
+        <Route path="/leave" Component={Leave} />
         <Route path="/signup" Component={SignUp} />
         <Route path="/login" Component={Login} />
         <Route path="/signout" Component={SignOut} />
@@ -32,7 +35,8 @@ function App() {
         <Route path="/profile" Component={Profile} />
         <Route path="/create-app" Component={Appointment} />
         <Route path="/invoice/:id" Component={OrderDetails}/>
-        <Route path="/create-app/AppointmentList" Component={AppointmentList}/>
+        <Route path="/my-app" Component={AppointmentList}/>
+
 
       </Routes>
 

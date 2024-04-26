@@ -45,7 +45,7 @@
   
     background-image: url(../../images/customer_appointment/signup.jpg);
     width: 100%;
-    min-height: 800px;
+    min-height: 900px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -70,7 +70,7 @@
     position: absolute;
     right: 0;
     padding-right: 200px;
-    padding-top: 3%;
+    padding-top: 5%;
   
   }
   

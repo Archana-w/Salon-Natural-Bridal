@@ -4,6 +4,8 @@ import './AppointmentList.css'
 import axios from 'axios';
 import { useAuthToken } from '../../auth';
 import { useNavigate } from 'react-router-dom';
+import PageLoading from '../../components/loading/PageLoading';
+
 
 
 function AppointmentList(){
@@ -11,6 +13,7 @@ function AppointmentList(){
   var token = useAuthToken();
   var navigate = useNavigate();
   const [isLoading, setLoading] = useState(true);
+  const [data,setData] = useState([]);
   
   useEffect(()=>{
 
@@ -21,7 +24,8 @@ function AppointmentList(){
           var data = response.data;
           var status = data.status;
           if (status == "success") {
-              alert(JSON.stringify(data));
+            setData(data.data);
+            setLoading(false);
           } else if (status == "token_expired" || status == "auth_failed") {
               navigate("/signout");
           } else {
@@ -33,9 +37,9 @@ function AppointmentList(){
           alert("Error 2 - " + error);
       });
 
-  } else {
+    } else {
       navigate("/login");
-  }
+    }
 
 
   });
@@ -44,7 +48,7 @@ function AppointmentList(){
      
         {
           title: 'Service Name',
-          dataIndex: 'service_name',
+          dataIndex: 'service',
         },
         {
           title: 'Date',
@@ -57,7 +61,7 @@ function AppointmentList(){
       
         {
           title: 'Stylist Name',
-          dataIndex: 'stylist_name',
+          dataIndex: 'name',
         },
         {
           title: 'Action',
@@ -75,48 +79,30 @@ function AppointmentList(){
         },
      
       ];
-      const data = [
-        {
-          key: '1',
-          
-          service_name: 'hair Straight',
-          date: '2024/03/22',
-          time:'09.00',
-          stylist_name:'stylist 1',
-    
-    
-        },
-        {
-          key: '2',
-          service_name: 'facial',
-          date: '2024/03/22',
-          time:'09.00',
-          stylist_name:'stylist 2',
-         
-        },
-        {
-          key: '3',
-          service_name: 'nail ploish',
-          date: '2024/03/22',
-          time:'09.00',
-          stylist_name:'stylist 3',
-         
-        },
-      ];
-      
-    
-        return(
-          <div className='content'> <h2>Your Appoinments</h2>
-          <input className='search'
-          type="search"
-          placeholder="Search here"/>
-          <Table columns={columns} dataSource={data} pagination={false}/>
-          
-          </div>
-          
-        );
-    
-    
 
+
+  if (isLoading) {
+
+    return (
+      <>
+        <PageLoading />
+      </>
+    );
+
+  } else {
+
+    return (
+      <div className='content'> <h2>Your Appoinments</h2>
+        <input className='search'
+          type="search"
+          placeholder="Search here" />
+        <Table columns={columns} dataSource={data} pagination={false} />
+
+      </div>
+
+    );
+
+  }
+  
 }
 export default AppointmentList;

@@ -95,7 +95,7 @@
   /* antd override */
   
   .login_input  {
-    background-color: white;
+    background-color: white !important;
       border: white !important;
       height: 50px;
       color: black;

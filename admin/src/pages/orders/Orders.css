@@ -1,0 +1,53 @@
+/* OrderList.css */
+.order-list-container {
+    max-width: auto;
+    margin: 20px auto;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.order-list-container h1 {
+    text-align: center;
+}
+
+.order-list-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.order-list-container th,
+.order-list-container td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.order-list-container thead {
+    background-color: #f2f2f2;
+}
+
+.order-list-container tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.order-list-container button {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.order-list-container button:hover {
+    background-color: #45a049;
+    /* Darker green */
+}

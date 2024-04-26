@@ -14,11 +14,12 @@ function Header() {
     },
     {
       name: "Employees",
-      icon: "home",
+      icon: "person",
       sub_menu: [
         { name: "Employee Details", navigate: "emp_details" },
         { name: "Employee Attendance", navigate: "emp_attendance" },
         { name: "Employee Salary", navigate: "emp_salary" },
+        { name: "Salary Details", navigate: "salary" },
         { name: "Employee Leaves", navigate: "emp_leaves" }
       ]
     },
@@ -33,9 +34,9 @@ function Header() {
       navigate: "appoinment",
     },
     {
-      name: "Payments",
-      icon: "home",
-      navigate: "payments",
+      name: "Orders",
+      icon: "shopping_cart",
+      navigate: "orders",
     },
     {
       name: "Inventory",
