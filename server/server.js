@@ -1,20 +1,19 @@
-var express = require("express");
-var dotenv = require("dotenv");
-var bodyParser = require("body-parser");
-var cors = require('cors');
-var multer = require("multer");
-var mongoose = require("mongoose");
-var Device = require("./models/Device");
-var User = require("./models/User");
-var tokenRoute = require("./routes/token_route");
-var userRoute = require("./routes/user_route");
-var productRoute = require("./routes/product_route");
-var cartRoute = require("./routes/cart_route");
-var checkoutRoute = require("./routes/checkout_route");
-var orderRoute = require("./routes/order_route");
-var appoinmentRoute = require("./routes/appointment_route");
-var empRoute = require("./routes/emp_route");
-
+const express = require("express");
+const dotenv = require("dotenv");
+const bodyParser = require("body-parser");
+const cors = require('cors');
+const multer = require("multer");
+const mongoose = require("mongoose");
+const Supplier = require("./models/Supplier");
+const tokenRoute = require("./routes/token_route");
+const supplierRoute = require("./routes/supplier_route"); 
+const userRoute = require("./routes/user_route");
+const productRoute = require("./routes/product_route");
+const cartRoute = require("./routes/cart_route");
+const checkoutRoute = require("./routes/checkout_route");
+const orderRoute = require("./routes/order_route");
+const appointmentRoute = require("./routes/appointment_route");
+const empRoute = require("./routes/emp_route");
 
 var app = express();
 dotenv.config({ path: "./config.env" });
@@ -86,13 +85,15 @@ app.use((req, res, next) => {
 
 //routes
 app.use("/token", tokenRoute);
-app.use("/user",userRoute);
+app.use("/supplier", supplierRoute); 
+app.use("/user", userRoute);
 app.use("/product", productRoute);
 app.use("/cart", cartRoute);
 app.use("/checkout", checkoutRoute);
 app.use("/order", orderRoute);
-app.use("/appointment", appoinmentRoute);
+app.use("/appointment", appointmentRoute);
 app.use("/emp", empRoute);
+
 
 //give access image 
 app.get("/image/:imageName", (req, res) => {
