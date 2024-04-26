@@ -73,7 +73,7 @@ function Appointment() {
                     var status = data.status;
                     if (status == "success") {
                         alert("Appointment created...");
-                        navigate("/create-app/AppointmentList");
+                        navigate("/my-app/AppointmentList");
                     } else if (status == "token_expired" || status == "auth_failed") {
                         navigate("/signout");
                     } else {
