@@ -19,6 +19,7 @@ function Header() {
         { name: "Employee Details", navigate: "emp_details" },
         { name: "Employee Attendance", navigate: "emp_attendance" },
         { name: "Employee Salary", navigate: "emp_salary" },
+        { name: "Salary Details", navigate: "salary" },
         { name: "Employee Leaves", navigate: "emp_leaves" }
       ]
     },

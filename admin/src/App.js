@@ -44,7 +44,7 @@ function App() {
           <Route path='/emp_salary' Component={Emp_salary}></Route>
           <Route path='/emp_leaves' Component={Emp_leaves}></Route>
           <Route path='/orders' Component={Orders}></Route>
-
+          
         </Routes>
 
       </div>
