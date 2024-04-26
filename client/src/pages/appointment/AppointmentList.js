@@ -44,7 +44,7 @@ function AppointmentList() {
 
   const handleDelete = (record) => {
     //  deleting appointments
-   
+
   };
 
   const columns = [
@@ -86,10 +86,12 @@ function AppointmentList() {
     return <PageLoading />;
   } else {
     return (
-      <div className='content'>
-        <h2>Your Appointments</h2>
-        <input className='search' type="search" placeholder="Search here" />
-        <Table columns={columns} dataSource={data} pagination={false} />
+      <div className="app_bg">
+        <div className='content'>
+          <h1>Your Appointments</h1>
+          <input className='search' type="search" placeholder="Search here" />
+          <Table  className="custom-table" columns={columns} dataSource={data} pagination={false} />
+        </div>
       </div>
     );
   }

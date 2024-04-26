@@ -1,22 +1,31 @@
 .content{
 
-    margin-top: 50px;
+   padding-top: 40px;
+   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(../../images/customer_appointment/appointment.jpg);
+    width: 100%;
+    min-height: 800px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+   
 }
-.content h2{
+.content h1{
 
     text-align: center;
-  
-}
-
-.ant-divider-inner-text {
+    color: white;
     font-weight: bold;
-    font-size: 20px;
+    font-family: 'De Bambeet';
+    font-size: 40px;
+    
+    
 }
 
 .ant-table-wrapper {
 
     width: 1000dp;
     margin: 30px;
+ 
 }
 
 .edt_btn {
@@ -55,7 +64,9 @@
 
     font-size: 16px;
     margin-bottom: 50px;
+    
 }
+
 
 .add_app_btn {
     
@@ -107,7 +118,6 @@
     margin-left: 30px;
     padding: 5px;
     border: 1px solid rgb(157, 157, 157);
-    background-color: rgb(225, 226, 228);
     outline: none !important;
 }
 
@@ -117,3 +127,12 @@
     outline: none !important;
     background-color: rgb(220, 220, 220);
 }
+
+.custom-table .ant-table-thead > tr > th {
+    background-color: rgba(175, 175, 175, 0.564); /* Define your desired background color for the thead */
+  }
+  
+  .custom-table .ant-table-tbody > tr > td {
+    background-color: #dedcdc55; /* Define your desired background color for the tbody */
+  }
+  
