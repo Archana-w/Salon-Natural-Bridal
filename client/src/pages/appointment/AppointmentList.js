@@ -4,6 +4,8 @@ import './AppointmentList.css'
 import axios from 'axios';
 import { useAuthToken } from '../../auth';
 import { useNavigate } from 'react-router-dom';
+import PageLoading from '../../components/loading/PageLoading';
+
 
 
 function AppointmentList(){
@@ -22,7 +24,8 @@ function AppointmentList(){
           var data = response.data;
           var status = data.status;
           if (status == "success") {
-            setData(data.data)
+            setData(data.data);
+            setLoading(false);
           } else if (status == "token_expired" || status == "auth_failed") {
               navigate("/signout");
           } else {
@@ -75,20 +78,31 @@ function AppointmentList(){
           render: () => <button className='delete_btn'>Delete</button>,
         },
      
-      ];      
-    
-        return(
-          <div className='content'> <h2>Your Appoinments</h2>
-          <input className='search'
-          type="search"
-          placeholder="Search here"/>
-          <Table columns={columns} dataSource={data} pagination={false}/>
-          
-          </div>
-          
-        );
-    
-    
+      ];
 
+
+  if (isLoading) {
+
+    return (
+      <>
+        <PageLoading />
+      </>
+    );
+
+  } else {
+
+    return (
+      <div className='content'> <h2>Your Appoinments</h2>
+        <input className='search'
+          type="search"
+          placeholder="Search here" />
+        <Table columns={columns} dataSource={data} pagination={false} />
+
+      </div>
+
+    );
+
+  }
+  
 }
 export default AppointmentList;

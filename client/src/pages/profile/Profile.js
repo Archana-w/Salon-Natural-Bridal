@@ -106,10 +106,10 @@ function Profile() {
                         <div className='image-container'>
                             <img className='profile_img' src={profilePictureUrl} alt="profile" height="100px" width="100px" />
                             <Upload className='camera-upload' showUploadList={false}>
-                            <Button className='camera-button'>
-                                <img src={Camera} alt="camera" />
-                            </Button>
-                        </Upload>
+                                <Button className='camera-button'>
+                                    <img src={Camera} alt="camera" />
+                                </Button>
+                            </Upload>
                         </div>
 
                         <div className='img_text'>
@@ -129,30 +129,30 @@ function Profile() {
                                     <Form.Item
                                         label="First Name"
                                         name="first_name"
-
+                                    
                                     >
-                                        <Input className="profile_input" placeholder="First Name" />
+                                        <Input className="profile_input" placeholder="First Name" defaultValue={profileDetails.first_name} />
                                     </Form.Item>
                                     <Form.Item
                                         label="Last Name"
                                         name="last_name"
 
                                     >
-                                        <Input className="profile_input" placeholder="Last Name" />
+                                        <Input className="profile_input" placeholder="Last Name" defaultValue={profileDetails.last_name}/>
                                     </Form.Item>
                                     <Form.Item
                                         label="Contact Number"
                                         name="mobile_number"
 
                                     >
-                                        <Input className="profile_input" placeholder="Contact Number" />
+                                        <Input className="profile_input" placeholder="Contact Number" defaultValue={profileDetails.mobile_number} />
                                     </Form.Item>
                                     <Form.Item
                                         label="Email"
                                         name="email"
 
                                     >
-                                        <Input className="profile_input" placeholder="Email" />
+                                        <Input className="profile_input" placeholder="Email" defaultValue={profileDetails.email} />
                                     </Form.Item>
 
                                     <Flex className='profile_btn' gap="small" wrap="wrap">
