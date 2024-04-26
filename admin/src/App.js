@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/header/Header';
 import Adminhome from './pages/adminhome/Adminhome';
 import Customer from './pages/customer/Customer';
+import Salary from './pages/salary/Salary';
 import Appointment from './pages/appointment/Appointment';
 import { useAuthToken } from './auth';
 import SignOut from './pages/signout/SignOut';
@@ -32,7 +33,7 @@ function App() {
       <div className='main'>
 
         <Routes>
-
+          <Route path="/salary" Component={Salary} />
           <Route path="/signout" Component={SignOut} />
           <Route path='/adminhome' Component={Adminhome}></Route>
           <Route path='/customer' Component={Customer}></Route>
