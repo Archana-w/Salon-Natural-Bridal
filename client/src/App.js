@@ -34,6 +34,7 @@ function App() {
         <Route path="/checkout" Component={Checkout}/>
         <Route path="/profile" Component={Profile} />
         <Route path="/create-app" Component={Appointment} />
+        <Route path="/create-app/:id" Component={Appointment} />
         <Route path="/invoice/:id" Component={OrderDetails}/>
         <Route path="/my-app" Component={AppointmentList}/>
 
