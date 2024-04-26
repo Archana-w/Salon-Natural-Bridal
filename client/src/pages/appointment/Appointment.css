@@ -1,0 +1,371 @@
+/* common styling */
+
+
+.submit {
+    background-color: black;
+    color: white;
+    height: 50px;
+    width: 20%;
+    font-size: 18px;
+    margin: 20px;
+    border-radius: 5px;
+    border: none !important;
+
+}
+
+.submit:hover {
+
+    background-color: rgb(96, 94, 94) !important;
+
+}
+
+.edit {
+    background-color: rgb(9, 98, 134);
+    color: white;
+    height: 50px;
+    width: 20%;
+    font-size: 18px;
+    margin: 20px;
+    border-radius: 5px;
+    border: none !important;
+
+}
+
+.edit:hover {
+
+    background-color: rgb(8, 140, 192) !important;
+
+}
+
+.cancel {
+    background-color: rgb(136, 4, 4);
+    color: white;
+    height: 50px;
+    width: 20%;
+    font-size: 18px;
+    margin: 20px;
+    border-radius: 5px;
+    border: none !important;
+
+}
+
+.cancel:hover {
+
+    background-color: rgb(196, 10, 10) !important;
+
+}
+
+.bg-image-appointment {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../images/customer_appointment/img1.jpg);
+    width: 100%;
+    max-height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+
+}
+
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: De Bambeet;
+}
+
+
+.hero-text h1 {
+    font-size: 50px;
+}
+
+
+.hero-text p {
+    font-size: 30px;
+}
+
+/*appointment form*/
+
+.appointment {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: black;
+    padding-top: 20px;
+    transform: translate(0px, 500px);
+}
+
+.appointment-form {
+
+    backdrop-filter: blur(30px);
+    width: 100%;
+    color: black;
+    border-radius: 10px;
+    padding: 20px;
+    overflow: hidden;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.card_title {
+    text-align: center;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.sub_title {
+    padding-top: 20px;
+    text-align: left !important;
+    color: black;
+    font-weight: bolder;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 200px;
+
+}
+
+.type-services {
+
+    width: 100%;
+    height: 680px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-right: 150px;
+
+
+}
+
+.typediv {
+
+    width: 300px;
+    height: 580px;
+    float: left;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    margin: 45px;
+
+}
+
+.typeimg {
+
+    width: 300px;
+    height: 300px;
+    float: left;
+    object-fit: cover;
+}
+
+.typeimg img {
+
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+
+}
+
+.type {
+
+
+    float: left;
+    width: 299px;
+    height: 280px;
+    background-color: white !important;
+}
+
+
+
+.desc {
+    padding: 15px;
+    text-align: center;
+    color: black;
+    font-weight: 100;
+    font-size: 20px;
+
+}
+
+.categories {
+
+    width: 100%;
+    height: auto;
+    margin-left: 20px;
+    font-size: 20px;
+
+
+}
+
+.ant-checkbox-group{
+
+    margin-left: 20px;
+}
+
+.ant-checkbox-wrapper {
+
+    width:250px;
+}
+
+.chdiv{
+
+    width:250px;
+    margin-left: 0 !important;
+    
+}
+
+.bottomsection {
+    padding-top: 20px;
+    width: 100%;
+    height: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.forminfo {
+    padding-top: 20px;
+    width: 50%;
+    font-family: Arial, Helvetica, sans-serif;
+    float: left;
+}
+
+.bottom_des {
+
+    padding-top: 20px;
+    width: 30%;
+    font-family: Arial, Helvetica, sans-serif;
+    float: left;
+
+}
+
+
+
+/* antd override */
+
+.appn_input {
+    background-color: white !important;
+    border: 1px solid rgb(202, 201, 201) !important;
+    height: 50px;
+    color: black;
+    font-weight: bold;
+    width: 450px !important;
+    margin-left: 40px;
+}
+
+.appc_input {
+    background-color: white !important;
+    border: 1px solid rgb(202, 201, 201) !important;
+    height: 50px;
+    color: black;
+    font-weight: bold;
+    width: 450px !important;
+    padding-left: 10px;
+}
+
+
+.datepic.ant-picker {
+    height: 50px;
+    color: black;
+    font-weight: bold;
+    width: 450px !important;
+    margin-left: 35px !important;
+    border: 1px solid rgb(202, 201, 201) !important;
+}
+.timepic{
+    height: 50px;
+    color: black;
+    font-weight: bold;
+    width: 450px !important;
+    margin-left: 35px !important;
+    border: 1px solid rgb(202, 201, 201) !important;
+
+}
+/*.ant-picker-input{
+
+    border: none !important;
+    outline: none !important;
+    text-decoration: none !important;
+}*/
+.selects.ant-select-selector {
+
+    height: 50px;
+    color: black;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid rgb(202, 201, 201) !important;
+}
+
+.selects.ant-select {
+
+    height: 50px;
+    color: black;
+    font-weight: bold;
+    width: 450px !important;
+    margin-left: 30px !important;
+}
+
+.selects.ant-select-selection-item {
+
+    color: black;
+    font-weight: bold !important;
+}
+
+.selectt.ant-select-selector {
+
+    height: 50px;
+    color: black;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid rgb(202, 201, 201) !important;
+}
+
+.selectt.ant-select {
+
+    height: 50px;
+    color: black;
+    font-weight: bold;
+    width: 450px !important;
+    margin-left: 40px !important;
+}
+
+.selectt.ant-select-selection-item {
+
+    color: black;
+    font-weight: bold !important;
+}
+
+
+.ant-form-item {
+    margin: 10px 0 !important;
+    padding: 0 20px !important;
+    font-weight: bold;
+}
+
+
+
+.ant-row {
+
+    padding-left: 20px;
+    color: black;
+    font-weight: bold;
+}
+
+.ant-flex {
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+
+
+.ant-checkbox {
+
+    border: 1px solid black !important;
+}
+
+.ant-checkbox-wrapper {
+
+    font-size: 16px;
+    font-weight: 600;
+
+}

@@ -1,0 +1,56 @@
+.content h2{
+
+    text-align: center;
+    
+  }
+  
+
+.ant-divider-inner-text{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.ant-table-wrapper{
+
+    width: 1000dp;
+    margin: 30px;
+}
+
+.start_btn{
+
+    width:80px;
+    height: 30px;
+    background-color: black;
+    color:white;
+    font-size: 14px;
+    border: none !important;
+}
+
+.start_btn:hover{
+
+    background-color: rgba(0, 0, 0, 0.721);
+   
+}
+
+.ant-table-content{
+
+    font-size: 16px;
+}
+
+.search {
+    
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    margin-left: 30px;
+    border: 1px solid rgb(157, 157, 157);
+    background-color: rgb(225, 226, 228);
+    outline: none !important;
+}
+
+.search:hover {
+
+    border: none !important;
+    outline: none !important;
+    background-color: rgb(220, 220, 220);
+}

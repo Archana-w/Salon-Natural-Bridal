@@ -1,0 +1,208 @@
+.checkout-page {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.page-title {
+    display: flex;
+    align-items: center;
+}
+
+.checkout-page-content {
+    padding-top: 20px;
+    display: flex;
+}
+
+.checkout-left-container{
+    width: 60%;
+    height: 200px;
+}
+
+.checkout-right-container{
+    width: 40%;
+    height: 200px;
+}
+
+.address-container{
+    margin: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgb(241, 241, 241);
+}
+
+.address{
+    padding: 10px;
+    display: flex;
+}
+
+.address-radio{
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.address-main *{
+    display: block;
+}
+
+.address-main{
+    width: 100%;
+}
+
+.address-delete{
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.address-delete span{
+    cursor: pointer;
+}
+
+.address-name{
+    font-size: 15px;
+}
+
+.address-text{
+    font-size: 12px;
+    color: gray;
+}
+
+.address-mobile{
+    font-size: 12px;
+    color: rgb(7, 52, 255);
+}
+
+.address-header{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-address-window-container{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.add-address-window{
+    width: 500px;
+    height: auto;
+    border-radius: 10px;
+    background: white;
+}
+
+.add-address-container{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+.add-address-header{
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-address-header span{
+    cursor: pointer;
+}
+
+.checkout-container {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.checkout-form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-method {
+    margin-bottom: 10px;
+}
+
+.card-details {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.payment-method-container{
+    margin: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgb(241, 241, 241);
+}
+
+.payment-method-header{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.order-summary h3 {
+    margin-bottom: 10px;
+}
+
+.place-order-button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.place-order-button:hover {
+    background-color: #218838;
+}

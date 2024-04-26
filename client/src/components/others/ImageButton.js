@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './ImageButton.css';
 
-function ImageButton({ children, background = "#e9e9e9", backgroundActive = "#dadada"}){
+function ImageButton({ children, background = "#e9e9e9", backgroundActive = "#dadada",onClick = null}){
 
     const [imageButtonActive,setImageButtonActive] = useState(false);
 
@@ -11,7 +11,9 @@ function ImageButton({ children, background = "#e9e9e9", backgroundActive = "#da
     }
 
     function onImageButtonClick(){
-        
+        if (onClick != null){
+            onClick();
+        }
     }
 
     return(
