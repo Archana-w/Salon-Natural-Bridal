@@ -35,7 +35,7 @@ function App() {
         <Route path="/profile" Component={Profile} />
         <Route path="/create-app" Component={Appointment} />
         <Route path="/invoice/:id" Component={OrderDetails}/>
-        <Route path="/my-app/AppointmentList" Component={AppointmentList}/>
+        <Route path="/my-app" Component={AppointmentList}/>
 
       </Routes>
 

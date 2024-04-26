@@ -73,7 +73,7 @@ function Appointment() {
                     var status = data.status;
                     if (status == "success") {
                         alert("Appointment created...");
-                        navigate("/my-app/AppointmentList");
+                        navigate("/my-app");
                     } else if (status == "token_expired" || status == "auth_failed") {
                         navigate("/signout");
                     } else {
@@ -192,16 +192,16 @@ function Appointment() {
                                     </Form.Item>
                                     <Form.Item name="time_range" label="Select time" hasFeedback rules={[{ required: true, message: 'Please select your time!' }]}>
                                         <Select className='selectt' placeholder="Please select a time">
-                                        <Option value="time1">8 a.m. - 9 a.m.</Option>
-                                        <Option value="time2">9 a.m. - 10 a.m.</Option>
-                                        <Option value="time3">10 a.m. - 11 a.m.</Option>
-                                        <Option value="time4">11 a.m. - 12 p.m.</Option>
-                                        <Option value="time5">12 p.m. - 13 p.m.</Option>
-                                        <Option value="time6">13 p.m. - 14 p.m.</Option>
-                                        <Option value="time7">14 p.m. - 15 p.m.</Option>
-                                        <Option value="time8">15 p.m. - 16 p.m.</Option>
-                                        <Option value="time9">16 p.m. - 17 p.m.</Option>
-                                        <Option value="time10">17 p.m. - 18 p.m.</Option>
+                                            <Option value="8 a.m. - 9 a.m.">8 a.m. - 9 a.m.</Option>
+                                            <Option value="9 a.m. - 10 a.m.">9 a.m. - 10 a.m.</Option>
+                                            <Option value="10 a.m. - 11 a.m.">10 a.m. - 11 a.m.</Option>
+                                            <Option value="11 a.m. - 12 p.m.">11 a.m. - 12 p.m.</Option>
+                                            <Option value="12 p.m. - 13 p.m.">12 p.m. - 13 p.m.</Option>
+                                            <Option value="13 p.m. - 14 p.m.">13 p.m. - 14 p.m.</Option>
+                                            <Option value="14 p.m. - 15 p.m.">14 p.m. - 15 p.m.</Option>
+                                            <Option value="15 p.m. - 16 p.m.">15 p.m. - 16 p.m.</Option>
+                                            <Option value="16 p.m. - 17 p.m.">16 p.m. - 17 p.m.</Option>
+                                            <Option value="17 p.m. - 18 p.m.">17 p.m. - 18 p.m.</Option>
                                         </Select>
                                     </Form.Item>
                                     <Form.Item name="select" label="Select Stylist" hasFeedback rules={[{ required: true, message: 'Please select your Stylist!' }]}>
