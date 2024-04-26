@@ -1,6 +1,8 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/header/Header'
+import Salary from './pages/salary/Salary';
+import Leave from './pages/leave/Leave';
 import Store from './pages/store/Store';
 import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
@@ -22,6 +24,8 @@ function App() {
       <Header />
 
       <Routes>
+        <Route path="/salary" Component={Salary} />
+        <Route path="/leave" Component={Leave} />
         <Route path="/signup" Component={SignUp} />
         <Route path="/login" Component={Login} />
         <Route path="/signout" Component={SignOut} />
@@ -33,7 +37,6 @@ function App() {
         <Route path="/create-app" Component={Appointment} />
         <Route path="/invoice/:id" Component={OrderDetails}/>
         <Route path="/create-app/AppointmentList" Component={AppointmentList}/>
-
       </Routes>
 
     </BrowserRouter>

@@ -1,0 +1,124 @@
+/* common styling */
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .card {
+    box-shadow: 0 0 2px gray;
+  
+  }
+  
+  .primary-button-salary {
+  
+    background-color: black;
+    color: white;
+    height: 50px;
+    width: 90%;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 26px;
+    border-radius: 5px;
+    border: none  !important;
+  }
+  
+  .primary-button-salary:hover {
+  
+    background-color: rgb(73, 72, 72);
+  
+  }
+
+  .bg-image-salary {
+  
+    background-image: url(../../images/em2.jpg);
+    width: 100%;
+    min-height: 800px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+ 
+
+  .salary {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: black;
+    padding-top: 50px;
+   
+  }
+  
+  .salary-form {
+    background-color: rgba(110, 104, 104, 0.1);
+    backdrop-filter:blur(30px);
+    width: 600px;
+    color: black;
+    border-radius: 10px;
+    padding: 20px;
+    border: none  !important;
+    outline: none !important;
+    box-shadow: none !important;
+  
+  }
+  
+  .salary-form.card-title {
+    text-align: center;
+    color: black;
+  }
+  
+  /* antd override */
+  
+ .salary_input  {
+  background-color: white;
+    border: white !important;
+    height: 50px;
+    color: black;
+    font-weight: bold;
+  }
+  
+  .salary_input:focus {
+  
+    outline: none !important;
+    box-shadow: none !important;
+    border: 1px solid rgb(97, 97, 97) !important;
+  }
+  
+  .ant-form-item {
+    margin: 10px 0 !important;
+    padding: 0 20px !important;
+    font-weight: bold;
+ 
+  }
+
+  .salary_select.ant-select-selector{
+   
+  
+    height: 50px;
+    color: black;
+    font-weight: bold;
+   
+}
+.ant-select.salary_select .ant-select-selector {
+  background-color: white !important;
+  text-align: left;
+ 
+}
+
+.salary_select.ant-select{
+
+    height: 50px;
+    color: black;
+    font-weight: bold;
+    width:545px !important;
+    padding-right: 5px !important ;
+}
+.salary_select.ant-select-selection-item{
+
+    color: black;
+    font-weight: bold !important;
+
+}

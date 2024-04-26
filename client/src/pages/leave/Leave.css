@@ -1,0 +1,106 @@
+/* common styling */
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .card {
+    box-shadow: 0 0 2px gray;
+  
+  }
+  
+  .primary-button-leave {
+  
+    background-color: black;
+    color: white;
+    height: 50px;
+    width: 90%;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 26px;
+    border-radius: 5px;
+    border: none  !important;
+  }
+  
+  .primary-button-salary:hover {
+  
+    background-color: rgb(73, 72, 72);
+  
+  }
+
+  .bg-image-leave {
+  
+    background-image: url(../../images/em1.jpg);
+    width: 100%;
+    min-height: 800px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .leave {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: black;
+    padding-top: 150px;
+   
+    
+  }
+  
+  .leave-form {
+    background-color: rgba(110, 104, 104, 0.1);
+    backdrop-filter:blur(30px);
+    width: 600px;
+    color: black;
+    border-radius: 10px;
+    padding: 20px;
+    border: none  !important;
+    outline: none !important;
+    box-shadow: none !important;
+  
+  }
+  
+  .leave-form.card-title {
+    text-align: center;
+    color: black;
+  }
+  
+  /* antd override */
+  
+  .ant-form-item {
+    margin: 10px 0 !important;
+    padding: 0 20px !important;
+    font-weight: bold;
+ 
+  }
+
+.date.ant-picker{
+    background-color: white !important;
+    height: 50px;
+    color: black;
+    font-weight: bold;
+    width: 540px !important;
+
+}
+
+.text.ant-form-item-control-input{
+
+    background-color: white !important;
+    height: 50px;
+    text-align: left;
+    color: black !important;
+}
+
+#TextArea{
+
+    background-color: white !important;
+    height: 100px;
+    text-align: left;
+    color: black !important;
+    padding-top: 0 !important;
+}
