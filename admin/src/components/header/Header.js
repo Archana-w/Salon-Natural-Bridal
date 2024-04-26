@@ -14,7 +14,7 @@ function Header() {
     },
     {
       name: "Employees",
-      icon: "home",
+      icon: "person",
       sub_menu: [
         { name: "Employee Details", navigate: "emp_details" },
         { name: "Employee Attendance", navigate: "emp_attendance" },
@@ -33,9 +33,9 @@ function Header() {
       navigate: "appoinment",
     },
     {
-      name: "Payments",
-      icon: "home",
-      navigate: "payments",
+      name: "Orders",
+      icon: "shopping_cart",
+      navigate: "orders",
     },
     {
       name: "Inventory",

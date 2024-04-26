@@ -37,6 +37,7 @@ function App() {
         <Route path="/invoice/:id" Component={OrderDetails}/>
         <Route path="/my-app" Component={AppointmentList}/>
 
+
       </Routes>
 
     </BrowserRouter>
