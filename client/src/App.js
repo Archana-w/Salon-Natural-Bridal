@@ -24,7 +24,6 @@ function App() {
 
       <Routes>
 
-        <Route path="/salary" Component={Salary} />
         <Route path="/leave" Component={Leave} />
         <Route path="/signup" Component={SignUp} />
         <Route path="/login" Component={Login} />
