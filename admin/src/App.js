@@ -42,6 +42,8 @@ function App() {
           <Route path='/emp_attendance' Component={Emp_attendance}></Route>
           <Route path='/emp_salary' Component={Emp_salary}></Route>
           <Route path='/emp_leaves' Component={Emp_leaves}></Route>
+        
+          
 
         </Routes>
 
