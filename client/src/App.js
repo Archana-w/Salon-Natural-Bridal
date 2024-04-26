@@ -24,6 +24,7 @@ function App() {
       <Header />
 
       <Routes>
+        
         <Route path="/salary" Component={Salary} />
         <Route path="/leave" Component={Leave} />
         <Route path="/signup" Component={SignUp} />
@@ -36,7 +37,8 @@ function App() {
         <Route path="/profile" Component={Profile} />
         <Route path="/create-app" Component={Appointment} />
         <Route path="/invoice/:id" Component={OrderDetails}/>
-        <Route path="/create-app/AppointmentList" Component={AppointmentList}/>
+        <Route path="/my-app/AppointmentList" Component={AppointmentList}/>
+
       </Routes>
 
     </BrowserRouter>

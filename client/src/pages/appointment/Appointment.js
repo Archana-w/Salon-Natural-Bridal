@@ -30,7 +30,7 @@ function Appointment() {
 
         if (token != null) {
 
-            //load tylish details
+            //load stylish details
             axios.post("http://localhost:5000/emp/get_employee", { token: token, employee_type:"66288da18da7ebc59fc96a2b" }).then((response) => {
 
                 var data = response.data;
@@ -73,7 +73,7 @@ function Appointment() {
                     var status = data.status;
                     if (status == "success") {
                         alert("Appointment created...");
-                        navigate("/create-app/AppointmentList");
+                        navigate("/my-app/AppointmentList");
                     } else if (status == "token_expired" || status == "auth_failed") {
                         navigate("/signout");
                     } else {
