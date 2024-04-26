@@ -52,6 +52,15 @@ function SignUp() {
     }
   };
 
+  const validateName = (rule, value, callback) => {
+    const namePattern = /^[a-zA-Z]+$/; // Regular expression for letters only
+    if (!namePattern.test(value)) {
+      callback('Please enter only letters');
+    } else {
+      callback();
+    }
+  };
+
   return (
     <div className="bg-image">
       <div className="authentication">
@@ -66,6 +75,9 @@ function SignUp() {
                   required: true,
                   message: 'Please input your First Name!',
                 },
+                {
+                  validator: validateName,
+                },
               ]}
             >
               <Input className="signup_input" placeholder="First Name" />
@@ -77,6 +89,9 @@ function SignUp() {
                 {
                   required: true,
                   message: 'Please input your Last Name!',
+                },
+                {
+                  validator: validateName,
                 },
               ]}
             >
@@ -128,6 +143,28 @@ function SignUp() {
               <Input.Password className="signup_input" placeholder="Password" type="password" />
             </Form.Item>
 
+            <Form.Item
+              name="confirm"
+              label="Confirm Password"
+              dependencies={['password']}
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: 'Please confirm your password!',
+                },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue('password') === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(new Error('The new password that you entered do not match!'));
+                  },
+                }),
+              ]}
+            >
+              <Input.Password  className="signup_input" placeholder="Confirm Password" type="password"/>
+            </Form.Item>
             <button className="primary-button" htmltype="submit">SIGN UP</button>
 
             <p className="para">
