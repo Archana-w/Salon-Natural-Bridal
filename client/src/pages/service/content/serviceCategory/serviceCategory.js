@@ -27,7 +27,7 @@ function serviceCategory() {
             <div className="category-image">
                 <Link to='/Skin_care'><img src={skin} alt="skin care" /></Link>
             </div>
-            <p className="category-name">Skin Care Treatments</p>
+            <p className="category-name">Skin Care</p>
         </div>
       </div>
         <div className="service_title">
@@ -40,7 +40,7 @@ function serviceCategory() {
             </div>
         </div>
         <div className="service_title">
-            <h2>Skin Care</h2>
+            <h2>Hair Care</h2>
         </div>
         <div className="service_image">
             <img src={hair} alt="hair care" />
@@ -49,7 +49,7 @@ function serviceCategory() {
             </div>
         </div>
         <div className="service_title">
-            <h2>Skin Care</h2>
+            <h2>Nail Care</h2>
         </div>
         <div className="service_image">
             <img src={nail} alt="nail care" />

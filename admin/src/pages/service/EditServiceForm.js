@@ -11,7 +11,7 @@ function EditServiceForm({ service, onUpdate }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put(`http://localhost:5000/service/${editedService._id}`, editedService)
+        axios.put(`http://localhost:5000/service/update/${editedService._id}`, editedService)
             .then(() => {
                 onUpdate(editedService); // Update service in parent component
                 alert("Service updated successfully");
@@ -35,10 +35,6 @@ function EditServiceForm({ service, onUpdate }) {
             <div className="mb-2">
                 <label htmlFor="sPrice" className="form-label">Price</label>
                 <input type="text" id="sPrice" name="sPrice" className="form-control" value={editedService.sPrice} onChange={handleChange} />
-            </div>
-            <div className="mb-2">
-                <label htmlFor="sEmpName" className="form-label">Employee Name</label>
-                <input type="text" id="sEmpName" name="sEmpName" className="form-control" value={editedService.sEmpName} onChange={handleChange} />
             </div>
             <div className="mb-2">
                 <label htmlFor="sDescription" className="form-label">Description</label>
