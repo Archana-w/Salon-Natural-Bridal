@@ -13,6 +13,7 @@ import Profile from './pages/profile/Profile';
 import Appointment from './pages/appointment/Appointment';
 import OrderDetails from './pages/order_details/OrderDetails';
 import AppointmentList from './pages/appointment/AppointmentList';
+import ProductDetails from './pages/store/ProductDetails';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/create-app/:id" Component={Appointment} />
         <Route path="/invoice/:id" Component={OrderDetails}/>
         <Route path="/my-app" Component={AppointmentList}/>
+        <Route path='/store/productDetails' Component={ProductDetails}/>
 
 
       </Routes>
