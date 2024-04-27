@@ -59,7 +59,7 @@ function ProductDetails(){
               </div>
               <br />
               <div className="form-group">
-                  <button type="submit" class="btn">Save</button><br /><br />
+                  <button type="submit" class="btn" >Save</button><br /><br />
               </div>
           </form>
           </div>
