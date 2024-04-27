@@ -14,16 +14,15 @@ function Profile() {
 
     var token = useAuthToken();
     var navigate = useNavigate();
+    const[update,setUpdate] = useState(0);
     const [isLoading, setLoading] = useState(true);
     const [profileDetails, setProfileDetails] = useState({});
-    const [profilePictureUrl, setProfilePictureUrl] = useState(ProfileVector); // State to store profile picture URL
 
     //handle profile picture
+    var profilePictureUrl = ProfileVector;
     if (profileDetails.profile_pic != null) {
-        setProfilePictureUrl("http://localhost:5000/image/" + profileDetails.profile_pic);
+        profilePictureUrl = "http://localhost:5000/image/" + profileDetails.profile_pic;
     }
-
-    console.log(profileDetails);
 
     useEffect(() => {
 
@@ -51,7 +50,7 @@ function Profile() {
             navigate("/login");
         }
 
-    }, []);
+    }, [update]);
 
     function deleteProfile() {
 
@@ -84,12 +83,35 @@ function Profile() {
     };
 
   
-    const handleProfilePictureUpload = () => {
-       
+    const handleProfilePictureUpload = (e) => {
+
+        var form = new FormData();
+        form.append("token", token);
+        form.append("image",e.file);
+
+        axios.post("http://localhost:5000/user/edit/avatar", form).then((response) => {
+
+            var data = response.data;
+            var status = data.status;
+            if (status == "success") {
+                setUpdate(update+1);
+            } else if (status == "token_expired" || status == "auth_failed") {
+                navigate("/signout");
+            } else {
+                var message = data.message;
+                alert("Error - " + message);
+            }
+
+        }).catch((error) => {
+            alert("Error 2 - " + error);
+        });
+
     };
 
     const editProfile = () => {
-       
+
+        //****************************************************************** */
+
     };
 
     if (isLoading) {

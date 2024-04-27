@@ -12,8 +12,10 @@ function AppointmentList() {
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const[update,setUpdate] = useState(0);
 
   useEffect(() => {
+
     if (token != null) {
       axios.post("http://localhost:5000/appointment/get", { token: token })
         .then((response) => {
@@ -35,15 +37,38 @@ function AppointmentList() {
     } else {
       navigate("/login");
     }
-  }, [token, navigate]);
+  }, [update]);
 
   const handleEdit = (record) => {
     //  editing appointments
-    navigate("/create-app");
+    navigate("/create-app/"+record.appointment_id);
   };
 
   const handleDelete = (record) => {
-    //  deleting appointments
+
+    if (token != null) {
+      
+      setLoading(true);
+
+      axios.post("http://localhost:5000/appointment/delete", { token: token, appointment_id: record.appointment_id })
+        .then((response) => {
+          const responseData = response.data;
+          const status = responseData.status;
+          if (status === "success") {
+            setLoading(false);
+            setUpdate(update+1);
+          } else if (status === "token_expired" || status === "auth_failed") {
+            navigate("/signout");
+          } else {
+            const message = responseData.message;
+            alert("Error - " + message);
+          }
+        })
+        .catch((error) => {
+          alert("Error 2 - " + error);
+        });
+        
+    }
 
   };
 
