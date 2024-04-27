@@ -113,6 +113,8 @@ div.gallery {
 
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
 .tpc {
   justify-content: center;
   font-size: 36px;
@@ -123,7 +125,7 @@ div.gallery {
   left: 27%;
   font-size: 40px;
   color: rgb(124, 116, 116);
-   padding-top: 50px;
+   padding-top: 25px;
 
 }
  
@@ -165,6 +167,7 @@ div.gallery {
 
 .category{
   padding-left: 90px;
+  color: #fcaddb;
 }
 
 
