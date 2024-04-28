@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuthToken } from '../../auth';
 import { useNavigate } from "react-router-dom";
+import './ProductForm.css'
 
 function AddProduct() {
 
@@ -73,9 +74,9 @@ function AddProduct() {
     };
 
     return (
-        <div>
-            <h2>Add Product</h2>
-            <form onSubmit={handleSubmit}>
+        <div class="product-form-container">
+            <h2 class="form-heading">Add Product</h2>
+            <form class="product-form" onSubmit={handleSubmit}>
                 <div>
                     <label>Name:</label>
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />

@@ -1,44 +1,59 @@
-.add-product-container {
+/* Style for the form container */
+.product-form-container {
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
     background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.product-form {
-    display: flex;
-    flex-direction: column;
+/* Style for form headings */
+.product-form-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+    text-align: center;
 }
 
-.form-group {
-    margin-bottom: 15px;
+/* Style for form labels */
+.product-form-container label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
 }
 
-label {
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="email"] {
+/* Style for form inputs */
+.product-form-container input[type="text"],
+.product-form-container input[type="file"] {
     width: 100%;
-    padding: 10px;
+    padding: 8px;
+    margin-bottom: 16px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
     box-sizing: border-box;
 }
 
-button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
+/* Style for submit button */
+.product-form-container button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
-    background-color: #45a049;
+/* Hover effect for submit button */
+.product-form-container button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Style for error and success messages */
+.product-form-container p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #dc3545; /* Error message color */
+    /* color: #28a745; Success message color */
 }
