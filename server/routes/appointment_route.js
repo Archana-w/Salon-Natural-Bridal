@@ -208,4 +208,74 @@ router.route("/get").post((req, res) => {
 
 });
 
+router.route("/app_get").post((req, res) => {
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userId = req.current_user.user_id;
+        const userType = req.current_user.user.type;
+        const appId = req.body.appointment_id;
+
+        if (userType == "client") {
+
+            if (appId == null || appId == "") {
+                res.send({ status: "required_failed", "message": "Required values are not received." });
+                return;
+            }
+
+            Appointment.findOne({ _id: appId }).then(async (doc) => {
+                
+                var item = doc;
+
+                var id = item._id;
+                var stylishId = item.stylist_id;
+                var appTime = item.appoinment_time;
+                var appDate = item.appoinment_date;
+                var time = item.time;
+                var status = item.status;
+                var hairCare = item.hair_care;
+                var skinCare = item.skin_care;
+                var nailCare = item.nail_care;
+
+                var service = "";
+
+                //hair care
+                for (var x = 0; x < hairCare.length; x++) {
+                    service = service + "," + hairCare[x];
+                }
+
+                //skin care
+                for (var x = 0; x < skinCare.length; x++) {
+                    service = service + "," + skinCare[x];
+                }
+
+                //nail care
+                for (var x = 0; x < nailCare.length; x++) {
+                    service = service + "," + nailCare[x];
+                }
+
+                //remove first comma
+                service = service.substring(1, service.length);
+
+                var stylistResult = await User.findOne({ _id: stylishId });
+
+                var stylishName = stylistResult.first_name + " " + stylistResult.last_name;
+
+                var result = { appointment_id: id, time: appTime, date: appDate, create_time: time, status: status, service: service, name: stylishName };
+
+                res.send({ status: "success", data:result });
+
+            });
+
+        } else {
+            res.send({ status: "access_denied", message: "Can not access." });
+        }
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
 module.exports = router;
