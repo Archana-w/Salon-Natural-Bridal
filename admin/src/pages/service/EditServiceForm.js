@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./EditServiceForm.css"; // Import your CSS file
 
 function EditServiceForm({ service, onUpdate }) {
     const [editedService, setEditedService] = useState(service);
@@ -23,20 +24,20 @@ function EditServiceForm({ service, onUpdate }) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div className="mb-2">
+        <form onSubmit={handleSubmit} className="edit-service-form">
+            <div className="form-group">
                 <label htmlFor="sType" className="form-label">Service Type</label>
                 <input type="text" id="sType" name="sType" className="form-control" value={editedService.sType} onChange={handleChange} />
             </div>
-            <div className="mb-2">
+            <div className="form-group">
                 <label htmlFor="sName" className="form-label">Service Name</label>
                 <input type="text" id="sName" name="sName" className="form-control" value={editedService.sName} onChange={handleChange} />
             </div>
-            <div className="mb-2">
+            <div className="form-group">
                 <label htmlFor="sPrice" className="form-label">Price</label>
                 <input type="text" id="sPrice" name="sPrice" className="form-control" value={editedService.sPrice} onChange={handleChange} />
             </div>
-            <div className="mb-2">
+            <div className="form-group">
                 <label htmlFor="sDescription" className="form-label">Description</label>
                 <textarea id="sDescription" name="sDescription" className="form-control" value={editedService.sDescription} onChange={handleChange} />
             </div>
