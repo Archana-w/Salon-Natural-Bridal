@@ -210,7 +210,7 @@ route.route("/atts").post((req,res)=>{
 
                         const currentDate = new Date();
                         const currentTimeInMillis = currentDate.getTime();
-                        const dateString = currentDate.getFullYear() + "/" + (currentDate.getMonth()+1) + "/" + currentDate.getDay();
+                        const dateString = currentDate.getFullYear() + "/" + (currentDate.getMonth()+1) + "/" + currentDate.getDate();
                         
                         const todayMillis = new Date(dateString).getTime();
                         const toadyLastMillis = todayMillis + 86400000;
@@ -235,6 +235,8 @@ route.route("/atts").post((req,res)=>{
                             } else {
                                 res.send({ "status": "already_marked", "message": "Emp attend already marked." });
                             }
+                        }).catch((e)=>{
+                            res.send("Error - "+e);
                         });
 
                     }else{
@@ -277,7 +279,7 @@ route.route("/atte").post((req, res) => {
 
             const currentDate = new Date();
             const currentTimeInMillis = currentDate.getTime();
-            const dateString = currentDate.getFullYear() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getDay();
+            const dateString = currentDate.getFullYear() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getDate();
 
             const todayMillis = new Date(dateString).getTime();
             const toadyLastMillis = todayMillis + 86400000;
@@ -296,7 +298,7 @@ route.route("/atte").post((req, res) => {
                             
                             const empType = doc.emp_type;
                             
-                            EmployeeType.findOne({ type: empType }).then((doc)=>{
+                            EmployeeType.findOne({ _id: empType }).then((doc)=>{
                                 if(doc != null){
 
                                     const salary = doc.salary;
@@ -460,7 +462,7 @@ route.route("/salary").post((req,res)=>{
 
                         const currentDate = new Date();
                         const currentTimeInMillis = currentDate.getTime();
-                        const dateString = currentDate.getFullYear() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getDay();
+                        const dateString = currentDate.getFullYear() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getDate();
                         const todayMillis = new Date(dateString).getTime();
                         const requestMillis = todayMillis - (86400000 * dayCount);
 
