@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useAuthToken } from '../../auth';
+import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
+
+    var token = useAuthToken();
+    var navigate = useNavigate();
+
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
@@ -18,6 +24,7 @@ function AddProduct() {
         e.preventDefault();
 
         const formData = new FormData();
+        formData.append("token", token);
         formData.append('name', name);
         formData.append('description', description);
         formData.append('category', category);
@@ -28,27 +35,41 @@ function AddProduct() {
         formData.append('discount', discount);
         formData.append('thumbnail', image);
 
-        try {
-            await axios.post('http://localhost:5000/products/add', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+        if (token != null) {
+
+            axios.post("http://localhost:5000/product/add", formData).then((response) => {
+
+                var data = response.data;
+                var status = data.status;
+                if (status == "success") {
+
+                    setSuccessMessage('Product added successfully!');
+                    // Clear form fields after successful submission
+                    setName('');
+                    setDescription('');
+                    setCategory('');
+                    setBrand('');
+                    setPrice('');
+                    setQuantity('');
+                    setWeight('');
+                    setDiscount('');
+                    setImage(null);
+
+                } else if (status == "token_expired" || status == "auth_failed") {
+                    navigate("/signout");
+                } else {
+                    var message = data.message;
+                    alert("Error - " + message);
                 }
+
+            }).catch((error) => {
+                alert("Error 2 - " + error);
             });
-            setSuccessMessage('Product added successfully!');
-            // Clear form fields after successful submission
-            setName('');
-            setDescription('');
-            setCategory('');
-            setBrand('');
-            setPrice('');
-            setQuantity('');
-            setWeight('');
-            setDiscount('');
-            setImage(null);
-        } catch (error) {
-            setError('Error adding product. Please try again later.');
-            console.error('Error adding product:', error);
+
+        } else {
+            navigate("/signout");
         }
+
     };
 
     return (
