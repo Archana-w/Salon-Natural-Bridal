@@ -13,7 +13,7 @@ function Appointment(){
   var token = useAuthToken();
   var navigate = useNavigate();
 
-  const[customerData,setCustomerData] = useState([]);
+  const[AppointmentData,setAppointmentData] = useState([]);
   
 
   useEffect(()=>{
@@ -25,7 +25,7 @@ function Appointment(){
         var data = response.data;
         var status = data.status;
         if (status == "success") {
-          setCustomerData(data.data);
+          setAppointmentData(data.data);
         } else if (status == "token_expired" || status == "auth_failed") {
           navigate("/signout");
         } else {
@@ -134,7 +134,7 @@ function Appointment(){
       type="search"
       placeholder="Search here"/>
       <Divider>Appoinment Details</Divider>
-      <Table columns={columns} dataSource={data} pagination={false}/>
+      <Table columns={columns} dataSource={AppointmentData} pagination={false}/>
       <div><button className='add_app_btn'>Add Appoinment</button></div>
       <div><button className='report_btn'>Generate Report</button></div>
       </div>
