@@ -27,11 +27,7 @@ function Store() {
     });
 
   },[]);
-
-  function handleProduct() {
-    
-    //handleProductDetails();
-}
+ 
   //implement by savindu
   function addCart(productId){
     

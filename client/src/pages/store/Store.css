@@ -123,8 +123,7 @@ div.gallery {
   left: 27%;
   font-size: 40px;
   color: rgb(124, 116, 116);
-   padding-top: 50px;
-
+ 
 }
  
 
@@ -150,7 +149,7 @@ div.gallery {
 
 .types{
   margin-top: 150px;
-  margin-left: 260px; 
+  margin-left: 310px; 
  }
 .circle{
   float:left;
@@ -165,6 +164,7 @@ div.gallery {
 
 .category{
   padding-left: 90px;
+  color: #f69292;
 }
 
 
