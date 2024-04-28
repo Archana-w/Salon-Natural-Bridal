@@ -13,6 +13,10 @@ import Profile from './pages/profile/Profile';
 import Appointment from './pages/appointment/Appointment';
 import OrderDetails from './pages/order_details/OrderDetails';
 import AppointmentList from './pages/appointment/AppointmentList';
+import Service from './pages/service/Service';
+import Nailcare from './pages/service/Nail_care';
+import Haircare from './pages/service/Hair_care';
+import Skincare from './pages/service/Skin_care';
 
 function App() {
 
@@ -37,6 +41,11 @@ function App() {
         <Route path="/create-app/:id" Component={Appointment} />
         <Route path="/invoice/:id" Component={OrderDetails}/>
         <Route path="/my-app" Component={AppointmentList}/>
+        <Route path="/my-app/AppointmentList" Component={AppointmentList}/>
+        <Route path="/service" element={<Service/>} />
+        <Route path="/Nail_care" element={<Nailcare />} />
+        <Route path="/Hair_care" element={<Haircare/>} />
+        <Route path="/Skin_care" element={<Skincare/>} />
 
 
       </Routes>
