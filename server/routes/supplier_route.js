@@ -85,6 +85,40 @@ router.post('/register', async (req, res) => {
   }
 });
 
+router.post('/supplier/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Find the supplier by email and password
+    const supplier = await Supplier.findOne({ email, password });
+
+    if (!supplier) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    // Check if the supplier is verified
+    if (!supplier.isVerified) {
+      return res.status(403).json({ message: 'Supplier account is not yet verified by an admin.' });
+    }
+
+    // Supplier is authenticated and verified, return success message with details
+    res.status(200).json({
+      message: 'Supplier login successful',
+      supplier: {
+        _id: supplier._id, // You might want to limit the data you send back
+        name: supplier.name,
+        email: supplier.email,
+        // ... other relevant supplier details
+      },
+    });
+  } catch (error) {
+    console.error('Error during supplier login:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+
 router.post('/verify', async (req, res) => {
   const { supplierId } = req.body;
   try {

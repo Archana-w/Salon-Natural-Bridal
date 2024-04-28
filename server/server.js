@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(form.any());
 
-//connect mongo db
+
 var DB_URI = process.env.ATLAS_URI;
 var option = { dbName:"sms"};
 mongoose.connect(DB_URI, option).then(()=>{
@@ -32,19 +32,19 @@ mongoose.connect(DB_URI, option).then(()=>{
     console.log("Db connect failed - "+error);
 });
 
-//authentication
+
 app.use((req, res, next) => {
 
     const token = req.body.token;
 
-    //validate token
+    
     if (token != null) {
 
         const date = new Date();
         const time = date.getTime();
         const token = req.body.token;
 
-        //validate token
+        
         Device.findOne({ token: token }).then((doc) => {
 
             if (doc == null) {
@@ -54,7 +54,7 @@ app.use((req, res, next) => {
 
             const userId = doc.user_id;
             const expire = doc.expire;
-            //check token is expire
+            
             if (time > expire) {
                 res.send({ "status": "token_expired", "message": "This token is expired." });
                 return;
@@ -83,7 +83,7 @@ app.use((req, res, next) => {
 });
 
 
-//routes
+
 app.use("/token", tokenRoute);
 app.use("/supplier", supplierRoute); 
 app.use("/user", userRoute);
@@ -95,13 +95,13 @@ app.use("/appointment", appointmentRoute);
 app.use("/emp", empRoute);
 
 
-//give access image 
+
 app.get("/image/:imageName", (req, res) => {
     var imageName = req.params.imageName;
     res.sendFile(__dirname + "/uploads/" + imageName);
 });
 
-//default page
+
 app.get("*",(req,res)=>{
     res.send("Hello world!!!");
 });
