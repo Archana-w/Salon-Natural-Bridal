@@ -13,6 +13,8 @@ import Emp_attendance from './pages/emp_attendance/Emp_attendance';
 import Emp_salary from './pages/emp_salary/Emp_salary';
 import Emp_leaves from './pages/emp_leaves/Emp_leaves';
 import Orders from './pages/orders/Orders';
+import Inventory from './pages/inventory/Inventory';
+import ProductForm from './pages/inventory/ProductForm'
 
 function App() {
 
@@ -44,6 +46,9 @@ function App() {
           <Route path='/emp_salary' Component={Emp_salary}></Route>
           <Route path='/emp_leaves' Component={Emp_leaves}></Route>
           <Route path='/orders' Component={Orders}></Route>
+          <Route path='/inventory' Component={Inventory}></Route>
+          <Route path='/inventory/ProductForm' Component={ProductForm}></Route>
+ 
           
         </Routes>
 
