@@ -47,6 +47,10 @@ function Header() {
       name: "Service",
       icon: "home",
       navigate: "service",
+      sub_menu: [
+        { name: "Service View", navigate: "service_view" },
+        { name: "Add Service", navigate: "add_service" },
+      ]
     },
     {
       name: "Customer Affairs",

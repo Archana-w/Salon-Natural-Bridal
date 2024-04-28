@@ -15,6 +15,8 @@ import Emp_leaves from './pages/emp_leaves/Emp_leaves';
 import Orders from './pages/orders/Orders';
 import Inventory from './pages/inventory/Inventory';
 import ProductForm from './pages/inventory/ProductForm'
+import Service_view from './pages/service/ServiceOut';
+import Add_Service from './pages/service/AddService';
 
 function App() {
 
@@ -48,8 +50,10 @@ function App() {
           <Route path='/orders' Component={Orders}></Route>
           <Route path='/inventory' Component={Inventory}></Route>
           <Route path='/inventory/ProductForm' Component={ProductForm}></Route>
- 
-          
+          <Route path='/orders' Component={Orders}></Route>         
+          <Route path='/service_view' Component={Service_view}></Route>
+          <Route path='/add_service' Component={Add_Service}></Route>
+
         </Routes>
 
       </div>
