@@ -1,8 +1,9 @@
-/* CSS Styling */
 .categories-container {
-    background-color: #ffffff; /* muted pink tone */
+    background-color: #ffffff; 
     padding: 20px;
     text-align: center;
+    background-image: url('../../../../images/service/background.jpg');
+
 }
   
 .title {
@@ -19,6 +20,7 @@
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
+
 }
   
 .category-item {
@@ -104,8 +106,8 @@
 }
 
 .service_image img{
-    height: 100px; /* Set a fixed height */
-    width: 200px; /* Set a fixed width */
-    object-fit: cover; /* Ensure the image covers the entire space without stretching */
-    border-radius: 10px; /* Rounded corners */
+    height: 100px;
+    width: 200px; 
+    object-fit: cover;
+    border-radius: 10px; 
 }
