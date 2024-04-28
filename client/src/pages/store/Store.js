@@ -30,7 +30,7 @@ function Store() {
 
   function handleProduct() {
     addCart()
-    handleProductDetails();
+    //handleProductDetails();
 }
   //implement by savindu
   function addCart(productId){
@@ -104,9 +104,7 @@ function Store() {
           <p>{result.product_name}</p>
           <p>Rs .{result.price}</p>
           <div className="desc">
-          <Link to="/ProductDetails">
-              <button class="button b6" onClick={(handleProduct)}>Place Order</button>
-          </Link> 
+            <button class="button b6" onClick={(handleProduct)}>Place Order</button>
  
              
           </div>
