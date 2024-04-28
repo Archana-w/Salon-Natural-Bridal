@@ -33,10 +33,10 @@ router.route("/login").post((req, res) => {
             device.user_id = userId;
             device.time = time;
             device.expire = exp;
-            
-            device.save().then(()=>{
-                res.send({ status: "success", type: type, "access_token": device.token});
-            }).catch((e)=>{
+
+            device.save().then(() => {
+                res.send({ status: "success", type: type, "access_token": device.token });
+            }).catch((e) => {
                 res.send({ status: "failed", "message": "Login failed. Please try again." });
             });
 
@@ -52,7 +52,7 @@ router.route("/login").post((req, res) => {
 });
 
 //register API endpoint
-router.route("/register").post((req,res)=>{
+router.route("/register").post((req, res) => {
 
     var firstName = req.body.first_name;
     var lastName = req.body.last_name;
@@ -61,21 +61,21 @@ router.route("/register").post((req,res)=>{
     var password = req.body.password;
 
     //validate details
-    if (firstName == null || firstName == "" || 
-        lastName == null || lastName == "" || 
-        mobileNumber == null || mobileNumber == "" || 
-        email == null || email == "" || 
-        password == null || password == ""){
+    if (firstName == null || firstName == "" ||
+        lastName == null || lastName == "" ||
+        mobileNumber == null || mobileNumber == "" ||
+        email == null || email == "" ||
+        password == null || password == "") {
 
-        res.send({"status":"required_failed","message":"Please send required details."});
-    
+        res.send({ "status": "required_failed", "message": "Please send required details." });
+
         return;
     }
 
     //check email is already
-    User.findOne({email:email}).then((doc)=>{
+    User.findOne({ email: email }).then((doc) => {
 
-        if(doc == null){
+        if (doc == null) {
 
             //save user details
             var user = new User();
@@ -91,32 +91,32 @@ router.route("/register").post((req,res)=>{
             }).catch((e) => {
                 res.send({ "status": "failed", "message": "Somthing error. Please try again." });
             });
-            
-        }else{
+
+        } else {
             res.send({ "status": "already_email", "message": "This email is already." });
         }
 
-    }).catch((e)=>{
+    }).catch((e) => {
         res.send({ "status": "failed", "message": "Somthing error. Please try again." });
     });
 
 });
 
 //get user profile
-router.route("/profile").post((req,res)=>{
+router.route("/profile").post((req, res) => {
 
     //check authentication
     if (req.current_user != null) {
 
         const userId = req.current_user.user_id;
-        User.findOne({ _id: userId }).then((result)=>{    
-            
+        User.findOne({ _id: userId }).then((result) => {
+
             var profilePic = null;
-            if (result.profile_pic != undefined){
+            if (result.profile_pic != undefined) {
                 profilePic = result.profile_pic;
             }
-            
-            res.send({ status: "success", profile_pic: profilePic, mobile_number: result.mobile_number, email: result.email,  first_name: result.first_name, last_name: result.last_name });
+
+            res.send({ status: "success", profile_pic: profilePic, mobile_number: result.mobile_number, email: result.email, first_name: result.first_name, last_name: result.last_name });
         });
 
     } else {
@@ -131,7 +131,7 @@ router.route("/delete").post((req, res) => {
     if (req.current_user != null) {
 
         const userId = req.current_user.user_id;
-        User.deleteOne({ _id: userId }).then((result)=>{
+        User.deleteOne({ _id: userId }).then((result) => {
             res.send({ status: "success", message: "User profile is deleted." });
         });
 
@@ -155,9 +155,9 @@ router.route("/edit/avatar").post((req, res) => {
             return;
         }
 
-        User.updateOne({ _id: userId }, { profile_pic: image.filename}).then(()=>{
+        User.updateOne({ _id: userId }, { profile_pic: image.filename }).then(() => {
             res.send({ status: "success", "message": "Profile picture updated." });
-        }).catch((error)=>{
+        }).catch((error) => {
             res.send(error);
         });
 

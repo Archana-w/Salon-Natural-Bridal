@@ -48,10 +48,11 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
 }
-.profile-container{
+
+.profile-container {
 
   width: 800px;
   height: 600px;
@@ -61,22 +62,22 @@
   background-color: white;
 }
 
-.upper-container{
+.upper-container {
   width: 780px;
   height: 250px;
   background-color: rgba(175, 175, 175, 0.353);
-  border-radius: 20px; 
+  border-radius: 20px;
   margin: 10px;
 
 }
 
-.image-container{
-  float:left;
-  width:200px;
+.image-container {
+  float: left;
+  width: 200px;
   position: relative;
   margin-left: 20px;
-  
- 
+
+
 }
 
 .image-container img {
@@ -94,7 +95,7 @@
   position: absolute;
   top: 40px;
   left: 150px;
- 
+
 }
 
 .camera-button {
@@ -102,7 +103,8 @@
   border: none;
 
 }
-.camera-button:hover{
+
+.camera-button:hover {
   background: transparent !important;
   border: none;
 }
@@ -111,7 +113,8 @@
   width: 30px;
   height: 30px;
 }
-.img_text{
+
+.img_text {
   float: left;
   width: 460px;
 
@@ -134,7 +137,7 @@
   font-family: 'Merriweather';
   color: black;
   padding-top: 40px;
-  border-bottom-right-radius: 20px; 
+  border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
 }
 
@@ -144,24 +147,24 @@
   height: 500px;
   display: flex;
   display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: black;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: black;
 
 }
 
 .profile_details-form {
 
   background-color: rgba(175, 175, 175, 0.353);
-  backdrop-filter:blur(30px);
+  backdrop-filter: blur(30px);
   width: 500px;
   padding-left: 140px;
   padding-right: 140px;
   color: black;
   padding-top: 20px;
   border-radius: 10px;
-  border: none  !important;
+  border: none !important;
   outline: none !important;
   box-shadow: none !important;
 
@@ -174,16 +177,16 @@
 }
 
 /* antd override */
-.profile_input  {
+.profile_input {
   background-color: white !important;
   border: white !important;
   height: 50px;
   color: black;
   font-weight: bold;
 }
-  
+
 .profile_input:focus {
-  
+
   outline: none !important;
   box-shadow: none !important;
   background-color: rgb(202, 201, 201) !important;
@@ -200,5 +203,3 @@
 
   background-color: rgba(0, 0, 0, 0.3);
 }
-
-
