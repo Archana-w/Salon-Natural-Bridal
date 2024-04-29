@@ -1,3 +1,4 @@
+// supplier.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './supplier.css';
@@ -63,6 +64,7 @@ function Supplier() {
   };
 
   const handleAddRecord = () => {
+    resetUserData();
     setIsModalOpen(true);
   };
 
@@ -73,7 +75,6 @@ function Supplier() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (userData._id) {
       updateUser();
     } else {
@@ -83,8 +84,13 @@ function Supplier() {
 
   const updateUser = async () => {
     try {
-      const response = await axios.patch(`http://localhost:5000/supplier/update/${userData._id}`, userData);
-      const updatedUsers = users.map((user) => (user._id === userData._id ? response.data.supplier : user));
+      const response = await axios.patch(
+        `http://localhost:5000/supplier/update/${userData._id}`,
+        userData
+      );
+      const updatedUsers = users.map((user) =>
+        user._id === userData._id ? response.data.supplier : user
+      );
       setUsers(updatedUsers);
       setFilterUsers(updatedUsers);
       setIsModalOpen(false);
@@ -125,18 +131,6 @@ function Supplier() {
     setUserData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleVerify = async (userId) => {
-    try {
-      const response = await axios.post("http://localhost:5000/supplier/verify", { supplierId: userId });
-      const updatedUsers = users.map((user) => (user._id === userId ? response.data.supplier : user));
-      setUsers(updatedUsers);
-      setFilterUsers(updatedUsers);
-    } catch (error) {
-      console.error("Error verifying supplier:", error.response ? error.response.data.message : error.message);
-      setMessage("Error verifying supplier. Please try again.");
-    }
-  };
-
   const openMessageModal = (userId) => {
     setSelectedUserId(userId);
     setIsModalOpen(true);
@@ -146,7 +140,7 @@ function Supplier() {
     try {
       await axios.post('http://localhost:5000/send-message', {
         userId: selectedUserId,
-        message: orderMessages[selectedUserId]
+        message: orderMessages[selectedUserId],
       });
       setMessage('Message sent successfully.');
       setIsModalOpen(false);
@@ -158,16 +152,12 @@ function Supplier() {
 
   return (
     <div className="container">
-      <h3>CRUD Application with React.js Frontend and Node.js Backend</h3>
       <div className="input-search">
-        <input
-          type="search"
-          placeholder="Search Text Here"
-          onChange={handleSearchChange}
-        />
-        <button className="btn green" onClick={handleAddRecord}>Add Supplier</button>
+        <input type="search" placeholder="Search Text Here" onChange={handleSearchChange} />
+        <button className="btn green" onClick={handleAddRecord}>
+          Add Supplier
+        </button>
       </div>
-
       <table className="table">
         <thead>
           <tr>
@@ -179,8 +169,7 @@ function Supplier() {
             <th>Category</th>
             <th>Edit</th>
             <th>Delete</th>
-            <th>Verify</th>
-            <th>Message</th>
+            <th>Order</th>
           </tr>
         </thead>
         <tbody>
@@ -194,18 +183,19 @@ function Supplier() {
                 <td>{user.email}</td>
                 <td>{user.category}</td>
                 <td>
-                  <button className="btn green" onClick={() => handleUpdateRecord(user)}>Edit</button>
+                  <button className="btn green" onClick={() => handleUpdateRecord(user)}>
+                    Edit
+                  </button>
                 </td>
                 <td>
-                  <button onClick={() => handleDelete(user._id)} className="btn red">Delete</button>
+                  <button onClick={() => handleDelete(user._id)} className="btn red">
+                    Delete
+                  </button>
                 </td>
                 <td>
-                  {!user.isVerified && (
-                    <button onClick={() => handleVerify(user._id)} className="btn blue">Verify</button>
-                  )}
-                </td>
-                <td>
-                  <button onClick={() => openMessageModal(user._id)} className="btn blue">Message</button>
+                  <button onClick={() => openMessageModal(user._id)} className="btn blue">
+                    Order
+                  </button>
                 </td>
               </tr>
             ))
@@ -216,13 +206,13 @@ function Supplier() {
           )}
         </tbody>
       </table>
-
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={closeModal}>&times;</span>
-            <h2>{selectedUserId ? 'Send Message' : 'Supplier Record'}</h2>
-
+            <span className="close" onClick={closeModal}>
+              &times;
+            </span>
+            <h2>{selectedUserId ? 'Send Order Message' : 'Supplier Record'}</h2>
             {selectedUserId ? (
               <div className="input-group">
                 <label htmlFor="message">Message:</label>
@@ -230,9 +220,13 @@ function Supplier() {
                   id="message"
                   name="message"
                   value={orderMessages[selectedUserId] || ''}
-                  onChange={(e) => setOrderMessages({ ...orderMessages, [selectedUserId]: e.target.value })}
+                  onChange={(e) =>
+                    setOrderMessages({ ...orderMessages, [selectedUserId]: e.target.value })
+                  }
                 />
-                <button className="btn green" onClick={sendMessage}>Send</button>
+                <button className="btn green" onClick={sendMessage}>
+                  Send
+                </button>
               </div>
             ) : (
               <>
@@ -240,39 +234,34 @@ function Supplier() {
                   <label htmlFor="name">Name:</label>
                   <input type="text" id="name" name="name" value={userData.name} onChange={handleData} />
                 </div>
-
                 <div className="input-group">
                   <label htmlFor="address">Address:</label>
                   <input type="text" id="address" name="address" value={userData.address} onChange={handleData} />
                 </div>
-
                 <div className="input-group">
                   <label htmlFor="contact">Contact:</label>
                   <input type="text" id="contact" name="contact" value={userData.contact} onChange={handleData} />
                 </div>
-
                 <div className="input-group">
                   <label htmlFor="email">Email:</label>
                   <input type="text" id="email" name="email" value={userData.email} onChange={handleData} />
                 </div>
-
                 <div className="input-group">
                   <label htmlFor="password">Password:</label>
                   <input type="password" id="password" name="password" value={userData.password} onChange={handleData} />
                 </div>
-
                 <div className="input-group">
                   <label htmlFor="category">Category:</label>
                   <input type="text" id="category" name="category" value={userData.category} onChange={handleData} />
                 </div>
-
-                <button className="btn green" onClick={handleSubmit}>Save</button>
+                <button className="btn green" onClick={handleSubmit}>
+                  Save
+                </button>
               </>
             )}
           </div>
         </div>
       )}
-
       <div className="message">{message}</div>
     </div>
   );
