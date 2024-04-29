@@ -18,14 +18,7 @@
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', seri
  }
-form {
-     max-width: 600px;
-     padding: 25px;
-    background-color: #beb9b9;
-    border-radius: 10px;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  }
+
 .form-group {
     margin-bottom: 10px;
 }

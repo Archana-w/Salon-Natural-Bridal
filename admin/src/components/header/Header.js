@@ -101,21 +101,19 @@ function Header() {
     <>
 
       <div className='header'>
-        <header>
+        <div className='header-container'>
 
-          <div onClick={() => setOpenNavMenu(true)} className='headerLogo'>
+          <div onClick={() => setOpenNavMenu(true)} className='nav-menu-btn'>
+            <span className="material-icons-round">menu</span>
+          </div>
+
+          <div className='headerLogo'>
             <img src={logosalon} alt='logo' className='logosalon' />
           </div>
 
-          <div className='headerDes'>
 
-            Welcome to Admin Dashboard
-
-          </div>
-        </header>
-
+        </div>
       </div>
-
 
       <div onClick={() => { setOpenNavMenu(false) }} id='sidenavOut' className='sidenav-out'></div>
       <div id='sidenav' className="sidenav">
