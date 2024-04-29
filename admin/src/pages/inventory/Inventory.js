@@ -72,14 +72,14 @@ function Inventory() {
     {
       key: '1',
       inventory_id: 1,
-      product_name:  '',
-      description:'',
-      category:'',
-      brand:'',
-      quantity:'',
-      weight:'',
-      price:'',
-      discount:'',
+      product_name:  'Kumarika',
+      description:'kumarika',
+      category:'hair',
+      brand:'kumarika',
+      quantity:'100',
+      weight:'100',
+      price:'1200',
+      discount:'0',
     },
      
   ];
