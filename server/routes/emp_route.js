@@ -77,6 +77,42 @@ route.route("/add").post((req, res) => {
 
 });
 
+route.route("/delete").post((req, res) => {
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userType = req.current_user.user.type;
+
+        if (userType == "admin") {
+
+            const userId = req.current_user.user_id;
+            const employeeId = req.body.employee_id;
+
+            //validate details
+            if (employeeId == null || employeeId == "") {
+
+                res.send({ "status": "required_failed", "message": "Please send required details." });
+
+                return;
+            }
+
+            User.findOneAndDelete({ _id: employeeId }).then(()=>{
+                res.send({ "status": "success", "message": "Employee Deleted." });
+            });
+
+        } else {
+            res.send({ status: "access_denied", message: "Can not access." });
+        }
+
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
+
 route.route("/get").post((req,res)=>{
 
     //check authentication
@@ -419,6 +455,31 @@ route.route("/etadd").post((req,res)=>{
 
                 }
 
+            });
+
+        } else {
+            res.send({ status: "access_denied", message: "Can not access." });
+        }
+
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+
+});
+
+route.route("/etget").post((req, res) => {
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userType = req.current_user.user.type;
+
+        if (userType == "admin") {
+
+            EmployeeType.find().then((doc)=>{
+                res.send({ "status": "success", data: doc });
             });
 
         } else {
