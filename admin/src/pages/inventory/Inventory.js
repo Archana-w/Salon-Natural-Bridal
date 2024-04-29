@@ -86,6 +86,9 @@ function Inventory() {
 
 
   return (
+
+    
+    
     <div className='content'> <h2>Manage Inventory</h2>
       <input className='search'
         type="search"

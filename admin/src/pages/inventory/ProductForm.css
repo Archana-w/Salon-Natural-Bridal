@@ -1,59 +1,59 @@
-/* Style for the form container */
-.product-form-container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+.PAimage{
+    background-size: cover; /* Cover the entire component */
+    background-position: center; /* Center the background image */
+    padding: 10px; /* Add padding as needed */
+     
+ }
 
-/* Style for form headings */
-.product-form-container h2 {
-    margin-bottom: 20px;
-    color: #333;
-    font-size: 24px;
+ .PAtopic{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
-}
+ }
+ .PAformout{
+    
+ }
 
-/* Style for form labels */
-.product-form-container label {
+ .PAproductForm{
+    max-width: 600px;
+    margin: 10px auto;
+    padding: 35px;
+    background-color: #dadadac2;
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', seri
+ }
+
+.PAform-group {
+    margin-bottom: 10px;
+}
+label {
     display: block;
-    margin-bottom: 8px;
-    color: #555;
+    font-weight: bold;
+    margin-bottom: 2px;
 }
-
-/* Style for form inputs */
-.product-form-container input[type="text"],
-.product-form-container input[type="file"] {
+.PAinarea{
     width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 16px;
 }
-
-/* Style for submit button */
-.product-form-container button[type="submit"] {
-    background-color: #007bff;
+.PAbtn {
+    padding: 10px 30px;
+    background-color: #0e1011;
     color: #fff;
     border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    font-size: 16px;
+    margin-left: 250px;
+ }
+button[type="submit"] {
+    background-color: #090b0c;
 
-/* Hover effect for submit button */
-.product-form-container button[type="submit"]:hover {
-    background-color: #0056b3;
 }
+ 
+button:hover {
+    background-color: #646363;
 
-/* Style for error and success messages */
-.product-form-container p {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #dc3545; /* Error message color */
-    /* color: #28a745; Success message color */
 }
