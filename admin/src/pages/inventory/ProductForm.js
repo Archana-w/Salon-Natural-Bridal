@@ -88,6 +88,15 @@ function AddProduct() {
                 <div>
                     <label>Category:</label>
                     <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} required />
+                    <select id="productCategory" value={category} onChange={(e) => setCategory(e.target.value)} required>
+
+                     <option>Select Category</option>
+                        <option>Hair Care Product</option>
+                        <option>Skin Care Product</option>
+                        <option>Nail Care Product</option>
+                        <option>Lips Care Product</option>
+
+                    </select>
                 </div>
                 <div>
                     <label>Brand:</label>
@@ -99,7 +108,7 @@ function AddProduct() {
                 </div>
                 <div>
                     <label>Quantity:</label>
-                    <input type="text" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+                    <input type="number" value={quantity} min="0" step="1" onChange={(e) => setQuantity(e.target.value)} />
                 </div>
                 <div>
                     <label>Weight:</label>
