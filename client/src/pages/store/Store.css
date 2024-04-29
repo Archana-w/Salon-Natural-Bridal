@@ -46,8 +46,11 @@ div.gallery {
    }
   
   div.desc {
+    width: 100%;
+    height: 100px;
      text-align: center;
-    padding-top: 45px;
+    padding-top: 5px;
+    padding-left: 1px;
     
   }
 
@@ -78,10 +81,7 @@ div.gallery {
     background-color: black; 
     color: white;
   }
-   
-
- 
-
+  
    .b6{
     margin-top: 45px;
    }
@@ -119,15 +119,18 @@ div.gallery {
   font-family: 'Great Vibes', 'cursive';
    margin-bottom: 50PX;
    position: absolute;
-  top: 105%;
+  top: 115%;
   left: 27%;
   font-size: 40px;
   color: rgb(124, 116, 116);
  
 }
- 
 
- 
+.Spic{
+  width:10px;
+  height:20px;
+}
+  
   /* Define keyframes for the animation */
 @keyframes move-hr {
   0% {
@@ -149,7 +152,7 @@ div.gallery {
 
 .types{
   margin-top: 150px;
-  margin-left: 310px; 
+  margin-left: 280px; 
  }
 .circle{
   float:left;
@@ -165,6 +168,16 @@ div.gallery {
 .category{
   padding-left: 90px;
   color: #f69292;
+}
+
+.Spic{
+  width: 100%;
+   height: 200px;
+}
+
+.Sdetails{
+  width: 100%;
+  height: 150px;
 }
 
 

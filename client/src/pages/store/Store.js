@@ -96,9 +96,13 @@ function Store() {
       {productData.map((result) =>
 
         <div key={result._id} className="gallery">
+        <div class="Spic">
           <img src={"http://localhost:5000/image/" + result.thumbnail} alt="Store" width="600" height="400" />
+          </div>
+          <div class="Sdetails">
           <p>{result.product_name}</p>
           <p>Rs .{result.price}</p>
+          </div>
           <div className="desc">
             <button class="button b6" onClick={() => addCart(result._id)}>Place Order</button>
           </div>
