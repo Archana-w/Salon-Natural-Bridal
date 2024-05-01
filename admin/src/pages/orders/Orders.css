@@ -12,6 +12,16 @@
     text-align: center;
 }
 
+.order-filter-bar{
+    height: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    background: rgb(235, 235, 235);
+    border-radius: 8px;
+}
+
 .order-list-container table {
     width: 100%;
     border-collapse: collapse;
@@ -20,21 +30,14 @@
 
 .order-list-container th,
 .order-list-container td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    text-align: center;
+    font-size: 14px;
 }
 
-.order-list-container thead {
-    background-color: #f2f2f2;
-}
-
-.order-list-container tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.order-list-container button {
-    background-color: #4CAF50;
+.view-order-btn {
+    background-color: #006eff;
     /* Green */
     border: none;
     color: white;
@@ -44,10 +47,97 @@
     display: inline-block;
     font-size: 14px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 30px;
 }
 
-.order-list-container button:hover {
-    background-color: #45a049;
+.view-order-btn:hover {
+    background-color: #0004ff;
     /* Darker green */
+}
+
+.order-id-td-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 125, 157);
+}
+
+.order-id-td-container span {
+    cursor: pointer;
+    margin-left: 10px;
+    color: gray;
+    font-size: 18px;
+}
+
+.order-status-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-status-pending {
+    background: orange;
+    border-radius: 30px;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+}
+
+.order-status-accept {
+    background: rgb(0, 81, 255);
+    border-radius: 30px;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+}
+
+.order-status-shipped {
+    background: rgb(26, 26, 26);
+    border-radius: 30px;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+}
+
+.order-status-complete {
+    background: rgb(0, 253, 127);
+    border-radius: 30px;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+}
+
+.order-filter-status{
+    margin-left: 20px;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    background: white;
+}
+
+.order-filter-search{
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    width: 250px;
+    margin-left: 30px;
+}
+
+.order-filter-search-btn{
+    background: rgb(51, 51, 51);
+    border-radius: 0px;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    cursor: pointer;
+    width: 100px;
 }
