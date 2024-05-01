@@ -13,96 +13,43 @@ function Inventory() {
         window.location.href = '/inventory/ProductForm';
       };
       
-  const columns = [
-    {
-      title: 'Inventory ID',
-      dataIndex: 'inventory_id',
-    },
-    
-    {
-      title: 'Product Name',
-      dataIndex: 'product_name',
-    },
-    {
-        title: 'Description',
-        dataIndex: 'description',
-      },
-    {
-      title: 'Category',
-      dataIndex: 'category',
-    },
-    {
-      title: 'Brand',
-      dataIndex: 'brand',
-    },
-
-    {
-      title: 'Quantity',
-      dataIndex: 'quantity',
-    },
-    {
-        title: 'Weight',
-        dataIndex: 'weight',
-      },
-      {
-        title: 'Price',
-        dataIndex: 'price',
-      },
-      {
-        title: 'Discount',
-        dataIndex: 'discount',
-      },
-      
-    {
-      title: 'Action',
-      dataIndex: '',
-      key: 'x',
-      render: () => <button className='edt_btn'>Edit</button>,
-    },
-
-    {
-      title: 'Action',
-      dataIndex: '',
-      key: 'x',
-      render: () => <button className='delete_btn'>Delete</button>,
-    },
-
-  ];
-  const data = [
-    {
-      key: '1',
-      inventory_id: 1,
-      product_name:  'Kumarika',
-      description:'kumarika',
-      category:'hair',
-      brand:'kumarika',
-      quantity:'100',
-      weight:'100',
-      price:'1200',
-      discount:'0',
-    },
-     
-  ];
+   
 
 
   return (
-
-    
-    
-    <div className='content'> <h2>Manage Inventory</h2>
-      <input className='search'
-        type="search"
-        placeholder="Search here" />
-      <Divider>Inventory Details</Divider>
-      <Table columns={columns} dataSource={data} pagination={false} />
-      <div>
-        <Link to="/inventory/ProductForm">
-            <button className='add_cus_btn' onClick={(addProduct )}>Add Product</button>
-        </Link>
-      </div>
+<div className='content'>
+      <h2>Manage Products</h2>
+      <input className='search' type="search" placeholder="Search here" />
+      <h3>Products details</h3>
+      <table className='product-table'>
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Weight</th>
+            <th>Discount</th>
+            <th>Action</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+         
+      </table>
+      <Link to="/inventory/ProductForm">
+      <div><button className='add_emp_btn' onClick={addProduct}>Add Product</button></div>
+      </Link>
     </div>
+ 
 
   );
+    
+     
+
+  
 }
 
 export default Inventory;
