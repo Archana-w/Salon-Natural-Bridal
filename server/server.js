@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-const express = require("express");
-const dotenv = require("dotenv");
-const bodyParser = require("body-parser");
-const cors = require('cors');
-const multer = require("multer");
-const mongoose = require("mongoose");
-const Supplier = require("./models/Supplier");
-const tokenRoute = require("./routes/token_route");
-const supplierRoute = require("./routes/supplier_route"); 
-const userRoute = require("./routes/user_route");
-const productRoute = require("./routes/product_route");
-const cartRoute = require("./routes/cart_route");
-const checkoutRoute = require("./routes/checkout_route");
-const orderRoute = require("./routes/order_route");
-const appointmentRoute = require("./routes/appointment_route");
-const empRoute = require("./routes/emp_route");
-=======
 var express = require("express");
 var dotenv = require("dotenv");
 var bodyParser = require("body-parser");
@@ -32,11 +14,7 @@ var checkoutRoute = require("./routes/checkout_route");
 var orderRoute = require("./routes/order_route");
 var appoinmentRoute = require("./routes/appointment_route");
 var empRoute = require("./routes/emp_route");
-var incomeRoute = require("./routes/transections_route");
-const serviceRouter = require("./routes/service.js");
-const scheduledFunctions = require('./controllers/scheduleController');
 
->>>>>>> dev-backup
 
 var app = express();
 dotenv.config({ path: "./config.env" });
@@ -46,7 +24,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(form.any());
 
-
+//connect mongo db
 var DB_URI = process.env.ATLAS_URI;
 var option = { dbName:"sms"};
 mongoose.connect(DB_URI, option).then(()=>{
@@ -54,25 +32,20 @@ mongoose.connect(DB_URI, option).then(()=>{
 }).catch((error)=>{
     console.log("Db connect failed - "+error);
 });
-<<<<<<< HEAD
 
-
-=======
-scheduledFunctions.initScheduledJobsMinite();
 //authentication
->>>>>>> dev-backup
 app.use((req, res, next) => {
 
     const token = req.body.token;
 
-    
+    //validate token
     if (token != null) {
 
         const date = new Date();
         const time = date.getTime();
         const token = req.body.token;
 
-        
+        //validate token
         Device.findOne({ token: token }).then((doc) => {
 
             if (doc == null) {
@@ -82,7 +55,7 @@ app.use((req, res, next) => {
 
             const userId = doc.user_id;
             const expire = doc.expire;
-            
+            //check token is expire
             if (time > expire) {
                 res.send({ "status": "token_expired", "message": "This token is expired." });
                 return;
@@ -111,32 +84,28 @@ app.use((req, res, next) => {
 });
 
 
-
+//routes
 app.use("/token", tokenRoute);
-app.use("/supplier", supplierRoute); 
-app.use("/user", userRoute);
+app.use("/user",userRoute);
 app.use("/product", productRoute);
 app.use("/cart", cartRoute);
 app.use("/checkout", checkoutRoute);
 app.use("/order", orderRoute);
-app.use("/appointment", appointmentRoute);
+app.use("/appointment", appoinmentRoute);
 app.use("/emp", empRoute);
-app.use("/transections", incomeRoute);
-app.use("/service",serviceRouter);
 
-
-
+//give access image 
 app.get("/image/:imageName", (req, res) => {
     var imageName = req.params.imageName;
     res.sendFile(__dirname + "/uploads/" + imageName);
 });
 
-
+//default page
 app.get("*",(req,res)=>{
     res.send("Hello world!!!");
 });
 
 const port = process.env.PORT || 5000;
 app.listen(port,()=>{
-    console.log(`Server is running on post: ${port}`);
+    console.log(Server is running on post: ${port});
 });

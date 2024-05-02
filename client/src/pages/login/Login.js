@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-/*import axios from 'axios';*/
+/import axios from 'axios';/
 import React from 'react';
 import { Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import './Login.css';
 import axios from 'axios';
-import {useCookies} from 'react-cookie';
-import {useNavigate} from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
 
@@ -15,42 +15,42 @@ function Login() {
 
   const onFinish = (values) => {
 
-    axios.post("http://localhost:5000/user/login",values).then((response)=>{
-      
+    axios.post("http://localhost:5000/user/login", values).then((response) => {
+
       var data = response.data;
       var status = data.status;
-      if(status == "success"){
-      
+      if (status == "success") {
+
         var token = data.access_token;
         var type = data.type;
 
         //redirect user
-        if(type == "client"){
-          
+        if (type == "client") {
+
           //save access token in cookie
           setCookies("auth_token", token);
           setCookies("user_type", type);
           //redirect client home
           navigate("/");
 
-        }else if(type == "employee"){
+        } else if (type == "employee") {
           //redirect employye home
-        
-        }else if(type == "admin"){
+
+        } else if (type == "admin") {
           //redirect admin
           setCookies("admin_auth_token", token);
           window.location.href = "http://localhost:3001/";
         }
 
-      } else if (status == "invalid_user"){
+      } else if (status == "invalid_user") {
         var message = data.message;
         alert(message);
-      }else{
+      } else {
         alert(JSON.stringify(data));
       }
 
-    }).catch((error)=>{
-      alert("Error - "+error);
+    }).catch((error) => {
+      alert("Error - " + error);
     });
 
   };
@@ -104,4 +104,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Login;
