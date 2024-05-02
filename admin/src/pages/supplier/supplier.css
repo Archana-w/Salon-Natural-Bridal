@@ -125,7 +125,42 @@ h3 {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-
+.input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .input-group input[type="text"],
+  .input-group input[type="password"],
+  .input-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  .input-group textarea {
+    height: 100px; /* Adjust height as needed */
+  }
+  
+  .input-group button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .input-group button:hover {
+    background-color: #0056b3;
+  }
 .close {
     color: #aaaaaa;
     float: right;

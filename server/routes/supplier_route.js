@@ -1,8 +1,10 @@
+// server/routes/supplier_route.js
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const Supplier = require("../models/Supplier");
+const User = require("../models/User");
 
 router.get('/getAll', async (req, res) => {
   try {
@@ -73,66 +75,54 @@ router.post('/register', async (req, res) => {
       email, 
       category, 
       password: hashedPassword,
-      isVerified: false 
     });
     
     await supplier.save();
 
-    res.status(201).json({ message: 'Supplier registered successfully. Waiting for admin verification.', supplier });
+    res.status(201).json({ message: 'Supplier registered successfully.', supplier });
   } catch (error) {
     console.error('Error registering supplier:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
 
-router.post('/supplier/login', async (req, res) => {
-  const { email, password } = req.body;
-
+router.get('/profile', async (req, res) => {
   try {
-    // Find the supplier by email and password
-    const supplier = await Supplier.findOne({ email, password });
-
-    if (!supplier) {
-      return res.status(401).json({ message: 'Invalid email or password' });
-    }
-
-    // Check if the supplier is verified
-    if (!supplier.isVerified) {
-      return res.status(403).json({ message: 'Supplier account is not yet verified by an admin.' });
-    }
-
-    // Supplier is authenticated and verified, return success message with details
-    res.status(200).json({
-      message: 'Supplier login successful',
-      supplier: {
-        _id: supplier._id, // You might want to limit the data you send back
-        name: supplier.name,
-        email: supplier.email,
-        // ... other relevant supplier details
-      },
-    });
-  } catch (error) {
-    console.error('Error during supplier login:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-
-
-router.post('/verify', async (req, res) => {
-  const { supplierId } = req.body;
-  try {
+    const supplierId = req.supplier._id; // Assuming you have middleware to authenticate the supplier and set req.supplier
     const supplier = await Supplier.findById(supplierId);
     if (!supplier) {
       return res.status(404).json({ message: 'Supplier not found' });
     }
-    supplier.isVerified = true;
-    await supplier.save();
-    res.status(200).json({ message: 'Supplier verified successfully', supplier });
+    res.status(200).json(supplier);
   } catch (error) {
-    console.error('Error verifying supplier:', error);
+    console.error('Error fetching supplier profile:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
 
+
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  let user = await User.findOne({ email });
+  let userType = 'user';
+
+  if (!user) {
+      user = await Supplier.findOne({ email });
+      userType = 'supplier';
+  }
+
+  if (!user) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+  }
+
+  const passwordMatch = await bcrypt.compare(password, user.password);
+  if (!passwordMatch) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+  }
+
+  // Generate token logic here
+  const token = 'generated_token_here'; // Replace with actual token generation logic
+  res.status(200).json({ status: 'success', type: userType, access_token: token });
+});
 module.exports = router;
+

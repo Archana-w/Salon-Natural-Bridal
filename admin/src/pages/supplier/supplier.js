@@ -51,9 +51,12 @@ function Supplier() {
         await axios.delete(`http://localhost:5000/supplier/delete/${id}`);
         const updatedUsers = users.filter((user) => user._id !== id);
         setUsers(updatedUsers);
-        setFilterUsers(updatedUsers);
+        setFilterUsers(updatedUsers); // Update filtered users
+        setIsModalOpen(false); // Close modal after deletion
+        setMessage('Supplier deleted successfully.');
       } catch (error) {
         console.error('Error deleting supplier:', error);
+        setMessage('Error deleting supplier. Please try again.');
       }
     }
   };
@@ -65,6 +68,7 @@ function Supplier() {
 
   const handleAddRecord = () => {
     resetUserData();
+    setSelectedUserId(null); // Reset selectedUserId
     setIsModalOpen(true);
   };
 
@@ -92,8 +96,8 @@ function Supplier() {
         user._id === userData._id ? response.data.supplier : user
       );
       setUsers(updatedUsers);
-      setFilterUsers(updatedUsers);
-      setIsModalOpen(false);
+      setFilterUsers(updatedUsers); // Update filtered users
+      setIsModalOpen(false); // Close modal after update
       setMessage(response.data.message);
     } catch (error) {
       console.error('Error updating supplier:', error);
@@ -106,8 +110,8 @@ function Supplier() {
       const response = await axios.post('http://localhost:5000/supplier/register', userData);
       const updatedUsers = [...users, response.data.supplier];
       setUsers(updatedUsers);
-      setFilterUsers(updatedUsers);
-      setIsModalOpen(false);
+      setFilterUsers(updatedUsers); // Update filtered users
+      setIsModalOpen(false); // Close modal after creation
       setMessage(response.data.message);
     } catch (error) {
       console.error('Error adding supplier:', error.message);
@@ -143,7 +147,7 @@ function Supplier() {
         message: orderMessages[selectedUserId],
       });
       setMessage('Message sent successfully.');
-      setIsModalOpen(false);
+      setIsModalOpen(false); // Close modal after sending message
     } catch (error) {
       console.error('Error sending message:', error.message);
       setMessage('Error sending message. Please try again.');

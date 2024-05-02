@@ -1,76 +1,39 @@
 .supplier-dashboard-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-  }
-  
-  .details-container {
-    text-align: left;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    max-width: 500px;
-    width: 90%;
-  }
-  
-  h2 {
-    margin-bottom: 25px;
-    color: #333333;
-    font-size: 24px;
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 10px;
-  }
-  
-  input[type="text"],
-  input[type="email"] {
-    border-radius: 5px;
-    padding: 12px;
-    border: 1px solid #cccccc;
-    margin-bottom: 20px;
-    width: 100%;
-    font-size: 16px;
-  }
-  
-  .update-btn,
-  .logout-btn {
-    border-radius: 20px;
-    padding: 12px 24px;
-    cursor: pointer;
-    border: none;
-    margin-right: 15px;
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .update-btn {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .logout-btn {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .order-link {
-    text-decoration: none;
-    border-radius: 20px;
-    padding: 12px 24px;
-    background-color: #007bff;
-    color: white;
-    text-align: center;
-    display: inline-block;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .order-link:hover {
-    background-color: #0056b3;
-  }
-  
+  text-align: center;
+  margin-top: 50px;
+}
+
+.supplier-details {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #d32f2f;
+}

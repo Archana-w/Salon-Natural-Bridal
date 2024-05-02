@@ -1,37 +1,30 @@
-// SupplierDashboard.js
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useCookies } from 'react-cookie';
 
-function SupplierDashboard({ supplier, onLogout, onUpdate }) {
-  const [editableSupplier, setEditableSupplier] = useState({ ...supplier });
+function SupplierDashboard() {
+  const [cookies, setCookie, removeCookie] = useCookies(['auth_token', 'supplier_info']);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setEditableSupplier(prevState => ({ ...prevState, [name]: value }));
-  };
-
-  const handleUpdate = () => {
-    onUpdate(editableSupplier);
+  const handleLogout = () => {
+    // Remove cookies and redirect to login page
+    removeCookie('auth_token');
+    removeCookie('supplier_info');
+    window.location.href = '/login'; // Redirect to login page
   };
 
   return (
     <div className="supplier-dashboard-container">
-      <div className="details-container">
-        <h2>Welcome, {editableSupplier.name}!</h2>
-        <label>Name:</label>
-        <input type="text" name="name" value={editableSupplier.name} onChange={handleChange} />
-        <label>Email:</label>
-        <input type="email" name="email" value={editableSupplier.email} disabled />
-        <label>Address:</label>
-        <input type="text" name="address" value={editableSupplier.address} onChange={handleChange} />
-        <label>Contact:</label>
-        <input type="text" name="contact" value={editableSupplier.contact} onChange={handleChange} />
-        <label>Category:</label>
-        <input type="text" name="category" value={editableSupplier.category} onChange={handleChange} />
-        <button onClick={handleUpdate} className="update-btn">Update</button>
-        <button onClick={onLogout} className="logout-btn">Logout</button>
-        <Link to={`/supplier-orders/${supplier._id}`} className="order-link">View Order Message</Link>
+      <h1>Hi, {cookies.supplier_info ? cookies.supplier_info.name : 'Supplier'}!</h1>
+      <div className="supplier-details">
+        {cookies.supplier_info && (
+          <div>
+            <h2>Supplier Information</h2>
+            <p>Name: {cookies.supplier_info.name}</p>
+            <p>Email: {cookies.supplier_info.email}</p>
+            <p>Category: {cookies.supplier_info.category}</p>
+          </div>
+        )}
       </div>
+      
     </div>
   );
 }
