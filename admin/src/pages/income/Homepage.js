@@ -138,7 +138,7 @@ const IncomeHomepage = () => {
   const handleDelete = async(record) => {
 
     try {
-
+      
       
       setLoading(true)
       let res = await axios.post("http://localhost:5000/transections/delete-transection",{token,transacationId:record._id})

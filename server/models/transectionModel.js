@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const transectionSchema = new mongoose.Schema ({
     userid:{
@@ -34,7 +34,12 @@ const transectionSchema = new mongoose.Schema ({
     date:{
         type:Date,
         require:[true,'data is required']
-    }
+    },
+
+    isAuto:{
+        type:Number,
+        required:false
+    },
     
 },{timestamps:true})
 

@@ -13,6 +13,7 @@ const Analytics = ({ allTransection }) => {
     "Rent",
     "Maintenance",
     "Marketing",
+    "Order",
   ];
 
   // total transaction
