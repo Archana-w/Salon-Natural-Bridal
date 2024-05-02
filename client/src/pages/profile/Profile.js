@@ -14,6 +14,7 @@ function Profile() {
 
     var token = useAuthToken();
     var navigate = useNavigate();
+    const[update,setUpdate] = useState(0);
     const [isLoading, setLoading] = useState(true);
     const [profileDetails, setProfileDetails] = useState({});
 
@@ -22,8 +23,6 @@ function Profile() {
     if (profileDetails.profile_pic != null) {
         profilePictureUrl = "http://localhost:5000/image/" + profileDetails.profile_pic;
     }
-
-    console.log(profileDetails);
 
     useEffect(() => {
 
@@ -51,7 +50,7 @@ function Profile() {
             navigate("/login");
         }
 
-    }, []);
+    }, [update]);
 
     function deleteProfile() {
 
@@ -83,7 +82,37 @@ function Profile() {
         return e?.fileList;
     };
 
+  
+    const handleProfilePictureUpload = (e) => {
 
+        var form = new FormData();
+        form.append("token", token);
+        form.append("image",e.file);
+
+        axios.post("http://localhost:5000/user/edit/avatar", form).then((response) => {
+
+            var data = response.data;
+            var status = data.status;
+            if (status == "success") {
+                setUpdate(update+1);
+            } else if (status == "token_expired" || status == "auth_failed") {
+                navigate("/signout");
+            } else {
+                var message = data.message;
+                alert("Error - " + message);
+            }
+
+        }).catch((error) => {
+            alert("Error 2 - " + error);
+        });
+
+    };
+
+    const editProfile = () => {
+
+        //****************************************************************** */
+
+    };
 
     if (isLoading) {
 
@@ -105,7 +134,11 @@ function Profile() {
 
                         <div className='image-container'>
                             <img className='profile_img' src={profilePictureUrl} alt="profile" height="100px" width="100px" />
-                            <Upload className='camera-upload' showUploadList={false}>
+                            <Upload
+                                className='camera-upload'
+                                showUploadList={false}
+                                customRequest={handleProfilePictureUpload} 
+                            >
                                 <Button className='camera-button'>
                                     <img src={Camera} alt="camera" />
                                 </Button>
@@ -158,7 +191,7 @@ function Profile() {
                                     <Flex className='profile_btn' gap="small" wrap="wrap">
 
 
-                                        <Button className='edit-profile' type="primary">Edit Profile</Button>
+                                        <Button className='edit-profile' type="primary" onClick={editProfile}>Edit Profile</Button>
                                         <Button className='delete' onClick={deleteProfile} type="primary">Delete Account</Button>
 
                                     </Flex>

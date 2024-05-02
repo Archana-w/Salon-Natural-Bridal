@@ -1,0 +1,118 @@
+/* CSS Structure */
+.App {
+  text-align: center;
+}
+
+.nav-image {
+  background-image: url('../../../../images/service/hair.jpg');
+  background-size: cover; /* Cover the entire div with the background image */
+  background-repeat: no-repeat; /* Prevent image from repeating */
+  background-position: center; /* Center the image */
+  height: 150px; /* Set height to full viewport height */
+}
+
+/*.nav-image.hair-care {
+  background-image: url('../../images/Service/hair.jpg');
+}
+
+.nav-image.nail-care {
+  background-image: url('../../images/Service/nail.jpg');
+}
+
+.nav-image.skin-care {
+  background-image: url('../../images/Service/skin.jpeg');
+}*/
+
+
+.navbar {
+  background-color: transparent;
+  padding: 1rem;
+  display: flex;
+  justify-content: right; 
+  position: relative; 
+}
+
+.navbar a {
+
+  margin: 0 1rem;
+  margin-bottom: 10px;
+  background-color: rgba(236, 242, 247, 0.397);
+  text-decoration: none;
+  color: black;
+  border-radius: 50%; 
+  width: 5px; 
+  height: 5px; 
+  padding: 50px 50px; 
+  align-items: center;
+  display: flex;
+  transition: background-color 0.3s ease; 
+  justify-content: center;
+  box-shadow: 5px 5px 5px rgb(55, 56, 56);
+}
+
+.navbar a:hover {
+  background-color: rgba(138, 63, 235, 0.322); /* Light blue background when hovered */
+}
+
+
+.nservice_image img {
+  width: 300px;
+  height: 200px;
+}
+
+.para  {
+  justify-content: right;
+}
+
+.para p {
+  color: black;
+}
+
+.appointment-btn {
+  background-color: rgb(32, 83, 192);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.appointment-btn:hover {
+  background-color: darkblue; /* Dark blue when hovered */
+}
+
+.appointment-btn:active {
+  background-color: blue; /* Blue when clicked */
+}
+
+.navbar hr{
+  background: rgba(138, 63, 235, 0.322);
+}
+
+.nservice_image {
+  justify-content: left;
+  margin-left: 10px;
+}
+
+.nservice_image p{
+  justify-content: right;
+  text-align: justify;
+  margin-left: 10px;
+}
+
+.current-page {
+  position: absolute;
+  top: 130px; /* Distance from the top */
+  left: 20px; /* Distance from the left */
+  color: rgb(3, 3, 3); /* White text color */
+  padding: 5px 10px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 30px;
+}
+
+.navbar a.active {
+  background-color: rgba(142, 69, 238, 0.342); /* Semi-transparent purple background for active page */
+  color: white; /* Text color for active page */
+}

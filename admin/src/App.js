@@ -13,6 +13,13 @@ import Emp_attendance from './pages/emp_attendance/Emp_attendance';
 import Emp_salary from './pages/emp_salary/Emp_salary';
 import Emp_leaves from './pages/emp_leaves/Emp_leaves';
 import Orders from './pages/orders/Orders';
+import IncomeHomepage from './pages/income/Homepage'
+import OrderView from './pages/orders/OrderView';
+import Inventory from './pages/inventory/Inventory';
+import ProductForm from './pages/inventory/ProductForm'
+import Service_view from './pages/service/ServiceOut';
+import Add_Service from './pages/service/AddService';
+
 
 function App() {
   var token = useAuthToken();
@@ -46,8 +53,18 @@ function App() {
 
 
           <Route path='/orders' Component={Orders}></Route>
+<<<<<<< HEAD
           
 
+=======
+          <Route path="/income_expenses" Component={IncomeHomepage}/>
+          <Route path='/inventory' Component={Inventory}></Route>
+          <Route path='/inventory/ProductForm' Component={ProductForm}></Route>
+          <Route path='/orders' Component={Orders}></Route>
+          <Route path='/order/:id' Component={OrderView}></Route>
+          <Route path='/service_view' Component={Service_view}></Route>
+          <Route path='/add_service' Component={Add_Service}></Route>
+>>>>>>> dev-backup
         </Routes>
       </div>
     </BrowserRouter>
