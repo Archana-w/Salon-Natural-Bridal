@@ -8,11 +8,12 @@ const getAllTransection = async (req, res) => {
   if (req.current_user != null) {
     try {
         const { frequency, selectedDate, type } = req.body;
+     
         const transections = await transectionModel.find({
           ...(frequency !== "custom"
             ? {
                 date: {
-                  $gt: moment().subtract(Number(frequency), "d").toDate(),
+                  $gte: moment().subtract(Number(frequency), "d").toDate(),
                 },
               }
             : {
@@ -21,9 +22,8 @@ const getAllTransection = async (req, res) => {
                   $lte: selectedDate[1],
                 },
               }),
-          userid: req.current_user.user_id,
           ...(type !== "all" && { type }),
-        });
+        }).sort({ date: -1 });
         res.status(200).json(transections);
       
     } catch (error) {
@@ -92,7 +92,7 @@ const addTransection = async (req, res) => {
       let data = req.body;
       data.userid = req.current_user.user_id;
       data.isAuto = 0;
-      const newTransection =
+      const newTransection = new transectionModel(data);
       await newTransection.save();
       res.status(201).send("Transection Created");
     } catch (error) {

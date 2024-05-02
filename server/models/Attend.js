@@ -8,7 +8,8 @@ var attendShcema = new Schema(
         end_time: {type:Number,required:true},
         salary:{type:Number,required:true},
         ot: { type: Number, required: true },
-        total: { type: Number, required: true }
+        total: { type: Number, required: true },
+        isAvilabaleReport: { type: Boolean, default: false }
     }
 );
 
