@@ -76,27 +76,48 @@ router.route("/add").post((req,res)=>{
                 //check quantity is numeric
                 if (Number(quantity) && quantity > 0){
 
-                    //check qut > productStock
-                    if (productStock < quantity){
-                        res.send({ status: "no_stock", message: "Invalid value." });
-                    }else{
+                    Cart.findOne({user_id:userId, product_id:productId}).then((result)=>{
 
-                        //calculate total
-                        const oneProductPrice = price - ((price / 100) * discount);
-                        const totalPrice = oneProductPrice * quantity;
-                        
-                        const cart = new Cart();
-                        cart.user_id = userId;
-                        cart.product_id = productId;
-                        cart.quantity = quantity;
-                        cart.added_date = time;
-                        cart.total = totalPrice;
+                        if(result == null){
 
-                        cart.save().then(()=>{
-                            res.send({ status: "success", message: "Item added." });
-                        });
+                            //check qut > productStock
+                            if (productStock < quantity){
+                                res.send({ status: "no_stock", message: "Invalid value." });
+                            }else{
+        
+                                //calculate total
+                                const oneProductPrice = price - ((price / 100) * discount);
+                                const totalPrice = oneProductPrice * quantity;
+                                
+                                const cart = new Cart();
+                                cart.user_id = userId;
+                                cart.product_id = productId;
+                                cart.quantity = quantity;
+                                cart.added_date = time;
+                                cart.total = totalPrice;
+        
+                                cart.save().then(()=>{
+                                    res.send({ status: "success", message: "Item added." });
+                                });
+        
+                            }
+    
+                        }else{
+                            
+                            var cartId = result._id;
+                            var quantity1 = result.quantity;
+                            var updatedQ = Number(quantity1 + 1);
 
-                    }
+                            //calculate total
+                            const oneProductPrice = price - ((price / 100) * discount);
+                            const totalPrice = oneProductPrice * quantity;
+
+                            Cart.findOneAndUpdate({user_id:userId,_id:cartId},{quantity:updatedQ,total:totalPrice}).then(()=>{
+                                res.send({ status: "success", message: "Item added." });
+                            });
+    
+                        }
+                    });
 
                 }else{
                     res.send({ status: "invalid_quantity", message: "Invalid value." });
