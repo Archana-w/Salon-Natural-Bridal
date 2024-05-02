@@ -16,6 +16,7 @@ var appoinmentRoute = require("./routes/appointment_route");
 var empRoute = require("./routes/emp_route");
 var incomeRoute = require("./routes/transections_route");
 const serviceRouter = require("./routes/service.js");
+const scheduledFunctions = require('./controllers/scheduleController');
 
 
 var app = express();
@@ -34,7 +35,7 @@ mongoose.connect(DB_URI, option).then(()=>{
 }).catch((error)=>{
     console.log("Db connect failed - "+error);
 });
-
+scheduledFunctions.initScheduledJobsMinite();
 //authentication
 app.use((req, res, next) => {
 

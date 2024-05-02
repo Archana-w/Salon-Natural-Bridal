@@ -29,6 +29,7 @@ const IncomeHomepage = () => {
   const [frequency, setFrequency] = useState("30");
   // Too hold the values commig from server
   const [allTransection, setAllTransection] = useState([]);
+  const [allTransectionAnalize, setAllTransectionAnalize] = useState([]);
   const [filterdTransection, setFilterdTransection] = useState([]);
   const [selectedDate, setSelectedate] = useState([]);
   const [type, setType] = useState("all");
@@ -36,6 +37,8 @@ const IncomeHomepage = () => {
   const [viewData,setViewData] = useState('table');
   // handing the edit and delte data 
   const [editable,setEditable] = useState(null)
+
+  const [addForm] = Form.useForm();
 
 
   var token = useAuthToken();
@@ -71,12 +74,24 @@ const IncomeHomepage = () => {
     {
       title: "Actions",
       render : (text , record) => (
+        
         <div>
-          <EditOutlined onClick={() => {
-            setEditable(record)
-            setShowModal(true);
-          }} />
-          <DeleteOutlined className="mx-2" onClick={() => {handleDelete(record)}} />
+          {record.isAuto ==1 ? (
+            <span class="text-danger" >Disabled</span>
+          ) : (
+            <>
+              <EditOutlined onClick={() => {
+                setShowModal(true);
+                setEditable(record);
+                setTimeout(() => {
+                  addForm.resetFields();
+                }, 50);
+                
+              }} className="btn btn-warning"/>
+              &nbsp;
+              <DeleteOutlined className="btn btn-danger" onClick={() => {handleDelete(record)}} />
+            </>
+          )}
         </div>
       )
     },
@@ -99,8 +114,10 @@ const IncomeHomepage = () => {
           navigate("/signout");
         }else{
           setLoading(false);
-          setAllTransection(data.reverse());
-          setFilterdTransection(data.reverse());
+          setAllTransection(data);
+          setFilterdTransection(data);
+          setAllTransectionAnalize(JSON.parse(JSON.stringify(data)));
+          setEditable(null); 
           console.log(res.data);
         }
       }else {
@@ -220,7 +237,6 @@ const IncomeHomepage = () => {
       }
      
       setShowModal(false);
-      setEditable(null);
       getAllTransaction();
     } catch (error) {
       setLoading(false);
@@ -251,9 +267,10 @@ const IncomeHomepage = () => {
 
       {/* filter */}
       <div className="filters">
-
-        <input onInput={doSearch} style={{'min-width':'100px'}} placeholder="Search.."></input>
-
+      <div>
+        <h6>&nbsp;</h6>
+        <input onInput={doSearch} style={{'min-width':'100px'}} placeholder="Search.." className="form-control"></input>
+      </div>
         <div>
           <h6>Select Frequency</h6>
           <Select value={frequency} onChange={(values) => setFrequency(values)}>
@@ -287,10 +304,11 @@ const IncomeHomepage = () => {
         </div>
 
         {/* graph switch */}
+        <div>
+          <h6>&nbsp;</h6>
+        <div className="switch-icons "> 
 
-        <div className="switch-icons"> 
-
-            <UnorderedListOutlined className={`mx-2 ${
+            <UnorderedListOutlined className={`mx-2 btn-outline-warning ${
               viewData === "table" ? "active-icon" : "inactive-icon"
             }`} onClick={() => setViewData("table")} />
 
@@ -299,6 +317,7 @@ const IncomeHomepage = () => {
             }`} onClick={() => setViewData("analytics")} />
 
         </div>
+        </div>
 
           {/* graph */}
 
@@ -306,23 +325,30 @@ const IncomeHomepage = () => {
 
 
       <div>
-      <div className="container mb-4 mt-4 p-3">
+      {/* <div className="container mb-4 mt-4 p-3">
         <div className="row">
             <button className="btn btn-primary" onClick={handleGenerateReport}>
               Generate Report
             </button>
         </div>
-      </div>
+      </div> */}
     </div>
 
 
       <div>
-          <button
-            className="btn btn-primary"
-            onClick={() => setShowModal(true)}
-          >
-            Add New
-          </button>
+        <h6>&nbsp;</h6>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" className="btn btn-primary btn-lg" onClick={handleGenerateReport}>Generate Report</button>
+          <button type="button" className="btn btn-success btn-lg" 
+          onClick={() => {
+            setShowModal(true);
+            setEditable(null);
+            setTimeout(() => {
+              addForm.resetFields();
+            }, 50);
+          }}
+          >Add New</button>
+        </div>
         </div>
       </div>
 
@@ -336,7 +362,7 @@ const IncomeHomepage = () => {
         {viewData === "table" ? (
           <Table columns={columns} dataSource={filterdTransection} />
         ) : (
-          <Analytics allTransection={allTransection} />
+          <Analytics allTransection={allTransectionAnalize} />
         )}
       </div>
 
@@ -346,10 +372,10 @@ const IncomeHomepage = () => {
       <Modal
         title={editable ? 'Edit Transaction' : 'Add Transection'}
         open={showModal}
-        onCancel={() => setShowModal(false)}
+        onCancel={() => {setShowModal(false);}}
         footer={false}
       >
-        <Form Layout="vertical" onFinish={handleSubmit} initialValues={editable}>
+        <Form Layout="vertical" onFinish={handleSubmit} initialValues={editable} form={addForm}>
           <Form.Item label="Amount" name="amount" rules={[{ required: true, message: 'Please input the amount!' }]}>
             <Input type="text" />
           </Form.Item>

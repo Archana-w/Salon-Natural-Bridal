@@ -2,19 +2,21 @@ import React from "react";
 import { Progress } from "antd";
 const Analytics = ({ allTransection }) => {
   // category
-  const categories = [
-    "Service",
-    "Retail",
-    "Membership",
-    "Special",
-    "Gift",
-    "Payroll",
-    "Supplies",
-    "Rent",
-    "Maintenance",
-    "Marketing",
-    "Order",
-  ];
+  // const categories = [
+  //   "Service",
+  //   "Retail",
+  //   "Membership",
+  //   "Special",
+  //   "Gift",
+  //   "Payroll",
+  //   "Supplies",
+  //   "Rent",
+  //   "Maintenance",
+  //   "Marketing",
+  //   "Order",
+  //   "Salary",
+    
+  // ];
 
   // total transaction
   const totalTransaction = allTransection.length;
@@ -30,21 +32,34 @@ const Analytics = ({ allTransection }) => {
     (totalExpenseTransactions.length / totalTransaction) * 100;
 
   //total turnover
-  const totalTurnover = allTransection.reduce(
-    (acc, transaction) => acc + transaction.amount,
-    0
-  );
-  const totalIncomeTurnover = allTransection
-    .filter((transaction) => transaction.type === "income")
-    .reduce((acc, transaction) => acc + transaction.amount, 0);
+ 
+  const totalIncome = totalIncomeTransactions.reduce((acc, transaction) => acc + transaction.amount, 0);
 
-  const totalExpenseTurnover = allTransection
-    .filter((transaction) => transaction.type === "expense")
-    .reduce((acc, transaction) => acc + transaction.amount, 0);
-  const totalIncomeTurnoverPercent =
-    (totalIncomeTurnover / totalTurnover) * 100;
-  const totalExpenseTurnoverPercent =
-    (totalExpenseTurnover / totalTurnover) * 100;
+  const totalExpense = totalExpenseTransactions.reduce((acc, transaction) => acc + transaction.amount, 0);
+
+  const totalProfit= totalIncome-totalExpense;
+
+  const totalProfitPercent =
+    (totalProfit / totalIncome) * 100;
+  const totalExpenseValPercent =
+    (totalExpense / totalIncome) * 100;
+
+    allTransection.sort((a,b)=>b.amount-a.amount);
+
+  const categories = allTransection.reduce((map, transaction) => {
+    if(transaction.type === "income"){
+      map.income[transaction.category] = (map.income[transaction.category] || 0) + transaction.amount;
+    }else{
+      map.expense[transaction.category] = (map.expense[transaction.category] || 0) + transaction.amount;
+    }
+    return map;
+  }, {expense:[],income:[]});
+
+
+
+  const incomeCategories = [...Object.keys(categories.income)];
+  const expenseCategories = [...Object.keys(categories.expense)];
+
   return (
     <>
       <div className="row m-3">
@@ -79,22 +94,22 @@ const Analytics = ({ allTransection }) => {
         </div>
         <div className="col-md-4">
           <div className="card">
-            <div className="card-header">Total TurnOver : {totalTurnover}</div>
+            <div className="card-header">Total Income: {totalIncome}</div>
             <div className="card-body">
-              <h5 className="text-success">Income : {totalIncomeTurnover}</h5>
-              <h5 className="text-danger">Expense : {totalExpenseTurnover}</h5>
+              <h5 className="text-success">Profit : {totalProfit}</h5>
+              <h5 className="text-danger">Expense : {totalExpense}</h5>
               <div>
                 <Progress
                   type="circle"
                   strokeColor={"green"}
                   className="mx-2"
-                  percent={totalIncomeTurnoverPercent.toFixed(0)}
+                  percent={totalProfitPercent.toFixed(0)}
                 />
                 <Progress
                   type="circle"
                   strokeColor={"red"}
                   className="mx-2"
-                  percent={totalExpenseTurnoverPercent.toFixed(0)}
+                  percent={totalExpenseValPercent.toFixed(0)}
                 />
               </div>
             </div>
@@ -104,23 +119,15 @@ const Analytics = ({ allTransection }) => {
       <div className="row mt-3">
         <div className="col-md-4">
           <h4>Categorywise Income</h4>
-          {categories.map((category) => {
-            const amount = allTransection
-              .filter(
-                (transaction) =>
-                  transaction.type === "income" &&
-                  transaction.category === category
-              )
-              .reduce((acc, transaction) => acc + transaction.amount, 0);
+          {incomeCategories.map((category) => {
+            const amount = ((categories.income[category]/totalIncome)*100).toFixed(0);
             return (
               amount > 0 && (
                 <div className="card">
                   <div className="card-body">
                     <h5>{category}</h5>
                     <Progress
-                      percent={((amount / totalIncomeTurnover) * 100).toFixed(
-                        0
-                      )}
+                      percent={amount}
                     />
                   </div>
                 </div>
@@ -130,23 +137,15 @@ const Analytics = ({ allTransection }) => {
         </div>
         <div className="col-md-4">
           <h4>Categorywise Expense</h4>
-          {categories.map((category) => {
-            const amount = allTransection
-              .filter(
-                (transaction) =>
-                  transaction.type === "expense" &&
-                  transaction.category === category
-              )
-              .reduce((acc, transaction) => acc + transaction.amount, 0);
+          {expenseCategories.map((category) => {
+            const amount = ((categories.expense[category]/totalExpense)*100).toFixed(0);
             return (
               amount > 0 && (
                 <div className="card">
                   <div className="card-body">
                     <h5>{category}</h5>
                     <Progress
-                      percent={((amount / totalExpenseTurnover) * 100).toFixed(
-                        0
-                      )}
+                      percent={amount}
                     />
                   </div>
                 </div>
