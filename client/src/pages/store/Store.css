@@ -38,29 +38,6 @@ div.gallery {
 
    }
   
-  div.gallery img {
-    width: 80%;
-    height: auto;
-     padding-left: 20px;
-     padding-top: 40px;
-   }
-  
-  div.desc {
-    width: 100%;
-    height: 100px;
-     text-align: center;
-    padding-top: 5px;
-    padding-left: 1px;
-    
-  }
-
-   .gallery p{
-      text-align: center;
-      font-weight: bold;
-      padding-top: 30px;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      color:darkred;
-     }
 
   .button {
     background-color: #58565f;
@@ -83,7 +60,7 @@ div.gallery {
   }
   
    .b6{
-    margin-top: 45px;
+    margin-top: 5px;
    }
 
 
@@ -126,10 +103,7 @@ div.gallery {
  
 }
 
-.Spic{
-  width:10px;
-  height:20px;
-}
+ 
   
   /* Define keyframes for the animation */
 @keyframes move-hr {
@@ -156,30 +130,92 @@ div.gallery {
  }
 .circle{
   float:left;
-}
-.circle img {
-   margin: 0px;
-  object-fit: cover;
   width: 115px;
   height: 115px;
+  box-shadow: 0 4px 8px 0 rgba(194, 193, 193, 0.432);
+  border-radius: 100%;
+  background-color: #fefeff;
   margin-left: 50px;
-}
-
+ }
+ .circle:hover{
+  background-color: #460564ee;
+  }
+ 
 .category{
-  padding-left: 90px;
-  color: #f69292;
+    color: #131212;
+    margin-top: 45px;
+    margin-left: 40px;
+    margin-right: 50px;
+    font-weight: bold;
 }
-
+.category:hover{
+  color: #fefeff;
+}
 .Spic{
   width: 100%;
-   height: 200px;
-}
+   height: 250px;
+ }
 
 .Sdetails{
   width: 100%;
-  height: 150px;
+  height: 130px;
+ 
+}
+div.desc {
+  width: 100%;
+  height: 70px;
+    text-align: center;
+  padding-left: 1px;
+  
 }
 
+div.gallery img {
+  width: 80%;
+  height: auto;
+   padding-left: 20px;
+   padding-top: 40px;
+ }
+
+ .gallery p{
+    text-align: center;
+    font-weight: bold;
+    padding-top: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:darkred;
+   }
+
+
+.bannerS{
+  width: 100%;
+   margin-top: 550px;
+}
+
+.ImgSqure{
+  float: left;
+ margin-left: 15px;
+}
+
+.Storegallery{
+  width: 100%;
+  height: auto;
+ }
+
+ div.ImgSqure:hover {
+  opacity: 0.6;
+ 
+ }
+
+ .Sbutton{
+  padding: 7px;
+  color: #fefeff;
+  background-color: #58565fb9;
+  border-radius: 5px;
+  }
+
+ .StoreSearch{
+  padding-left: 50px;
+  
+ }
 
 
  
