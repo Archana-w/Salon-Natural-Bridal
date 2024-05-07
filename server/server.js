@@ -14,10 +14,7 @@ var checkoutRoute = require("./routes/checkout_route");
 var orderRoute = require("./routes/order_route");
 var appoinmentRoute = require("./routes/appointment_route");
 var empRoute = require("./routes/emp_route");
-var incomeRoute = require("./routes/transections_route");
 const serviceRouter = require("./routes/service.js");
-const scheduledFunctions = require('./controllers/scheduleController');
-
 
 var app = express();
 dotenv.config({ path: "./config.env" });
@@ -35,7 +32,7 @@ mongoose.connect(DB_URI, option).then(()=>{
 }).catch((error)=>{
     console.log("Db connect failed - "+error);
 });
-scheduledFunctions.initScheduledJobsMinite();
+
 //authentication
 app.use((req, res, next) => {
 
@@ -96,7 +93,6 @@ app.use("/checkout", checkoutRoute);
 app.use("/order", orderRoute);
 app.use("/appointment", appoinmentRoute);
 app.use("/emp", empRoute);
-app.use("/transections", incomeRoute);
 app.use("/service",serviceRouter);
 
 //give access image 
