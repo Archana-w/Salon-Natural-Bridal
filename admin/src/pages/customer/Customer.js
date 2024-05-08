@@ -53,10 +53,7 @@ function Customer() {
       title: 'Name',
       dataIndex: 'name',
     },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-    },
+   
     {
       title: 'Contact number',
       dataIndex: 'contact_number',

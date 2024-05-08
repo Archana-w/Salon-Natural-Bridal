@@ -16,7 +16,6 @@ var appoinmentRoute = require("./routes/appointment_route");
 var empRoute = require("./routes/emp_route");
 const serviceRouter = require("./routes/service.js");
 
-
 var app = express();
 dotenv.config({ path: "./config.env" });
 var form = multer({ dest: 'uploads/' });
