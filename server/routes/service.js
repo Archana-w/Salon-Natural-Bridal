@@ -1,9 +1,17 @@
 const router = require("express").Router();
 const Service = require("../models/Service");
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 // Create a new service
-router.post("/add", async (req, res) => {
+router.post('/add', upload.single('image'), async (req, res) => {
   const { sName, sPrice, sDescription, sType } = req.body;
+  const imageUri = req.file.path; // Path to the uploaded image
+  const imagename = req.file.filename;
+  
+
+  // Construct the complete image URL
+  const imageURL = `${req.protocol}://${req.get('host')}/${imagename}`;
 
   try {
     const newService = new Service({
@@ -11,11 +19,15 @@ router.post("/add", async (req, res) => {
       sPrice,
       sDescription,
       sType,
+      imageUrl: imageURL, // Save complete image URL in the database
+      createdAt: new Date(),
     });
 
-    // Save the new service
-    await newService.save();
-    res.status(200).json({ status: "Service added" });
+    const savedService = await newService.save();
+
+    const addedDate = savedService.createdAt;
+
+    res.status(200).json({ status: "Service added", addedDate });
   } catch (error) {
     console.error("Error adding service:", error);
     res.status(500).json({ status: "Error adding service", error: error.message });
