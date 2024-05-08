@@ -8,6 +8,7 @@
  .PEtopic{
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
+    font-weight: bold;
  }
  .PEformout{
     
@@ -30,6 +31,8 @@ label {
     display: block;
     font-weight: bold;
     margin-bottom: 2px;
+    font-size: 15px;
+
 }
 .PEinarea{
     width: 100%;
@@ -47,6 +50,7 @@ label {
     cursor: pointer;
     font-size: 16px;
     margin-left: 250px;
+    font-weight: bold;
  }
 button[type="submit"] {
     background-color: #090b0c;
@@ -54,6 +58,6 @@ button[type="submit"] {
 }
  
 button:hover {
-    background-color: #646363;
+    background-color: #3b3a3a;
 
 }

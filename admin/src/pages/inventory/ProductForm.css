@@ -8,6 +8,7 @@
  .PAtopic{
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
+    font-weight: bold;
  }
  .PAformout{
     
@@ -17,7 +18,7 @@
     max-width: 600px;
     margin: 10px auto;
     padding: 35px;
-    background-color: #3b2d2da9;
+    background-color: #3b2d2d2f;
     border-radius: 10px;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', seri
@@ -30,6 +31,7 @@ label {
     display: block;
     font-weight: bold;
     margin-bottom: 2px;
+    font-size: 15px;
 }
 .PAinarea{
     width: 100%;
@@ -54,6 +56,6 @@ button[type="submit"] {
 }
  
 button:hover {
-    background-color: #646363;
+    background-color: #9e9999;
 
 }
