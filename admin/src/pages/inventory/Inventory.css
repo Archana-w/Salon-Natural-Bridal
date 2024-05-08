@@ -122,14 +122,35 @@ font-weight: bold;
 }
 
 .product-filter-add-btn{
-  background: rgb(51, 51, 51);
+  background: rgb(3, 105, 8);
   border-radius: 0px;
   padding: 12px;
   color: white;
   border-radius: 10px;
   border: none;
   outline: none;
-  margin-left: 650px;
+  margin-left: 70px;
   cursor: pointer;
   width: 100px;
+}
+
+.product-filter-generate-btn{
+  background: rgb(59, 3, 105);
+  border-radius: 0px;
+  padding: 12px;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  margin-left: 350px;
+  cursor: pointer;
+  width: 190px;
+}
+
+.product-filter-generate-btn:hover{
+  background-color: rgb(126, 13, 13);
+}
+
+.product-filter-add-btn:hover{
+  background-color: rgb(126, 13, 13);
 }

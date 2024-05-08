@@ -22,7 +22,7 @@ function Inventory() {
       const[update,setUpdate] = useState(0);
    
       useEffect(() => {
-   
+    
          if (token != null) {
    
             axios.post("http://localhost:5000/product/get/all", { token: token, status: filterStatus, search: searchText }).then((response) => {
@@ -70,6 +70,9 @@ function Inventory() {
    
                <input className='product-filter-search' onChange={(e) => setSearchText(e.target.value)} placeholder="Search product" type="text"/>
                <button className='product-filter-search-btn' onClick={searchProductId}>Search</button>
+               <Link >
+                  <div><button className='product-filter-generate-btn' >Generate Report</button></div>
+              </Link>
                <Link to="/inventory/ProductForm">
                   <div><button className='product-filter-add-btn' onClick={addProduct}>Add Product</button></div>
               </Link>
@@ -108,7 +111,7 @@ function Inventory() {
                         <td>{product.price}</td>
                         <td>{product.discount}</td>
                         <td>
-                        <Link>
+                        <Link to={`/inventory/${product.id}`}>
                            <button className='edt_btn'>Edit</button>
                         </Link>
                         

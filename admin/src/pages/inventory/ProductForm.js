@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useAuthToken } from '../../auth';
 import { useNavigate } from "react-router-dom";
 import './ProductForm.css'
+ 
 
 function AddProduct() {
 
@@ -43,7 +44,8 @@ function AddProduct() {
                 var data = response.data;
                 var status = data.status;
                 if (status == "success") {
-
+                   
+                    
                     setSuccessMessage('Product added successfully!');
                     // Clear form fields after successful submission
                     setName('');
