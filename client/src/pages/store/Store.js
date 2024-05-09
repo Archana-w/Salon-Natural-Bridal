@@ -92,15 +92,18 @@ function Store() {
               </div>
            </div>
            <div class="store">
+
+           <div class="StoreSearch">
+          <input type="text" class="sSearch" placeholder="Search products" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+          <button class="Sbutton" onClick={handleSearch}>Search</button>
+        </div>
 </div>
              
        <div class ="Storegallery">   
 
-       <div class="StoreSearch">
-          <input type="text" class="sSearch" placeholder="Search products" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-          <button class="Sbutton" onClick={handleSearch}>Search</button>
-        </div>
-         
+       <div class= "STtopic">
+         <h1>Our Products</h1>
+         </div>
       {productData.map((result) =>
         
         <div key={result._id} className="gallery">

@@ -1,7 +1,3 @@
-.Searchbar{
-  padding-left: 1050px;
-  padding-top: 10px;
-  }
 
   .storeinput[type = text]{
 
@@ -23,9 +19,8 @@
    
 div.gallery {
     margin: 5px;
-    border: 1px solid #ccc;
-    float: left;
-    width: 200px;
+     float: left;
+    width: 220px;
     height:450px;
     margin-left: 15px;
     margin-top: 50px;
@@ -33,8 +28,7 @@ div.gallery {
     }
    
   div.gallery:hover {
-    border: 1px solid #777;
-    background-color: rgb(233, 233, 240);
+     background-color: rgb(233, 233, 240);
 
    }
   
@@ -154,11 +148,14 @@ div.gallery {
 .Spic{
   width: 100%;
    height: 250px;
+   background-color: #f0ecec9c;
+  border-radius: 20px;
  }
 
 .Sdetails{
   width: 100%;
   height: 130px;
+   
  
 }
 div.desc {
@@ -173,8 +170,9 @@ div.gallery img {
   width: 80%;
   height: auto;
    padding-left: 20px;
-   padding-top: 40px;
- }
+   padding-top: 40px;    
+
+  }
 
  .gallery p{
     text-align: center;
@@ -187,7 +185,7 @@ div.gallery img {
 
 .bannerS{
   width: 100%;
-   margin-top: 550px;
+   margin-top: 1200px;
 }
 
 .ImgSqure{
@@ -198,6 +196,7 @@ div.gallery img {
 .Storegallery{
   width: 100%;
   height: auto;
+  padding-left: 70px;
  }
 
  div.ImgSqure:hover {
@@ -206,16 +205,39 @@ div.gallery img {
  }
 
  .Sbutton{
-  padding: 7px;
-  color: #fefeff;
-  background-color: #58565fb9;
+   
   border-radius: 5px;
+  background: rgb(14, 13, 13);
+  border-radius: 0px;
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  margin-left: 10px;
+  cursor: pointer;
+  width: 100px;
   }
 
- .StoreSearch{
-  padding-left: 50px;
   
- }
+
+.sSearch{
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  width: 250px;
+  margin-left: 30px;
+  background-color: #77777744;
+}
+
+.STtopic{
+  padding-top: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+  font-size: 20px;
+  color: #100449;
+}
 
 
  
