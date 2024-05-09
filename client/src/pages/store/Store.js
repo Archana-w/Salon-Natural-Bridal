@@ -66,31 +66,7 @@ function Store() {
             <div class="tpc"><h1>Welcome to our salon store</h1></div>
 
 
-            <div class="types">
-              <div class="circle">
-              <p class="category">HAIR</p>
-              </div>
-
-              <div class="circle"  >
-               
-              <p class="category">SKIN</p>
-              </div>
-
-              <div class="circle"  >
-               
-              <p class="category">LIPS</p>
-              </div>
-
-              <div class="circle"  >
-               
-              <p class="category">NAIL</p>
-              </div>
-
-              <div class="circle"  >
-               
-              <p class="category">EYE</p>
-              </div>
-           </div>
+            
            <div class="store">
 
            <div class="StoreSearch">

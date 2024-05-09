@@ -194,7 +194,7 @@ div.gallery img {
 }
 
 .Storegallery{
-  width: 100%;
+  width: 1200px;
   height: auto;
   padding-left: 70px;
  }
@@ -237,6 +237,10 @@ div.gallery img {
   text-align: center;
   font-size: 20px;
   color: #100449;
+}
+
+.StoreSearch{
+  padding-top: 10px;
 }
 
 
