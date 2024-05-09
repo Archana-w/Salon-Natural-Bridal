@@ -1,35 +1,64 @@
-.content h2{
+/* Appointment.css */
+.appointment-list-container {
+    max-width: auto;
+    margin: 20px auto;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
+.appointment-list-container h1 {
     text-align: center;
-  
-    
 }
 
-.ant-divider-inner-text {
-    font-weight: bold;
-    font-size: 20px;
+.appointment-filter-bar {
+    height: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    background: rgb(235, 235, 235);
+    border-radius: 8px;
 }
 
-.ant-table-wrapper {
+.appointment-list-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
 
-    width: 1000dp;
-    margin: 30px;
+.appointment-list-container th {
+    padding: 20px 5px;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    text-align: left;
+    font-size: 14px;
+    background-color: rgba(228, 228, 228, 0.274);
+}
+
+.appointment-list-container td {
+    padding: 20px 5px;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    text-align: left;
+    font-size: 14px;
+    font-weight: 100;
 }
 
 .edt_btn {
-
     width: 80px;
     height: 30px;
     background-color: black;
     color: white;
     font-size: 14px;
-    border: none !important;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
 }
 
 .edt_btn:hover {
-
     background-color: rgba(0, 0, 0, 0.721);
-
 }
 
 .delete_btn {
@@ -39,6 +68,7 @@
     color: white;
     font-size: 14px;
     border: none !important;
+    border-radius: 20px;
 
 }
 
@@ -48,25 +78,61 @@
 
 }
 
-.ant-table-content {
+.appointment-id-td-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 125, 157);
+}
 
-    font-size: 16px;
-    margin-bottom: 50px;
+.appointment-id-td-container span {
+    cursor: pointer;
+    margin-left: 10px;
+    color: gray;
+    font-size: 18px;
+}
+
+.appointment-status-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.appointment-filter-search {
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    width: 250px;
+    margin-left: 30px;
+}
+
+.appointment-filter-search-btn {
+    background: rgb(51, 51, 51);
+    border-radius: 0px;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    cursor: pointer;
+    width: 100px;
+
 }
 
 .add_app_btn {
-    
+
     width: 150px;
     height: 40px;
     display: block !important;
-    margin: auto !important;
-    background-color: black;
+    margin-left: 600px;
+    background: rgb(51, 51, 51);
     color: white;
     font-size: 14px;
-    border-radius: 5px;
+    border-radius: 10px;
     border: none !important;
 }
-
 
 .add_app_btn:hover {
 
@@ -74,42 +140,18 @@
 
 }
 
-.report_btn {
-   
+.generate_report_btn {
     width: 150px;
     height: 40px;
-    margin-top: 20px;
     display: block !important;
-    margin: auto !important;
-    margin-top: 20px !important;
-    background-color: black;
+    margin-left: 10px; /* Adjust margin as needed */
+    background: rgb(51, 51, 51);
     color: white;
     font-size: 14px;
-    border-radius: 5px;
-    border: none !important;
-}
-
-.report_btn:hover {
-
-    background-color: rgba(0, 0, 0, 0.721);
-
-}
-
-
-.search {
-
-    width: 300px;
-    height: 40px;
     border-radius: 10px;
-    margin-left: 30px;
-    border: 1px solid rgb(157, 157, 157);
-    background-color: rgb(225, 226, 228);
-    outline: none !important;
+    border: none !important;
 }
 
-.search:hover {
-
-    border: none !important;
-    outline: none !important;
-    background-color: rgb(220, 220, 220);
+.generate_report_btn:hover {
+    background-color: rgba(0, 0, 0, 0.721);
 }

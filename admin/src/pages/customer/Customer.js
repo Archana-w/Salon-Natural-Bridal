@@ -1,72 +1,69 @@
-import React,{useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Customer.css'
 import { useAuthToken } from '../../auth';
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 function Customer() {
 
-  
-  var token = useAuthToken();
-  var navigate = useNavigate();
-  const[CustomerData,setCustomerData] = useState([]);
-  const[searchText,setSearchText] = useState("");
-  const[update,setUpdate] = useState(0);
 
-  
+   var token = useAuthToken();
+   var navigate = useNavigate();
+   const [CustomerData, setCustomerData] = useState([]);
+   const [searchText, setSearchText] = useState("");
+   const [update, setUpdate] = useState(0);
 
-  useEffect(()=>{
-    
-    if (token != null) {
 
-      axios.post("http://localhost:5000/user/get", { token: token }).then((response) => {
 
-        var data = response.data;
+   useEffect(() => {
 
-        console.log(data);
+      if (token != null) {
 
-        var status = data.status;
-        if (status == "success") {
-          setCustomerData(data.data);
-        } else if (status == "token_expired" || status == "auth_failed") {
-          navigate("/signout");
-        } else {
-          var message = data.message;
-          alert("Error - " + message);
-        }
+         axios.post("http://localhost:5000/user/get", { token: token }).then((response) => {
 
-      }).catch((error) => {
-        alert("Error 2 - " + error);
-      });
+            var data = response.data;
 
-    } else {
-      navigate("/signout");
-    }
+            console.log(data);
 
-  },[]);
+            var status = data.status;
+            if (status == "success") {
+               setCustomerData(data.data);
+            } else if (status == "token_expired" || status == "auth_failed") {
+               navigate("/signout");
+            } else {
+               var message = data.message;
+               alert("Error - " + message);
+            }
 
-  function searchCustomerId(){
-    setUpdate(update + 1);
- }
+         }).catch((error) => {
+            alert("Error 2 - " + error);
+         });
 
- function copyCustomerId(id){
-    navigator.clipboard.writeText(id);
-    alert("Order id copied!!!");
- }
+      } else {
+         navigate("/signout");
+      }
 
-  return (
+   }, []);
 
-    <div className="customer-list-container">
+   function searchCustomerId() {
+      setUpdate(update + 1);
+   }
+
+   function copyCustomerId(id) {
+      navigator.clipboard.writeText(id);
+      alert("Customer id copied!!!");
+   }
+
+   return (
+
+      <div className="customer-list-container">
          <h1>Manage Customers</h1>
 
-         <div className='order-filter-bar'>
-            
+         <div className='customer-filter-bar'>
 
-           
-
-            <input className='customer-filter-search'onChange={(e) => setSearchText(e.target.value)}  placeholder="Search customer" type="text"/>
-            <button className='customer-filter-search-btn'onClick={searchCustomerId}>Search</button>
+            <input className='customer-filter-search' onChange={(e) => setSearchText(e.target.value)} placeholder="Search customer" type="text" />
+            <button className='customer-filter-search-btn' onClick={searchCustomerId}>Search</button>
 
          </div>
 
@@ -83,7 +80,7 @@ function Customer() {
                </tr>
             </thead>
             <tbody>
-            {CustomerData.map((customer, index) => (
+               {CustomerData.map((customer, index) => (
                   <tr>
                      <td>
                         <div className='customer-id-td-container'>
@@ -91,11 +88,11 @@ function Customer() {
                            <span onClick={() => copyCustomerId(customer._id)} className="material-icons-round">copy</span>
                         </div>
                      </td>
-                     <td>{customer.first_name+" "+customer.last_name}</td>
+                     <td>{customer.first_name + " " + customer.last_name}</td>
                      <td>{customer.mobile_number}</td>
                      <td>{customer.email}</td>
                      <td>{customer.password}</td>
-                     
+
                      <td>
                         <Link>
                            <button className='edt_btn'>Edit</button>
@@ -108,12 +105,12 @@ function Customer() {
                      </td>
                   </tr>
                ))}
-               
+
             </tbody>
          </table>
       </div>
 
-  );
+   );
 }
 
 export default Customer;
