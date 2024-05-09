@@ -1,32 +1,52 @@
-import React from 'react';
-import { useCookies } from 'react-cookie';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useAuthToken } from '../../auth';
 
 function SupplierDashboard() {
-  const [cookies, setCookie, removeCookie] = useCookies(['auth_token', 'supplier_info']);
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+    const token = useAuthToken();
 
-  const handleLogout = () => {
-    // Remove cookies and redirect to login page
-    removeCookie('auth_token');
-    removeCookie('supplier_info');
-    window.location.href = '/login'; // Redirect to login page
-  };
+    useEffect(() => {
+        if (!token) {
+            navigate("/login");
+            return;
+        }
+        axios.get("http://localhost:5000/supplier/profile", {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        .then(response => {
+            setUser(response.data);
+            setLoading(false);
+        })
+        .catch(error => {
+            console.error("Error fetching user data:", error);
+            setError("Error - " + (error.response?.data?.message || error.message));
+            setLoading(false);
+        });
+    }, [token, navigate]);
 
-  return (
-    <div className="supplier-dashboard-container">
-      <h1>Hi, {cookies.supplier_info ? cookies.supplier_info.name : 'Supplier'}!</h1>
-      <div className="supplier-details">
-        {cookies.supplier_info && (
-          <div>
-            <h2>Supplier Information</h2>
-            <p>Name: {cookies.supplier_info.name}</p>
-            <p>Email: {cookies.supplier_info.email}</p>
-            <p>Category: {cookies.supplier_info.category}</p>
-          </div>
-        )}
-      </div>
-      
-    </div>
-  );
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+    if (!user) {
+        return <div>No user data available.</div>;
+    }
+    return (
+        <div className="supplier-details">
+            <h1>Supplier Details</h1>
+            <p><strong>First Name:</strong> {user.first_name}</p>
+            <p><strong>Last Name:</strong> {user.last_name}</p>
+            <p><strong>Email:</strong> {user.email}</p>
+            <p><strong>Mobile Number:</strong> {user.mobile_number}</p>
+        </div>
+    );
 }
 
 export default SupplierDashboard;
