@@ -90,42 +90,7 @@ function Appointment(){
     },
  
   ];
-  const data = [
-    {
-      key: '1',
-      appoinment_id:1,
-      customer_name: 'John Brown',
-      contact_no:'0712345678',
-      service_name: 'hair Straight',
-      date: '2024/03/22',
-      time:'09.00',
-      employee_name:'stylist 1',
 
-
-    },
-    {
-      key: '2',
-      appoinment_id:2,
-      customer_name: 'Jim Green',
-      contact_no:'0712345678',
-      service_name: 'facial',
-      date: '2024/03/22',
-      time:'09.00',
-      employee_name:'stylist 2',
-     
-    },
-    {
-      key: '3',
-      appoinment_id:3,
-      customer_name: 'Joe Black',
-      contact_no:'0712345678',
-      service_name: 'nail ploish',
-      date: '2024/03/22',
-      time:'09.00',
-      employee_name:'stylist 3',
-     
-    },
-  ];
   
 
     return(

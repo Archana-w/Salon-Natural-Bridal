@@ -1,59 +1,61 @@
-.content h2{
+/* OrderList.css */
+.customer-list-container {
+    max-width: auto;
+    margin: 20px auto;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
+.customer-list-container h1 {
     text-align: center;
-    
-  }
-  
-.ant-divider-inner-text {
-    font-weight: bold;
-    font-size: 20px;
 }
 
-.ant-table-wrapper {
-
-    width: 1000dp;
-    margin: 30px;
+.customer-filter-bar{
+    height: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    background: rgb(235, 235, 235);
+    border-radius: 8px;
 }
 
-.edt_btn {
+.customer-list-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
 
+.customer-list-container th {
+    padding: 20px;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    text-align: left;
+    font-size: 14px;
+    background-color: rgba(228, 228, 228, 0.274);
+}
+.customer-list-container td {
+    padding: 20px;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    text-align: left;
+    font-size: 14px;
+    font-weight: 100;
+}
+.edt_btn{
     width: 80px;
     height: 30px;
     background-color: black;
     color: white;
     font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
 }
 
 .edt_btn:hover {
-
     background-color: rgba(0, 0, 0, 0.721);
-
 }
-
-.ant-table-content {
-
-    font-size: 16px;
-    margin-bottom: 50px;
-}
-
-.add_cus_btn {
-
-    width: 150px;
-    height: 40px;
-    display: block !important;
-    margin: auto !important;
-    background-color: black;
-    color: white;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.add_cus_btn:hover {
-
-    background-color: rgba(0, 0, 0, 0.721);
-
-}
-
 .delete_btn {
     width: 80px;
     height: 30px;
@@ -61,6 +63,7 @@
     color: white;
     font-size: 14px;
     border: none !important;
+    border-radius: 20px;
 
 }
 
@@ -70,21 +73,45 @@
 
 }
 
-.search {
-    
-    width: 300px;
-    height: 40px;
-    border-radius: 10px;
-    margin-left: 30px;
-    border: 1px solid rgb(157, 157, 157);
-    background-color: rgb(225, 226, 228);
-    outline: none !important;
-
+.customer-id-td-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 125, 157);
 }
 
-.search:hover {
+.customer-id-td-container span {
+    cursor: pointer;
+    margin-left: 10px;
+    color: gray;
+    font-size: 18px;
+}
 
-    border: none !important;
-    outline: none !important;
-    background-color: rgb(220, 220, 220);
+.customer-status-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.customer-filter-search{
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    width: 250px;
+    margin-left: 30px;
+}
+
+.customer-filter-search-btn{
+    background: rgb(51, 51, 51);
+    border-radius: 0px;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    cursor: pointer;
+    width: 100px;
+    
 }
