@@ -1,4 +1,4 @@
-/* OrderList.css */
+/* Cuatomer.css */
 .customer-list-container {
     max-width: auto;
     margin: 20px auto;
@@ -12,10 +12,12 @@
     text-align: center;
 }
 
-.customer-filter-bar{
+.customer-filter-bar {
     height: 60px;
     padding-left: 20px;
     padding-right: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     display: flex;
     align-items: center;
     background: rgb(235, 235, 235);
@@ -29,20 +31,22 @@
 }
 
 .customer-list-container th {
-    padding: 20px;
+    padding: 20px 5px;
     border-bottom: 1px solid rgb(218, 218, 218);
     text-align: left;
     font-size: 14px;
     background-color: rgba(228, 228, 228, 0.274);
 }
+
 .customer-list-container td {
-    padding: 20px;
+    padding: 20px 5px;
     border-bottom: 1px solid rgb(218, 218, 218);
     text-align: left;
     font-size: 14px;
     font-weight: 100;
 }
-.edt_btn{
+
+.edt_btn {
     width: 80px;
     height: 30px;
     background-color: black;
@@ -56,6 +60,7 @@
 .edt_btn:hover {
     background-color: rgba(0, 0, 0, 0.721);
 }
+
 .delete_btn {
     width: 80px;
     height: 30px;
@@ -93,7 +98,7 @@
     justify-content: center;
 }
 
-.customer-filter-search{
+.customer-filter-search {
     padding: 10px;
     border-radius: 10px;
     outline: none;
@@ -102,7 +107,7 @@
     margin-left: 30px;
 }
 
-.customer-filter-search-btn{
+.customer-filter-search-btn {
     background: rgb(51, 51, 51);
     border-radius: 0px;
     padding: 10px;
@@ -113,5 +118,7 @@
     margin-left: 10px;
     cursor: pointer;
     width: 100px;
-    
+
 }
+
+
