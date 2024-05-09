@@ -4,6 +4,32 @@ var Device = require("../models/Device");
 
 var router = express.Router();
 
+//get user
+router.route("/get").post((req,res)=>{
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userType = req.current_user.user.type;
+
+        if (userType == "admin") {
+
+            User.find().then((result)=>{  
+                res.send({ status: "success", data:result });
+            });
+
+           
+        } else {
+            res.send({ status: "access_denied", message: "Can not access." });
+        }
+
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
 //login API endpoint
 router.route("/login").post((req, res) => {
 

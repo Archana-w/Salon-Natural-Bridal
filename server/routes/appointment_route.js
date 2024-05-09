@@ -187,11 +187,16 @@ router.route("/get").post((req, res) => {
                     service = service.substring(1,service.length);
 
                     var stylistResult = await User.findOne({ _id: stylishId });
+                    //check stylish available
+                    if (stylistResult){
 
-                    var stylishName = stylistResult.first_name + " " + stylistResult.last_name;
+                        var stylishName = stylistResult.first_name + " " + stylistResult.last_name;
+
+                        array.push({ appointment_id: id, time: appTime, date: appDate, create_time: time, status: status, service: service, name: stylishName });
+
+
+                    }
                     
-                    array.push({ appointment_id: id, time: appTime, date: appDate, create_time: time, status: status, service: service, name: stylishName });
-
                 }
 
                 res.send({ status: "success", data: array });

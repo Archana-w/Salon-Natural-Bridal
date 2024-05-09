@@ -43,7 +43,7 @@ function AppointmentList() {
 
   const handleEdit = (record) => {
     //  editing appointments
-    navigate("/create-app/"+record.appointment_id);
+    navigate("/create-app/" + record.appointment_id);
   };
 
   const handleDelete = (record) => {
@@ -55,7 +55,7 @@ function AppointmentList() {
           const status = responseData.status;
           if (status === "success") {
             setLoading(false);
-            setUpdate(update+1);
+            setUpdate(update + 1);
           } else if (status === "token_expired" || status === "auth_failed") {
             navigate("/signout");
           } else {
@@ -129,7 +129,9 @@ function AppointmentList() {
         <div className='content'>
           <h1>Your Appointments</h1>
           <input className='search' type="search" placeholder="Search here" value={searchQuery} onChange={handleSearch} />
-          <Table  className="custom-table" columns={columns} dataSource={searchQuery ? filteredData : data} pagination={false} />
+
+          <Table className="custom-table" columns={columns} dataSource={searchQuery ? filteredData : data} pagination={false} />
+
         </div>
       </div>
     );
