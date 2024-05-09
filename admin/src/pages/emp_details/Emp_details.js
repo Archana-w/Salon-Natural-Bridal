@@ -8,9 +8,10 @@ function Emp_details() {
 
   var token = useAuthToken();
   var navigate = useNavigate();
-  const [EmployeeData, setEmployeeData] = useState([]);
+  const [employeeData, setEmployeeData] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [update, setUpdate] = useState(0);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
 
   useEffect(() => {
 
@@ -32,44 +33,66 @@ function Emp_details() {
     } else {
       navigate("/signout");
     }
-  }, []);
+  }, [update]);
 
-  function searchemployeeId() {
-    setUpdate(update + 1);
-  }
+  const sortTable = (key) => {
+    let direction = 'asc';
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+  };
 
-  function copyEmployeeIId(id) {
-    navigator.clipboard.writeText(id);
-    alert("Employee id copied!!!");
-  }
+  const sortedData = () => {
+    const sorted = [...employeeData].sort((a, b) => {
+      if (sortConfig.direction === 'asc') {
+        return a[sortConfig.key] > b[sortConfig.key] ? 1 : -1;
+      }
+      if (sortConfig.direction === 'desc') {
+        return a[sortConfig.key] < b[sortConfig.key] ? 1 : -1;
+      }
+      return null;
+    });
+    return sorted;
+  };
+
+  const filteredData = () => {
+    if (searchText === "") {
+      return sortedData();
+    } else {
+      return sortedData().filter(employee =>
+        employee.name.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }
+  };
 
   return (
     <div className="employee-list-container">
       <h1>Manage Employees</h1>
       <div className='employee-filter-bar'>
         <input className='employee-filter-search' onChange={(e) => setSearchText(e.target.value)} placeholder="Search employee" type="text" />
-        <button className='employee-filter-search-btn' onClick={searchemployeeId}>Search</button>
+        <button className='employee-filter-search-btn' onClick={() => setUpdate(update + 1)}>Search</button>
       </div>
       <table>
         <thead>
           <tr>
-            <th>Employee ID</th>
-            <th>Name</th>
-            <th>Contact number</th>
-            <th>Email</th>
-            <th>Job role</th>
-            <th>Password</th>
+            <th onClick={() => sortTable('id')}>Employee ID</th>
+            <th onClick={() => sortTable('name')}>Name</th>
+            <th onClick={() => sortTable('contact_number')}>Contact number</th>
+            <th onClick={() => sortTable('email')}>Email</th>
+            <th onClick={() => sortTable('job_role')}>Job role</th>
+            <th onClick={() => sortTable('password')}>Password</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody>
-          {EmployeeData.map((employee, index) => (
+          {filteredData().map((employee, index) => (
             <tr key={index}>
               <td>
                 <div className='employee-id-td-container'>
                   {index + 1}
-                  <span onClick={() => copyEmployeeIId(employee.id)} className="material-icons-round">copy</span>
+                  <span onClick={() => navigator.clipboard.writeText(employee.employee_id)} className="material-icons-round">copy</span>
                 </div>
               </td>
               <td>{employee.name}</td>
@@ -78,12 +101,12 @@ function Emp_details() {
               <td>{employee.job_role}</td>
               <td>{employee.password}</td>
               <td>
-                <Link to={`/edit/${employee.id}`}>
+                <Link to={`/edit/${employee.employee_id}`}>
                   <button className='edt_btn'>Edit</button>
                 </Link>
               </td>
               <td>
-                <Link to={`/delete/${employee.id}`}>
+                <Link to={`/delete/${employee.employee_id}`}>
                   <button className='delete_btn'>Delete</button>
                 </Link>
               </td>
