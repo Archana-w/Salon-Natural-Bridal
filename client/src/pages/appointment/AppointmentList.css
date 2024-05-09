@@ -1,117 +1,75 @@
-.content{
-
-   padding-top: 40px;
-   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(../../images/customer_appointment/appointment.jpg);
+.content {
+    padding-top: 40px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../images/customer_appointment/appointment.jpg);
     width: 100%;
-    min-height: 800px;
+    min-height: 1000px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
-   
-}
-.content h1{
-
+  }
+  
+  .content h1 {
     text-align: center;
     color: white;
     font-weight: bold;
     font-family: 'De Bambeet';
     font-size: 40px;
-    
-    
-}
+  }
+  .app_table{
 
-.ant-table-wrapper {
-
-    width: 1000dp;
     margin: 30px;
  
-}
+  }
+  .custom-table {
+    width: 100%;
+    border-collapse: collapse;
 
-.edt_btn {
+  }
+  
+  .custom-table th,
+  .custom-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    padding: 20px;
+  }
+  
+  .custom-table tbody td{
+    background-color: white;
+  }
 
+  .custom-table th{
+    background-color: rgb(228, 228, 228);
+  }
+  
+  .edt_btn,
+  .delete_btn {
     width: 80px;
     height: 30px;
-    background-color: black;
     color: white;
     font-size: 14px;
-    border: none !important;
-}
-
-.edt_btn:hover {
-
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .edt_btn {
+    background-color: black;
+  }
+  
+  .edt_btn:hover {
     background-color: rgba(0, 0, 0, 0.721);
-
-}
-
-.delete_btn {
-    width: 80px;
-    height: 30px;
+  }
+  
+  .delete_btn {
     background-color: rgb(145, 7, 7);
-    color: white;
-    font-size: 14px;
-    border: none !important;
-
-}
-
-.delete_btn:hover {
-
+  }
+  
+  .delete_btn:hover {
     background-color: rgba(145, 7, 7, 0.67);
-
-}
-
-.ant-table-content {
-
-    font-size: 16px;
-    margin-bottom: 50px;
-    
-}
-
-
-.add_app_btn {
-    
-    width: 150px;
-    height: 40px;
-    display: block !important;
-    margin: auto !important;
-    background-color: black;
-    color: white;
-    font-size: 14px;
-    border-radius: 5px;
-    border: none !important;
-}
-
-
-.add_app_btn:hover {
-
-    background-color: rgba(0, 0, 0, 0.721);
-
-}
-
-.report_btn {
-   
-    width: 150px;
-    height: 40px;
-    margin-top: 20px;
-    display: block !important;
-    margin: auto !important;
-    margin-top: 20px !important;
-    background-color: black;
-    color: white;
-    font-size: 14px;
-    border-radius: 5px;
-    border: none !important;
-}
-
-.report_btn:hover {
-
-    background-color: rgba(0, 0, 0, 0.721);
-
-}
-
-
-.search {
-
+  }
+  
+  .search {
     width: 300px;
     height: 40px;
     border-radius: 10px;
@@ -119,20 +77,11 @@
     padding: 5px;
     border: 1px solid rgb(157, 157, 157);
     outline: none !important;
-}
-
-.search:hover {
-
+  }
+  
+  .search:hover {
     border: none !important;
     outline: none !important;
     background-color: rgb(220, 220, 220);
-}
-
-.custom-table .ant-table-thead > tr > th {
-    background-color: rgba(175, 175, 175, 0.564); /* Define your desired background color for the thead */
-  }
-  
-  .custom-table .ant-table-tbody > tr > td {
-    background-color: #dedcdc55; /* Define your desired background color for the tbody */
   }
   

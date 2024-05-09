@@ -72,8 +72,8 @@ function Appointment() {
                   <th>Date</th>
                   <th>Time</th>
                   <th>Stylist Name</th>
-                  <th>Action</th> {/* Add a new column for action buttons */}
-                  <th>Action</th> {/* Add a new column for action buttons */}
+                  <th>Edit</th> {/* Add a new column for action buttons */}
+                  <th>Delete</th> {/* Add a new column for action buttons */}
                </tr>
             </thead>
             <tbody>
@@ -87,7 +87,7 @@ function Appointment() {
                      </td>
 
                      <td>{appointment._id}</td>
-                     <td>{appointment._id}</td>
+                     <td>{appointment.service}</td>
                      <td>{appointment.appoinment_date}</td>
                      <td>{appointment.appoinment_time}</td>
                      <td>{appointment.stylist_id}</td>

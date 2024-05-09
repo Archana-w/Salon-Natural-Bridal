@@ -75,8 +75,8 @@ function Customer() {
                   <th>Contact number</th>
                   <th>Email</th>
                   <th>password</th>
-                  <th>Action</th> {/* Add a new column for action buttons */}
-                  <th>Action</th> {/* Add a new column for action buttons */}
+                  <th>Edit</th> {/* Add a new column for action buttons */}
+                  <th>Delete</th> {/* Add a new column for action buttons */}
                </tr>
             </thead>
             <tbody>
