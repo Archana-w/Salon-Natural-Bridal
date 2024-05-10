@@ -15,6 +15,8 @@ import Emp_leaves from './pages/emp_leaves/Emp_leaves';
 import Orders from './pages/orders/Orders';
 import OrderList from './pages/OrderList/OrderList';
 import AddEmp from './pages/add_emp/AddEmp';
+import Service_view from './pages/service/ServiceOut';
+import Add_Service from './pages/service/AddService';
 
 function App() {
   var token = useAuthToken();
@@ -47,6 +49,8 @@ function App() {
           <Route path='/orders' Component={Orders}></Route>
           <Route path='/emp_add' Component={AddEmp}></Route>
           <Route path='/emp_add:id' Component={AddEmp}></Route>
+          <Route path='/service_view' Component={Service_view}></Route>
+          <Route path='/add_service' Component={Add_Service}></Route>
 
         </Routes>
       </div>

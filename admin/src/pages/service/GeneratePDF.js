@@ -57,6 +57,14 @@ export function generatePDF(title, columns, data, fileName) {
     );
   }
 
+  /*data.forEach((item) => {
+    const rowData = [];
+    columns.forEach((column) => {
+      rowData.push(item[column]);
+    });
+    tableRows.push(rowData);
+  });*/
+
   data.forEach((item) => {
     const rowData = [];
     columns.forEach((column) => {
