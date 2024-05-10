@@ -4,15 +4,20 @@ import "../../pages/store/Store.css";
 import axios from "axios";
 import { useAuthToken } from '../../auth';
 import Link from "antd/es/typography/Link";
-import pic1 from "../../images/Store/hair.png"; 
-import pic2 from "../../images/Store/skin.png";
-import pic3 from "../../images/Store/lips.png"; 
-import pic4 from "../../images/Store/nail.png";
-import pic5 from "../../images/Store/eye.png"; 
+import pic6 from "../../images/Store/1.png";
+import pic7 from "../../images/Store/2.png";
+import pic8 from "../../images/Store/3.png";
+import pic9 from "../../images/Store/4.png";
+import pic10 from "../../images/Store/5.png";
+import pic11 from "../../images/Store/6.png";
+import pic12 from "../../images/Store/7.png";
+import pic13 from "../../images/Store/8.png";
 
 function Store() {
 
   const [productData, setProductData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
   var token = useAuthToken();
  
    const handleProductDetails = () => {
@@ -27,11 +32,7 @@ function Store() {
     });
 
   },[]);
-
-  function handleProduct() {
-    
-    //handleProductDetails();
-}
+ 
   //implement by savindu
   function addCart(productId){
     
@@ -42,6 +43,15 @@ function Store() {
       alert(error);
     });
   
+  }
+
+  function handleSearch() {
+    // Implement search logic here
+    // For example, filter productData based on searchQuery
+    const filteredProducts = productData.filter(product => 
+      product.product_name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setProductData(filteredProducts);
   }
 
   return (
@@ -56,53 +66,30 @@ function Store() {
             <div class="tpc"><h1>Welcome to our salon store</h1></div>
 
 
-            <div class="types">
-              <div class="circle" id="circle">
-              <a href="C:\Users\Udeshika Balasooriya\Desktop\Salon\Salon-Natural-Bridal\client\src\images\Store/hair.png">
-                  <img src={pic1} alt="hair" />
-              </a>
-              <p class="category">HAIR</p>
-              </div>
-
-              <div class="circle" id="circle">
-              <a href="C:\Users\Udeshika Balasooriya\Desktop\Salon\Salon-Natural-Bridal\client\src\images\Store/skin.png">
-                  <img src={pic2} alt="skin" />
-              </a>
-              <p class="category">SKIN</p>
-              </div>
-
-              <div class="circle" id="circle">
-              <a href="C:\Users\Udeshika Balasooriya\Desktop\Salon\Salon-Natural-Bridal\client\src\images\Store/lips.png">
-                  <img src={pic3} alt="lips" />
-              </a>
-              <p class="category">LIPS</p>
-              </div>
-
-              <div class="circle" id="circle">
-              <a href="C:\Users\Udeshika Balasooriya\Desktop\Salon\Salon-Natural-Bridal\client\src\images\Store/nail.png">
-                  <img src={pic4} alt="nail" />
-              </a>
-              <p class="category">NAIL</p>
-              </div>
-
-              <div class="circle" id="circle">
-              <a href="C:\Users\Udeshika Balasooriya\Desktop\Salon\Salon-Natural-Bridal\client\src\images\Store/eye.png">
-                  <img src={pic5} alt="eye" />
-              </a>
-              <p class="category">EYE</p>
-              </div>
-           </div>
+            
            <div class="store">
+
+           <div class="StoreSearch">
+          <input type="text" class="sSearch" placeholder="Search products" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+          <button class="Sbutton" onClick={handleSearch}>Search</button>
+        </div>
 </div>
              
-           
-         
-      {productData.map((result) =>
+       <div class ="Storegallery">   
 
+       <div class= "STtopic">
+         <h1>Our Products</h1>
+         </div>
+      {productData.map((result) =>
+        
         <div key={result._id} className="gallery">
+        <div class="Spic">
           <img src={"http://localhost:5000/image/" + result.thumbnail} alt="Store" width="600" height="400" />
+          </div>
+          <div class="Sdetails">
           <p>{result.product_name}</p>
           <p>Rs .{result.price}</p>
+          </div>
           <div className="desc">
             <button class="button b6" onClick={() => addCart(result._id)}>Place Order</button>
           </div>
@@ -110,9 +97,71 @@ function Store() {
         </div>
 
       )} 
+      </div>
+      <div class = "bannerS">
+      <div class = "ImgSqure">
+          <a href="C:\Users\Udeshika Balasooriya\Desktop\Salon\Salon-Natural-Bridal\client\src\images\Store/1.png">
+                  <img src={pic6} alt="1" width={320} height={320}/>
+          </a>
+               
+      </div>
 
-</div>    
+      <div class = "ImgSqure">
+          <a href="C:\Users\Udeshika Balasooriya\Desktop\Salon\Salon-Natural-Bridal\client\src\images\Store/3.png">
+                  <img src={pic7} alt="1" width={320} height={320}/>
+          </a>
+               
+      </div>
+
+      <div  class = "ImgSqure">
+          <a href="C:\Users\Udeshika Balasooriya\Desktop\Salon\Salon-Natural-Bridal\client\src\images\Store/4.png">
+                  <img src={pic8} alt="1" width={320} height={320}/>
+          </a>
+               
+      </div>
+      <div class = "ImgSqure">
+          <a href="C:\Users\Udeshika Balasooriya\Desktop\Salon\Salon-Natural-Bridal\client\src\images\Store/5.png">
+                  <img src={pic9} alt="1" width={320} height={320}/>
+          </a>
+               
+      </div>
+
+      <div class = "ImgSqure">
+          <a href="C:\Users\Udeshika Balasooriya\Desktop\Salon\Salon-Natural-Bridal\client\src\images\Store/6.png">
+                  <img src={pic10} alt="1" width={320} height={320}/>
+          </a>
+               
+      </div>
+
+      <div class = "ImgSqure">
+          <a href="C:\Users\Udeshika Balasooriya\Desktop\Salon\Salon-Natural-Bridal\client\src\images\Store/7.png">
+                  <img src={pic11} alt="1" width={320} height={320}/>
+          </a>
+               
+      </div>
+
+      <div  class = "ImgSqure">
+          <a href="C:\Users\Udeshika Balasooriya\Desktop\Salon\Salon-Natural-Bridal\client\src\images\Store/8.png">
+                  <img src={pic12} alt="1" width={320} height={320}/>
+          </a>
+               
+      </div>
+      <div class = "ImgSqure">
+          <a href="C:\Users\Udeshika Balasooriya\Desktop\Salon\Salon-Natural-Bridal\client\src\images\Store/9.png">
+                  <img src={pic13} alt="1" width={320} height={320}/>
+          </a>
+               
+      </div>
+
+       
+      </div>
+
+      
+
+</div>  
+  
     </> 
+    
  
 );
 

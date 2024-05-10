@@ -30,26 +30,26 @@ function ProductDetails(){
       };
   
       return (
-        <div class="image">
-        <div class="formout">
-        <h1 class="topic"> Place Order Product</h1>
+        <div class="Pimage">
+        <div class="Pformout">
+        <h1 class="Ptopic"> Place Order Product</h1>
 
-          <form id="productForm" onSubmit={handleSubmit}>
-              <div className="form-group">
+          <form id="PproductForm" onSubmit={handleSubmit}>
+              <div className="Pform-group">
                   <label for ="productName">Name:</label>
-                  <input type="text" class="inarea" id="productName" name="productName" value={productName} onChange={(e) => setProductName(e.target.value)} required />
+                  <input type="text" class="Pinarea" id="productName" name="productName" value={productName} onChange={(e) => setProductName(e.target.value)} required />
               </div>
-              <div className="form-group">
+              <div className="Pform-group">
                   <label for="productQuantity">Quantity:</label>
-                  <input type="number" class="inarea" id="productQuantity" name="productQuantity" min="0" step="1" value={productQuantity} onChange={(e) => setProductQuantity(e.target.value)} required />
+                  <input type="number" class="Pinarea" id="productQuantity" name="productQuantity" min="0" step="1" value={productQuantity} onChange={(e) => setProductQuantity(e.target.value)} required />
               </div>
-              <div className="form-group">
+              <div className="Pform-group">
                   <label for="productPrice">Price:</label>
-                  <input type="number" class="inarea" id="productPrice" name="productPrice" min="0" step="0.1" value={productPrice} onChange={(e) => setProductPrice(e.target.value)} required />
+                  <input type="number" class="Pinarea" id="productPrice" name="productPrice" min="0" step="0.1" value={productPrice} onChange={(e) => setProductPrice(e.target.value)} required />
               </div>
-              <div className="form-group">
+              <div className="Pform-group">
                   <label for="productCategory">Category:</label>
-                  <select id="productCategory" class="inarea" name="productCategory" value={productCategory} onChange={(e) => setProductCategory(e.target.value)} required>
+                  <select id="productCategory" class="Pinarea" name="productCategory" value={productCategory} onChange={(e) => setProductCategory(e.target.value)} required>
                       <option value="">Select Category</option>
                       <option value="hair">Hair care Products</option>
                       <option value="skin">Skin Care Products</option>
@@ -58,8 +58,8 @@ function ProductDetails(){
                   </select>
               </div>
               <br />
-              <div className="form-group">
-                  <button type="submit" class="btn" >Save</button><br /><br />
+              <div className="Pform-group">
+                  <button type="submit" class="Pbtn" >Save</button><br /><br />
               </div>
           </form>
           </div>

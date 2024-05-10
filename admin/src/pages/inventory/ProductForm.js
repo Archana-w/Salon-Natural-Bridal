@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuthToken } from '../../auth';
 import { useNavigate } from "react-router-dom";
+import './ProductForm.css'
+ 
 
 function AddProduct() {
 
@@ -42,7 +44,8 @@ function AddProduct() {
                 var data = response.data;
                 var status = data.status;
                 if (status == "success") {
-
+                   
+                    
                     setSuccessMessage('Product added successfully!');
                     // Clear form fields after successful submission
                     setName('');
@@ -73,21 +76,20 @@ function AddProduct() {
     };
 
     return (
-        <div>
-            <h2>Add Product</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
+        <div class="PAformout">
+            <h2 class="PAtopic">Add Product</h2>
+            <form class="PAproductForm" onSubmit={handleSubmit}>
+                <div className="PAform-group">
                     <label>Name:</label>
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+                    <input type="text" class="PAinarea" value={name} onChange={(e) => setName(e.target.value)} required />
                 </div>
-                <div>
+                <div className="PAform-group">
                     <label>Description:</label>
-                    <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
+                    <input type="text" class="PAinarea" value={description} onChange={(e) => setDescription(e.target.value)} />
                 </div>
-                <div>
+                <div className="PAform-group">
                     <label>Category:</label>
-                    <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} required />
-                    <select id="productCategory" value={category} onChange={(e) => setCategory(e.target.value)} required>
+                     <select id="productCategory" class="PAinarea" value={category} onChange={(e) => setCategory(e.target.value)} required>
 
                      <option>Select Category</option>
                         <option>Hair Care Product</option>
@@ -97,31 +99,31 @@ function AddProduct() {
 
                     </select>
                 </div>
-                <div>
+                <div className="PAform-group">
                     <label>Brand:</label>
-                    <input type="text" value={brand} onChange={(e) => setBrand(e.target.value)} />
+                    <input type="text" class="PAinarea" value={brand} onChange={(e) => setBrand(e.target.value)} />
                 </div>
-                <div>
+                <div className="PAform-group">
                     <label>Price:</label>
-                    <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} required />
+                    <input type="text" class="PAinarea" value={price} onChange={(e) => setPrice(e.target.value)} required />
                 </div>
-                <div>
+                <div className="PAform-group">
                     <label>Quantity:</label>
-                    <input type="number" value={quantity} min="0" step="1" onChange={(e) => setQuantity(e.target.value)} />
+                    <input type="number" class="PAinarea" value={quantity} min="0" step="1" onChange={(e) => setQuantity(e.target.value) } required/>
                 </div>
-                <div>
+                <div className="PAform-group">
                     <label>Weight:</label>
-                    <input type="text" value={weight} onChange={(e) => setWeight(e.target.value)} />
+                    <input type="text" class="PAinarea" value={weight} onChange={(e) => setWeight(e.target.value)} />
                 </div>
-                <div>
+                <div className="PAform-group">
                     <label>Discount:</label>
-                    <input type="text" value={discount} onChange={(e) => setDiscount(e.target.value)} />
+                    <input type="text" class="PAinarea" value={discount} onChange={(e) => setDiscount(e.target.value)} />
                 </div>
-                <div>
+                <div className="PAform-group">
                     <label>Thumbnail:</label>
-                    <input type="file" onChange={(e) => setImage(e.target.files[0])} accept="image/*" required />
+                    <input type="file" class="PAinarea" onChange={(e) => setImage(e.target.files[0])} accept="image/*" required />
                 </div>
-                <button type="submit">Add Product</button>
+                <button type="submit" class="PAbtn">Add Product</button>
             </form>
             {error && <p>{error}</p>}
             {successMessage && <p>{successMessage}</p>}
