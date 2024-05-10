@@ -32,9 +32,8 @@ function Login() {
             window.location.href = "http://localhost:3001/";
           } else if (type === "supplier") {
             setCookies("auth_token", token);
-                setCookies("user_type", type);
-                        setCookies("supplier", JSON.stringify(data.supplier));
-                        navigate("/supplier-dashboard");
+            setCookies("user_type", type);
+            navigate("/supplier-dashboard");
         }
         } else if (status === "invalid_user") {
           const message = data.message;

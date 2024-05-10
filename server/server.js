@@ -14,6 +14,8 @@ const checkoutRoute = require("./routes/checkout_route");
 const orderRoute = require("./routes/order_route");
 const appointmentRoute = require("./routes/appointment_route");
 const empRoute = require("./routes/emp_route");
+const Device = require("./models/Device");
+const User = require("./models/User");
 
 var app = express();
 dotenv.config({ path: "./config.env" });

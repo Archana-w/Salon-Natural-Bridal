@@ -15,10 +15,12 @@ function SupplierDashboard() {
             navigate("/login");
             return;
         }
-        axios.get("http://localhost:5000/supplier/profile", {
-            headers: { Authorization: `Bearer ${token}` }
-        })
+
+        console.log(token);
+
+        axios.post("http://localhost:5000/user/profile", {token:token})
         .then(response => {
+            console.log("Res - "+response.data);
             setUser(response.data);
             setLoading(false);
         })
@@ -27,7 +29,7 @@ function SupplierDashboard() {
             setError("Error - " + (error.response?.data?.message || error.message));
             setLoading(false);
         });
-    }, [token, navigate]);
+    }, [navigate]);
 
     if (loading) {
         return <div>Loading...</div>;
