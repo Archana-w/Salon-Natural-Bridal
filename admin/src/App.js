@@ -61,6 +61,8 @@ function App() {
           <Route path='/inventory/ProductForm' Component={ProductForm}></Route>
           <Route path='/income_expenses' Component={IncomeEp}></Route>   
           <Route path='/editProduct/:id' Component={EditProduct}></Route>
+          <Route path='/income_expenses' Component={IncomeEp}></Route>
+          <Route path='/inventory' Component={Inventory}></Route>
 
         </Routes>
 
