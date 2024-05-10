@@ -103,7 +103,7 @@ route.route("/get").post((req,res)=>{
 
 
                     var emp = { employee_id: empDoc._id,
-                        name: fullName,
+                        name:fullName,
                         contact_number:empDoc.mobile_number,
                         job_role: empTypeResult.type,
                         email: empDoc.email,

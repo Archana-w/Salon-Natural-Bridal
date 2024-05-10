@@ -1,99 +1,68 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import React from 'react';
-import { Divider, Table} from 'antd';
+import { useAuthToken } from '../../auth';
+import { useNavigate, Link } from "react-router-dom";
 import './Emp_leaves.css'
 
 
 
-function Emp_leaves(){
-  const columns = [
-    {
-      title: 'Leave ID',
-      dataIndex: 'leave_id',
-    },
-    {
-      title: 'Leave Type',
-      dataIndex: 'leave_type',
-    },
-    {
-      title: 'Job Role',
-      dataIndex: 'job_role',
-    },
-    {
-      title: 'OT Total',
-      dataIndex: 'OT_total',
-    },
-    {
-      title: 'Date From',
-      dataIndex: 'date_from',
-    },
-    {
-      title: 'Date To',
-      dataIndex: 'date_to',
-    },
+function Emp_leaves() {
 
-    
-    {
-      title: 'Action',
-      dataIndex: '',
-      key: 'x',
-      render: () => <button className='edt_btn'>Edit</button>,
-      
-    },
 
-    {
-      title: 'Action',
-      dataIndex: '',
-      key: 'x',
-      render: () => <button className='delete_btn'>Delete</button>,
-    },
- 
-  ];
-  const data = [
-    {
-      key: '1',
-      leave_id:1,
-      job_role: 'John Brown',
-      OT_total: 'New York No. 1 Lake Park',
-      date_from: '+9471123456',
-      date_to:'Stylist',
-      
+  var token = useAuthToken();
+  var navigate = useNavigate();
+  const [LeaveyData, setleaveData] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [update, setUpdate] = useState(0);
 
-    },
-    {
-      key: '2',
-      leave_id:2,
-      job_role: 'Jim Green',
-      OT_total: 'London No. 1 Lake Park',
-      date_from: '+9471123456',
-      date_to:'Stylist',
-      
-    },
-    {
-      key: '3',
-      leave_id:3,
-      job_role: 'Joe Black',
-      OT_total: 'Sydney No. 1 Lake Park',
-      date_from: '+9471123456',
-      date_to:'Stylist',
-      
-    },
-  ];
-  
+  function searchleaveId() {
+    setUpdate(update + 1);
+  }
 
-    return(
-      <div className='content'> <h2>Manage Employees Leaves</h2>
-      <input className='search'
-      type="search"
-      placeholder="Search here"/>
-      <Divider>Employees Leaves Details</Divider>
-      <Table columns={columns} dataSource={data} pagination={false}/>
-      <div><button className='add_emp_btn'>Add Employee</button></div>
-      <div><button className='report_empLeaves_btn'>Generate Report</button></div>
+
+  return (
+    <div className="employee-list-container">
+      <h1>Manage Employee Leaves</h1>
+
+      <div className='employee-filter-bar'>
+
+        <input className='employee-filter-search' onChange={(e) => setSearchText(e.target.value)} placeholder="Search leave" type="text" />
+        <button className='employee-filter-search-btn' onClick={searchleaveId}>Search</button>
+
+
       </div>
-      
-    );
+
+      <table>
+        <thead>
+          <tr>
+            <th>Leave ID</th>
+            <th>Employee Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td>
+              <div className='employee-id-td-container'>
+
+              </div>
+            </td>
+            <td>{ }</td>
+            <td>{ }</td>
+            <td>{ }</td>
+            <td>{ }</td>
+          </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+
+  );
 }
 
 export default Emp_leaves;

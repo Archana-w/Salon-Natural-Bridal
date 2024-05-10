@@ -12,29 +12,42 @@ function Login() {
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-    axios.post("http://localhost:5000/user/login", values)
-      .then((response) => {
-        const data = response.data;
-        const status = data.status;
 
-        if (status === "success") {
-          const token = data.access_token;
-          const type = data.type;
+    axios.post("http://localhost:5000/user/login",values).then((response)=>{
+      
+      var data = response.data;
+      var status = data.status;
+      if(status == "success"){
+      
+        var token = data.access_token;
+        var type = data.type;
 
-          if (type === "client") {
-            setCookies("auth_token", token);
-            setCookies("user_type", type);
-            navigate("/");
-          } else if (type === "employee") {
-            // redirect employee home
-          } else if (type === "admin") {
-            setCookies("admin_auth_token", token);
-            window.location.href = "http://localhost:3001/";
-          } else if (type === "supplier") {
+        //redirect user
+        if(type == "client"){
+          
+          //save access token in cookie
+          setCookies("auth_token", token);
+          setCookies("user_type", type);
+          //redirect client home
+          navigate("/");
+
+        }else if(type == "employee"){
+          //redirect employye home
+           //save access token in cookie
+           setCookies("auth_token", token);
+           setCookies("user_type", type);
+           //redirect client home
+           navigate("/");
+        }else if(type == "admin"){
+          //redirect admin
+          setCookies("admin_auth_token", token);
+          window.location.href = "http://localhost:3001/";
+        }else if (type === "supplier") {
             setCookies("auth_token", token);
             setCookies("user_type", type);
             navigate("/supplier-dashboard");
         }
+        
         } else if (status === "invalid_user") {
           const message = data.message;
           alert(message);

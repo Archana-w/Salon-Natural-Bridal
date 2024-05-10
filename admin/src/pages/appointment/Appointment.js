@@ -1,145 +1,115 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import React from 'react';
-import { Divider, Table} from 'antd';
 import './Appointment.css'
 import { useAuthToken } from '../../auth';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 
-function Appointment(){
+function Appointment() {
 
-  var token = useAuthToken();
-  var navigate = useNavigate();
-
-  const[AppointmentData,setAppointmentData] = useState([]);
-  
-
-  useEffect(()=>{
-    
-    if (token != null) {
-
-      axios.post("http://localhost:5000/appointment/get", { token: token }).then((response) => {
-
-        var data = response.data;
-        var status = data.status;
-        if (status == "success") {
-          setAppointmentData(data.data);
-        } else if (status == "token_expired" || status == "auth_failed") {
-          navigate("/signout");
-        } else {
-          var message = data.message;
-          alert("Error - " + message);
-        }
-
-      }).catch((error) => {
-        alert("Error 2 - " + error);
-      });
-
-    } else {
-      navigate("/signout");
-    }
-
-  },[]);
+   var token = useAuthToken();
+   var navigate = useNavigate();
+   const [AppointmentData, setAppointmentData] = useState([]);
+   const [searchText, setSearchText] = useState("");
+   const [update, setUpdate] = useState(0);
 
 
-  const columns = [
-    {
-      title: 'Appoinment ID',
-      dataIndex: 'appoinment_id',
-    },
-    {
-      title: 'Customer Name',
-      dataIndex: 'customer_name',
-    },
-    {
-      title: 'Contact Number',
-      dataIndex: 'contact_no',
-    },
-    {
-      title: 'Service Name',
-      dataIndex: 'service_name',
-    },
-    {
-      title: 'Date',
-      dataIndex: 'date',
-    },
-    {
-      title: 'Time',
-      dataIndex: 'time',
-    },
-  
-    {
-      title: 'Employee Name',
-      dataIndex: 'employee_name',
-    },
-    {
-      title: 'Action',
-      dataIndex: '',
-      key: 'x',
-      render: () => <button className='edt_btn'>Edit</button>,
-      
-    },
+   useEffect(() => {
 
-    {
-      title: 'Action',
-      dataIndex: '',
-      key: 'x',
-      render: () => <button className='delete_btn'>Delete</button>,
-    },
- 
-  ];
-  const data = [
-    {
-      key: '1',
-      appoinment_id:1,
-      customer_name: 'John Brown',
-      contact_no:'0712345678',
-      service_name: 'hair Straight',
-      date: '2024/03/22',
-      time:'09.00',
-      employee_name:'stylist 1',
+      if (token != null) {
+
+         axios.post("http://localhost:5000/appointment/get", { token: token }).then((response) => {
+
+            var data = response.data;
+            var status = data.status;
+            if (status == "success") {
+               setAppointmentData(data.data);
+            } else if (status == "token_expired" || status == "auth_failed") {
+               navigate("/signout");
+            } else {
+               var message = data.message;
+               alert("Error - " + message);
+            }
+
+         }).catch((error) => {
+            alert("Error 2 - " + error);
+         });
+
+      } else {
+         navigate("/signout");
+      }
+
+   }, []);
+   function searchAppointmentId() {
+      setUpdate(update + 1);
+   }
+
+   function copyAppointmentId(id) {
+      navigator.clipboard.writeText(id);
+      alert("Appointment id copied!!!");
+   }
 
 
-    },
-    {
-      key: '2',
-      appoinment_id:2,
-      customer_name: 'Jim Green',
-      contact_no:'0712345678',
-      service_name: 'facial',
-      date: '2024/03/22',
-      time:'09.00',
-      employee_name:'stylist 2',
-     
-    },
-    {
-      key: '3',
-      appoinment_id:3,
-      customer_name: 'Joe Black',
-      contact_no:'0712345678',
-      service_name: 'nail ploish',
-      date: '2024/03/22',
-      time:'09.00',
-      employee_name:'stylist 3',
-     
-    },
-  ];
-  
+   return (
+      <div className="appointment-list-container">
+         <h1>Manage Appointment</h1>
 
-    return(
-      <div className='content'> <h2>Manage Appoinment</h2>
-      <input className='search'
-      type="search"
-      placeholder="Search here"/>
-      <Divider>Appoinment Details</Divider>
-      <Table columns={columns} dataSource={AppointmentData} pagination={false}/>
-      <div><button className='add_app_btn'>Add Appoinment</button></div>
-      <div><button className='report_btn'>Generate Report</button></div>
+         <div className='appointment-filter-bar'>
+
+            <input className='appointment-filter-search' onChange={(e) => setSearchText(e.target.value)} placeholder="Search appointment" type="text" />
+            <button className='appointment-filter-search-btn' onClick={searchAppointmentId}>Search</button>
+            <button className='add_app_btn'>Add Appointment</button>
+            <button className='generate_report_btn'>Generate Report</button> 
+
+         </div>
+
+         <table>
+            <thead>
+               <tr>
+                  <th>Appointment ID</th>
+                  <th>service Name</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Stylist Name</th>
+                  <th>Edit</th> {/* Add a new column for action buttons */}
+                  <th>Delete</th> {/* Add a new column for action buttons */}
+               </tr>
+            </thead>
+            <tbody>
+               {AppointmentData.map((appointment, index) => (
+                  <tr>
+                     <td>
+                        <div className='appointment-id-td-container'>
+                           {appointment._id.substring(0, 5)}...
+                           <span onClick={() => copyAppointmentId(appointment._id)} className="material-icons-round">copy</span>
+                        </div>
+                     </td>
+
+                     <td>{appointment._id}</td>
+                     <td>{appointment.service}</td>
+                     <td>{appointment.appoinment_date}</td>
+                     <td>{appointment.appoinment_time}</td>
+                     <td>{appointment.stylist_id}</td>
+
+                     <td>
+                        <Link>
+                           <button className='edt_btn'>Edit</button>
+                        </Link>
+                     </td>
+                     <td>
+                        <Link>
+                           <button className='delete_btn'>Delete</button>
+                        </Link>
+                     </td>
+                  </tr>
+               ))}
+
+            </tbody>
+         </table>
       </div>
-      
-    );
+
+   );
 }
 
 export default Appointment;
