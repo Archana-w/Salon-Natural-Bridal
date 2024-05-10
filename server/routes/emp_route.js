@@ -168,7 +168,6 @@ route.route("/get").post((req,res)=>{
 });
 
 route.route("/get_employee").post((req,res)=>{
-
     //check authentication
     if (req.current_user != null) {
 
