@@ -122,7 +122,7 @@ font-weight: bold;
 }
 
 .product-filter-add-btn{
-  background: rgb(3, 105, 8);
+  background: rgb(51, 51, 51);
   border-radius: 0px;
   padding: 12px;
   color: white;
@@ -135,7 +135,7 @@ font-weight: bold;
 }
 
 .product-filter-generate-btn{
-  background: rgb(59, 3, 105);
+  background: rgb(51, 51, 51);
   border-radius: 0px;
   padding: 12px;
   color: white;
@@ -148,9 +148,9 @@ font-weight: bold;
 }
 
 .product-filter-generate-btn:hover{
-  background-color: rgb(126, 13, 13);
+  background-color: rgba(54, 53, 53, 0.89);
 }
 
 .product-filter-add-btn:hover{
-  background-color: rgb(126, 13, 13);
+  background-color: rgba(54, 53, 53, 0.89);
 }
