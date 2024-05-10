@@ -14,8 +14,6 @@ var checkoutRoute = require("./routes/checkout_route");
 var orderRoute = require("./routes/order_route");
 var appoinmentRoute = require("./routes/appointment_route");
 var empRoute = require("./routes/emp_route");
-const serviceRouter = require("./routes/service.js");
-
 
 
 var app = express();
@@ -95,7 +93,6 @@ app.use("/checkout", checkoutRoute);
 app.use("/order", orderRoute);
 app.use("/appointment", appoinmentRoute);
 app.use("/emp", empRoute);
-app.use("/service",serviceRouter);
 
 //give access image 
 app.get("/image/:imageName", (req, res) => {
