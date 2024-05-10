@@ -18,6 +18,7 @@ import AddEmp from './pages/add_emp/AddEmp';
 import Service_view from './pages/service/ServiceOut';
 import Add_Service from './pages/service/AddService';
 import EditEmployee from './pages/emp_details/EditEmployee';
+import IncomeEp from './pages/income/Homepage'
 
 function App() {
   var token = useAuthToken();
@@ -53,6 +54,8 @@ function App() {
           <Route path='/service_view' Component={Service_view}></Route>
           <Route path='/add_service' Component={Add_Service}></Route>
           <Route path='/emp_details/EditEmployee/:employee_id' Component={EditEmployee}></Route>
+          <Route path='/income_expenses' Component={IncomeEp}></Route>
+
         </Routes>
       </div>
     </BrowserRouter>
