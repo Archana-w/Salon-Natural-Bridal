@@ -8,13 +8,7 @@ import Spinner from "../../components/income/Spinner";
 import moment from "moment";
 import Analytics from "../../components/income/Analytics"; 
 import { UnorderedListOutlined, AreaChartOutlined , EditOutlined, DeleteOutlined } from "@ant-design/icons";
-
-
-
-
-
 import generateTransactionReport from "./reportGenerator"
-
 import './income.css'
 
 import { useAuthToken } from '../../auth';
@@ -128,7 +122,6 @@ const IncomeHomepage = () => {
       
     } catch (error) {
       console.log(error);
-      message.error("Fetch issue with transaction");
     }
   };
   // useEffect Hook
