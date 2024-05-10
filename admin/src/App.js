@@ -17,6 +17,7 @@ import OrderList from './pages/OrderList/OrderList';
 import AddEmp from './pages/add_emp/AddEmp';
 import Service_view from './pages/service/ServiceOut';
 import Add_Service from './pages/service/AddService';
+import EditEmployee from './pages/emp_details/EditEmployee';
 
 function App() {
   var token = useAuthToken();
@@ -51,7 +52,7 @@ function App() {
           <Route path='/emp_add:id' Component={AddEmp}></Route>
           <Route path='/service_view' Component={Service_view}></Route>
           <Route path='/add_service' Component={Add_Service}></Route>
-
+          <Route path='/emp_details/EditEmployee/:employee_id' Component={EditEmployee}></Route>
         </Routes>
       </div>
     </BrowserRouter>
