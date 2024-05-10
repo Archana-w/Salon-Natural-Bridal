@@ -4,9 +4,11 @@ var bodyParser = require("body-parser");
 var cors = require('cors');
 var multer = require("multer");
 var mongoose = require("mongoose");
+const Supplier = require("./models/Supplier");
 var Device = require("./models/Device");
 var User = require("./models/User");
 var tokenRoute = require("./routes/token_route");
+const supplierRoute = require("./routes/supplier_route");
 var userRoute = require("./routes/user_route");
 var productRoute = require("./routes/product_route");
 var cartRoute = require("./routes/cart_route");
@@ -24,7 +26,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(form.any());
 
-//connect mongo db
+
 var DB_URI = process.env.ATLAS_URI;
 var option = { dbName:"sms"};
 mongoose.connect(DB_URI, option).then(()=>{
@@ -38,14 +40,14 @@ app.use((req, res, next) => {
 
     const token = req.body.token;
 
-    //validate token
+    
     if (token != null) {
 
         const date = new Date();
         const time = date.getTime();
         const token = req.body.token;
 
-        //validate token
+        
         Device.findOne({ token: token }).then((doc) => {
 
             if (doc == null) {
@@ -55,7 +57,7 @@ app.use((req, res, next) => {
 
             const userId = doc.user_id;
             const expire = doc.expire;
-            //check token is expire
+            
             if (time > expire) {
                 res.send({ "status": "token_expired", "message": "This token is expired." });
                 return;
@@ -84,24 +86,25 @@ app.use((req, res, next) => {
 });
 
 
-//routes
+
 app.use("/token", tokenRoute);
-app.use("/user",userRoute);
+app.use("/supplier", supplierRoute); 
+app.use("/user", userRoute);
 app.use("/product", productRoute);
 app.use("/cart", cartRoute);
 app.use("/checkout", checkoutRoute);
 app.use("/order", orderRoute);
-app.use("/appointment", appoinmentRoute);
+app.use("/appointment", appointmentRoute);
 app.use("/emp", empRoute);
 app.use("/service",serviceRouter);
 
-//give access image 
+
 app.get("/image/:imageName", (req, res) => {
     var imageName = req.params.imageName;
     res.sendFile(__dirname + "/uploads/" + imageName);
 });
 
-//default page
+
 app.get("*",(req,res)=>{
     res.send("Hello world!!!");
 });

@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
-/*import axios from 'axios';*/
 import React from 'react';
 import { Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import './Login.css';
 import axios from 'axios';
-import {useCookies} from 'react-cookie';
-import {useNavigate} from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
-
-  const [cookies, setCookies] = useCookies(["auth_token", "user_type", "admin_auth_token"]);
-  var navigate = useNavigate();
+  const [cookies, setCookies, removeCookies] = useCookies(['auth_token', 'user_type', 'admin_auth_token', 'supplier']);
+  const navigate = useNavigate();
 
   const onFinish = (values) => {
 
@@ -44,21 +42,23 @@ function Login() {
           //redirect admin
           setCookies("admin_auth_token", token);
           window.location.href = "http://localhost:3001/";
+        }else if (type === "supplier") {
+            setCookies("auth_token", token);
+            setCookies("user_type", type);
+            navigate("/supplier-dashboard");
         }
-
-      } else if (status == "invalid_user"){
-        var message = data.message;
-        alert(message);
-      }else{
-        alert(JSON.stringify(data));
-      }
-
-    }).catch((error)=>{
-      alert("Error - "+error);
-    });
-
+        
+        } else if (status === "invalid_user") {
+          const message = data.message;
+          alert(message);
+        } else {
+          alert(JSON.stringify(data));
+        }
+      })
+      .catch((error) => {
+        alert("Error - " + error);
+      });
   };
-
   return (
     <div className='bg-image-login'>
 
@@ -108,4 +108,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Login;
