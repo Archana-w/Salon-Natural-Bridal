@@ -35,7 +35,11 @@ function Login() {
 
         }else if(type == "employee"){
           //redirect employye home
-        
+           //save access token in cookie
+           setCookies("auth_token", token);
+           setCookies("user_type", type);
+           //redirect client home
+           navigate("/");
         }else if(type == "admin"){
           //redirect admin
           setCookies("admin_auth_token", token);
