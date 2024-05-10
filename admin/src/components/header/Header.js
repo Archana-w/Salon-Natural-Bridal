@@ -31,7 +31,7 @@ function Header() {
     {
       name: "Appoinments",
       icon: "home",
-      navigate: "appoinment",
+      navigate: "appointment",
     },
     {
       name: "Orders",

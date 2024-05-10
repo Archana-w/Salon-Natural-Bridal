@@ -76,6 +76,7 @@ function Emp_details() {
       <div className='employee-filter-bar'>
         <input className='employee-filter-search' onChange={(e) => setSearchText(e.target.value)} placeholder="Search employee" type="text" />
         <button className='employee-filter-search-btn' onClick={() => setUpdate(update + 1)}>Search</button>
+        <button className='salary_btn'>Add Employee</button>
       </div>
       <table>
         <thead>

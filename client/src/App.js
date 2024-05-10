@@ -15,6 +15,10 @@ import OrderDetails from './pages/order_details/OrderDetails';
 import AppointmentList from './pages/appointment/AppointmentList';
 import SupplierDashboard from './pages/SupplierDashboard/SupplierDashboard';
 import SupplierOrder from './pages/SupplierOrder/SupplierOrder';
+import Service from './pages/service/Service';
+import Nailcare from './pages/service/Nail_care';
+import Haircare from './pages/service/Hair_care';
+import Skincare from './pages/service/Skin_care';
 
 function App() {
   return (
@@ -48,6 +52,10 @@ function LayoutWithHeader() {
         <Route path="/create-app" element={<Appointment />} />
         <Route path="/invoice/:id" element={<OrderDetails />} />
         <Route path="/my-app" element={<AppointmentList />} />
+        <Route path="/service" element={<Service/>} />
+        <Route path="/Nail_care" element={<Nailcare />} />
+        <Route path="/Hair_care" element={<Haircare/>} />
+        <Route path="/Skin_care" element={<Skincare/>} />
         
       </Routes>
     </>
