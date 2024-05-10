@@ -52,7 +52,7 @@ function AddService() {
 
   return (
     <div className="container">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="form_cs" onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           <br />
           <div className="mb-1">
