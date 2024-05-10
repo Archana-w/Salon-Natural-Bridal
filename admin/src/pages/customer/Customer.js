@@ -1,12 +1,49 @@
-import { useEffect, useState } from 'react';
+import React,{useEffect, useState} from 'react';
 import axios from 'axios';
-import React from 'react';
 import { Divider, Table } from 'antd';
 import './Customer.css'
-
+import { useAuthToken } from '../../auth';
+import { useNavigate } from "react-router-dom";
 
 
 function Customer() {
+
+  var token = useAuthToken();
+  var navigate = useNavigate();
+
+  const[customerData,setCustomerData] = useState([]);
+  
+
+  useEffect(()=>{
+    
+    if (token != null) {
+
+      axios.post("http://localhost:5000/user/get", { token: token }).then((response) => {
+
+        var data = response.data;
+        var status = data.status;
+        if (status == "success") {
+          setCustomerData(data.data);
+        } else if (status == "token_expired" || status == "auth_failed") {
+          navigate("/signout");
+        } else {
+          var message = data.message;
+          alert("Error - " + message);
+        }
+
+      }).catch((error) => {
+        alert("Error 2 - " + error);
+      });
+
+    } else {
+      navigate("/signout");
+    }
+
+  },[]);
+
+
+
+
   const columns = [
     {
       title: 'Customer ID',
@@ -49,39 +86,7 @@ function Customer() {
     },
 
   ];
-  const data = [
-    {
-      key: '1',
-      customer_id: 1,
-      name: 'John Brown',
-      address: 'New York No. 1 Lake Park',
-      contact_number: '+9471123456',
-      job_role: 'Stylist',
-      email: 'c@gmail.com',
-      password: 'ac123'
-
-    },
-    {
-      key: '2',
-      customer_id: 2,
-      name: 'Jim Green',
-      address: 'London No. 1 Lake Park',
-      contact_number: '+9471123456',
-      job_role: 'Stylist',
-      email: 'c@gmail.com',
-      password: 'ac123'
-    },
-    {
-      key: '3',
-      customer_id: 3,
-      name: 'Joe Black',
-      address: 'Sydney No. 1 Lake Park',
-      contact_number: '+9471123456',
-      job_role: 'Stylist',
-      email: 'c@gmail.com',
-      password: 'ac123'
-    },
-  ];
+ 
 
 
   return (
@@ -90,7 +95,7 @@ function Customer() {
         type="search"
         placeholder="Search here" />
       <Divider>Customer Details</Divider>
-      <Table columns={columns} dataSource={data} pagination={false} />
+      <Table columns={columns} dataSource={customerData} pagination={false} />
       <div><button className='add_cus_btn'>Add Customer</button></div>
     </div>
 

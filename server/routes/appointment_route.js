@@ -25,13 +25,13 @@ router.route("/create").post((req, res) => {
 
             if (time == null || time == "" ||
                 date == null || date == "" ||
-                stylistId == null || stylistId == ""){
+                stylistId == null || stylistId == "") {
                 res.send({ status: "required_failed", "message": "Required values are not received." });
-               return; 
+                return;
             }
 
-            Appointment.findOne({ appoinment_time: time, appoinment_date: date }).then((doc)=>{
-                if(doc == null){
+            Appointment.findOne({ appoinment_time: time, appoinment_date: date }).then((doc) => {
+                if (doc == null) {
 
                     var a = new Appointment();
                     a.appoinment_time = time;
@@ -48,7 +48,7 @@ router.route("/create").post((req, res) => {
                         res.send({ status: "success", message: "Appointment created." });
                     });
 
-                }else{
+                } else {
                     res.send({ status: "already", message: "Already appoinment this time range." });
                 }
             });
@@ -87,7 +87,7 @@ router.route("/update").post((req, res) => {
                 return;
             }
 
-            Appointment.findOneAndUpdate({ _id: appId }, { time_range: range, service_id: serviceId }).then(()=>{
+            Appointment.findOneAndUpdate({ _id: appId }, { time_range: range, service_id: serviceId }).then(() => {
                 res.send({ status: "success", message: "Appointment updated." });
             });
 
@@ -115,15 +115,15 @@ router.route("/delete").post((req, res) => {
         if (userType == "client") {
 
             const appId = req.body.appointment_id;
-    
+
             if (appId == null || appId == "") {
                 res.send({ status: "required_failed", "message": "Required values are not received." });
                 return;
             }
 
-            Appointment.findOneAndDelete({ _id: appId }).then(()=>{
+            Appointment.findOneAndDelete({ _id: appId }).then(() => {
                 res.send({ status: "success", message: "Appointment deleted." });
-            }).catch(()=>{
+            }).catch(() => {
                 res.send({ status: "failed", message: "Can not delete this appointment." });
             });
 
@@ -137,6 +137,7 @@ router.route("/delete").post((req, res) => {
 
 });
 
+///get user appoinment
 router.route("/get").post((req, res) => {
 
     //check authentication
@@ -146,14 +147,125 @@ router.route("/get").post((req, res) => {
         const userType = req.current_user.user.type;
 
         if (userType == "client") {
-            
-            Appointment.find({ user_id: userId }).then(async (doc)=>{
 
-                var stylishId = doc.stylist_id;
-                res.send({ status: "success", data: doc });
-            
-            
-            
+            Appointment.find({ user_id: userId, status: "reserved" }).sort({ time: -1 }).then(async (doc) => {
+
+
+                var array = new Array();
+                for (var i = 0; i < doc.length; i++) {
+
+                    var item = doc[i];
+
+                    var id = item._id;
+                    var stylishId = item.stylist_id;
+                    var appTime = item.appoinment_time;
+                    var appDate = item.appoinment_date;
+                    var time = item.time;
+                    var status = item.status;
+                    var hairCare = item.hair_care;
+                    var skinCare = item.skin_care;
+                    var nailCare = item.nail_care;
+
+                    var service = "";
+
+                    //hair care
+                    for (var x = 0; x < hairCare.length; x++) {
+                        service = service + "," + hairCare[x];
+                    }
+
+                    //skin care
+                    for (var x = 0; x < skinCare.length; x++) {
+                        service = service + "," + skinCare[x];
+                    }
+
+                    //nail care
+                    for (var x = 0; x < nailCare.length; x++) {
+                        service = service + "," + nailCare[x];
+                    }
+
+                    //remove first comma
+                    service = service.substring(1, service.length);
+
+                    var stylistResult = await User.findOne({ _id: stylishId });
+
+                    var stylishName = stylistResult.first_name + " " + stylistResult.last_name;
+
+                    array.push({ appointment_id: id, time: appTime, date: appDate, create_time: time, status: status, service: service, name: stylishName });
+
+                }
+
+                res.send({ status: "success", data: array });
+
+            });
+
+        } else {
+            res.send({ status: "access_denied", message: "Can not access." });
+        }
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
+router.route("/app_get").post((req, res) => {
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userId = req.current_user.user_id;
+        const userType = req.current_user.user.type;
+        const appId = req.body.appointment_id;
+
+        if (userType == "client") {
+
+            if (appId == null || appId == "") {
+                res.send({ status: "required_failed", "message": "Required values are not received." });
+                return;
+            }
+
+            Appointment.findOne({ _id: appId }).then(async (doc) => {
+
+                var item = doc;
+
+                var id = item._id;
+                var stylishId = item.stylist_id;
+                var appTime = item.appoinment_time;
+                var appDate = item.appoinment_date;
+                var time = item.time;
+                var status = item.status;
+                var hairCare = item.hair_care;
+                var skinCare = item.skin_care;
+                var nailCare = item.nail_care;
+
+                var service = "";
+
+                //hair care
+                for (var x = 0; x < hairCare.length; x++) {
+                    service = service + "," + hairCare[x];
+                }
+
+                //skin care
+                for (var x = 0; x < skinCare.length; x++) {
+                    service = service + "," + skinCare[x];
+                }
+
+                //nail care
+                for (var x = 0; x < nailCare.length; x++) {
+                    service = service + "," + nailCare[x];
+                }
+
+                //remove first comma
+                service = service.substring(1, service.length);
+
+                var stylistResult = await User.findOne({ _id: stylishId });
+
+                var stylishName = stylistResult.first_name + " " + stylistResult.last_name;
+
+                var result = { appointment_id: id, time: appTime, date: appDate, create_time: time, status: status, service: service, name: stylishName };
+
+                res.send({ status: "success", data: result });
+
             });
 
         } else {

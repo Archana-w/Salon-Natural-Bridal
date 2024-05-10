@@ -7,31 +7,30 @@ import HairImage from '../../images/customer_appointment/haircare.jpg';
 import SkinImage from '../../images/customer_appointment/skincare.jpg';
 import NailImage from '../../images/customer_appointment/nailcare.jpg';
 import { useAuthToken } from '../../auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PageLoading from '../../components/loading/PageLoading';
-
-
 
 function Appointment() {
 
+    var { id } = useParams();
     var token = useAuthToken();
     var navigate = useNavigate();
     const [isLoading, setLoading] = useState(true);
-    const[stylish,setStylish] = useState({});
+    const [stylish, setStylish] = useState({});
+    const [selectedDate, setSelectedDate] = useState(null); // State to hold the selected date
 
-  
     const [selectedServices, setSelectedServices] = useState({
         hairCare: [],
         skinCare: [],
         nailCare: []
     });
 
-    useEffect(()=>{
+    useEffect(() => {
 
         if (token != null) {
 
             //load stylish details
-            axios.post("http://localhost:5000/emp/get_employee", { token: token, employee_type:"66288da18da7ebc59fc96a2b" }).then((response) => {
+            axios.post("http://localhost:5000/emp/get_employee", { token: token, employee_type: "66288da18da7ebc59fc96a2b" }).then((response) => {
 
                 var data = response.data;
                 var status = data.status;
@@ -53,7 +52,7 @@ function Appointment() {
             navigate("/login");
         }
 
-    },[]);
+    }, []);
 
     const onFinish = async (values) => {
 
@@ -67,13 +66,13 @@ function Appointment() {
 
                 setLoading(true);
 
-                axios.post("http://localhost:5000/appointment/create", { token: token, stylist_id: formData.select, time: formData.time_range, date: formData.DatePicker, hair_care: formData.hairCare, nail_care: formData.nailCare, skin_care: formData.skinCare, }).then((response) => {
+                axios.post("http://localhost:5000/appointment/create", { token: token, stylist_id: formData.select, time: formData.time_range, date: selectedDate.format('YYYY-MM-DD'), hair_care: formData.hairCare, nail_care: formData.nailCare, skin_care: formData.skinCare, }).then((response) => {
 
                     var data = response.data;
                     var status = data.status;
                     if (status == "success") {
                         alert("Appointment created...");
-                        navigate("/my-app/AppointmentList");
+                        navigate("/my-app");
                     } else if (status == "token_expired" || status == "auth_failed") {
                         navigate("/signout");
                     } else {
@@ -88,11 +87,11 @@ function Appointment() {
             } else {
                 navigate("/login");
             }
- 
-            // Optionally, you can show a success message or redirect the user
+
+            //show a success message or redirect the user
         } catch (error) {
             console.error('Error creating appointment:', error);
-            // Handle error, show error message to the user, etc.
+            //show error message to the user
         }
     };
 
@@ -107,6 +106,10 @@ function Appointment() {
 
     const disabledDate = (currentDate) => {
         return currentDate && currentDate < moment().startOf('day');
+    };
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
     };
 
     if (isLoading) {
@@ -185,35 +188,35 @@ function Appointment() {
                                     </div>
                                 </div>
                                 <div className='forminfo'>
-                                    
-                                   
+
+
                                     <Form.Item name="DatePicker" label="Select Date" rules={[{ required: true, message: 'Please select a date!' }]}>
-                                        <DatePicker className='datepic' disabledDate={disabledDate}/>
+                                        <DatePicker className='datepic' disabledDate={disabledDate} onChange={handleDateChange} />
                                     </Form.Item>
                                     <Form.Item name="time_range" label="Select time" hasFeedback rules={[{ required: true, message: 'Please select your time!' }]}>
                                         <Select className='selectt' placeholder="Please select a time">
-                                        <Option value="time1">8 a.m. - 9 a.m.</Option>
-                                        <Option value="time2">9 a.m. - 10 a.m.</Option>
-                                        <Option value="time3">10 a.m. - 11 a.m.</Option>
-                                        <Option value="time4">11 a.m. - 12 p.m.</Option>
-                                        <Option value="time5">12 p.m. - 13 p.m.</Option>
-                                        <Option value="time6">13 p.m. - 14 p.m.</Option>
-                                        <Option value="time7">14 p.m. - 15 p.m.</Option>
-                                        <Option value="time8">15 p.m. - 16 p.m.</Option>
-                                        <Option value="time9">16 p.m. - 17 p.m.</Option>
-                                        <Option value="time10">17 p.m. - 18 p.m.</Option>
+                                            <Option value="8 a.m. - 9 a.m.">8 a.m. - 9 a.m.</Option>
+                                            <Option value="9 a.m. - 10 a.m.">9 a.m. - 10 a.m.</Option>
+                                            <Option value="10 a.m. - 11 a.m.">10 a.m. - 11 a.m.</Option>
+                                            <Option value="11 a.m. - 12 p.m.">11 a.m. - 12 p.m.</Option>
+                                            <Option value="12 p.m. - 13 p.m.">12 p.m. - 13 p.m.</Option>
+                                            <Option value="13 p.m. - 14 p.m.">13 p.m. - 14 p.m.</Option>
+                                            <Option value="14 p.m. - 15 p.m.">14 p.m. - 15 p.m.</Option>
+                                            <Option value="15 p.m. - 16 p.m.">15 p.m. - 16 p.m.</Option>
+                                            <Option value="16 p.m. - 17 p.m.">16 p.m. - 17 p.m.</Option>
+                                            <Option value="17 p.m. - 18 p.m.">17 p.m. - 18 p.m.</Option>
                                         </Select>
                                     </Form.Item>
                                     <Form.Item name="select" label="Select Stylist" hasFeedback rules={[{ required: true, message: 'Please select your Stylist!' }]}>
                                         <Select className='selects' placeholder="Please select a Stylist">
-                                            {stylish.map((item)=>
+                                            {stylish.map((item) =>
                                                 <Option value={item.employee_id}>{item.name}</Option>
                                             )}
                                         </Select>
                                     </Form.Item>
                                     <Flex gap="small" wrap="wrap">
                                         <Button className='submit' type="primary" htmlType='submit'>Submit</Button>
-                                    
+
 
                                     </Flex>
                                 </div>

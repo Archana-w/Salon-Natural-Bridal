@@ -3,10 +3,47 @@ import axios from 'axios';
 import React from 'react';
 import { Divider, Table} from 'antd';
 import './Appointment.css'
+import { useAuthToken } from '../../auth';
+import { useNavigate } from "react-router-dom";
 
 
 
 function Appointment(){
+
+  var token = useAuthToken();
+  var navigate = useNavigate();
+
+  const[AppointmentData,setAppointmentData] = useState([]);
+  
+
+  useEffect(()=>{
+    
+    if (token != null) {
+
+      axios.post("http://localhost:5000/appointment/get", { token: token }).then((response) => {
+
+        var data = response.data;
+        var status = data.status;
+        if (status == "success") {
+          setAppointmentData(data.data);
+        } else if (status == "token_expired" || status == "auth_failed") {
+          navigate("/signout");
+        } else {
+          var message = data.message;
+          alert("Error - " + message);
+        }
+
+      }).catch((error) => {
+        alert("Error 2 - " + error);
+      });
+
+    } else {
+      navigate("/signout");
+    }
+
+  },[]);
+
+
   const columns = [
     {
       title: 'Appoinment ID',
@@ -97,7 +134,7 @@ function Appointment(){
       type="search"
       placeholder="Search here"/>
       <Divider>Appoinment Details</Divider>
-      <Table columns={columns} dataSource={data} pagination={false}/>
+      <Table columns={columns} dataSource={AppointmentData} pagination={false}/>
       <div><button className='add_app_btn'>Add Appoinment</button></div>
       <div><button className='report_btn'>Generate Report</button></div>
       </div>

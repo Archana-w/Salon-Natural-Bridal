@@ -1,88 +1,55 @@
-.content h2{
-
-    text-align: center;
-    
-  }
-  
-.ant-divider-inner-text{
-    font-weight: bold;
-    font-size: 20px;
+.content {
+    margin: 20px;
 }
 
-.ant-table-wrapper{
-
-    width: 1000dp;
-    margin: 30px;
+.employee-table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.edt_btn{
-
-    width:80px;
-    height: 30px;
-    background-color: black;
-    color:white;
-    font-size: 14px;
-    border: none !important;
+.employee-table th,
+.employee-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
 }
 
-.edt_btn:hover{
-
-    background-color: rgba(0, 0, 0, 0.721);
-   
-}
-.delete_btn{
-    width:80px;
-    height: 30px;
-    background-color: rgb(145, 7, 7);
-    color:white;
-    font-size: 14px;
-    border: none !important;
-   
+.employee-table th {
+    background-color: #f2f2f2;
 }
 
-.delete_btn:hover{
-
-    background-color: rgba(145, 7, 7, 0.67);
-   
-}
-.ant-table-content{
-
-    font-size: 16px;
+.employee-table tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
-.add_emp_btn{
-  
-     width:150px;
-     height: 40px;
-     display: block !important;
-     margin: auto !important;
-     background-color: black;
-     color:white;
-     font-size: 14px;
-     border-radius: 5px;
-     border: none !important;
- }
-
- 
-.add_emp_btn:hover{
-  
-    background-color:  rgba(0, 0, 0, 0.721);
-  
+.employee-table tr:hover {
+    background-color: #ddd;
 }
+
 .search {
-   
-    width: 300px;
-    height: 40px;
-    border-radius: 10px;
-    margin-left: 30px;
-    border: 1px solid rgb(157, 157, 157);
-    background-color: rgb(225, 226, 228);
-    outline: none !important;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 200px;
 }
 
-.search:hover {
+.table-container {
+    overflow-x: auto;
+}
 
-    border: none !important;
-    outline: none !important;
-    background-color: rgb(220, 220, 220);
+.edt_btn,
+.delete_btn,
+.add_emp_btn {
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+.edt_btn:hover,
+.delete_btn:hover,
+.add_emp_btn:hover {
+    background-color: #0056b3;
 }
