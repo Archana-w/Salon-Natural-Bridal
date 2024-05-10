@@ -142,7 +142,7 @@ router.route("/profile").post((req, res) => {
                 profilePic = result.profile_pic;
             }
 
-            res.send({ status: "success", profile_pic: profilePic, mobile_number: result.mobile_number, email: result.email, first_name: result.first_name, last_name: result.last_name });
+            res.send({ status: "success", profile_pic: profilePic, mobile_number: result.mobile_number, email: result.email, first_name: result.first_name, last_name: result.last_name ,sup_category: result.sup_category  });
         });
 
     } else {
