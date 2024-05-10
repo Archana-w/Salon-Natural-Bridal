@@ -1,55 +1,122 @@
-.content {
-    margin: 20px;
+/* Emp_details.css */
+.employee-list-container {
+    max-width: auto;
+    margin: 20px auto;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.employee-table {
+.employee-list-container h1 {
+    text-align: center;
+}
+
+.employee-filter-bar {
+    height: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    background: rgb(235, 235, 235);
+    border-radius: 8px;
+}
+
+.employee-list-container table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 15px;
 }
 
-.employee-table th,
-.employee-table td {
-    padding: 8px;
-    border: 1px solid #ddd;
+.employee-list-container th {
+    padding: 20px 5px;
+    border-bottom: 1px solid rgb(218, 218, 218);
     text-align: left;
+    font-size: 14px;
+    background-color: rgba(228, 228, 228, 0.274);
 }
 
-.employee-table th {
-    background-color: #f2f2f2;
+.employee-list-container td {
+    padding: 20px 5px;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    text-align: left;
+    font-size: 14px;
+    font-weight: 100;
 }
 
-.employee-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-.employee-table tr:hover {
-    background-color: #ddd;
-}
-
-.search {
-    margin-bottom: 10px;
-    padding: 5px;
-    width: 200px;
-}
-
-.table-container {
-    overflow-x: auto;
-}
-
-.edt_btn,
-.delete_btn,
-.add_emp_btn {
-    padding: 5px 10px;
-    margin-right: 5px;
+.edt_btn {
+    width: 80px;
+    height: 30px;
+    background-color: black;
+    color: white;
+    font-size: 14px;
     cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 20px;
 }
 
-.edt_btn:hover,
-.delete_btn:hover,
-.add_emp_btn:hover {
-    background-color: #0056b3;
+.edt_btn:hover {
+    background-color: rgba(0, 0, 0, 0.721);
+}
+
+.delete_btn {
+    width: 80px;
+    height: 30px;
+    background-color: rgb(145, 7, 7);
+    color: white;
+    font-size: 14px;
+    border: none !important;
+    border-radius: 20px;
+
+}
+
+.delete_btn:hover {
+
+    background-color: rgba(145, 7, 7, 0.67);
+
+}
+
+.employee-id-td-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 125, 157);
+}
+
+.employee-id-td-container span {
+    cursor: pointer;
+    margin-left: 10px;
+    color: gray;
+    font-size: 18px;
+}
+
+.employee-status-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.employee-filter-search {
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    width: 250px;
+    margin-left: 30px;
+}
+
+.employee-filter-search-btn {
+    background: rgb(51, 51, 51);
+    border-radius: 0px;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    cursor: pointer;
+    width: 100px;
+
 }

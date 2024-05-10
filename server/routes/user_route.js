@@ -4,6 +4,32 @@ var Device = require("../models/Device");
 
 var router = express.Router();
 
+//get user
+router.route("/get").post((req,res)=>{
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userType = req.current_user.user.type;
+
+        if (userType == "admin") {
+
+            User.find().then((result)=>{  
+                res.send({ status: "success", data:result });
+            });
+
+           
+        } else {
+            res.send({ status: "access_denied", message: "Can not access." });
+        }
+
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
 //login API endpoint
 router.route("/login").post((req, res) => {
 
@@ -116,7 +142,7 @@ router.route("/profile").post((req, res) => {
                 profilePic = result.profile_pic;
             }
 
-            res.send({ status: "success", profile_pic: profilePic, mobile_number: result.mobile_number, email: result.email, first_name: result.first_name, last_name: result.last_name });
+            res.send({ status: "success", profile_pic: profilePic, mobile_number: result.mobile_number, email: result.email, first_name: result.first_name, last_name: result.last_name ,sup_category: result.sup_category  });
         });
 
     } else {
@@ -180,4 +206,4 @@ function makeid(length) {
 }
 
 
-module.exports = router;
+module.exports = router;

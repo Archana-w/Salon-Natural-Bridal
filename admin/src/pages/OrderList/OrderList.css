@@ -1,0 +1,49 @@
+/* OrderList.css */
+
+/* Center-align the entire component */
+.OrderList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Style the product grid */
+  .ProductGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  /* Style individual product items */
+  .ProductItem {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Add hover effect */
+  .ProductItem:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+  }
+  
+  /* Style product details */
+  .ProductName {
+    font-weight: bold;
+  }
+  
+  .ProductBrand {
+    color: #555;
+  }
+  
+  .ProductPrice {
+    font-size: 14px;
+    color: #888;
+  }
+  

@@ -11,12 +11,11 @@ var userSchema = new Schema(
         email:{type:String,required:true},
         password:{type:String,required:true},
         type:{type:String,required:true},
-        emp_type: { type: String },
+        sup_category:{type:String},
         profile_pic:{type:String},
         nic: { type: String }
     }
 );
-
 
 var user = mongoose.model("user", userSchema);
 module.exports = user;

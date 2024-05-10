@@ -88,6 +88,42 @@ router.route("/add").post((req,res)=>{
 
 });
 
+
+router.route("/delete").post((req,res)=>{
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userType = req.current_user.user.type;
+
+        if (userType == "admin") {
+
+            var productId = req.body.product_id;
+
+            //validation data
+            if (productId == null || productId == "") {
+                res.send({ status: "required_failed", "message": "Required values are not received." });
+                return;
+            }
+
+            Product.findOneAndDelete({_id:productId}).then(()=>{
+                res.send({ status: "success", message: "Product deleted." });
+            }).catch((error)=>{
+                res.send({ status: "failed", message: error });
+            });
+
+        } else {
+            res.send({ status: "access_denied", message: "Can not access." });
+        }
+
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+    
+});
+
+
 router.route("/update").post((req,res)=>{
 
     //check authentication

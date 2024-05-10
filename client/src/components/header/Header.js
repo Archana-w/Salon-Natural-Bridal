@@ -6,11 +6,12 @@ import 'material-icons/iconfont/material-icons.css';
 import Logo from '../../images/logo.png';
 import ProfileVector from '../../images/default_profile_vector.webp';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuthToken } from '../../auth';
+import { useAuthToken, useCurrentUserType } from '../../auth';
 
 function Header() {
 
     var authToken = useAuthToken();
+    var userType = useCurrentUserType();
     const [activePage, setActivePage] = useState(null);
     var location = useLocation();
     var navigate = useNavigate();
@@ -95,8 +96,10 @@ function Header() {
                 <HeaderNavButton id="service" activeId={activePage} name="Our Service" onClick={(id) => { navItemClick(id) }} />
                 <HeaderNavButton id="store" activeId={activePage} name="Our Store" onClick={(id) => { navItemClick(id) }} />
                 <HeaderNavButton id="contact" activeId={activePage} name="Contact Us" onClick={(id) => { navItemClick(id) }} />
-                <HeaderNavButton id="leave" activeId={activePage} name="Leave" onClick={(id) => { navItemClick(id) }} />
-
+                
+                {(userType != null & userType == "employee")?(
+                    <HeaderNavButton id="leave" activeId={activePage} name="Leave" onClick={(id) => { navItemClick(id) }} />
+                ):("")}
 
             </div>
         </div>
