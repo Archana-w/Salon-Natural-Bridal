@@ -3,8 +3,12 @@ import axios from "axios";
 import jsPDF from "jspdf";
 import EditServiceForm from "./EditServiceForm";
 import "./serviceOut.css"; // Import the CSS file
+import {generatePDF} from "../service/GeneratePDF"
+import Button from 'react-bootstrap/Button';
+import { IoMdAddCircleOutline } from "react-icons/io";
 
 function ServiceList() {
+  const [data,setData] = useState([]);
   const [services, setServices] = useState([]);
   const [editingServiceId, setEditingServiceId] = useState(null);
   const [deletingServiceId, setDeletingServiceId] = useState(null);
@@ -16,6 +20,7 @@ function ServiceList() {
       .then(response => {
         if (Array.isArray(response.data)) {
           setServices(response.data);
+          setData(response.data);
         } else {
           console.error("Invalid response data:", response.data);
         }
@@ -81,34 +86,25 @@ function ServiceList() {
     );
   });
 
-  const generatePDFReport = () => {
-    const doc = new jsPDF();
-
-    doc.text(20, 10, `Report for Search Term: ${searchTerm}`);
-
-    let yPos = 20;
-
-    doc.text(20, yPos, "Service Type");
-    doc.text(60, yPos, "Service Name");
-    doc.text(120, yPos, "Price");
-    doc.text(160, yPos, "Date");
-
-    yPos += 10;
-
-    filteredServices.forEach((service, index) => {
-      const { sType, sName, sPrice, createdAt } = service; // Use createdAt instead of addedDate
-      yPos += 10;
-      doc.text(20, yPos + index * 10, sType);
-      doc.text(60, yPos + index * 10, sName);
-      doc.text(120, yPos + index * 10, `LKR: ${sPrice}`);
-      doc.text(160, yPos + index * 10, new Date(createdAt).toLocaleDateString()); // Use createdAt here
-    });
-
-    doc.save("report.pdf");
+  const handleDownloadReport = () => {
+    // Define columns for the PDF table
+    const columns = ['sType', 'sName', 'sPrice', 'createdAt'];
+    // Define title and fileName for the PDF
+    const title = 'Bidding Report';
+    const fileName = 'bidding_report';
+    // Format createdAt date to remove time portion
+    const formattedData = filteredServices.map(service => ({
+      ...service,
+      createdAt: service.createdAt.split('T')[0]
+    }));
+    // Generate PDF with the formatted data
+    generatePDF(title, columns, formattedData, fileName);
   };
+  
+
 
   return (
-    <div className="container">
+    <div className="containerso">
       <h2>Service List</h2>
 
       <div className="input-group">
@@ -123,9 +119,12 @@ function ServiceList() {
         />
       </div>
 
-      <button onClick={generatePDFReport} className="btn generate-report-btn">Generate Report</button>
+      
+      <Button variant="primary" className="m-1" style={{ display: 'flex', gap: '20px' }} onClick={handleDownloadReport}>
+          <IoMdAddCircleOutline className="mb-1" /> <span>Download Report</span>
+      </Button>
 
-      <table className="table">
+      <table className="table" style={{padding:'30px'}}>
         <thead>
           <tr>
             <th>Service Type</th>
@@ -142,7 +141,7 @@ function ServiceList() {
               <td>{service.sType}</td>
               <td>{service.sName}</td>
               <td>LKR :{service.sPrice}</td>
-              <td>{new Date(service.createdAt).toLocaleDateString()}</td> {/* Use createdAt here */}
+              <td>{service.createdAt.split('T')[0]}</td> {/* Use createdAt here */}
               <td>{service.sDescription}</td>
               <td>
                 <button onClick={() => handleEdit(service._id)} className="btn edit-btn">Edit</button>

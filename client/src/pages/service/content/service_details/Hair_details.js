@@ -31,7 +31,7 @@ function HairDetails() {
       {services.map(service => (
         <div key={service._id} className='service-info'>
           <div className='s_image'>
-            <img src={service.imageUrl} alt="Service Image" />
+            <img src={"http://localhost:5000/image/" + service.imageUrl} alt="Service Image" />
             <div className="service-name">{service.sName}</div>
           </div>
           <div className="details">

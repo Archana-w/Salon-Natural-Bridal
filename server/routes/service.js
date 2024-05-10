@@ -1,30 +1,33 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 const Service = require("../models/Service");
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
 
-// Create a new service
-router.post('/add', upload.single('image'), async (req, res) => {
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); 
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({ storage: storage });
+
+router.post('/add', async (req, res) => {
   const { sName, sPrice, sDescription, sType } = req.body;
-  const imageUri = req.file.path; // Path to the uploaded image
-  const imagename = req.file.filename;
-  
-
-  // Construct the complete image URL
-  const imageURL = `${req.protocol}://${req.get('host')}/${imagename}`;
-
+  const imageName = req.files[0].filename;
   try {
     const newService = new Service({
       sName,
       sPrice,
       sDescription,
       sType,
-      imageUrl: imageURL, // Save complete image URL in the database
+      imageUrl:imageName,
       createdAt: new Date(),
     });
 
     const savedService = await newService.save();
-
     const addedDate = savedService.createdAt;
 
     res.status(200).json({ status: "Service added", addedDate });
