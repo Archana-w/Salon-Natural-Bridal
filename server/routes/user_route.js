@@ -128,6 +128,41 @@ router.route("/register").post((req, res) => {
 
 });
 
+router.route("/edit").post((req, res) => {
+
+    //check authentication
+    if (req.current_user != null) {
+   
+       const userId = req.current_user.user_id;
+       var firstName = req.body.first_name;
+       var lastName = req.body.last_name;
+       var mobileNumber = req.body.mobile_number;
+       var email = req.body.email;
+   
+       //validate details
+       if (firstName == null || firstName == "" ||
+           lastName == null || lastName == "" ||
+           mobileNumber == null || mobileNumber == "" ||
+           email == null || email == "") {
+   
+           res.send({ "status": "required_failed", "message": "Please send required details." });
+   
+           return;
+       }
+   
+       //check email is already
+       User.findOneAndUpdate({ _id: userId },{first_name:firstName,last_name:lastName,email:email,mobile_number:mobileNumber}).then(() => {
+           res.send({ "status": "success", "message": "Profile details changed." });
+       }).catch((e) => {
+           res.send({ "status": "failed", "message": "Somthing error. Please try again." });
+       });
+   
+   } else {
+       res.send({ status: "auth_failed", message: "User authentication required." });
+   }
+   
+});
+
 //get user profile
 router.route("/profile").post((req, res) => {
 
