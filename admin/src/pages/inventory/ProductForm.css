@@ -1,44 +1,61 @@
-.add-product-container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
+.PAimage{
+    background-size: cover; /* Cover the entire component */
+    background-position: center; /* Center the background image */
+    padding: 10px; /* Add padding as needed */
+     
+ }
 
-.product-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
+ .PAtopic{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
     font-weight: bold;
-}
+ }
+ .PAformout{
+    
+ }
 
-input[type="text"],
-input[type="email"] {
+ .PAproductForm{
+    max-width: 600px;
+    margin: 10px auto;
+    padding: 35px;
+    background-color: #3b2d2d2f;
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', seri
+ }
+
+.PAform-group {
+    margin-bottom: 10px;
+}
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 2px;
+    font-size: 15px;
+}
+.PAinarea{
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box;
+    font-size: 16px;
 }
-
-button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
+.PAbtn {
+    padding: 10px 30px;
+    background-color: #0e1011;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
-}
+    font-size: 16px;
+    margin-left: 250px;
+ }
+button[type="submit"] {
+    background-color: #090b0c;
 
-button[type="submit"]:hover {
-    background-color: #45a049;
+}
+ 
+button:hover {
+    background-color: #9e9999;
+
 }

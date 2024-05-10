@@ -1,0 +1,92 @@
+.container {
+  padding-left: 10px;
+  padding-top: 50px;
+  padding-right: 10px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.service-info {
+  display: flex;
+  margin-bottom: 20px;
+  background-color: aliceblue;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.199);
+}
+
+.service-info img {
+  width: 350px; 
+  height: 100%;
+  margin-right: 20px;
+  border-radius: 20px;
+}
+
+.details {
+  flex-grow: 1; /* Allow the details to take up remaining space */
+  background-color: rgba(117, 116, 113, 0.103);
+  border-radius: 20px;
+  justify-content: center;
+}
+
+.details div {
+  margin-bottom: 10px; /* Spacing between detail elements */
+}
+
+.app-button {
+  background-color: rgba(138, 63, 235, 0.322);
+  margin-top: 10px;
+  border: none;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-left: 610px;
+}
+
+.button-pos {
+  margin-left: auto;
+}
+
+.app-button:hover{
+  background-color: rgba(117, 26, 236, 0.363)
+  
+}
+
+.service-info {
+  position: relative; /* Set position relative for the container */
+  display: flex;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.service-name {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.192);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.service-n-c{
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.service-desc{
+  text-align :inherit;
+  margin-left: 10px;
+}
+
+.price{
+  margin-left: 10px;
+}

@@ -110,25 +110,18 @@ router.post('/profile', async (req, res) => {
 });
 // Update a supplier
 router.patch('/update/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { name, address, contact, category } = req.body;
-
-    const updatedSupplier = await User.findByIdAndUpdate(
-      id,
-      { name, address, contact, category },
-      { new: true }
-    );
-
-    if (!updatedSupplier) {
-      return res.status(404).json({ message: 'Supplier not found' });
+    try {
+        const { id } = req.params;
+        const updateData = req.body;
+        const updatedSupplier = await User.findByIdAndUpdate(id, updateData, { new: true });
+        if (!updatedSupplier) {
+            return res.status(404).json({ message: 'Supplier not found' });
+        }
+        res.json({ message: 'Supplier updated successfully', supplier: updatedSupplier });
+    } catch (error) {
+        console.error('Error updating supplier:', error);
+        res.status(500).json({ message: 'Server error' });
     }
-
-    res.json({ message: 'Supplier updated successfully', supplier: updatedSupplier });
-  } catch (error) {
-    console.error('Error updating supplier:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
 });
 
 

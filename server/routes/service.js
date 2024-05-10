@@ -1,21 +1,36 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 const Service = require("../models/Service");
+const multer = require('multer');
 
-// Create a new service
-router.post("/add", async (req, res) => {
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); 
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({ storage: storage });
+
+router.post('/add', async (req, res) => {
   const { sName, sPrice, sDescription, sType } = req.body;
-
+  const imageName = req.files[0].filename;
   try {
     const newService = new Service({
       sName,
       sPrice,
       sDescription,
       sType,
+      imageUrl:imageName,
+      createdAt: new Date(),
     });
 
-    // Save the new service
-    await newService.save();
-    res.status(200).json({ status: "Service added" });
+    const savedService = await newService.save();
+    const addedDate = savedService.createdAt;
+
+    res.status(200).json({ status: "Service added", addedDate });
   } catch (error) {
     console.error("Error adding service:", error);
     res.status(500).json({ status: "Error adding service", error: error.message });

@@ -15,7 +15,12 @@ import Emp_leaves from './pages/emp_leaves/Emp_leaves';
 import Orders from './pages/orders/Orders';
 import OrderList from './pages/OrderList/OrderList';
 import AddEmp from './pages/add_emp/AddEmp';
-
+import Service_view from './pages/service/ServiceOut';
+import Add_Service from './pages/service/AddService';
+import EditEmployee from './pages/emp_details/EditEmployee';
+import Inventory from './pages/inventory/Inventory';
+import ProductForm from './pages/inventory/ProductForm';
+ 
 function App() {
   var token = useAuthToken();
   if (token == null) {
@@ -47,8 +52,12 @@ function App() {
           <Route path='/orders' Component={Orders}></Route>
           <Route path='/emp_add' Component={AddEmp}></Route>
           <Route path='/emp_add:id' Component={AddEmp}></Route>
-
-        </Routes>
+          <Route path='/service_view' Component={Service_view}></Route>
+          <Route path='/add_service' Component={Add_Service}></Route>
+          <Route path='/emp_details/EditEmployee/:employee_id' Component={EditEmployee}></Route>
+          <Route path='/inventory' Component={Inventory}></Route>
+          <Route path='/inventory/ProductForm' Component={ProductForm}></Route>
+         </Routes>
       </div>
     </BrowserRouter>
   );

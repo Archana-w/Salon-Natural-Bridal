@@ -1,0 +1,96 @@
+/* Common styling */
+
+.edit-card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.edit-card {
+    box-shadow: 0 0 2px gray;
+}
+
+.primary-button-edit {
+    background-color: black;
+    color: white;
+    height: 50px;
+    width: 91%;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    border-radius: 5px;
+    border: none !important;
+}
+
+.primary-button-edit:hover {
+    background-color: rgb(73, 72, 72);
+}
+
+.edit-anchor {
+    color: black !important;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.edit-anchor:hover {
+    text-decoration: underline !important;
+}
+
+
+.edit-para {
+    color: black;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Authentication pages */
+
+.authentication-edit {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: black;
+}
+
+.authentication-form-edit {
+    background-color: rgba(175, 175, 175, 0.353);
+    backdrop-filter: blur(30px);
+    width: 600px;
+    color: black;
+    border-radius: 10px;
+    padding: 5px;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.authentication-edit.edit-card-title {
+    text-align: center;
+    color: black;
+}
+
+/* Antd override */
+
+.edit-input {
+    background-color: white !important;
+    border: white !important;
+    height: 50px;
+    color: black;
+    font-weight: bold;
+}
+
+.edit-input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: rgb(202, 201, 201) !important;
+}
+
+.ant-form-item {
+    margin: 10px 0 !important;
+    padding: 0 20px !important;
+    font-weight: bold;
+}

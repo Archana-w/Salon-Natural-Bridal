@@ -84,34 +84,24 @@ function Supplier() {
         setIsModalOpen(true);
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-       
-        const completeUserData = {
-            ...userData,
-            type: 'supplier'
-        };
-    
-        if (userData._id) {
-            updateUser(completeUserData);
-        } else {
-            createUser(completeUserData);
-        }
-    };
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    const completeUserData = { ...userData, type: 'supplier' };
+    if (userData._id) {
+        updateUser(completeUserData);
+    } else {
+        createUser(completeUserData);
+    }
+};
 
-    const updateUser = async () => {
+    const updateUser = async (userData) => {
         try {
-            const response = await axios.patch(
-                `http://localhost:5000/supplier/update/${userData._id}`,
-                userData
-            );
-            const updatedUsers = users.map((user) =>
-                user._id === userData._id ? response.data.user : user
-            );
+            const response = await axios.patch(`http://localhost:5000/supplier/update/${userData._id}`, userData);
+            const updatedUsers = users.map((user) => user._id === userData._id ? response.data.supplier : user);
             setUsers(updatedUsers);
             setFilterUsers(updatedUsers);
             setIsModalOpen(false);
-            setMessage(response.data.message);
+            setMessage('Supplier updated successfully.');
         } catch (error) {
             console.error('Error updating supplier:', error);
             setMessage('Error updating supplier. Please try again.');

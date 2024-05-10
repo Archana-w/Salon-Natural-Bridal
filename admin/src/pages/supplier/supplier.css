@@ -1,13 +1,6 @@
 /* Importing Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
 
-/* Basic Reset */
-* {
-    font-family: 'Tilt Neon', sans-serif;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
 /* Container */
 .container {
