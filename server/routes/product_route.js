@@ -17,6 +17,57 @@ router.route("/get").post((req,res)=>{
 
 });
 
+
+router.route("/get_product").post(async (req, res) => {
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userId = req.current_user.user_id;
+        const productId = req.body.product_id;
+
+        //validate data
+        if (productId == null || productId == ""){
+            res.send({ status: "required_failed", "message": "Required values are not received." });
+            return;
+        }
+        Product.findOne({_id:productId}).then((result)=>{
+            res.send({status:"success",product:result});
+        }).catch((error)=>{
+            res.send({ status: "invalid_order_id", message: "Please enter valid order id." });
+        });
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
+
+router.route("/admin_get").post((req,res)=>{
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userType = req.current_user.user.type;
+
+        if (userType == "admin") {
+
+            Product.find().then((result) => {
+                res.send({status:"success",data:result});
+            });
+
+        } else {
+            res.send({ status: "access_denied", message: "Can not access." });
+        }
+
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
 router.route("/add").post((req,res)=>{
 
     //check authentication

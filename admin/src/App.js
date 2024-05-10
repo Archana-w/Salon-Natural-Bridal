@@ -21,6 +21,7 @@ import EditEmployee from './pages/emp_details/EditEmployee';
 import Inventory from './pages/inventory/Inventory';
 import ProductForm from './pages/inventory/ProductForm';
 import IncomeEp from './pages/income/Homepage'
+import EditProduct from './pages/inventory/EditProduct'
 
 function App() {
   var token = useAuthToken();
@@ -59,6 +60,7 @@ function App() {
           <Route path='/inventory' Component={Inventory}></Route>
           <Route path='/inventory/ProductForm' Component={ProductForm}></Route>
           <Route path='/income_expenses' Component={IncomeEp}></Route>   
+          <Route path='/editProduct/:id' Component={EditProduct}></Route>
 
         </Routes>
 
