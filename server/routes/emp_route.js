@@ -77,6 +77,42 @@ route.route("/add").post((req, res) => {
 
 });
 
+route.route("/delete").post((req, res) => {
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userType = req.current_user.user.type;
+
+        if (userType == "admin") {
+
+            const userId = req.current_user.user_id;
+            const employeeId = req.body.employee_id;
+
+            //validate details
+            if (employeeId == null || employeeId == "") {
+
+                res.send({ "status": "required_failed", "message": "Please send required details." });
+
+                return;
+            }
+
+            User.findOneAndDelete({ _id: employeeId }).then(()=>{
+                res.send({ "status": "success", "message": "Employee Deleted." });
+            });
+
+        } else {
+            res.send({ status: "access_denied", message: "Can not access." });
+        }
+
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
+
 route.route("/get").post((req,res)=>{
 
     //check authentication
@@ -103,7 +139,7 @@ route.route("/get").post((req,res)=>{
 
 
                     var emp = { employee_id: empDoc._id,
-                        name: fullName,
+                        name:fullName,
                         contact_number:empDoc.mobile_number,
                         job_role: empTypeResult.type,
                         email: empDoc.email,
@@ -132,7 +168,6 @@ route.route("/get").post((req,res)=>{
 });
 
 route.route("/get_employee").post((req,res)=>{
-
     //check authentication
     if (req.current_user != null) {
 
@@ -210,7 +245,7 @@ route.route("/atts").post((req,res)=>{
 
                         const currentDate = new Date();
                         const currentTimeInMillis = currentDate.getTime();
-                        const dateString = currentDate.getFullYear() + "/" + (currentDate.getMonth()+1) + "/" + currentDate.getDay();
+                        const dateString = currentDate.getFullYear() + "/" + (currentDate.getMonth()+1) + "/" + currentDate.getDate();
                         
                         const todayMillis = new Date(dateString).getTime();
                         const toadyLastMillis = todayMillis + 86400000;
@@ -235,6 +270,8 @@ route.route("/atts").post((req,res)=>{
                             } else {
                                 res.send({ "status": "already_marked", "message": "Emp attend already marked." });
                             }
+                        }).catch((e)=>{
+                            res.send("Error - "+e);
                         });
 
                     }else{
@@ -277,7 +314,7 @@ route.route("/atte").post((req, res) => {
 
             const currentDate = new Date();
             const currentTimeInMillis = currentDate.getTime();
-            const dateString = currentDate.getFullYear() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getDay();
+            const dateString = currentDate.getFullYear() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getDate();
 
             const todayMillis = new Date(dateString).getTime();
             const toadyLastMillis = todayMillis + 86400000;
@@ -296,7 +333,7 @@ route.route("/atte").post((req, res) => {
                             
                             const empType = doc.emp_type;
                             
-                            EmployeeType.findOne({ type: empType }).then((doc)=>{
+                            EmployeeType.findOne({ _id: empType }).then((doc)=>{
                                 if(doc != null){
 
                                     const salary = doc.salary;
@@ -431,6 +468,31 @@ route.route("/etadd").post((req,res)=>{
 
 });
 
+route.route("/etget").post((req, res) => {
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userType = req.current_user.user.type;
+
+        if (userType == "admin") {
+
+            EmployeeType.find().then((doc)=>{
+                res.send({ "status": "success", data: doc });
+            });
+
+        } else {
+            res.send({ status: "access_denied", message: "Can not access." });
+        }
+
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+
+});
+
 route.route("/salary").post((req,res)=>{
     
     //check authentication
@@ -460,7 +522,7 @@ route.route("/salary").post((req,res)=>{
 
                         const currentDate = new Date();
                         const currentTimeInMillis = currentDate.getTime();
-                        const dateString = currentDate.getFullYear() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getDay();
+                        const dateString = currentDate.getFullYear() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getDate();
                         const todayMillis = new Date(dateString).getTime();
                         const requestMillis = todayMillis - (86400000 * dayCount);
 

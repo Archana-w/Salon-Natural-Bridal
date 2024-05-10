@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Divider, Table } from 'antd';
 import './AppointmentList.css';
 import axios from 'axios';
 import { useAuthToken } from '../../auth';
@@ -7,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import PageLoading from '../../components/loading/PageLoading';
 
 function AppointmentList() {
-
   const token = useAuthToken();
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(true);
@@ -86,41 +84,6 @@ function AppointmentList() {
     filterAppointments(value);
   };
 
-  const columns = [
-    {
-      title: 'Service Name',
-      dataIndex: 'service',
-    },
-    {
-      title: 'Date',
-      dataIndex: 'date',
-    },
-    {
-      title: 'Time',
-      dataIndex: 'time',
-    },
-    {
-      title: 'Stylist Name',
-      dataIndex: 'name',
-    },
-    {
-      title: 'Action',
-      dataIndex: '',
-      key: 'edit',
-      render: (text, record) => (
-        <button className='edt_btn' onClick={() => handleEdit(record)}>Edit</button>
-      ),
-    },
-    {
-      title: 'Action',
-      dataIndex: '',
-      key: 'delete',
-      render: (text, record) => (
-        <button className='delete_btn' onClick={() => handleDelete(record)}>Delete</button>
-      ),
-    },
-  ];
-
   if (isLoading) {
     return <PageLoading />;
   } else {
@@ -129,7 +92,41 @@ function AppointmentList() {
         <div className='content'>
           <h1>Your Appointments</h1>
           <input className='search' type="search" placeholder="Search here" value={searchQuery} onChange={handleSearch} />
-          <Table className="custom-table" columns={columns} dataSource={searchQuery ? filteredData : data} pagination={false} />
+          <div className="app_table">
+            <table className="custom-table">
+              <thead>
+                <tr>
+                  <th>Service Name</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Stylist Name</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {searchQuery ? filteredData.map(appointment => (
+                  <tr key={appointment.appointment_id}>
+                    <td>{appointment.service}</td>
+                    <td>{appointment.date}</td>
+                    <td>{appointment.time}</td>
+                    <td>{appointment.name}</td>
+                    <td><button className='edt_btn' onClick={() => handleEdit(appointment)}>Edit</button></td>
+                    <td><button className='delete_btn' onClick={() => handleDelete(appointment)}>Delete</button></td>
+                  </tr>
+                )) : data.map(appointment => (
+                  <tr key={appointment.appointment_id}>
+                    <td>{appointment.service}</td>
+                    <td>{appointment.date}</td>
+                    <td>{appointment.time}</td>
+                    <td>{appointment.name}</td>
+                    <td><button className='edt_btn' onClick={() => handleEdit(appointment)}>Edit</button></td>
+                    <td><button className='delete_btn' onClick={() => handleDelete(appointment)}>Delete</button></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     );

@@ -3,9 +3,17 @@ import { useEffect, useState } from 'react';
 import React from 'react';
 import { Form, Input, DatePicker } from 'antd';
 import './Leave.css';
+import { useCurrentUserType } from '../../auth';
 
 function Leave() {
+    
     const { RangePicker } = DatePicker;
+    var userType = useCurrentUserType();
+
+    if(userType != "employee"){
+        return("You can not access this.");
+    }
+
     return (
         <div className='bg-image-leave'>
 
@@ -53,6 +61,8 @@ function Leave() {
 
         </div>
     );
+
+
 }
 
 export default Leave;

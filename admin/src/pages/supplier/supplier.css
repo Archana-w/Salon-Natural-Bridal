@@ -1,0 +1,180 @@
+/* Importing Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+/* Headings */
+h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px dashed #eee;
+    color: darkslategray;
+}
+
+/* Buttons */
+.btn {
+    color: white;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #ccc;
+}
+
+.btn.green {
+    background-color: #4caf50;
+}
+
+.btn.green:hover {
+    background-color: #45a049;
+}
+
+.btn.red {
+    background-color: rgb(207, 16, 16);
+}
+
+.btn.red:hover {
+    background-color: rgb(177, 14, 14);
+}
+
+.btn.blue {
+    background-color: #007bff;
+}
+
+.btn.blue:hover {
+    background-color: #0056b3;
+}
+
+/* Search Input */
+.input-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.input-search input {
+    width: 300px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+/* Table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    cursor: pointer;
+    margin: auto;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.table th {
+    background-color: #f2f2f2;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #ddd;
+}
+
+/* Modal */
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10px auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .input-group input[type="text"],
+  .input-group input[type="password"],
+  .input-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  .input-group textarea {
+    height: 100px; /* Adjust height as needed */
+  }
+  
+  .input-group button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .input-group button:hover {
+    background-color: #0056b3;
+  }
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Message Button */
+.message-btn {
+    background-color: #007bff;
+    padding: 8px 10px;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.message-btn:hover {
+    background-color: #0056b3;
+}

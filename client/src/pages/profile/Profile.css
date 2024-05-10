@@ -1,5 +1,149 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
+.upper-img {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../images/customer_appointment/upper_img.jpg');
+  height: 100%;
+  min-height: 1000px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+
+.profile-container {
+  width: 800px;
+  height: 600px;
+  margin: auto;
+  border-radius: 20px;
+  margin-top: 50px;
+  background-color: white;
+  font-family: 'Merriweather';
+}
+
+.upper-container {
+  width: 780px;
+  height: 250px;
+  background-color: rgba(175, 175, 175, 0.353);
+  border-radius: 20px;
+  margin: 10px;
+}
+
+.image-container {
+  float: left;
+  width: 200px;
+  position: relative;
+  margin-left: 20px;
+}
+
+.image-container img {
+  background: white;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  padding: 5px;
+  transform: translate(1%, 10%);
+  object-fit: cover;
+}
+
+.camera-upload {
+  position: absolute;
+  top: 40px;
+  left: 150px;
+}
+
+.camera-button {
+  background: transparent;
+  border: none;
+}
+
+.camera-button:hover {
+  background: transparent !important;
+  border: none;
+}
+
+.camera-button img {
+  width: 30px;
+  height: 30px;
+}
+
+.img_text {
+  float: left;
+  width: 460px;
+}
+
+.pcard-title {
+  text-align: center;
+  color: black !important;
+  font-family: 'Merriweather';
+  padding-top: 100px;
+}
+
+.lower-container {
+  width: 800px;
+  height: 620px;
+  background-color: white;
+  text-align: center;
+  font-family: 'Merriweather';
+  color: black;
+  padding-top: 40px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.profile_details {
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: black;
+
+}
+
+.profile_details-form {
+  background-color: rgba(175, 175, 175, 0.353);
+  backdrop-filter: blur(30px);
+  width: 500px;
+  height: 600px;
+  padding-left: 140px;
+  padding-right: 140px;
+  color: black;
+  padding-top: 20px;
+  text-align: left;
+  border-radius: 10px;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.card-title {
+  text-align: center;
+  color: black;
+}
+.profile_form{
+  margin-top: 50px;
+}
+.profile_input {
+  background-color: white !important;
+  border: white !important;
+  width: 500px;
+  height: 35px;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  color: rgb(94, 94, 94);
+}
+
+.profile_input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: rgb(202, 201, 201) !important;
+ 
+}
 
 .edit-profile {
   background-color: black;
@@ -13,13 +157,10 @@
   margin-right: 35px;
   border-radius: 5px;
   border: none !important;
-
 }
 
 .edit-profile:hover {
-
   background-color: rgb(73, 72, 72) !important;
-
 }
 
 .delete {
@@ -32,173 +173,17 @@
   margin-bottom: 20px;
   border-radius: 5px;
   border: none !important;
-
 }
 
 .delete:hover {
-
   background-color: rgb(196, 10, 10) !important;
-
 }
 
-.upper-img {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../images/customer_appointment/upper_img.jpg');
-  height: 100%;
-  min-height: 1000px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex; 
-  align-items: center; 
-}
-.profile-container{
-
-  width: 800px;
-  height: 600px;
-  margin: auto;
-  border-radius: 20px;
-  margin-top: 50px;
-  background-color: white;
-}
-
-.upper-container{
-  width: 780px;
-  height: 250px;
-  background-color: rgba(175, 175, 175, 0.353);
-  border-radius: 20px; 
-  margin: 10px;
-
-}
-
-.image-container{
-  float:left;
-  width:200px;
-  position: relative;
-  margin-left: 20px;
-  
- 
-}
-
-.image-container img {
-  background: white;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  padding: 5px;
-  transform: translate(1%, 10%);
-  object-fit: cover;
-
-}
-
-.camera-upload {
-  position: absolute;
-  top: 40px;
-  left: 150px;
- 
-}
-
-.camera-button {
-  background: transparent;
-  border: none;
-
-}
-.camera-button:hover{
-  background: transparent !important;
-  border: none;
-}
-
-.camera-button img {
-  width: 30px;
-  height: 30px;
-}
-.img_text{
-  float: left;
-  width: 460px;
-
-}
-
-.pcard-title {
-  text-align: center;
-  color: black !important;
-  font-family: 'Merriweather';
-  padding-top: 100px;
-
-}
-
-.lower-container {
-
-  width: 800px;
-  height: 550px;
-  background-color: white;
-  text-align: center;
-  font-family: 'Merriweather';
-  color: black;
-  padding-top: 40px;
-  border-bottom-right-radius: 20px; 
-  border-bottom-left-radius: 20px;
-}
-
-.profile_details {
-
-
-  height: 500px;
+.profile_btn {
   display: flex;
-  display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: black;
-
+  justify-content: center;
 }
 
-.profile_details-form {
-
-  background-color: rgba(175, 175, 175, 0.353);
-  backdrop-filter:blur(30px);
-  width: 500px;
-  padding-left: 140px;
-  padding-right: 140px;
-  color: black;
-  padding-top: 20px;
-  border-radius: 10px;
-  border: none  !important;
-  outline: none !important;
-  box-shadow: none !important;
-
+.profile_btn button {
+  margin: 0 10px;
 }
-
-.authentication .card-title {
-  text-align: center;
-  color: black;
-
-}
-
-/* antd override */
-.profile_input  {
-  background-color: white !important;
-  border: white !important;
-  height: 50px;
-  color: black;
-  font-weight: bold;
-}
-  
-.profile_input:focus {
-  
-  outline: none !important;
-  box-shadow: none !important;
-  background-color: rgb(202, 201, 201) !important;
-}
-
-.ant-form-item {
-  margin: 10px 0 !important;
-  padding: 0 20px !important;
-  font-weight: bold;
-
-}
-
-.ant-input {
-
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-

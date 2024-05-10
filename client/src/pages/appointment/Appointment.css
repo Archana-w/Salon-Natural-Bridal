@@ -196,21 +196,21 @@
 
 }
 
-.ant-checkbox-group{
+.ant-checkbox-group {
 
     margin-left: 20px;
 }
 
 .ant-checkbox-wrapper {
 
-    width:250px;
+    width: 250px;
 }
 
-.chdiv{
+.chdiv {
 
-    width:250px;
+    width: 250px;
     margin-left: 0 !important;
-    
+
 }
 
 .bottomsection {
@@ -271,7 +271,8 @@
     margin-left: 35px !important;
     border: 1px solid rgb(202, 201, 201) !important;
 }
-.timepic{
+
+.timepic {
     height: 50px;
     color: black;
     font-weight: bold;
@@ -280,6 +281,7 @@
     border: 1px solid rgb(202, 201, 201) !important;
 
 }
+
 /*.ant-picker-input{
 
     border: none !important;

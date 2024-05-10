@@ -213,6 +213,81 @@ router.route("/get").post((req, res) => {
 
 });
 
+router.route("/admin_get").post((req, res) => {
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userId = req.current_user.user_id;
+        const userType = req.current_user.user.type;
+
+        if (userType == "admin") {
+            
+            Appointment.find({ status:"reserved" }).sort({time:-1}).then(async (doc)=>{
+
+
+                var array = new Array();
+                for(var i = 0; i < doc.length; i++){
+
+                    var item = doc[i];
+
+                    var id = item._id;
+                    var stylishId = item.stylist_id;
+                    var appTime = item.appoinment_time;
+                    var appDate = item.appoinment_date;
+                    var time = item.time;
+                    var status = item.status;
+                    var hairCare = item.hair_care;
+                    var skinCare = item.skin_care;
+                    var nailCare = item.nail_care;
+
+                    var service = "";
+
+                    //hair care
+                    for (var x = 0; x < hairCare.length; x++){
+                        service = service + "," + hairCare[x];
+                    }
+
+                    //skin care
+                    for (var x = 0; x < skinCare.length; x++) {
+                        service = service + "," + skinCare[x];
+                    }
+
+                    //nail care
+                    for (var x = 0; x < nailCare.length; x++) {
+                        service = service + "," + nailCare[x];
+                    }
+
+                    //remove first comma
+                    service = service.substring(1,service.length);
+
+                    var stylistResult = await User.findOne({ _id: stylishId });
+                    //check stylish available
+                    if (stylistResult){
+
+                        var stylishName = stylistResult.first_name + " " + stylistResult.last_name;
+
+                        array.push({ appointment_id: id, time: appTime, date: appDate, create_time: time, status: status, service: service, name: stylishName });
+
+
+                    }
+                    
+                }
+
+                res.send({ status: "success", data: array });
+            
+            });
+
+        } else {
+            res.send({ status: "access_denied", message: "Can not access." });
+        }
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
 router.route("/app_get").post((req, res) => {
 
     //check authentication

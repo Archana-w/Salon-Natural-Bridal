@@ -163,7 +163,7 @@ function SignUp() {
                 }),
               ]}
             >
-              <Input.Password  className="signup_input" placeholder="Confirm Password" type="password"/>
+              <Input.Password className="signup_input" placeholder="Confirm Password" type="password" />
             </Form.Item>
             <button className="primary-button" htmltype="submit">SIGN UP</button>
 
