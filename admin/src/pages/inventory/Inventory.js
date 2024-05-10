@@ -79,6 +79,7 @@ function Inventory() {
    
             </div>
    
+   
             <table>
                <thead>
                   <tr>
