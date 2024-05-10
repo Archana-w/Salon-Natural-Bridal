@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require("../models/User");
+const SupplierProduct = require("../models/Supplier");
 
 // Register a new user
 router.post('/register', async (req, res) => {
@@ -124,5 +125,26 @@ router.patch('/update/:id', async (req, res) => {
     }
 });
 
+router.post('/add-product/:supplierId', async (req, res) => {
+    const { productName, brandName, quantity, price } = req.body;
+    const { supplierId } = req.params;
+
+    var supId = supplierId.toString();
+
+    try {
+        const newProduct = new SupplierProduct({
+            productName,
+            brandName,
+            quantity,
+            price,
+            supplierId
+        });
+        await newProduct.save();
+        res.status(201).json({ message: 'Product added successfully', product: newProduct });
+    } catch (error) {
+        console.error('Error adding product:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 module.exports = router;
