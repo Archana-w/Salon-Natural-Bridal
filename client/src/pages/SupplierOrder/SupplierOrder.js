@@ -9,7 +9,7 @@ function SupplierOrder() {
   const [price, setPrice] = useState(0);
   const [message, setMessage] = useState('');
   const [products, setProducts] = useState([]);
-  const supplierId = 'YOUR_SUPPLIER_ID'; // Replace with the actual supplier ID
+  const supplierId = 'YOUR_SUPPLIER_ID'; 
 
   useEffect(() => {
     fetchProducts();
@@ -18,7 +18,7 @@ function SupplierOrder() {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(`http://localhost:5000/supplier/products/${supplierId}`);
-      // Ensure the response data is an array
+      
       setProducts(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       setMessage(error.response?.data?.message || 'Failed to fetch products');
@@ -27,26 +27,31 @@ function SupplierOrder() {
   };
 
   const handleProductSubmit = async (e) => {
+
+    console.log(productName);
+    console.log(brandName);
+    console.log(quantity);
+    console.log(price);
+
+
     e.preventDefault();
-
     try {
-      const response = await axios.post(`http://localhost:5000/supplier/add-product/${supplierId}`, {
-        productName,
-        brandName,
-        quantity: Number(quantity),
-        price: Number(price),
-      });
-
-      setMessage(response.data.message);
-      setProductName('');
-      setBrandName('');
-      setQuantity(0);
-      setPrice(0);
-      fetchProducts(); // Fetch the updated list of products
+        const response = await axios.post(`http://localhost:5000/supplier/add-product/${supplierId}`, {
+            productName,
+            brandName,
+            quantity: Number(quantity),
+            price: Number(price),
+        });
+        setMessage(response.data.message);
+        setProductName('');
+        setBrandName('');
+        setQuantity(0);
+        setPrice(0);
+        fetchProducts();
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Failed to add product');
+        setMessage(error.response?.data?.message || 'Failed to add product');
     }
-  };
+};
   const handleProductDelete = async (productId) => {
     try {
       const response = await axios.delete(`http://localhost:5000/supplier/delete-product/${supplierId}/${productId}`);
