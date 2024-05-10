@@ -20,7 +20,9 @@ import Add_Service from './pages/service/AddService';
 import EditEmployee from './pages/emp_details/EditEmployee';
 import Inventory from './pages/inventory/Inventory';
 import ProductForm from './pages/inventory/ProductForm';
- 
+import IncomeEp from './pages/income/Homepage'
+import EditProduct from './pages/inventory/EditProduct'
+
 function App() {
   var token = useAuthToken();
   if (token == null) {
@@ -57,7 +59,13 @@ function App() {
           <Route path='/emp_details/EditEmployee/:employee_id' Component={EditEmployee}></Route>
           <Route path='/inventory' Component={Inventory}></Route>
           <Route path='/inventory/ProductForm' Component={ProductForm}></Route>
-         </Routes>
+          <Route path='/income_expenses' Component={IncomeEp}></Route>   
+          <Route path='/editProduct/:id' Component={EditProduct}></Route>
+          <Route path='/income_expenses' Component={IncomeEp}></Route>
+          <Route path='/inventory' Component={Inventory}></Route>
+
+        </Routes>
+
       </div>
     </BrowserRouter>
   );

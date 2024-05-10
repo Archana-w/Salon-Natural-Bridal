@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuthToken } from '../../auth';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import './EditProduct.css';
 
 function EditProduct() {
+
+    const{id} = useParams();
     const token = useAuthToken();
     const navigate = useNavigate();
 
@@ -18,54 +20,81 @@ function EditProduct() {
     const [discount, setDiscount] = useState('');
     const [image, setImage] = useState(null);
     const[product,setProduct] = useState('');
-     
     
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
-        // Fetch product details from the backend when the component mounts
-        axios.get("http://localhost:5000/product/{productId}",  )
-            .then(response => {
-                const data = response.data;
-                
-            })
-            .catch(error => {
-                // Handle error
-                console.error("Error fetching product details:", error);
-                setError("Error fetching product details. Please try again later.");
+
+        if (token != null) {
+
+            axios.post("http://localhost:5000/product/get_product", {token:token,product_id:id}).then((response) => {
+               var data = response.data;
+               var status = data.status;
+               if (status == "success") {
+                   
+                  var currentProduct = data.product;
+                  setName(currentProduct.product_name);
+                  setDescription(currentProduct.description);
+                  setCategory(currentProduct.category);
+                  setBrand(currentProduct.brand);
+                  setPrice(currentProduct.price);
+                  setQuantity(currentProduct.quantity_available);
+                  setWeight(currentProduct.weight);
+                  setDiscount(currentProduct.discount);
+
+               } else if (status == "token_expired" || status == "auth_failed") {
+                  navigate("/signout");
+               } else {
+                  var message = data.message;
+                  alert("Error - " + message);
+               }
+   
+            }).catch((error) => {
+               alert("Error 2 - " + error);
             });
-    }, [token]);
+   
+         } else {
+            navigate("/signout");
+         }
+
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Prepare data for update request
         const formData = new FormData();
-        formData.append('name', product.name);
-        formData.append('description', product.description);
-        formData.append('category', product.category);
-        formData.append('brand', product.brand);
-        formData.append('price', product.price);
-        formData.append('quantity', product.quantity);
-        formData.append('weight', product.weight);
-        formData.append('discount', product.discount);
-        formData.append('thumbnail', product.image);
+        formData.append('token', token);
+        formData.append('product_id', id);
+        formData.append('name', name);
+        formData.append('description', description);
+        formData.append('category', category);
+        formData.append('brand', brand);
+        formData.append('price', price);
+        formData.append('quantity', quantity);
+        formData.append('weight', weight);
+        formData.append('discount', discount);
 
         // Send PUT request to update product details
-        axios.put("http://localhost:5000/product/{productId}", formData, { headers: { Authorization: `Bearer ${token}` } })
+        axios.post("http://localhost:5000/product/update", formData)
             .then(response => {
                 const data = response.data;
-                if (data.status === "success") {
-                    setSuccessMessage('Product updated successfully!');
-                } else {
-                    setError(data.message);
-                }
+               var status = data.status;
+               if (status == "success") {
+                navigate("/inventory");
+               } else if (status == "token_expired" || status == "auth_failed") {
+                  navigate("/signout");
+               } else {
+                  var message = data.message;
+                  alert("Error - " + message);
+               }
             })
             .catch(error => {
                 console.error("Error updating product:", error);
                 setError("Error updating product. Please try again later.");
             });
+
     };
 
     return (
@@ -112,10 +141,7 @@ function EditProduct() {
                     <label>Discount:</label>
                     <input type="text" class="PEinarea" value={discount} onChange={(e) => setDiscount(e.target.value)} />
                 </div>
-                <div className="PAform-group">
-                    <label>Thumbnail:</label>
-                    <input type="file" class="PEinarea" onChange={(e) => setImage(e.target.files[0])} accept="image/*" required />
-                </div>
+                 
                 <button type="submit" className="PEbtn">Update Product</button>
             </form>
             {error && <p>{error}</p>}

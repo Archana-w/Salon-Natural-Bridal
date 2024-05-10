@@ -26,9 +26,9 @@ const getAllTransection = async (req, res) => {
         }).sort({ date: -1 });
         res.status(200).json(transections);
       
-    } catch (error) {
+    } catch (error){
       console.log(error);
-      res.status(500).json(erorr);
+      res.status(500).json(error);
     }
 
   }else {

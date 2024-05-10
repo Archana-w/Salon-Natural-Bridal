@@ -1,15 +1,12 @@
 const mongoose = require('mongoose');
 
 const supplierSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  address: { type: String, required: true },
-  contact: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  category: { type: String, required: true },
-  password: { type: String, required: true },
-  orderMessage: { type: String, default: '' },
+    productName: { type: String, required: true },
+    brandName: { type: String, required: true },
+    quantity: { type: Number, required: true },
+    price: { type: Number, required: true },
+    supplierId: { type: String, ref: 'User', required: true }
 });
 
-const Supplier = mongoose.model('Supplier', supplierSchema);
-
-module.exports = Supplier;
+const SupplierProduct = mongoose.model('SupplierProduct', supplierSchema);
+module.exports = SupplierProduct;

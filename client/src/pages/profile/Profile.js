@@ -15,6 +15,11 @@ function Profile() {
     const [isLoading, setLoading] = useState(true);
     const [profileDetails, setProfileDetails] = useState({});
 
+    const[firstName,setFirstName] = useState("");
+    const[lastName,setLastName] = useState("");
+    const[email,setEmail] = useState("");
+    const[mobileNumber,setMobileNumber] = useState("");
+
     var profilePictureUrl = ProfileVector;
     if (profileDetails.profile_pic != null) {
         profilePictureUrl = "http://localhost:5000/image/" + profileDetails.profile_pic;
@@ -27,6 +32,14 @@ function Profile() {
                 const status = data.status;
                 if (status === "success") {
                     setProfileDetails(data);
+
+                    setFirstName(data.first_name);
+                    setLastName(data.last_name);
+                    setMobileNumber(data.mobile_number);
+                    setEmail(data.email);
+
+
+
                     setLoading(false);
                 } else if (status === "token_expired" || status === "auth_failed") {
                     navigate("/signout");
@@ -80,8 +93,29 @@ function Profile() {
         });
     };
 
-    const editProfile = () => {
-        // Handle profile editing
+    const editProfile = (e) => {
+
+        console.log(firstName);
+        console.log(lastName);
+        console.log(mobileNumber);
+        console.log(email);
+
+        setLoading(true);
+        axios.post("http://localhost:5000/user/edit", { token: token, first_name:firstName,last_name:lastName,email:email,mobile_number:mobileNumber}).then((response) => {
+            const data = response.data;
+            const status = data.status;
+
+            if (status === "success") {
+                setUpdate(update + 1);
+            } else if (status === "token_expired" || status === "auth_failed") {
+                navigate("/signout");
+            } else {
+                const message = data.message;
+                alert("Error - " + message);
+            }
+        }).catch((error) => {
+            alert("Error 2 - " + error);
+        });
     };
 
     if (isLoading) {
@@ -108,13 +142,13 @@ function Profile() {
                                 <h1 className="card-title">User Information</h1>
                                 <form className='profile_form'>
                                     <label>First Name</label>
-                                    <input className="profile_input" type="text" placeholder="First Name" defaultValue={profileDetails.first_name} />
+                                    <input className="profile_input" type="text" onChange={(e)=>setFirstName(e.target.value)} placeholder="First Name" defaultValue={profileDetails.first_name} />
                                     <label>Last Name</label>
-                                    <input className="profile_input" type="text" placeholder="Last Name" defaultValue={profileDetails.last_name} />
+                                    <input className="profile_input" type="text" onChange={(e)=>setLastName(e.target.value)} placeholder="Last Name" defaultValue={profileDetails.last_name} />
                                     <label>Contact Number</label>
-                                    <input className="profile_input" type="text" placeholder="Contact Number" defaultValue={profileDetails.mobile_number} />
+                                    <input className="profile_input" type="text" onChange={(e)=>setMobileNumber(e.target.value)} placeholder="Contact Number" defaultValue={profileDetails.mobile_number} />
                                     <label>Email</label>
-                                    <input className="profile_input" type="email" placeholder="Email" defaultValue={profileDetails.email} />
+                                    <input className="profile_input" type="email" onChange={(e)=>setEmail(e.target.value)} placeholder="Email" defaultValue={profileDetails.email} />
                                     <div className='profile_btn'>
                                         <button className='edit-profile' onClick={editProfile}>Edit Profile</button>
                                         <button className='delete' onClick={deleteProfile}>Delete Account</button>

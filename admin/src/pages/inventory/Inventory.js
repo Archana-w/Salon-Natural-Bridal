@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import React from 'react';
@@ -12,7 +13,7 @@ function Inventory() {
     const addProduct = () => {
         window.location.href = '/inventory/ProductForm';
       };
-      
+
 
       var token = useAuthToken();
       var navigate = useNavigate();
@@ -20,12 +21,45 @@ function Inventory() {
       const[filterStatus,setFilterStatus] = useState("all");
       const[searchText,setSearchText] = useState("");
       const[update,setUpdate] = useState(0);
+
+      const deleteProduct = (id) => {
+
+         if (token != null) {
    
+            axios.post("http://localhost:5000/product/delete", { token: token, product_id:id }).then((response) => {
+   
+               console.log(response.data);
+   
+               var data = response.data;
+               var status = data.status;
+               if (status == "success") {
+                  alert("Item deleted");
+                  setUpdate(update+1);
+               } else if (status == "token_expired" || status == "auth_failed" || status == "access_denied") {
+                  navigate("/signout");
+               } else {
+                  var message = data.message;
+                  alert("Error - " + message);
+               }
+   
+            }).catch((error) => {
+               alert("Error 2 - " + error);
+            });
+   
+         } else {
+            navigate("/signout");
+         }
+
+      };
+
+      
+      
+
       useEffect(() => {
     
          if (token != null) {
    
-            axios.post("http://localhost:5000/product/get/all", { token: token, status: filterStatus, search: searchText }).then((response) => {
+            axios.post("http://localhost:5000/product/admin_get", { token: token }).then((response) => {
    
                console.log(response.data);
    
@@ -49,7 +83,7 @@ function Inventory() {
             navigate("/signout");
          }
    
-      }, [filterStatus,update]);
+      }, [update]);
    
       function searchProductId(){
          setUpdate(update + 1);
@@ -78,6 +112,7 @@ function Inventory() {
               </Link>
    
             </div>
+   
    
             <table>
                <thead>
@@ -111,14 +146,14 @@ function Inventory() {
                         <td>{product.price}</td>
                         <td>{product.discount}</td>
                         <td>
-                        <Link to={`/inventory/${product.id}`}>
+                        <Link to={`/editProduct/${product._id}`}>
                            <button className='edt_btn'>Edit</button>
                         </Link>
                         
                      </td>
                      <td>
                         <Link>
-                           <button className='delete_btn'>Delete</button>
+                           <button className='delete_btn' onClick={()=>deleteProduct(product._id)}>Delete</button>
                         </Link>
                      </td>
                          
