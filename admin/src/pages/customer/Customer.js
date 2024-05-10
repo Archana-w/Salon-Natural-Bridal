@@ -1,116 +1,125 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Customer.css'
+import './Customer.css';
 import { useAuthToken } from '../../auth';
 import { useNavigate, Link } from "react-router-dom";
 
-
 function Customer() {
+    const token = useAuthToken();
+    const navigate = useNavigate();
+    const [customerData, setCustomerData] = useState([]);
+    const [searchText, setSearchText] = useState("");
+    const [sortBy, setSortBy] = useState({ field: "", order: "asc" });
+    const [update, setUpdate] = useState(0);
 
+    useEffect(() => {
+        if (token) {
+            axios.post("http://localhost:5000/user/get", { token })
+                .then((response) => {
+                    const data = response.data;
+                    if (data.status === "success") {
+                        setCustomerData(data.data);
+                    } else if (data.status === "token_expired" || data.status === "auth_failed") {
+                        navigate("/signout");
+                    } else {
+                        alert("Error - " + data.message);
+                    }
+                })
+                .catch((error) => {
+                    alert("Error - " + error);
+                });
+        } else {
+            navigate("/signout");
+        }
+    }, [token, navigate]);
 
-   var token = useAuthToken();
-   var navigate = useNavigate();
-   const [CustomerData, setCustomerData] = useState([]);
-   const [searchText, setSearchText] = useState("");
-   const [update, setUpdate] = useState(0);
+    function searchCustomerId() {
+        setUpdate(update + 1);
+    }
 
+    function copyCustomerId(id) {
+        navigator.clipboard.writeText(id);
+        alert("Customer id copied!!!");
+    }
 
+    function handleSort(field) {
+        const sortOrder = sortBy.field === field && sortBy.order === "asc" ? "desc" : "asc";
+        setSortBy({ field, order: sortOrder });
+    }
 
-   useEffect(() => {
+    // Sorting function
+    const sortedData = [...customerData].sort((a, b) => {
+        const aValue = a[sortBy.field] || ""; // Default to an empty string if property is undefined
+        const bValue = b[sortBy.field] || ""; // Default to an empty string if property is undefined
 
-      if (token != null) {
+        if (sortBy.order === "asc") {
+            return aValue.localeCompare(bValue);
+        } else {
+            return bValue.localeCompare(aValue);
+        }
+    });
 
-         axios.post("http://localhost:5000/user/get", { token: token }).then((response) => {
+    // Filter customer data based on searchText
+    const filteredCustomers = sortedData.filter(customer =>
+        customer.first_name.toLowerCase().includes(searchText.toLowerCase()) ||
+        customer.last_name.toLowerCase().includes(searchText.toLowerCase()) ||
+        customer.mobile_number.includes(searchText) ||
+        customer.email.toLowerCase().includes(searchText.toLowerCase())
+    );
 
-            var data = response.data;
-
-            console.log(data);
-
-            var status = data.status;
-            if (status == "success") {
-               setCustomerData(data.data);
-            } else if (status == "token_expired" || status == "auth_failed") {
-               navigate("/signout");
-            } else {
-               var message = data.message;
-               alert("Error - " + message);
-            }
-
-         }).catch((error) => {
-            alert("Error 2 - " + error);
-         });
-
-      } else {
-         navigate("/signout");
-      }
-
-   }, []);
-
-   function searchCustomerId() {
-      setUpdate(update + 1);
-   }
-
-   function copyCustomerId(id) {
-      navigator.clipboard.writeText(id);
-      alert("Customer id copied!!!");
-   }
-
-   return (
-
-      <div className="customer-list-container">
-         <h1>Manage Customers</h1>
-
-         <div className='customer-filter-bar'>
-
-            <input className='customer-filter-search' onChange={(e) => setSearchText(e.target.value)} placeholder="Search customer" type="text" />
-            <button className='customer-filter-search-btn' onClick={searchCustomerId}>Search</button>
-
-         </div>
-
-         <table>
-            <thead>
-               <tr>
-                  <th>Customer ID</th>
-                  <th>Name</th>
-                  <th>Contact number</th>
-                  <th>Email</th>
-                  <th>password</th>
-                  <th>Edit</th> {/* Add a new column for action buttons */}
-                  <th>Delete</th> {/* Add a new column for action buttons */}
-               </tr>
-            </thead>
-            <tbody>
-               {CustomerData.map((customer, index) => (
-                  <tr>
-                     <td>
-                        <div className='customer-id-td-container'>
-                           {customer._id.substring(0, 5)}...
-                           <span onClick={() => copyCustomerId(customer._id)} className="material-icons-round">copy</span>
-                        </div>
-                     </td>
-                     <td>{customer.first_name + " " + customer.last_name}</td>
-                     <td>{customer.mobile_number}</td>
-                     <td>{customer.email}</td>
-                     <td>{customer.password}</td>
-
-                     <td>
-                        <Link>
-                           <button className='edt_btn'>Edit</button>
-                        </Link>
-                     </td>
-                     <td>
-                        <Link>
-                           <button className='delete_btn'>Delete</button>
-                        </Link>
-                     </td>
-                  </tr>
-               ))}
-
-            </tbody>
-         </table>
-      </div>
-
-   );
+    return (
+        <div className="customer-list-container">
+            <h1>Manage Customers</h1>
+            <div className='customer-filter-bar'>
+                <input
+                    className='customer-filter-search'
+                    onChange={(e) => setSearchText(e.target.value)}
+                    placeholder="Search customer"
+                    type="text"
+                />
+                <button className='customer-filter-search-btn' onClick={searchCustomerId}>Search</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th onClick={() => handleSort('_id')}>Customer ID</th>
+                        <th onClick={() => handleSort('first_name')}>Name</th>
+                        <th onClick={() => handleSort('mobile_number')}>Contact number</th>
+                        <th onClick={() => handleSort('email')}>Email</th>
+                        <th>Password</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {filteredCustomers.map((customer, index) => (
+                        <tr key={index}>
+                            <td>
+                                <div className='customer-id-td-container'>
+                                    {customer._id.substring(0, 5)}...
+                                    <span onClick={() => copyCustomerId(customer._id)} className="material-icons-round">copy</span>
+                                </div>
+                            </td>
+                            <td>{customer.first_name + " " + customer.last_name}</td>
+                            <td>{customer.mobile_number}</td>
+                            <td>{customer.email}</td>
+                            <td>{'*'.repeat(customer.password.length)}</td>
+                            <td>
+                                <Link to={`/edit/${customer._id}`}>
+                                    <button className='edt_btn'>Edit</button>
+                                </Link>
+                            </td>
+                            <td>
+                                <Link to={`/delete/${customer._id}`}>
+                                    <button className='delete_btn'>Delete</button>
+                                </Link>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
 }
 
 export default Customer;
