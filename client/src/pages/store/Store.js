@@ -45,6 +45,8 @@ function Store() {
   
   }
 
+  
+
   function handleSearch() {
     // Implement search logic here
     // For example, filter productData based on searchQuery

@@ -5,8 +5,7 @@ import React from 'react';
 import './Inventory.css'
  import { useAuthToken } from '../../auth';
 import { useNavigate,Link } from "react-router-dom";
-
-
+import { jsPDF } from "jspdf";
 
 function Inventory() {
 
@@ -18,7 +17,6 @@ function Inventory() {
       var token = useAuthToken();
       var navigate = useNavigate();
       const[productData,setProductData] = useState([]);
-      const[filterStatus,setFilterStatus] = useState("all");
       const[searchText,setSearchText] = useState("");
       const[update,setUpdate] = useState(0);
 
@@ -33,7 +31,7 @@ function Inventory() {
                var data = response.data;
                var status = data.status;
                if (status == "success") {
-                  alert("Item deleted");
+                  alert("Product deleted Successfully!!..");
                   setUpdate(update+1);
                } else if (status == "token_expired" || status == "auth_failed" || status == "access_denied") {
                   navigate("/signout");
@@ -52,8 +50,53 @@ function Inventory() {
 
       };
 
-      
-      
+      const generateReport = () => {
+         const doc = new jsPDF();
+         doc.text("Product Report", 85, 10);
+
+    // Add header
+    const header = [['Product Name', 'Category', 'Brand', 'Quantity Available', 'Weight', 'Price', 'Discount']];
+    
+    // Add some sample data (replace with your actual product data)
+    const data = [];
+
+        // Populate data array with product data
+        productData.forEach(product => {
+            data.push([
+                product.product_name,
+                product.category,
+                product.brand,
+                product.quantity_available,
+                product.weight,
+                product.price,
+                product.discount
+            ]);
+        });
+
+    // Set table style
+    const styles = {
+         fontSize: 10,
+         cellPadding: 2
+    };
+
+    // Set table column widths
+    const columnWidths = ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'];
+
+    // Auto-generate table
+    doc.autoTable({
+        head: header,
+        body: data,
+        startY: 20, // Start y-position of the table
+        styles: styles,
+        columnStyles: {
+            0: { fontStyle: 'bold' } // Make the first column bold
+        },
+        columnWidth: columnWidths,
+        margin: { top: 30 } // Add margin between header and table
+    });         
+    
+    doc.save("Product Report.pdf"); // Save the PDF
+     };
 
       useEffect(() => {
     
@@ -102,14 +145,17 @@ function Inventory() {
             <div className='product-filter-bar'>
                
    
-               <input className='product-filter-search' onChange={(e) => setSearchText(e.target.value)} placeholder="Search product" type="text"/>
+               <input className='product-filter-search' value={searchText} onChange={(e) => setSearchText(e.target.value)} placeholder="Search product" type="text"/>
                <button className='product-filter-search-btn' onClick={searchProductId}>Search</button>
-               <Link >
-                  <div><button className='product-filter-generate-btn' >Generate Report</button></div>
-              </Link>
+               <div class = "Isquare">
                <Link to="/inventory/ProductForm">
                   <div><button className='product-filter-add-btn' onClick={addProduct}>Add Product</button></div>
               </Link>
+
+              <Link >
+                  <div><button className='product-filter-generate-btn' onClick={generateReport}>Generate Report</button></div>
+              </Link>
+              </div>
    
             </div>
    
@@ -142,9 +188,9 @@ function Inventory() {
                          <td>{product.category}</td>
                         <td>{product.brand}</td>
                         <td>{product.quantity_available}</td>
-                        <td>{product.weight}</td>
-                        <td>{product.price}</td>
-                        <td>{product.discount}</td>
+                        <td>{product.weight} g</td>
+                        <td>Rs.{product.price}.00</td>
+                        <td>Rs.{product.discount}.00</td>
                         <td>
                         <Link to={`/editProduct/${product._id}`}>
                            <button className='edt_btn'>Edit</button>

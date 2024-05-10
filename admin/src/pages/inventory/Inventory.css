@@ -129,9 +129,10 @@ font-weight: bold;
   border-radius: 10px;
   border: none;
   outline: none;
-  margin-left: 70px;
-  cursor: pointer;
+   cursor: pointer;
   width: 100px;
+  float:left;
+
 }
 
 .product-filter-generate-btn{
@@ -142,9 +143,11 @@ font-weight: bold;
   border-radius: 10px;
   border: none;
   outline: none;
-  margin-left: 350px;
-  cursor: pointer;
-  width: 190px;
+   cursor: pointer;
+  width: 150px;
+  float:left;
+  margin-left: 10px;
+
 }
 
 .product-filter-generate-btn:hover{
@@ -154,3 +157,8 @@ font-weight: bold;
 .product-filter-add-btn:hover{
   background-color: rgba(54, 53, 53, 0.89);
 }
+
+.Isquare{
+  width: 350px;
+  padding-left: 430px;
+  }
