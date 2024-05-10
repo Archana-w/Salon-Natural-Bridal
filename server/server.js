@@ -94,7 +94,7 @@ app.use("/product", productRoute);
 app.use("/cart", cartRoute);
 app.use("/checkout", checkoutRoute);
 app.use("/order", orderRoute);
-app.use("/appointment", appointmentRoute);
+app.use("/appointment", appoinmentRoute);
 app.use("/emp", empRoute);
 app.use("/service",serviceRouter);
 

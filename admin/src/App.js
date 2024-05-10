@@ -32,23 +32,17 @@ function App() {
       <div className='main'>
         <Routes>
 
-
           <Route path="/salary" Component={Salary} />
-
           <Route path="/signout" Component={SignOut} />
           <Route path='/supplier' Component={Supplier}></Route> 
-          <Route path="/orders/:supplierId" element={<OrderList />} />
-      
+          <Route path="/sup-orders/:supplierId" element={<OrderList />} />
           <Route path='/customer' Component={Customer}></Route>
           <Route path='/appointment' Component={Appointment}></Route>
           <Route path='/emp_details' Component={Emp_details}></Route>
           <Route path='/emp_attendance' Component={Emp_attendance}></Route>
           <Route path='/emp_salary' Component={Emp_salary}></Route>
           <Route path='/emp_leaves' Component={Emp_leaves}></Route>
-
-
-          <Route path='/orders' Component={Orders}></Route>
-          
+          <Route path='/orders' Component={Orders}></Route>          
 
         </Routes>
       </div>
