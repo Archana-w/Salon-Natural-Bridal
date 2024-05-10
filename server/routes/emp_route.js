@@ -77,6 +77,57 @@ route.route("/add").post((req, res) => {
 
 });
 
+route.route("/edit").post((req, res) => {
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userType = req.current_user.user.type;
+
+        if(userType == "admin"){
+            
+            const userId = req.current_user.user_id;
+            var empId = req.body.emp_id;
+            var firstName = req.body.first_name;
+            var lastName = req.body.last_name;
+            var mobileNumber = req.body.mobile_number;
+            var email = req.body.email;
+            var password = req.body.password;
+            var empType = req.body.emp_type;
+            var nic = req.body.nic;
+
+            //validate details
+            if (empId == null || empId == "" ||
+                firstName == null || firstName == "" ||
+                lastName == null || lastName == "" ||
+                mobileNumber == null || mobileNumber == "" ||
+                email == null || email == "" ||
+                password == null || password == "" ||
+                empType == null || empType == "" ||
+                nic == null || nic == "") {
+
+                res.send({ "status": "required_failed", "message": "Please send required details." });
+
+                return;
+            }
+
+            User.findOneAndUpdate({_id:empId},{}).then(()=>{
+                res.send({ "status": "success", "message": "Emp details changed." });
+            }).catch((e) => {
+                res.send({ "status": "failed", "message": "Somthing error. Please try again." });
+            });
+
+        }else{
+            res.send({ status: "access_denied", message: "Can not access." });
+        }
+
+        
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+
+});
+
 route.route("/delete").post((req, res) => {
 
     //check authentication
@@ -112,6 +163,53 @@ route.route("/delete").post((req, res) => {
 
 });
 
+route.route("/get_emp").post((req,res)=>{
+
+    //check authentication
+    if (req.current_user != null) {
+
+        const userType = req.current_user.user.type;
+
+        if (userType == "admin") {
+
+            const userId = req.current_user.user_id;
+            var empId = req.body.emp_id;
+
+            //validate details
+            if (empId == null || empId == "") {
+              res.send({ "status": "required_failed", "message": "Please send required details." });
+              return;
+            }
+
+            User.find({_id:empId,type:"employee"}).then(async (doc)=>{
+
+                var empDoc = doc;
+                var fullName = empDoc.first_name + " " + empDoc.last_name;
+                var emp = { employee_id: empDoc._id,
+                        name:fullName,
+                        contact_number:empDoc.mobile_number,
+                        job_role: empTypeResult.type,
+                        email: empDoc.email,
+                        password: empDoc.password
+                        };
+
+                res.send({ status: "success", emp });
+
+            }).catch((e)=>{
+                res.send(e);
+            });
+
+
+        } else {
+            res.send({ status: "access_denied", message: "Can not access." });
+        }
+
+
+    } else {
+        res.send({ status: "auth_failed", message: "User authentication required." });
+    }
+    
+});
 
 route.route("/get").post((req,res)=>{
 
