@@ -13,4 +13,17 @@ function useAuthToken(){
     
 }
 
-export { useAuthToken };
+function useCurrentUserType(){
+
+    const[cookies,setCookies] = useCookies(["user_type"]);
+    var userType = cookies.user_type;
+
+    if(userType == undefined){
+        return null;
+    }else{
+        return userType;
+    }
+
+}
+
+export { useAuthToken, useCurrentUserType };

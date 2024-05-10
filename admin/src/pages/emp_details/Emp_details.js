@@ -6,25 +6,25 @@ import { useNavigate, Link } from "react-router-dom";
 
 function Emp_details() {
 
-  var token = useAuthToken();
-  var navigate = useNavigate();
+  const token = useAuthToken();
+  const navigate = useNavigate();
   const [employeeData, setEmployeeData] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [update, setUpdate] = useState(0);
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
   useEffect(() => {
 
     if (token != null) {
       axios.post("http://localhost:5000/emp/get", { token: token }).then((response) => {
-        var data = response.data;
-        var status = data.status;
+        const data = response.data;
+        const status = data.status;
         if (status === "success") {
           setEmployeeData(data.data);
         } else if (status === "token_expired" || status === "auth_failed") {
           navigate("/signout");
         } else {
-          var message = data.message;
+          const message = data.message;
           alert("Error - " + message);
         }
       }).catch((error) => {
@@ -33,7 +33,7 @@ function Emp_details() {
     } else {
       navigate("/signout");
     }
-  }, [update]);
+  }, [token, update, navigate]);
 
   const sortTable = (key) => {
     let direction = 'asc';
@@ -44,12 +44,16 @@ function Emp_details() {
   };
 
   const sortedData = () => {
+    if (!sortConfig || !sortConfig.key) return employeeData;
+    
     const sorted = [...employeeData].sort((a, b) => {
+      const keyA = sortConfig.key === 'name' ? a.name : a.job_role;
+      const keyB = sortConfig.key === 'name' ? b.name : b.job_role;
       if (sortConfig.direction === 'asc') {
-        return a[sortConfig.key] > b[sortConfig.key] ? 1 : -1;
+        return keyA.localeCompare(keyB);
       }
       if (sortConfig.direction === 'desc') {
-        return a[sortConfig.key] < b[sortConfig.key] ? 1 : -1;
+        return keyB.localeCompare(keyA);
       }
       return null;
     });
@@ -72,16 +76,16 @@ function Emp_details() {
       <div className='employee-filter-bar'>
         <input className='employee-filter-search' onChange={(e) => setSearchText(e.target.value)} placeholder="Search employee" type="text" />
         <button className='employee-filter-search-btn' onClick={() => setUpdate(update + 1)}>Search</button>
+        <button className='salary_btn'>Add Employee</button>
       </div>
       <table>
         <thead>
           <tr>
-            <th onClick={() => sortTable('id')}>Employee ID</th>
             <th onClick={() => sortTable('name')}>Name</th>
-            <th onClick={() => sortTable('contact_number')}>Contact number</th>
-            <th onClick={() => sortTable('email')}>Email</th>
             <th onClick={() => sortTable('job_role')}>Job role</th>
-            <th onClick={() => sortTable('password')}>Password</th>
+            <th>Contact number</th>
+            <th>Email</th>
+            <th>Password</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -89,16 +93,10 @@ function Emp_details() {
         <tbody>
           {filteredData().map((employee, index) => (
             <tr key={index}>
-              <td>
-                <div className='employee-id-td-container'>
-                  {index + 1}
-                  <span onClick={() => navigator.clipboard.writeText(employee.employee_id)} className="material-icons-round">copy</span>
-                </div>
-              </td>
               <td>{employee.name}</td>
+              <td>{employee.job_role}</td>
               <td>{employee.contact_number}</td>
               <td>{employee.email}</td>
-              <td>{employee.job_role}</td>
               <td>{employee.password}</td>
               <td>
                 <Link to={`/edit/${employee.employee_id}`}>

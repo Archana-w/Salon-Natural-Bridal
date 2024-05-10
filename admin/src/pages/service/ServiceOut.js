@@ -3,22 +3,24 @@ import axios from "axios";
 import jsPDF from "jspdf";
 import EditServiceForm from "./EditServiceForm";
 import "./serviceOut.css"; // Import the CSS file
+import {generatePDF} from "../service/GeneratePDF"
+import Button from 'react-bootstrap/Button';
+import { IoMdAddCircleOutline } from "react-icons/io";
 
 function ServiceList() {
+  const [data,setData] = useState([]);
   const [services, setServices] = useState([]);
   const [editingServiceId, setEditingServiceId] = useState(null);
   const [deletingServiceId, setDeletingServiceId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [timePeriod, setTimePeriod] = useState("");
+  const [showDeleteModal, setShowDeleteModal] = useState(false); 
 
   useEffect(() => {
     axios.get("http://localhost:5000/service")
       .then(response => {
         if (Array.isArray(response.data)) {
           setServices(response.data);
+          setData(response.data);
         } else {
           console.error("Invalid response data:", response.data);
         }
@@ -50,6 +52,10 @@ function ServiceList() {
       });
   };
 
+  const handleCancelEdit = () => {
+    setEditingServiceId(null); // Cancel editing by setting editingServiceId to null
+  };
+
   const handleDelete = (serviceId) => {
     setDeletingServiceId(serviceId);
     setShowDeleteModal(true);
@@ -70,61 +76,6 @@ function ServiceList() {
       });
   };
 
-  const generatePDFReport = () => {
-    // Calculate start and end dates based on time period
-    let reportStartDate = "";
-    let reportEndDate = "";
-    const today = new Date();
-    if (timePeriod === "oneDay") {
-      reportStartDate = today.toISOString().split("T")[0];
-      reportEndDate = reportStartDate;
-    } else if (timePeriod === "oneWeek") {
-      const oneWeekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
-      reportStartDate = oneWeekAgo.toISOString().split("T")[0];
-      reportEndDate = today.toISOString().split("T")[0];
-    } else if (timePeriod === "oneMonth") {
-      const oneMonthAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
-      reportStartDate = oneMonthAgo.toISOString().split("T")[0];
-      reportEndDate = today.toISOString().split("T")[0];
-    } else if (timePeriod === "threeMonths") {
-      const threeMonthsAgo = new Date(today.getTime() - 90 * 24 * 60 * 60 * 1000);
-      reportStartDate = threeMonthsAgo.toISOString().split("T")[0];
-      reportEndDate = today.toISOString().split("T")[0];
-    }
-
-    if (!reportStartDate || !reportEndDate) {
-      alert("Please select both start and end dates.");
-      return;
-    }
-
-    const doc = new jsPDF();
-
-    doc.text(20, 10, `Report from ${reportStartDate} to ${reportEndDate}`);
-
-    let yPos = 20;
-
-    // Add table headers
-    doc.text(20, yPos, "Service Type");
-    doc.text(60, yPos, "Service Name");
-    doc.text(120, yPos, "Price");
-
-    yPos += 10;
-
-    // Add table rows
-    services.forEach((service, index) => {
-      const { sType, sName, sPrice } = service;
-      yPos += 10;
-      doc.text(20, yPos + index * 10, sType);
-      doc.text(60, yPos + index * 10, sName);
-      doc.text(120, yPos + index * 10, `$${sPrice}`);
-    });
-
-    doc.save("report.pdf");
-
-    // Reset the timePeriod state after generating the report
-    setTimePeriod("");
-  };
-
   const filteredServices = services.filter(service => {
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
 
@@ -135,8 +86,25 @@ function ServiceList() {
     );
   });
 
+  const handleDownloadReport = () => {
+    // Define columns for the PDF table
+    const columns = ['sType', 'sName', 'sPrice', 'createdAt'];
+    // Define title and fileName for the PDF
+    const title = 'Bidding Report';
+    const fileName = 'bidding_report';
+    // Format createdAt date to remove time portion
+    const formattedData = filteredServices.map(service => ({
+      ...service,
+      createdAt: service.createdAt.split('T')[0]
+    }));
+    // Generate PDF with the formatted data
+    generatePDF(title, columns, formattedData, fileName);
+  };
+  
+
+
   return (
-    <div className="container">
+    <div className="containerso">
       <h2>Service List</h2>
 
       <div className="input-group">
@@ -151,43 +119,18 @@ function ServiceList() {
         />
       </div>
 
-      <div className="report">
-        <h3>Report Generator</h3>
-        <div className="date-inputs">
-          <div className="input-group">
-            <label htmlFor="startDate">Start Date:</label>
-            <input
-              type="date"
-              id="startDate"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="endDate">End Date:</label>
-            <input
-              type="date"
-              id="endDate"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
-          </div>
-        </div>
-        <div className="time-period-buttons">
-          <button className={`time-period-btn ${timePeriod === "oneDay" ? "active" : ""}`} onClick={() => setTimePeriod("oneDay")}>One Day</button>
-          <button className={`time-period-btn ${timePeriod === "oneWeek" ? "active" : ""}`} onClick={() => setTimePeriod("oneWeek")}>One Week</button>
-          <button className={`time-period-btn ${timePeriod === "oneMonth" ? "active" : ""}`} onClick={() => setTimePeriod("oneMonth")}>One Month</button>
-          <button className={`time-period-btn ${timePeriod === "threeMonths" ? "active" : ""}`} onClick={() => setTimePeriod("threeMonths")}>Three Months</button>
-        </div>
-        <button onClick={generatePDFReport} className="btn generate-report-btn">Generate Report</button>
-      </div>
+      
+      <Button variant="primary" className="m-1" style={{ display: 'flex', gap: '20px' }} onClick={handleDownloadReport}>
+          <IoMdAddCircleOutline className="mb-1" /> <span>Download Report</span>
+      </Button>
 
-      <table className="table">
+      <table className="table" style={{padding:'30px'}}>
         <thead>
           <tr>
             <th>Service Type</th>
             <th>Service Name</th>
             <th>Price</th>
+            <th>Date</th>
             <th>Description</th>
             <th>Actions</th>
           </tr>
@@ -197,7 +140,8 @@ function ServiceList() {
             <tr key={service._id}>
               <td>{service.sType}</td>
               <td>{service.sName}</td>
-              <td>{service.sPrice}</td>
+              <td>LKR :{service.sPrice}</td>
+              <td>{service.createdAt.split('T')[0]}</td> {/* Use createdAt here */}
               <td>{service.sDescription}</td>
               <td>
                 <button onClick={() => handleEdit(service._id)} className="btn edit-btn">Edit</button>
@@ -223,10 +167,11 @@ function ServiceList() {
       {editingServiceId && (
         <div className="edit-form-modal">
           <div className="edit-form-content">
-            <button onClick={() => setEditingServiceId(null)} className="close-btn">&times;</button>
+            <button onClick={handleCancelEdit} className="close-btn">&times;</button>
             <EditServiceForm
               service={services.find(service => service._id === editingServiceId)}
               onUpdate={handleUpdate}
+              onCancel={handleCancelEdit} // Pass cancel action function
             />
           </div>
         </div>

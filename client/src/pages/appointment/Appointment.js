@@ -13,7 +13,6 @@ import PageLoading from '../../components/loading/PageLoading';
 function Appointment() {
 
     var { id } = useParams();
-    
     var token = useAuthToken();
     var navigate = useNavigate();
     const [isLoading, setLoading] = useState(true);
@@ -89,10 +88,10 @@ function Appointment() {
                 navigate("/login");
             }
 
-            // Optionally, you can show a success message or redirect the user
+            //show a success message or redirect the user
         } catch (error) {
             console.error('Error creating appointment:', error);
-            // Handle error, show error message to the user, etc.
+            //show error message to the user
         }
     };
 
