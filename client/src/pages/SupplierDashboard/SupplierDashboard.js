@@ -62,7 +62,7 @@ function SupplierDashboard() {
     return (
         <div className="supplier-dashboard">
             <div>
-                <h1>Hi !{user.first_name} {user.last_name}</h1>
+                <h1>Hi ! {user.first_name} {user.last_name}</h1>
                 {error && (
                     <Alert message={error} type="error" showIcon closable onClose={() => setError(null)} />
                 )}

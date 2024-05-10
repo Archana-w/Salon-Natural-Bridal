@@ -1,11 +1,11 @@
 .supplier-dashboard {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 50px;
+  border: 1px solid #ececec;
+  border-radius: 15px;
+  background-color: #ede5aa; /* Changed background color to khaki */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.9);
 }
 
 .supplier-details {
@@ -13,7 +13,7 @@
 }
 
 .supplier-title {
-  color: #333;
+  color: #322929;
   text-align: center;
 }
 
@@ -24,7 +24,8 @@
 .supplier-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 10px;
+  size: 50px;
 }
 
 .supplier-alert {
@@ -33,12 +34,13 @@
 
 .update-button, .logout-button, .details-button {
   margin-right: 10px;
-  font-size: 16px; /* Increased font size */
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .update-button {
-  background-color: green;
-  border-color: green;
+  background-color: rgb(14, 154, 47);
+  border-color: rgb(14, 154, 47);
 }
 
 .logout-button {
