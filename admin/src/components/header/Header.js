@@ -56,6 +56,9 @@ function Header() {
       name: "Customer Affairs",
       icon: "home",
       navigate: "customer_affairs",
+      sub_menu: [
+        { name: "Feedback View", navigate: "feedback_home" },
+      ]
     },
     {
       name: "Supplier",

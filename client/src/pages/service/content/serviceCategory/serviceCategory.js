@@ -33,28 +33,28 @@ function serviceCategory() {
         <div className="service_title">
             <h2>Skin Care</h2>
         </div>
-        <div className="service_image">
-            <img src={skin} alt="skin care" />
+        <div className="service_image_d">
+            <img className='service_image_img1' src={skin} alt="skin care" />
             <div className="description">
-                <p>Haircare or haircare is an overall term for hygiene and cosmetology involving the hair which grows from the human scalp, and to a lesser extent facial, pubic and other body hair. Hair care routines differ according to an individual's culture and the physical characteristics of one's hair.</p>
+                <p className='desc'>Haircare or haircare is an overall term for hygiene and cosmetology involving the hair which grows from the human scalp, and to a lesser extent facial, pubic and other body hair. Hair care routines differ according to an individual's culture and the physical characteristics of one's hair.</p>
             </div>
         </div>
         <div className="service_title">
             <h2>Hair Care</h2>
         </div>
-        <div className="service_image">
-            <img src={hair} alt="hair care" />
+        <div className="service_image_d">
+            <img className='service_image_img2' src={hair} alt="hair care" />
             <div className="description">
-                <p>Haircare or haircare is an overall term for hygiene and cosmetology involving the hair which grows from the human scalp, and to a lesser extent facial, pubic and other body hair. Hair care routines differ according to an individual's culture and the physical characteristics of one's hair.</p>
+                <p className='desc'>Haircare or haircare is an overall term for hygiene and cosmetology involving the hair which grows from the human scalp, and to a lesser extent facial, pubic and other body hair. Hair care routines differ according to an individual's culture and the physical characteristics of one's hair.</p>
             </div>
         </div>
         <div className="service_title">
             <h2>Nail Care</h2>
         </div>
-        <div className="service_image">
-            <img src={nail} alt="nail care" />
+        <div className="service_image_d">
+            <img className='service_image_img3' src={nail} alt="nail care" />
             <div className="description">
-                <p>Haircare or haircare is an overall term for hygiene and cosmetology involving the hair which grows from the human scalp, and to a lesser extent facial, pubic and other body hair. Hair care routines differ according to an individual's culture and the physical characteristics of one's hair.</p>
+                <p className='desc'>Haircare or haircare is an overall term for hygiene and cosmetology involving the hair which grows from the human scalp, and to a lesser extent facial, pubic and other body hair. Hair care routines differ according to an individual's culture and the physical characteristics of one's hair.</p>
             </div>
         </div>
       

@@ -1,0 +1,105 @@
+.createfeedform {
+    display: flex;
+    flex-direction: column;
+    width: 750px;
+    margin: auto;
+}
+
+.createfeedpost_header {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.rating {
+  list-style: none;
+}
+
+.createfeedpost_input_group {
+    margin-bottom: 15px;
+}
+
+.createfeed_input,
+.createfeedpost_input_group_dropdown,
+.createfeedpost_input_group_dropdown_txtarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    outline: none;
+}
+
+
+.createfeedpost_input_group_dropdown {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    background-position: calc(100% - 10px) center;
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.createfeedpost_input_group_dropdown_txtarea{
+  border: none;
+}
+
+.createfeedpost_input_group_dropdown{
+  display: flex;
+  flex-direction: row;
+  color: black;
+  flex-grow: 2;
+  border: none;
+  font-size: 16px;
+}
+
+
+.createfeed_input {
+  flex-grow: 2;
+  border: none;
+  font-size: 16px;
+}
+
+.createfeed_input:focus {
+  outline: none;
+}
+
+
+.btnpostsubmit{
+  border: none;
+  border-radius: 8px;
+  width: 100px;
+  height: 40px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(76, 76, 76);
+  cursor: pointer;
+}
+.btnpostsubmit:hover {
+  transform: scale(1.05);
+  color: white;
+  background-color: rgb(0, 0, 0);
+  transition-duration: 0.5s;
+}
+
+@media (max-width: 600px) {
+  .rating li {
+    margin: 10px 3px;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 30px 0 40px;
+  }
+
+  .createfeed_input {
+    width: 80%;
+  }
+}
