@@ -13,6 +13,7 @@ function AppointmentList() {
   const [filteredData, setFilteredData] = useState([]); // State for filtered data
   const [searchQuery, setSearchQuery] = useState(''); // State for search query
   const [update, setUpdate] = useState(0);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(null); // State for delete confirmation
 
   useEffect(() => {
     if (token != null) {
@@ -45,26 +46,37 @@ function AppointmentList() {
   };
 
   const handleDelete = (record) => {
-    if (token != null) {
+    setDeleteConfirmation(record); // Set the appointment to be deleted
+  };
+
+  const confirmDelete = () => {
+    if (deleteConfirmation && token != null) {
       setLoading(true);
-      axios.post("http://localhost:5000/appointment/delete", { token: token, appointment_id: record.appointment_id })
+      axios.post("http://localhost:5000/appointment/delete", { token: token, appointment_id: deleteConfirmation.appointment_id })
         .then((response) => {
           const responseData = response.data;
           const status = responseData.status;
           if (status === "success") {
             setLoading(false);
             setUpdate(update + 1);
+            setDeleteConfirmation(null); // Reset delete confirmation
           } else if (status === "token_expired" || status === "auth_failed") {
             navigate("/signout");
           } else {
             const message = responseData.message;
             alert("Error - " + message);
+            setDeleteConfirmation(null); // Reset delete confirmation
           }
         })
         .catch((error) => {
           alert("Error - " + error);
+          setDeleteConfirmation(null); // Reset delete confirmation
         });
     }
+  };
+
+  const cancelDelete = () => {
+    setDeleteConfirmation(null); // Reset delete confirmation
   };
 
   const filterAppointments = (query) => {
@@ -92,6 +104,15 @@ function AppointmentList() {
         <div className='content'>
           <h1>Your Appointments</h1>
           <input className='search' type="search" placeholder="Search here" value={searchQuery} onChange={handleSearch} />
+          {deleteConfirmation && (
+            <div className="confirmation-wrapper">
+              <div className="confirmation-message">
+                <p>Do you want to delete this appointment?</p>
+                <button className="con_delete" onClick={confirmDelete}>Delete</button>
+                <button className="con_cancel" onClick={cancelDelete}>Cancel</button>
+              </div>
+            </div>
+          )}
           <div className="app_table">
             <table className="custom-table">
               <thead>
@@ -112,7 +133,9 @@ function AppointmentList() {
                     <td>{appointment.time}</td>
                     <td>{appointment.name}</td>
                     <td><button className='edt_btn' onClick={() => handleEdit(appointment)}>Edit</button></td>
-                    <td><button className='delete_btn' onClick={() => handleDelete(appointment)}>Delete</button></td>
+                    <td>
+                      <button className='delete_btn' onClick={() => handleDelete(appointment)}>Delete</button>
+                    </td>
                   </tr>
                 )) : data.map(appointment => (
                   <tr key={appointment.appointment_id}>
@@ -121,7 +144,9 @@ function AppointmentList() {
                     <td>{appointment.time}</td>
                     <td>{appointment.name}</td>
                     <td><button className='edt_btn' onClick={() => handleEdit(appointment)}>Edit</button></td>
-                    <td><button className='delete_btn' onClick={() => handleDelete(appointment)}>Delete</button></td>
+                    <td>
+                      <button className='delete_btn' onClick={() => handleDelete(appointment)}>Delete</button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -1,0 +1,40 @@
+
+.feed_ad_fd_row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.feed_ad_fd_col_sm_9{
+    flex: 0 0 75%;
+    max-width: 75%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.feed_ad_fd_col_sm_3{
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .col-sm-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  
+  .col-sm-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  

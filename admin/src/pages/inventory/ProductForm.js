@@ -45,7 +45,7 @@ function AddProduct() {
                 var status = data.status;
                 if (status == "success") {
                    
-                    
+                    alert("Product added successfully!!.")
                     setSuccessMessage('Product added successfully!');
                     // Clear form fields after successful submission
                     setName('');
