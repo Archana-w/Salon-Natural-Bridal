@@ -121,17 +121,29 @@
 
 }
 
+.emp_add {
+    margin-left: 800px;
+}
+
+.emplink {
+
+    color: black !important;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .emp_btn_add {
 
     width: 150px;
     height: 40px;
     display: block !important;
-    margin-left: 800px;
     background: rgb(51, 51, 51);
     color: white;
     font-size: 14px;
     border-radius: 10px;
     border: none !important;
+    text-decoration: none;
 }
 
 .emp_btn_add {
