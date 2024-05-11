@@ -95,8 +95,8 @@ function Appointment() {
                         </div>
                      </td>
                      <td>{appointment.service}</td>
-                     <td>{appointment.create_time}</td>
                      <td>{appointment.date}</td>
+                     <td>{appointment.time}</td>
                      <td>{appointment.name}</td>
                      <td>
                         <Link>
