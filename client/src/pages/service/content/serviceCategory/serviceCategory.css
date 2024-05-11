@@ -24,7 +24,7 @@
 }
   
 .category-item {
-    width: 30%;
+    width: 25%;
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
@@ -84,30 +84,49 @@
   
 .description {
     color: #666;
-    margin-top: 20px;
+    background-color: #6666660e;
   }
 
-.description p{
+.desc{
     text-align: justify;
-    margin-left: 10px;
+    margin-top: 10px;
+    margin-left: 30px;
+    height: 100%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
  
 .service_title{
     display: flex;
     justify-content: left;
     margin-top: 4%;
-    margin-left: 10px;
+    margin-left: 30px;
 }
   
-.service_image{
+.service_image_d{
     display: flex;
     justify-content: left;
     margin-top: 10px;
+    margin-left: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.service_image img{
-    height: 100px;
-    width: 200px; 
+.service_image_img1{
+    height: 200px;
+    width: 25%; 
+    object-fit: cover;
+    border-radius: 10px; 
+}
+
+.service_image_img2{
+    height: 200px;
+    width: 25%; 
+    object-fit: cover;
+    border-radius: 10px; 
+}
+
+.service_image_img3{
+    height: 200px;
+    width: 25%; 
     object-fit: cover;
     border-radius: 10px; 
 }
