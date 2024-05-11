@@ -65,10 +65,7 @@ function Store() {
                 <div class="topicS"><h1>Salon Natural Bridal</h1></div> 
             </div>
 
-            <div class="tpc"><h1>Welcome to our salon store</h1></div>
 
-
-            
            <div class="store">
 
            <div class="StoreSearch">
@@ -92,7 +89,7 @@ function Store() {
           <p>{result.product_name}</p>
           <p>Rs .{result.price}</p>
           </div>
-          <div className="description">
+          <div class="description">
             <button class="button b6" onClick={() => addCart(result._id)}>Place Order</button>
           </div>
           
