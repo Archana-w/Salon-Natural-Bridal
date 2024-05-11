@@ -92,7 +92,7 @@ function Store() {
           <p>{result.product_name}</p>
           <p>Rs .{result.price}</p>
           </div>
-          <div className="desc">
+          <div className="description">
             <button class="button b6" onClick={() => addCart(result._id)}>Place Order</button>
           </div>
           
