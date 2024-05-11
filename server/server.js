@@ -18,6 +18,7 @@ var appoinmentRoute = require("./routes/appointment_route");
 var empRoute = require("./routes/emp_route");
 const serviceRouter = require("./routes/service.js");
 const transectionsRouter = require("./routes/transections_route.js");
+const postRoutes = require('./routes/posts_route.js');
 
 var app = express();
 dotenv.config({ path: "./config.env" });
@@ -99,6 +100,7 @@ app.use("/appointment", appoinmentRoute);
 app.use("/emp", empRoute);
 app.use("/service",serviceRouter);
 app.use("/transections",transectionsRouter);
+app.use(postRoutes);
 
 
 app.get("/image/:imageName", (req, res) => {
