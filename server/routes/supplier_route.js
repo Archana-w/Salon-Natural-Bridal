@@ -2,39 +2,62 @@ const express = require('express');
 const router = express.Router();
 const User = require("../models/User");
 const SupplierProduct = require("../models/Supplier");
+const nodemailer = require('nodemailer');
 
-// Register a new user
+// Generate a random 4-digit number as a string for password
+const generatePassword = () => {
+    return Math.floor(1000 + Math.random() * 9000).toString();
+};
+
+// Function to send email using Nodemailer
+const sendEmail = async (to, subject, text) => {
+    try {
+      let transporter = nodemailer.createTransport({
+        // Consider using more secure methods like OAuth2 instead of direct Gmail password
+        service: 'Gmail',
+        auth: {
+          user: "amith457n@gmail.com",
+          pass: "whcx fhev ecyo fbwk"
+        }
+      });
+  
+      let info = await transporter.sendMail({
+        from: "amith457n@gmail.com",
+        to: to,
+        subject: subject,
+        text: text
+      });
+  
+      console.log("Message sent: %s", info.messageId);
+    } catch (error) {
+      console.error("Error sending email:", error);
+    }
+};
+
+// Route to register a new user (supplier)
 router.post('/register', async (req, res) => {
-    const { first_name, last_name, mobile_number, email, password, type, sup_category } = req.body;
-
-    if (!first_name || !last_name || !mobile_number || !email || !password || !type || !sup_category) {
+    const { first_name, last_name, mobile_number, email, type, sup_category } = req.body;
+    if (!first_name || !last_name || !mobile_number || !email || !type || !sup_category) {
         return res.status(400).json({ message: 'All fields are required' });
     }
-
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(409).json({ message: 'Email already exists' });
         }
-
+        const password = generatePassword();
         const user = new User({
-            first_name,
-            last_name,
-            mobile_number,
-            email,
-            password, 
-            type,
-            sup_category,
+            first_name, last_name, mobile_number, email, password, type, sup_category,
         });
-
         await user.save();
+        // Send email with password
+        await sendEmail(email, 'Your Supplier Account', `Your password is: ${password}`);
         res.status(201).json({ message: 'User registered successfully', user });
     } catch (error) {
         console.error('Error registering user:', error);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 });
-
 // Get all suppliers
 router.get('/getAll', async (req, res) => {
     try {

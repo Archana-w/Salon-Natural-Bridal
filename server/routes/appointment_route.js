@@ -77,17 +77,22 @@ router.route("/update").post((req, res) => {
         if (userType == "client") {
 
             const appId = req.body.appointment_id;
-            const serviceId = req.body.service_id;
-            const range = req.body.range;
+            const time = req.body.time;
+            const date = req.body.date;
+            const stylistId = req.body.stylist_id;
+            const hairCare = req.body.hair_care;
+            const nailCare = req.body.nail_care;
+            const skinCare = req.body.skin_care;
 
             if (appId == null || appId == "" ||
-                range == null || range == "" ||
-                serviceId == null || serviceId == "") {
+                time == null || time == "" ||
+                date == null || date == "" ||
+                stylistId == null || stylistId == ""){
                 res.send({ status: "required_failed", "message": "Required values are not received." });
-                return;
+               return; 
             }
 
-            Appointment.findOneAndUpdate({ _id: appId }, { time_range: range, service_id: serviceId }).then(()=>{
+            Appointment.findOneAndUpdate({ _id: appId }, { hair_care:hairCare,skin_care:nailCare,nail_care:skinCare,stylist_id:stylistId, appoinment_time:time, appoinment_date:date, }).then(()=>{
                 res.send({ status: "success", message: "Appointment updated." });
             });
 

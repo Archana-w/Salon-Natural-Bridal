@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import './AppointmentList.css';
 import axios from 'axios';
 import { useAuthToken } from '../../auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import PageLoading from '../../components/loading/PageLoading';
 
 function AppointmentList() {
@@ -41,9 +41,9 @@ function AppointmentList() {
   }, [update]);
 
   const handleEdit = (record) => {
-    //  editing appointments
-    navigate("/create-app/" + record.appointment_id);
+    navigate(`/edit-app/${record.appointment_id}`);
   };
+  
 
   const handleDelete = (record) => {
     setDeleteConfirmation(record); // Set the appointment to be deleted
@@ -143,7 +143,8 @@ function AppointmentList() {
                     <td>{appointment.date}</td>
                     <td>{appointment.time}</td>
                     <td>{appointment.name}</td>
-                    <td><button className='edt_btn' onClick={() => handleEdit(appointment)}>Edit</button></td>
+                    <td><button className='edt_btn
+                    'onClick={() => handleEdit(appointment)}>Edit</button></td>
                     <td>
                       <button className='delete_btn' onClick={() => handleDelete(appointment)}>Delete</button>
                     </td>

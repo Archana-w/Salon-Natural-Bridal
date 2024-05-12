@@ -25,6 +25,8 @@ import EditProduct from './pages/inventory/EditProduct'
 import FeedbackHome from './pages/customer_feedback/FeedbackHome';
 import PostDetails from './pages/customer_feedback/PostDetails';
 import FeedBackReply from './pages/customer_feedback/FeedbackReply';
+import Order from './pages/orders/OrderView';
+
 
 function App() {
   var token = useAuthToken();
@@ -54,7 +56,7 @@ function App() {
           <Route path='/emp_salary' Component={Emp_salary}></Route>
           <Route path='/emp_leaves' Component={Emp_leaves}></Route>
           <Route path='/orders' Component={Orders}></Route>
-          <Route path='/orders' Component={Orders}></Route>
+          <Route path='/order/:id' Component={Order}></Route>
           <Route path='/emp_add' Component={AddEmp}></Route>
           <Route path='/emp_add:id' Component={AddEmp}></Route>
           <Route path='/service_view' Component={Service_view}></Route>
