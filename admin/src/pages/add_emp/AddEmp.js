@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Divider, Table } from 'antd';
 import './AddEmp.css';
 import { useAuthToken } from '../../auth';
 import { useNavigate } from "react-router-dom";

@@ -136,10 +136,10 @@ function Profile() {
                             <h1 className='pcard-title'>{profileDetails.first_name + " " + profileDetails.last_name}</h1>
                         </div>
                     </div>
-                    <div className="lower-container">
+                    <div className="lower_pcontainer">
                         <div className="profile_details">
-                            <div className="profile_details-form card p-2">
-                                <h1 className="card-title">User Information</h1>
+                            <div className="profile_details_form card">
+                                <h1 className="card_title">User Information</h1>
                                 <form className='profile_form'>
                                     <label>First Name</label>
                                     <input className="profile_input" type="text" onChange={(e)=>setFirstName(e.target.value)} placeholder="First Name" defaultValue={profileDetails.first_name} />
