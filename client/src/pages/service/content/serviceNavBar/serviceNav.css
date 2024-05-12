@@ -4,7 +4,7 @@
 }
 
 .nav-image {
-  background-image: url('../../../../images/service/hair.jpg');
+  background-image: url('../../../../images/service/service_nav.jpg');
   background-size: cover; /* Cover the entire div with the background image */
   background-repeat: no-repeat; /* Prevent image from repeating */
   background-position: center; /* Center the image */

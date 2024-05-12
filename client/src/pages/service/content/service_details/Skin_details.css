@@ -12,12 +12,12 @@
   display: flex;
   margin-bottom: 20px;
   background-color: aliceblue;
-  height: auto;
+  height: 280px;
   border-radius: 20px;
   box-shadow: 5px 5px rgba(0, 0, 0, 0.199);
 }
 
-.service-info img {
+.service_details_image {
   width: 350px; 
   height: 100%;
   margin-right: 20px;
@@ -35,23 +35,27 @@
   margin-bottom: 10px; /* Spacing between detail elements */
 }
 
-.app-button {
-  background-color: rgba(138, 63, 235, 0.322);
+.service_app_button {
+  background-color: rgb(39, 27, 54);
+  color: white;
   margin-top: 10px;
   border: none;
   font-size: 20px;
   font-family: 'Times New Roman', Times, serif;
   font-weight: bold;
   border-radius: 6px;
-  margin-left: 610px;
+  margin-left: 70%;
+  height: 34px;
+  width: 250px;
+  margin-bottom: 10px;
 }
 
 .button-pos {
   margin-left: auto;
 }
 
-.app-button:hover{
-  background-color: rgba(117, 26, 236, 0.363)
+.service_app_button:hover{
+  background-color: rgba(73, 57, 94, 0.562)
   
 }
 
