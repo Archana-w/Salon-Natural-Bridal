@@ -143,7 +143,8 @@ function AppointmentList() {
                     <td>{appointment.date}</td>
                     <td>{appointment.time}</td>
                     <td>{appointment.name}</td>
-                    <td><button className='edt_btn'onClick={() => handleEdit(appointment)}>Edit</button></td>
+                    <td><button className='edt_btn
+                    'onClick={() => handleEdit(appointment)}>Edit</button></td>
                     <td>
                       <button className='delete_btn' onClick={() => handleDelete(appointment)}>Delete</button>
                     </td>
