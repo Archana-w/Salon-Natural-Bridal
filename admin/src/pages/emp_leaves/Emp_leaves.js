@@ -5,21 +5,39 @@ import { useAuthToken } from '../../auth';
 import { useNavigate, Link } from "react-router-dom";
 import './Emp_leaves.css'
 
-
-
 function Emp_leaves() {
-
 
   var token = useAuthToken();
   var navigate = useNavigate();
-  const [LeaveyData, setleaveData] = useState([]);
+  const[leaveData,setLeaveData] = useState([])
   const [searchText, setSearchText] = useState("");
   const [update, setUpdate] = useState(0);
+
+  useEffect(() => {
+    if (token != null) {
+      axios.post("http://localhost:5000/leave/get", { token: token }).then((response) => {
+        const data = response.data;
+        const status = data.status;
+        console.log(data)
+        if (status === "success") {
+          setLeaveData(data.data);
+        } else if (status === "token_expired" || status === "auth_failed") {
+          navigate("/signout");
+        } else {
+          const message = data.message;
+          alert("Error - " + message);
+        }
+      }).catch((error) => {
+        alert("Error 2 - " + error);
+      });
+    } else {
+      navigate("/signout");
+    }
+  }, [token, navigate]);
 
   function searchleaveId() {
     setUpdate(update + 1);
   }
-
 
   return (
     <div className="employee-list-container">
@@ -29,7 +47,6 @@ function Emp_leaves() {
 
         <input className='employee-filter-search' onChange={(e) => setSearchText(e.target.value)} placeholder="Search leave" type="text" />
         <button className='employee-filter-search-btn' onClick={searchleaveId}>Search</button>
-
 
       </div>
 
@@ -44,21 +61,24 @@ function Emp_leaves() {
           </tr>
         </thead>
         <tbody>
-
+        {leaveData.map((leave) => (
+            
           <tr>
             <td>
               <div className='employee-id-td-container'>
-
+              <td>{leave.item._id}</td>
               </div>
             </td>
-            <td>{ }</td>
-            <td>{ }</td>
-            <td>{ }</td>
-            <td>{ }</td>
+            <td>{leave.user.first_name} {leave.user.last_name}</td>
+            <td>{leave.item.from_date}</td>
+            <td>{leave.item.to_date}</td>
+            <td>{leave.item.text}</td>
           </tr>
 
+        ))}
 
         </tbody>
+      
       </table>
     </div>
 

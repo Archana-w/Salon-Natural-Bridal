@@ -6,25 +6,29 @@ import './Leave.css';
 import { useCurrentUserType } from '../../auth';
 import axios from 'axios'; 
 import { useNavigate } from 'react-router-dom';
+import { useAuthToken } from '../../auth';
 
 function Leave() {
     
     const { RangePicker } = DatePicker;
     var userType = useCurrentUserType();
     var navigate = useNavigate();
+    const token = useAuthToken();
+    
 
     if(userType != "employee"){
         return("You can not access this.");
     }
 
     const onFinish = async (values) => {
-        const { token, dates, TextArea } = values;
+        const { dates, TextArea } = values;
         const [fromDate, toDate] = dates;
 
-        axios.post("http://localhost:5000/leave/add", { token, from_date: fromDate, to_date: toDate, text: TextArea })
+        axios.post("http://localhost:5000/leave/add", { token:token, from_date: fromDate, to_date: toDate, text: TextArea })
             .then((response) => {
                 var data = response.data;
                 var status = data.status;
+                console.log(data)
                 if (status == "success") {
                     alert("Leave created...");
                 } else if (status == "token_expired" || status == "auth_failed") {
@@ -37,6 +41,8 @@ function Leave() {
             .catch((error) => {
                 alert("Error 2 - " + error);
             });
+
+        
     }
 
     return (
