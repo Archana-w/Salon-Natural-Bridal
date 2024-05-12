@@ -5,7 +5,6 @@ import { useNavigate, Link } from "react-router-dom";
 import './Appointment.css';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
-import logosalon from '../../images/logo.png'
 
 function Appointment() {
    var token = useAuthToken();
