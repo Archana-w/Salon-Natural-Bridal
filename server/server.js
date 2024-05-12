@@ -19,6 +19,8 @@ var empRoute = require("./routes/emp_route");
 const serviceRouter = require("./routes/service.js");
 const transectionsRouter = require("./routes/transections_route.js");
 const postRoutes = require('./routes/posts_route.js');
+const scheduledFunctions = require("./controllers/scheduleController")
+const leaveRoute = require('./routes/leave_route.js');
 
 var app = express();
 dotenv.config({ path: "./config.env" });
@@ -87,7 +89,7 @@ app.use((req, res, next) => {
 
 });
 
-
+scheduledFunctions.initScheduledJobsMinite();
 
 app.use("/token", tokenRoute);
 app.use("/supplier", supplierRoute); 
@@ -101,6 +103,7 @@ app.use("/emp", empRoute);
 app.use("/service",serviceRouter);
 app.use("/transections",transectionsRouter);
 app.use(postRoutes);
+app.use("/leave",leaveRoute);
 
 
 app.get("/image/:imageName", (req, res) => {

@@ -38,7 +38,10 @@ function AddEmp() {
         e.preventDefault();
         // Here you can send the employeeData object to your backend for processing
 
-        const jsonData = JSON.parse(JSON.stringify(employeeData));
+        const jsonData = employeeData;
+        console.log(jsonData);
+
+
 
         if (token != null) {
 
@@ -47,7 +50,7 @@ function AddEmp() {
                 var data = response.data;
                 var status = data.status;
                 if (status == "success") {
-                    setEmpTypeData(data.data);
+                    alert("Employee added");
                 } else if (status == "token_expired" || status == "auth_failed") {
                     navigate("/signout");
                 } else {

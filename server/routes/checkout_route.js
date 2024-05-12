@@ -113,12 +113,9 @@ router.route("/place").post(async (req,res)=>{
         //update order
         await Order.findOneAndUpdate({ _id: orderResult._id }, { total: total,status:"pending"});
 
-        res.send({ status: "success", order_id: orderResult._id, message: "Order placed." });
-        return;
-
         //clear cart
         Cart.deleteMany({ user_id: userId }).then((result)=>{
-            res.send({ status: "success", message: "Order placed." });
+            res.send({ status: "success", order_id: orderResult._id, message: "Order placed." });
         });
 
     } else {

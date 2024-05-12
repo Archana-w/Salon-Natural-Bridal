@@ -31,7 +31,7 @@ function HairDetails() {
       {services.map(service => (
         <div key={service._id} className='service-info'>
           <div className='s_image'>
-            <img src={"http://localhost:5000/image/" + service.imageUrl} alt="Service Image" />
+            <img className='service_details_image' src={"http://localhost:5000/image/" + service.imageUrl} alt="Service Image" />
             <div className="service-name">{service.sName}</div>
           </div>
           <div className="details">
@@ -45,7 +45,7 @@ function HairDetails() {
               <p className='price'>LKR {service.sPrice}</p>
             </div>
             <div className='button-pos'>
-              <button onClick={() => handleMakeAppointment(service._id)} className='app-button'>Make an Appointment</button>
+              <button onClick={() => window.location.href='/create-app'} className='service_app_button'>Make an Appointment</button>
             </div>
           </div>
         </div>

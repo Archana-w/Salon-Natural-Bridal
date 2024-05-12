@@ -1,11 +1,11 @@
 .edit-service-form {
     font-family: Arial, sans-serif;
-    max-width: 400px;
-    margin: 0 auto;
+    max-width: 700px;
   }
   
-  .form-group {
+  .service-form-group {
     margin-bottom: 1rem;
+    width: 700px;
   }
   
   .form-label {
@@ -22,7 +22,7 @@
     border-radius: 0.25rem;
   }
   
-  .btn-primary {
+  .service-btn-primary {
     background-color: #007bff;
     color: #fff;
     padding: 0.5rem 1rem;
@@ -31,7 +31,7 @@
     cursor: pointer;
   }
   
-  .btn-primary:hover {
+  .service-btn-primary{
     background-color: #0056b3;
   }
   
@@ -40,4 +40,6 @@
     resize: vertical;
     min-height: 100px;
   }
+
+  
   

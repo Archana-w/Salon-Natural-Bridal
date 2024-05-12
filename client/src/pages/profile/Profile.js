@@ -76,7 +76,8 @@ function Profile() {
     const handleProfilePictureUpload = (e) => {
         const form = new FormData();
         form.append("token", token);
-        form.append("image", e.file);
+        form.append("image", e);
+    
         axios.post("http://localhost:5000/user/edit/avatar", form).then((response) => {
             const data = response.data;
             const status = data.status;

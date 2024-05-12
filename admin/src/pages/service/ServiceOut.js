@@ -2,22 +2,23 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import jsPDF from "jspdf";
 import EditServiceForm from "./EditServiceForm";
-import "./serviceOut.css"; // Import the CSS file
-import {generatePDF} from "../service/GeneratePDF"
-import Button from 'react-bootstrap/Button';
+import "./serviceOut.css"; 
+import { generatePDF } from "../service/GeneratePDF";
+import Button from "react-bootstrap/Button";
 import { IoMdAddCircleOutline } from "react-icons/io";
 
 function ServiceList() {
-  const [data,setData] = useState([]);
+  const [data, setData] = useState([]);
   const [services, setServices] = useState([]);
   const [editingServiceId, setEditingServiceId] = useState(null);
   const [deletingServiceId, setDeletingServiceId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [showDeleteModal, setShowDeleteModal] = useState(false); 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/service")
-      .then(response => {
+    axios
+      .get("http://localhost:5000/service")
+      .then((response) => {
         if (Array.isArray(response.data)) {
           setServices(response.data);
           setData(response.data);
@@ -25,7 +26,7 @@ function ServiceList() {
           console.error("Invalid response data:", response.data);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching services:", error);
       });
   }, []);
@@ -35,9 +36,10 @@ function ServiceList() {
   };
 
   const handleUpdate = (updatedService) => {
-    axios.put(`http://localhost:5000/service/update/${updatedService._id}`, updatedService)
-      .then(response => {
-        const updatedServices = services.map(service => {
+    axios
+      .put(`http://localhost:5000/service/update/${updatedService._id}`, updatedService)
+      .then((response) => {
+        const updatedServices = services.map((service) => {
           if (service._id === updatedService._id) {
             return response.data.service;
           }
@@ -46,7 +48,7 @@ function ServiceList() {
         setServices(updatedServices);
         setEditingServiceId(null);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error updating service:", error);
         alert("Error updating service");
       });
@@ -62,21 +64,22 @@ function ServiceList() {
   };
 
   const confirmDelete = () => {
-    axios.delete(`http://localhost:5000/service/delete/${deletingServiceId}`)
+    axios
+      .delete(`http://localhost:5000/service/delete/${deletingServiceId}`)
       .then(() => {
-        const updatedServices = services.filter(service => service._id !== deletingServiceId);
+        const updatedServices = services.filter((service) => service._id !== deletingServiceId);
         setServices(updatedServices);
         setDeletingServiceId(null);
         setShowDeleteModal(false);
         alert("Service deleted successfully");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error deleting service:", error);
         alert("Error deleting service");
       });
   };
 
-  const filteredServices = services.filter(service => {
+  const filteredServices = services.filter((service) => {
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
 
     return (
@@ -87,44 +90,41 @@ function ServiceList() {
   });
 
   const handleDownloadReport = () => {
-    // Define columns for the PDF table
-    const columns = ['sType', 'sName', 'sPrice', 'createdAt'];
-    // Define title and fileName for the PDF
-    const title = 'Bidding Report';
-    const fileName = 'bidding_report';
-    // Format createdAt date to remove time portion
-    const formattedData = filteredServices.map(service => ({
+    const columns = ["sType", "sName", "sPrice", "createdAt"];
+    const title = "Bidding Report";
+    const fileName = "bidding_report";
+    const formattedData = filteredServices.map((service) => ({
       ...service,
-      createdAt: service.createdAt.split('T')[0]
+      createdAt: service.createdAt.split("T")[0],
     }));
-    // Generate PDF with the formatted data
     generatePDF(title, columns, formattedData, fileName);
   };
-  
 
+  const expandDescription = (description) => {
+    alert(description);
+  };
 
   return (
     <div className="containerso">
-      <h2>Service List</h2>
+      <h2 className="service_list">Service List</h2>
 
-      <div className="input-group">
-        <label htmlFor="searchInput">Search:</label>
-        <input
-          type="text"
-          id="searchInput"
-          className="search-input"
-          placeholder="Search by Service Name, Type, or Price"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+      <div className="service-input-group">
+  
+          <input
+            type="text"
+            id="searchInput"
+            className="service-search-input"
+            placeholder="Search by Service Name, Type, or Price"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <Button variant="primary" className="service_report" onClick={handleDownloadReport}>
+            <IoMdAddCircleOutline className="service_report_button" /> <span>Download Report</span>
+          </Button>
       </div>
 
-      
-      <Button variant="primary" className="m-1" style={{ display: 'flex', gap: '20px' }} onClick={handleDownloadReport}>
-          <IoMdAddCircleOutline className="mb-1" /> <span>Download Report</span>
-      </Button>
 
-      <table className="table" style={{padding:'30px'}}>
+      <table className="table" style={{ padding: "30px" }}>
         <thead>
           <tr>
             <th>Service Type</th>
@@ -136,16 +136,25 @@ function ServiceList() {
           </tr>
         </thead>
         <tbody>
-          {filteredServices.map(service => (
+          {filteredServices.map((service) => (
             <tr key={service._id}>
               <td>{service.sType}</td>
               <td>{service.sName}</td>
               <td>LKR :{service.sPrice}</td>
-              <td>{service.createdAt.split('T')[0]}</td> {/* Use createdAt here */}
-              <td>{service.sDescription}</td>
+              <td>{service.createdAt.split("T")[0]}</td>
               <td>
-                <button onClick={() => handleEdit(service._id)} className="btn edit-btn">Edit</button>
-                <button onClick={() => handleDelete(service._id)} className="btn delete-btn">Delete</button>
+                {service.sDescription.length > 30
+                  ? service.sDescription.substring(0, 30) + "..."
+                  : service.sDescription}
+              </td>
+
+              <td>
+                <button onClick={() => handleEdit(service._id)} className="btn edit-btn">
+                  Edit
+                </button>
+                <button onClick={() => handleDelete(service._id)} className="btn delete-btn">
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
@@ -157,8 +166,12 @@ function ServiceList() {
           <div className="delete-modal-content">
             <p>Are you sure you want to delete this service?</p>
             <div>
-              <button onClick={confirmDelete} className="btn confirm-delete-btn">Confirm Delete</button>
-              <button onClick={() => setShowDeleteModal(false)} className="btn cancel-delete-btn">Cancel</button>
+              <button onClick={confirmDelete} className="btn confirm-delete-btn">
+                Confirm Delete
+              </button>
+              <button onClick={() => setShowDeleteModal(false)} className="btn cancel-delete-btn">
+                Cancel
+              </button>
             </div>
           </div>
         </div>
@@ -167,11 +180,13 @@ function ServiceList() {
       {editingServiceId && (
         <div className="edit-form-modal">
           <div className="edit-form-content">
-            <button onClick={handleCancelEdit} className="close-btn">&times;</button>
+            <button onClick={handleCancelEdit} className="close-btn">
+              &times;
+            </button>
             <EditServiceForm
-              service={services.find(service => service._id === editingServiceId)}
+              service={services.find((service) => service._id === editingServiceId)}
               onUpdate={handleUpdate}
-              onCancel={handleCancelEdit} // Pass cancel action function
+              onCancel={handleCancelEdit} 
             />
           </div>
         </div>

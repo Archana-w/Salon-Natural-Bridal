@@ -2,29 +2,33 @@
     margin-top: 50px;
   }
   
-  h2 {
+  .service_list {
+    margin-bottom: 20px;
+    margin-left: 45%;
+  }
+  
+  .service-input-group {
     margin-bottom: 20px;
   }
   
-  .input-group {
-    margin-bottom: 20px;
-  }
-  
-  .input-group label {
+  .service_lable {
     display: block;
     margin-bottom: 5px;
   }
   
-  .input-group {
+  .service-input-group {
     width: 90%;
     margin-bottom: 20px;
     margin: auto;
     border-radius: 50px;
   }
 
-  .search-input{
-    border-radius: 50px;
+  .service-search-input{
+    border-radius: 10px;
     cursor: pointer;
+    width: 30%;
+    height: 30px;
+    margin-bottom: 40px;
   }
   
   .report {
@@ -122,8 +126,8 @@
       padding: 0 10px;
     }
   
-    .input-group input[type="text"],
-    .input-group input[type="date"] {
+    .service-input-group input[type="text"],
+    .service-input-group input[type="date"] {
       font-size: 14px;
     }
   
@@ -147,17 +151,17 @@
     color: #fff;
   }
   
-  .generate-report-btn {
-    background-color: #509beb;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .generate-report-btn:hover {
-    background-color: #487fb9d0; /* Darker shade of blue on hover */
-  }
 
+  .service_report{
+    margin-left: 5%;
+    margin-top: 20px;
+    height: 30px;
+    float: right;
+    margin-bottom: 40px;
+  }
   
+  .service_report_button{
+    height: 30px;
+    
+  }
   
