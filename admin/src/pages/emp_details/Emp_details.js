@@ -34,6 +34,7 @@ function Emp_details() {
       navigate("/signout");
     }
   }, [token, update, navigate]);
+  
 
   //delete
   const deleteEmp = (id) => {
