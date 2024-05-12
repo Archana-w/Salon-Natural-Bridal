@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import './Emp_details.css'
-import { useAuthToken } from '../../auth';
 import { useNavigate, Link } from "react-router-dom";
+import { useAuthToken } from '../../auth';
 
 function Emp_details() {
 
@@ -14,7 +14,6 @@ function Emp_details() {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
   useEffect(() => {
-
     if (token != null) {
       axios.post("http://localhost:5000/emp/get", { token: token }).then((response) => {
         const data = response.data;
@@ -78,10 +77,9 @@ function Emp_details() {
         <button className='employee-filter-search-btn' onClick={() => setUpdate(update + 1)}>Search</button>
         <div className='emp_add'>
           <Link to="/emp_add" className='emplink'>
-            <div><button className='emp_btn_add' onClick={Emp_details}>Add Employee</button></div>
+            <div><button className='emp_btn_add'>Add Employee</button></div>
           </Link>
         </div>
-
       </div>
       <table>
         <thead>
