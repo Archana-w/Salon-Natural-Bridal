@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Appointment.css'
 import { useAuthToken } from '../../auth';
 import { useNavigate, Link } from "react-router-dom";
 import './Appointment.css';
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
 
 function Appointment() {
    var token = useAuthToken();
@@ -17,7 +18,6 @@ function Appointment() {
          axios.post("http://localhost:5000/appointment/admin_get", { token: token }).then((response) => {
             var data = response.data;
             var status = data.status;
-            console.log(data);
 
             if (status === "success") {
                setAppointmentData(data.data);
@@ -44,8 +44,6 @@ function Appointment() {
       navigator.clipboard.writeText(id);
       alert("Appointment id copied!!!");
    }
-
-   // Function to sort appointment data by a given key
    const sortData = (key) => {
       const sortedData = [...AppointmentData].sort((a, b) => {
          if (a[key] < b[key]) return -1;
@@ -54,15 +52,108 @@ function Appointment() {
       });
       setAppointmentData(sortedData);
    };
+// Function to generate PDF report
+const generateReport = () => {
+   const doc = new jsPDF();
 
-   // Function to filter appointment data based on search text
-   const filteredData = AppointmentData.filter(appointment =>
-      appointment.appointment_id.toLowerCase().includes(searchText.toLowerCase()) ||
-      appointment.service.toLowerCase().includes(searchText.toLowerCase()) ||
-      appointment.date.toLowerCase().includes(searchText.toLowerCase()) ||
-      appointment.time.toLowerCase().includes(searchText.toLowerCase()) ||
-      appointment.name.toLowerCase().includes(searchText.toLowerCase())
-   );
+   // Add salon name at the top with background color
+   doc.setFillColor(0, 0, 0); // Set background color to yellow
+   doc.rect(0, 0, doc.internal.pageSize.getWidth(), 20, 'F'); // Draw rectangle with background color
+   doc.setFontSize(20);
+   doc.setTextColor(255, 204, 0); // Set font color to red
+   doc.text("Salon Natural Bridal", doc.internal.pageSize.getWidth() / 2, 15, 'center');
+
+   // Add report title
+   doc.setTextColor(0, 0, 0); // Reset font color to black
+   doc.setFontSize(16);
+   doc.text("Appointment Report", doc.internal.pageSize.getWidth() / 2, 30, 'center');
+
+   // Get appointments within the week
+   const today = new Date();
+   const oneWeekAgo = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+   const appointmentsWithinWeek = AppointmentData.filter(appointment => {
+      const appointmentDate = new Date(appointment.date);
+      return appointmentDate >= oneWeekAgo && appointmentDate <= today;
+   });
+
+   // Count appointments for each service for the week
+   const serviceCountsWeek = {};
+   const stylistCountsWeek = {}; // Initialize object to count stylist appointments
+   appointmentsWithinWeek.forEach(appointment => {
+      serviceCountsWeek[appointment.service] = (serviceCountsWeek[appointment.service] || 0) + 1;
+      stylistCountsWeek[appointment.name] = (stylistCountsWeek[appointment.name] || 0) + 1; // Count stylist appointments
+   });
+
+   // Get appointments within the month
+   const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+   const appointmentsWithinMonth = AppointmentData.filter(appointment => {
+      const appointmentDate = new Date(appointment.date);
+      return appointmentDate >= oneMonthAgo && appointmentDate <= today;
+   });
+
+   // Count appointments for each service for the month
+   const serviceCountsMonth = {};
+   const stylistCountsMonth = {}; // Initialize object to count stylist appointments
+   appointmentsWithinMonth.forEach(appointment => {
+      serviceCountsMonth[appointment.service] = (serviceCountsMonth[appointment.service] || 0) + 1;
+      stylistCountsMonth[appointment.name] = (stylistCountsMonth[appointment.name] || 0) + 1; // Count stylist appointments
+   });
+
+   // Generate report content for the week
+doc.setFontSize(14);
+doc.setTextColor(0, 0, 0); // Reset font color to black
+doc.text(`Total Appointments within the week: ${appointmentsWithinWeek.length}`, doc.internal.pageSize.getWidth() / 2, 45, 'center');
+doc.text("Most Selected Services for the Week:", doc.internal.pageSize.getWidth() / 2, 55, 'center');
+doc.autoTable({
+    startY: 65,
+    head: [['Service Name', 'Number of Appointments']],
+    body: Object.entries(serviceCountsWeek),
+    theme: 'plain', // Set theme to 'plain' to disable styling
+    headStyles: { fillColor: [0, 0, 0], textColor: [255, 255, 255] }, // Set text color of table header cells to black
+    alternateRowStyles: { fillColor: [242, 242, 242], textColor: [0, 0, 0] } // Set styles for alternate rows
+});
+doc.text("Most Selected Stylists for the Week:", doc.internal.pageSize.getWidth() / 2, doc.autoTable.previous.finalY + 15, 'center');
+doc.autoTable({
+    startY: doc.autoTable.previous.finalY + 25,
+    head: [['Stylist Name', 'Number of Appointments']],
+    body: Object.entries(stylistCountsWeek),
+    theme: 'plain', // Set theme to 'plain' to disable styling
+    headStyles: { fillColor: [0, 0, 0], textColor: [255, 255, 255] }, // Set text color of table header cells to black
+    alternateRowStyles: { fillColor: [242, 242, 242], textColor: [0, 0, 0] } // Set styles for alternate rows
+});
+
+
+   // Add a new page for monthly appointments
+   doc.addPage();
+
+   // Generate report content for the month
+   doc.setFontSize(14);
+   doc.setTextColor(0, 0, 0); // Reset font color to black
+   doc.text(`Total Appointments within the month: ${appointmentsWithinMonth.length}`, doc.internal.pageSize.getWidth() / 2, 45, 'center');
+   doc.text("Most Selected Services for the Month:", doc.internal.pageSize.getWidth() / 2, 55, 'center');
+   doc.autoTable({
+      startY: 65,
+      head: [['Service Name', 'Number of Appointments']],
+      body: Object.entries(serviceCountsMonth),
+      theme: 'plain', // Set theme to 'plain' to disable styling
+      headStyles: { fillColor: [0, 0, 0], textColor: [255, 255, 255] }, // Set text color of table header cells to black
+    alternateRowStyles: { fillColor: [242, 242, 242], textColor: [0, 0, 0] } // Set styles for alternate rows
+   });
+   doc.text("Most Selected Stylists for the Month:", doc.internal.pageSize.getWidth() / 2, doc.autoTable.previous.finalY + 15, 'center');
+   doc.autoTable({
+      startY: doc.autoTable.previous.finalY + 25,
+      head: [['Stylist Name', 'Number of Appointments']],
+      body: Object.entries(stylistCountsMonth),
+      theme: 'plain', // Set theme to 'plain' to disable styling
+      headStyles: { fillColor: [0, 0, 0], textColor: [255, 255, 255] }, // Set text color of table header cells to black
+    alternateRowStyles: { fillColor: [242, 242, 242], textColor: [0, 0, 0] } // Set styles for alternate rows
+   });
+
+   doc.save('appointment_report.pdf');
+};
+
+
+
 
    return (
       <div className="appointment-list-container">
@@ -71,9 +162,10 @@ function Appointment() {
             <input className='appointment-filter-search' value={searchText} onChange={(e) => setSearchText(e.target.value)} placeholder="Search appointment" type="text" />
             <button className='appointment-filter-search-btn' onClick={searchAppointmentId}>Search</button>
             <button className='add_app_btn'>Add Appointment</button>
-            <button className='generate_report_btn'>Generate Report</button> 
+            <button className='generate_report_btn' onClick={generateReport}>Generate Report</button>
          </div>
-         <table>
+        
+         <table className="appointment-table">
             <thead>
                <tr>
                   <th onClick={() => sortData('appointment_id')}>Appointment ID</th>
@@ -86,7 +178,7 @@ function Appointment() {
                </tr>
             </thead>
             <tbody>
-               {filteredData.map((appointment, index) => (
+               {AppointmentData.map((appointment, index) => (
                   <tr key={index}>
                      <td>
                         <div className='appointment-id-td-container'>
@@ -113,6 +205,7 @@ function Appointment() {
             </tbody>
          </table>
       </div>
+      
    );
 }
 

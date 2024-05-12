@@ -22,6 +22,7 @@ import Skincare from './pages/service/Skin_care';
 import FeedbackHome from './pages/customer_feedback/FeedbackHome';
 import CreatePost from './pages/customer_feedback/CreatePost';
 import EditPost from './pages/customer_feedback/EditPost';
+import EditAppointment from './pages/appointment/EditAppointment'
 
 function App() {
   return (
@@ -62,6 +63,7 @@ function LayoutWithHeader() {
         <Route path="/contact" element={<FeedbackHome/>} />
         <Route path="/addfeedback" element={<CreatePost/>} />
         <Route path="/edit/:id" element={<EditPost />} />
+        <Route path="/edit-app/:id" element={<EditAppointment />} />
         
       </Routes>
     </>

@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import './Emp_details.css'
-import { useAuthToken } from '../../auth';
 import { useNavigate, Link } from "react-router-dom";
+import { useAuthToken } from '../../auth';
 
 function Emp_details() {
 
@@ -14,7 +14,6 @@ function Emp_details() {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
   useEffect(() => {
-
     if (token != null) {
       axios.post("http://localhost:5000/emp/get", { token: token }).then((response) => {
         const data = response.data;
@@ -45,7 +44,7 @@ function Emp_details() {
 
   const sortedData = () => {
     if (!sortConfig || !sortConfig.key) return employeeData;
-    
+
     const sorted = [...employeeData].sort((a, b) => {
       const keyA = sortConfig.key === 'name' ? a.name : a.job_role;
       const keyB = sortConfig.key === 'name' ? b.name : b.job_role;
@@ -76,7 +75,11 @@ function Emp_details() {
       <div className='employee-filter-bar'>
         <input className='employee-filter-search' onChange={(e) => setSearchText(e.target.value)} placeholder="Search employee" type="text" />
         <button className='employee-filter-search-btn' onClick={() => setUpdate(update + 1)}>Search</button>
-        <button className='salary_btn'>Add Employee</button>
+        <div className='emp_add'>
+          <Link to="/emp_add" className='emplink'>
+            <div><button className='emp_btn_add'>Add Employee</button></div>
+          </Link>
+        </div>
       </div>
       <table>
         <thead>

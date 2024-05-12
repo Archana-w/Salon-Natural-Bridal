@@ -141,7 +141,7 @@ function Appointment() {
                                     <div className='typediv'>
                                         <div className='typeimg'> <img src={HairImage} alt="hair" /></div>
                                         <div className="type">
-                                            <div className="desc">Hair Care</div>
+                                            <div className="app_desc">Hair Care</div>
                                             <div className="categories">
                                                 <Checkbox.Group onChange={(values) => handleServiceSelection('hairCare', values)}>
                                                     <Checkbox value="Hair straight">Hair straight</Checkbox>
@@ -158,7 +158,7 @@ function Appointment() {
                                     <div className='typediv'>
                                         <div className='typeimg'> <img src={SkinImage} alt="skin" /></div>
                                         <div className="type">
-                                            <div className="desc">Skin Care</div>
+                                            <div className="app_desc">Skin Care</div>
                                             <div className="categories">
                                                 <Checkbox.Group onChange={(values) => handleServiceSelection('skinCare', values)}>
                                                     <Checkbox value="Facial">Facial</Checkbox>
@@ -176,7 +176,7 @@ function Appointment() {
                                     <div className='typediv'>
                                         <div className='typeimg'> <img src={NailImage} alt="nail" /></div>
                                         <div className="type">
-                                            <div className="desc">Nail Care</div>
+                                            <div className="app_desc">Nail Care</div>
                                             <div className="categories">
                                                 <Checkbox.Group onChange={(values) => handleServiceSelection('nailCare', values)}>
                                                     <Checkbox value="Nail polish">Nail polish</Checkbox>
