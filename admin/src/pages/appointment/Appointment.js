@@ -39,39 +39,6 @@ console.log(data)
       }
    }, [token, navigate]);
 
-   //Delete
-   const deleteApp = (id) => {
-
-      if (token != null) {
-  
-         axios.post("http://localhost:5000/appointment/delete", { token: token,appointment_id: id}).then((response) => {
-  
-           var data = response.data;
-            var status = data.status;
-  
-            console.log(response.data);
-            if (status == "success") {
-               alert("Appointment deleted Successfully!!..");
-               setUpdate(update+1);
-            } else if (status == "token_expired" || status == "auth_failed" || status == "access_denied") {
-               navigate("/signout");
-            } else {
-               var message = data.message;
-               alert("Error - " + message);
-            }
-  
-         }).catch((error) => {
-            alert("Error 2 - " + error);
-         });
-  
-      } else {
-         navigate("/signout");
-      }
-  
-   };
-  
-  
-
    useEffect(() => {
       // Filter appointment data based on search text
       const filteredData = originalAppointmentData.filter(appointment =>
