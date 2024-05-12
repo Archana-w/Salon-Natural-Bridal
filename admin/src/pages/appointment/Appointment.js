@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import './Appointment.css';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
+import logosalon from '../../images/logo.png'
 
 function Appointment() {
    var token = useAuthToken();
@@ -52,52 +53,108 @@ function Appointment() {
       });
       setAppointmentData(sortedData);
    };
-   // Function to generate PDF report
-   const generateReport = () => {
-      const doc = new jsPDF();
-      doc.text("Appointment Report", 10, 10);
+// Function to generate PDF report
+const generateReport = () => {
+   const doc = new jsPDF();
 
-      // Get appointments within the week
-      const appointmentsWithinWeek = AppointmentData.filter(appointment => {
-         const appointmentDate = new Date(appointment.date);
-         const today = new Date();
-         const oneWeekAgo = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
-         return appointmentDate >= oneWeekAgo && appointmentDate <= today;
-      });
+   // Add salon name at the top with background color
+   doc.setFillColor(0, 0, 0); // Set background color to yellow
+   doc.rect(0, 0, doc.internal.pageSize.getWidth(), 20, 'F'); // Draw rectangle with background color
+   doc.setFontSize(20);
+   doc.setTextColor(255, 204, 0); // Set font color to red
+   doc.text("Salon Natural Bridal", doc.internal.pageSize.getWidth() / 2, 15, 'center');
 
-      // Count appointments for each service
-      const serviceCounts = {};
-      appointmentsWithinWeek.forEach(appointment => {
-         serviceCounts[appointment.service] = (serviceCounts[appointment.service] || 0) + 1;
-      });
+   // Add report title
+   doc.setTextColor(0, 0, 0); // Reset font color to black
+   doc.setFontSize(16);
+   doc.text("Appointment Report", doc.internal.pageSize.getWidth() / 2, 30, 'center');
 
-      // Count appointments for each stylist
-      const stylistCounts = {};
-      appointmentsWithinWeek.forEach(appointment => {
-         stylistCounts[appointment.name] = (stylistCounts[appointment.name] || 0) + 1;
-      });
+   // Get appointments within the week
+   const today = new Date();
+   const oneWeekAgo = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+   const appointmentsWithinWeek = AppointmentData.filter(appointment => {
+      const appointmentDate = new Date(appointment.date);
+      return appointmentDate >= oneWeekAgo && appointmentDate <= today;
+   });
 
-      // Generate report content
-      doc.text(`Total Appointments within the week: ${appointmentsWithinWeek.length}`, 10, 20);
+   // Count appointments for each service for the week
+   const serviceCountsWeek = {};
+   const stylistCountsWeek = {}; // Initialize object to count stylist appointments
+   appointmentsWithinWeek.forEach(appointment => {
+      serviceCountsWeek[appointment.service] = (serviceCountsWeek[appointment.service] || 0) + 1;
+      stylistCountsWeek[appointment.name] = (stylistCountsWeek[appointment.name] || 0) + 1; // Count stylist appointments
+   });
 
-      // Generate table for most selected services
-      doc.text("Most Selected Services:", 10, 30);
-      doc.autoTable({
-         startY: 40,
-         head: [['Service Name', 'Number of Appointments']],
-         body: Object.entries(serviceCounts),
-      });
+   // Get appointments within the month
+   const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+   const appointmentsWithinMonth = AppointmentData.filter(appointment => {
+      const appointmentDate = new Date(appointment.date);
+      return appointmentDate >= oneMonthAgo && appointmentDate <= today;
+   });
 
-      // Generate table for most popular stylists
-      doc.text("Most Popular Stylists:", 10, doc.autoTable.previous.finalY + 10);
-      doc.autoTable({
-         startY: doc.autoTable.previous.finalY + 20,
-         head: [['Stylist Name', 'Number of Appointments']],
-         body: Object.entries(stylistCounts),
-      });
+   // Count appointments for each service for the month
+   const serviceCountsMonth = {};
+   const stylistCountsMonth = {}; // Initialize object to count stylist appointments
+   appointmentsWithinMonth.forEach(appointment => {
+      serviceCountsMonth[appointment.service] = (serviceCountsMonth[appointment.service] || 0) + 1;
+      stylistCountsMonth[appointment.name] = (stylistCountsMonth[appointment.name] || 0) + 1; // Count stylist appointments
+   });
 
-      doc.save('appointment_report.pdf');
-   };
+   // Generate report content for the week
+doc.setFontSize(14);
+doc.setTextColor(0, 0, 0); // Reset font color to black
+doc.text(`Total Appointments within the week: ${appointmentsWithinWeek.length}`, doc.internal.pageSize.getWidth() / 2, 45, 'center');
+doc.text("Most Selected Services for the Week:", doc.internal.pageSize.getWidth() / 2, 55, 'center');
+doc.autoTable({
+    startY: 65,
+    head: [['Service Name', 'Number of Appointments']],
+    body: Object.entries(serviceCountsWeek),
+    theme: 'plain', // Set theme to 'plain' to disable styling
+    headStyles: { fillColor: [0, 0, 0], textColor: [255, 255, 255] }, // Set text color of table header cells to black
+    alternateRowStyles: { fillColor: [242, 242, 242], textColor: [0, 0, 0] } // Set styles for alternate rows
+});
+doc.text("Most Selected Stylists for the Week:", doc.internal.pageSize.getWidth() / 2, doc.autoTable.previous.finalY + 15, 'center');
+doc.autoTable({
+    startY: doc.autoTable.previous.finalY + 25,
+    head: [['Stylist Name', 'Number of Appointments']],
+    body: Object.entries(stylistCountsWeek),
+    theme: 'plain', // Set theme to 'plain' to disable styling
+    headStyles: { fillColor: [0, 0, 0], textColor: [255, 255, 255] }, // Set text color of table header cells to black
+    alternateRowStyles: { fillColor: [242, 242, 242], textColor: [0, 0, 0] } // Set styles for alternate rows
+});
+
+
+   // Add a new page for monthly appointments
+   doc.addPage();
+
+   // Generate report content for the month
+   doc.setFontSize(14);
+   doc.setTextColor(0, 0, 0); // Reset font color to black
+   doc.text(`Total Appointments within the month: ${appointmentsWithinMonth.length}`, doc.internal.pageSize.getWidth() / 2, 45, 'center');
+   doc.text("Most Selected Services for the Month:", doc.internal.pageSize.getWidth() / 2, 55, 'center');
+   doc.autoTable({
+      startY: 65,
+      head: [['Service Name', 'Number of Appointments']],
+      body: Object.entries(serviceCountsMonth),
+      theme: 'plain', // Set theme to 'plain' to disable styling
+      headStyles: { fillColor: [0, 0, 0], textColor: [255, 255, 255] }, // Set text color of table header cells to black
+    alternateRowStyles: { fillColor: [242, 242, 242], textColor: [0, 0, 0] } // Set styles for alternate rows
+   });
+   doc.text("Most Selected Stylists for the Month:", doc.internal.pageSize.getWidth() / 2, doc.autoTable.previous.finalY + 15, 'center');
+   doc.autoTable({
+      startY: doc.autoTable.previous.finalY + 25,
+      head: [['Stylist Name', 'Number of Appointments']],
+      body: Object.entries(stylistCountsMonth),
+      theme: 'plain', // Set theme to 'plain' to disable styling
+      headStyles: { fillColor: [0, 0, 0], textColor: [255, 255, 255] }, // Set text color of table header cells to black
+    alternateRowStyles: { fillColor: [242, 242, 242], textColor: [0, 0, 0] } // Set styles for alternate rows
+   });
+
+   doc.save('appointment_report.pdf');
+};
+
+
+
 
    return (
       <div className="appointment-list-container">
