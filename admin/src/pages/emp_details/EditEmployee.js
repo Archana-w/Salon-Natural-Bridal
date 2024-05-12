@@ -1,142 +1,111 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Form, Input, Select } from 'antd';
-import { Link } from 'react-router-dom';
+import { Form, Input } from 'antd';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import './EditEmployee.css';
-import { useNavigate, useParams } from 'react-router-dom';
-
-const { Option } = Select;
+import { useAuthToken } from '../../auth';
 
 function EditEmployee() {
-  const [employee, setEmployee] = useState(null);
-  const navigate = useNavigate();
-  const{ employee_id } = useParams();
-
-
-
-  useEffect(() => {
-
   
+    const [employee, setEmployee] = useState(null);
+    const { employee_id } = useParams();
+    const token = useAuthToken();
+    const navigate = useNavigate();
 
-    axios.get(`http://localhost:5000/employee/${employee_id}`)
-      .then(response => {
-        setEmployee(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching employee details:', error);
-      });
-  }, []);
-
-  const onFinish = (values) => {
-    axios.put(`http://localhost:5000/employee/${employee_id}`, values)
-      .then(function (response) {
-        var data = response.data;
-        var status = data.status;
-        if (status === 'success') {
-          navigate('/employees');
+    useEffect(() => {
+        if (token) {
+            axios.post("http://localhost:5000/emp/get_emp", { token, emp_id: employee_id })
+                .then((response) => {
+                    const data = response.data;
+                    if (data.status === "success") {
+                        setEmployee(data.doc);
+                    } else if (data.status === "token_expired" || data.status === "auth_failed") {
+                        navigate("/signout");
+                    } else {
+                        alert("Error - " + data.message);
+                    }
+                })
+                .catch((error) => {
+                    alert("Error fetching employee details");
+                });
         } else {
-          alert(JSON.stringify(data));
+            navigate("/signout");
         }
-      })
-      .catch(function (error) {
-        alert(error);
-      });
-  };
+    }, [token, employee_id, navigate]);
 
-  return (
-    <div className="bg-image">
-      <div className="authentication">
-        <div className="authentication-form card p-2">
-          <h1 className="card-title">EDIT EMPLOYEE DETAILS</h1>
-          {employee && (
-            <Form layout="vertical" onFinish={onFinish} initialValues={employee}>
-              <Form.Item
-                label="First Name"
-                name="first_name"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input employee\'s First Name!',
-                  },
-                ]}
-              >
-                <Input className="signup_input" placeholder="First Name" />
-              </Form.Item>
-              <Form.Item
-                label="Last Name"
-                name="last_name"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input employee\'s Last Name!',
-                  },
-                ]}
-              >
-                <Input className="signup_input" placeholder="Last Name" />
-              </Form.Item>
-              <Form.Item
-                label="Job Role"
-                name="job_role"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please select employee\'s Job Role!',
-                  },
-                ]}
-              >
-                <Select className="signup_input" placeholder="Select Job Role">
-                  <Option value="admin">Admin</Option>
-                  <Option value="stylist">Stylist</Option>
-                  <Option value="receptionist">Receptionist</Option>
-                  <Option value="cashier">Cashier</Option>
-                </Select>
-              </Form.Item>
-              <Form.Item
-                label="Contact Number"
-                name="mobile_number"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input employee\'s Contact Number!',
-                  },
-                ]}
-              >
-                <Input className="signup_input" placeholder="Contact Number" />
-              </Form.Item>
-              <Form.Item
-                label="Email"
-                name="email"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input employee\'s Email!',
-                  },
-                ]}
-              >
-                <Input className="signup_input" placeholder="Email" />
-              </Form.Item>
-              <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input employee\'s Password!',
-                  },
-                ]}
-              >
-                <Input.Password className="signup_input" placeholder="Password" type="password" />
-              </Form.Item>
-              <button className="primary-button" htmltype="submit">SAVE CHANGES</button>
-            </Form>
-          )}
-          <p className="para">
-            Go back to <Link to="/employees" className="anchor">Employees List</Link>
-          </p>
+    const onFinish = (values) => {
+        axios.post("http://localhost:5000/emp/edit", {
+            token,
+            emp_id: employee_id,
+            ...values
+        })
+        .then((response) => {
+            const data = response.data;
+            if (data.status === "success") {
+                setEmployee(data.doc);
+            } else if (data.status === "token_expired" || data.status === "auth_failed") {
+                navigate("/signout");
+            } else {
+                alert("Error - " + data.message);
+            }
+        })
+        .catch((error) => {
+            alert("Error editing employee details");
+        });
+    };
+
+    return (
+        <div className="bg-image">
+            <div className="authentication">
+                <div className="authentication-form card p-2">
+                    <h1 className="card-title">EDIT EMPLOYEE DETAILS</h1>
+                    {employee && (
+                        <Form layout="vertical" onFinish={onFinish} initialValues={employee}>
+                            <Form.Item
+                                label="First Name"
+                                name="first_name"
+                                rules={[{ required: true, message: 'Please input employee\'s First Name!' }]}
+                            >
+                                <Input className="signup_input" placeholder="First Name" />
+                            </Form.Item>
+                            <Form.Item
+                                label="Last Name"
+                                name="last_name"
+                                rules={[{ required: true, message: 'Please input employee\'s Last Name!' }]}
+                            >
+                                <Input className="signup_input" placeholder="Last Name" />
+                            </Form.Item>
+                            <Form.Item
+                                label="Contact Number"
+                                name="mobile_number"
+                                rules={[{ required: true, message: 'Please input employee\'s Contact Number!' }]}
+                            >
+                                <Input className="signup_input" placeholder="Contact Number" />
+                            </Form.Item>
+                            <Form.Item
+                                label="Email"
+                                name="email"
+                                rules={[{ required: true, message: 'Please input employee\'s Email!' }]}
+                            >
+                                <Input className="signup_input" placeholder="Email" />
+                            </Form.Item>
+                            <Form.Item
+                                label="NIC"
+                                name="nic"
+                                rules={[{ required: true, message: 'Please input employee\'s NIC!' }]}
+                            >
+                                <Input className="signup_input" placeholder="NIC" />
+                            </Form.Item>
+                            <button className="primary-button" type="submit">SAVE CHANGES</button>
+                        </Form>
+                    )}
+                    <p className="para">
+                        Go back to <Link to="/employees" className="anchor">Employees List</Link>
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default EditEmployee;

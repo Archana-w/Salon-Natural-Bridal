@@ -61,7 +61,7 @@ function App() {
           <Route path='/emp_add:id' Component={AddEmp}></Route>
           <Route path='/service_view' Component={Service_view}></Route>
           <Route path='/add_service' Component={Add_Service}></Route>
-          <Route path='/emp_details/EditEmployee/:employee_id' Component={EditEmployee}></Route>
+          <Route path='/edit/:employee_id' Component={EditEmployee}></Route>
           <Route path='/inventory' Component={Inventory}></Route>
           <Route path='/inventory/ProductForm' Component={ProductForm}></Route>
           <Route path='/income_expenses' Component={IncomeEp}></Route>   

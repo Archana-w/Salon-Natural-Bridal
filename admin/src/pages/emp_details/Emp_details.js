@@ -18,6 +18,7 @@ function Emp_details() {
       axios.post("http://localhost:5000/emp/get", { token: token }).then((response) => {
         const data = response.data;
         const status = data.status;
+        console.log(data)
         if (status === "success") {
           setEmployeeData(data.data);
         } else if (status === "token_expired" || status === "auth_failed") {
@@ -33,6 +34,38 @@ function Emp_details() {
       navigate("/signout");
     }
   }, [token, update, navigate]);
+
+  //delete
+  const deleteEmp = (id) => {
+
+    if (token != null) {
+
+       axios.post("http://localhost:5000/emp/delete", { token: token,employee_id: id}).then((response) => {
+
+         var data = response.data;
+          var status = data.status;
+
+          console.log(response.data);
+          if (status == "success") {
+             alert("Employee deleted Successfully!!..");
+             setUpdate(update+1);
+          } else if (status == "token_expired" || status == "auth_failed" || status == "access_denied") {
+             navigate("/signout");
+          } else {
+             var message = data.message;
+             alert("Error - " + message);
+          }
+
+       }).catch((error) => {
+          alert("Error 2 - " + error);
+       });
+
+    } else {
+       navigate("/signout");
+    }
+
+ };
+
 
   const sortTable = (key) => {
     let direction = 'asc';
@@ -107,9 +140,7 @@ function Emp_details() {
                 </Link>
               </td>
               <td>
-                <Link to={`/delete/${employee.employee_id}`}>
-                  <button className='delete_btn'>Delete</button>
-                </Link>
+                <button className='delete_btn' onClick={()=>deleteEmp(employee.employee_id)}>Delete</button>
               </td>
             </tr>
           ))}
