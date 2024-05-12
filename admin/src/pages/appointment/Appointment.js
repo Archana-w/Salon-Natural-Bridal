@@ -12,13 +12,14 @@ function Appointment() {
    const [originalAppointmentData, setOriginalAppointmentData] = useState([]);
    const [filteredAppointmentData, setFilteredAppointmentData] = useState([]);
    const [searchText, setSearchText] = useState("");
+   const [update, setUpdate] = useState(0);
 
    useEffect(() => {
       if (token != null) {
          axios.post("http://localhost:5000/appointment/admin_get", { token: token }).then((response) => {
             var data = response.data;
             var status = data.status;
-
+console.log(data)
             if (status === "success") {
                const appointments = data.data;
                setOriginalAppointmentData(appointments);
@@ -38,12 +39,47 @@ function Appointment() {
       }
    }, [token, navigate]);
 
+   //Delete
+   const deleteApp = (id) => {
+
+      if (token != null) {
+  
+         axios.post("http://localhost:5000/appointment/delete", { token: token,appointment_id: id}).then((response) => {
+  
+           var data = response.data;
+            var status = data.status;
+  
+            console.log(response.data);
+            if (status == "success") {
+               alert("Appointment deleted Successfully!!..");
+               setUpdate(update+1);
+            } else if (status == "token_expired" || status == "auth_failed" || status == "access_denied") {
+               navigate("/signout");
+            } else {
+               var message = data.message;
+               alert("Error - " + message);
+            }
+  
+         }).catch((error) => {
+            alert("Error 2 - " + error);
+         });
+  
+      } else {
+         navigate("/signout");
+      }
+  
+   };
+  
+  
+
    useEffect(() => {
       // Filter appointment data based on search text
       const filteredData = originalAppointmentData.filter(appointment =>
          appointment.appointment_id.toLowerCase().includes(searchText.toLowerCase()) ||
          appointment.service.toLowerCase().includes(searchText.toLowerCase()) ||
-         appointment.name.toLowerCase().includes(searchText.toLowerCase())
+         appointment.name.toLowerCase().includes(searchText.toLowerCase())||
+         appointment.date.toLowerCase().includes(searchText.toLowerCase()) ||
+         appointment.time.toLowerCase().includes(searchText.toLowerCase())
       );
       setFilteredAppointmentData(filteredData);
    }, [originalAppointmentData, searchText]);
@@ -174,7 +210,6 @@ function Appointment() {
          <div className='appointment-filter-bar'>
             <input className='appointment-filter-search' value={searchText} onChange={(e) => setSearchText(e.target.value)} placeholder="Search appointment" type="text" />
             <button className='appointment-filter-search-btn' onClick={searchAppointment}>Search</button>
-            <button className='add_app_btn'>Add Appointment</button>
             <button className='generate_report_btn' onClick={generateReport}>Generate Report</button>
          </div>
         
@@ -186,8 +221,6 @@ function Appointment() {
                   <th onClick={() => sortData('date')}>Date</th>
                   <th onClick={() => sortData('time')}>Time</th>
                   <th onClick={() => sortData('name')}>Stylist Name</th>
-                  <th>Edit</th> 
-                  <th>Delete</th> 
                </tr>
             </thead>
             <tbody>
@@ -203,16 +236,7 @@ function Appointment() {
                      <td>{appointment.date}</td>
                      <td>{appointment.time}</td>
                      <td>{appointment.name}</td>
-                     <td>
-                        <Link>
-                           <button className='edt_btn'>Edit</button>
-                        </Link>
-                     </td>
-                     <td>
-                        <Link>
-                           <button className='delete_btn'>Delete</button>
-                        </Link>
-                     </td>
+                     
                   </tr>
                ))}
             </tbody>
