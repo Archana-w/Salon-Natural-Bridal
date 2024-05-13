@@ -165,7 +165,8 @@ function Inventory() {
          // Filter productData based on searchText
     const filteredProducts = productData.filter(product => {
       // Convert both product name and search text to lowercase for case-insensitive search
-      return product.product_name.toLowerCase().includes(searchText.toLowerCase());
+      return product.category.toLowerCase().includes(searchText.toLowerCase());
+      
    });
 
   // Update productData state with filtered products
@@ -230,7 +231,7 @@ function Inventory() {
                         <td>{product.quantity_available}</td>
                         <td>{product.weight} g</td>
                         <td>Rs.{product.price}.00</td>
-                        <td>Rs.{product.discount}.00</td>
+                        <td>{product.discount}%</td>
                         <td>
                         <Link to={`/editProduct/${product._id}`}>
                            <button className='edt_btn'>Edit</button>
