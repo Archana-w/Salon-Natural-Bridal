@@ -100,7 +100,7 @@ function AddEmp() {
     return (
 
         <div className="employee-form-container">
-            <h2>Employee Form</h2>
+            <h2>Add Employee</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>First Name:</label>
