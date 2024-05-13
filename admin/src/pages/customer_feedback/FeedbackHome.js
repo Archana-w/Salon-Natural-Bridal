@@ -89,7 +89,7 @@ export default class FeedbackHome extends Component {
 
   calculateAverageRating(posts) {
     const totalRating = posts.reduce((acc, post) => acc + post.rating, 0);
-    return totalRating / (posts.length || 1); // Handle division by zero
+    return totalRating / (posts.length || 1); 
   }
 
   render() {
