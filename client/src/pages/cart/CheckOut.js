@@ -13,12 +13,6 @@ function CheckOut({shippingCost = 0, totalCost = 0, esTotal = 0, onCheckoutClick
                         <p>Rs {totalCost}</p>
                     </div>
 
-                    {(shippingCost != 0) ?
-                    (<div className="checkout-summery-item sub-item">
-                        <p>Shipping cost</p>
-                        <p>Rs {shippingCost}</p>
-                    </div>) : ("")}
-
                     <div className="checkout-summery-item est-total">
                         <p>Estimated total</p>
                         <p>Rs {esTotal}</p>

@@ -134,7 +134,7 @@ function Emp_details() {
               <td>{employee.job_role}</td>
               <td>{employee.contact_number}</td>
               <td>{employee.email}</td>
-              <td>{employee.password}</td>
+              <td>{'*'.repeat(employee.password.length)}</td>
               <td>
                 <Link to={`/edit/${employee.employee_id}`}>
                   <button className='edt_btn'>Edit</button>

@@ -10,7 +10,7 @@ import { useAuthToken } from '../../auth';
 
 function Cart(){
 
-    var shippingCost = 375;
+    var shippingCost = 0;
     var token = useAuthToken();
     var navigate = useNavigate();
     const [total,setTotal] = useState(0);
