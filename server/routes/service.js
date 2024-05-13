@@ -99,4 +99,15 @@ router.delete("/delete/:sid", async (req, res) => {
   }
 });
 
+router.get('/check/:sName', async (req, res) => {
+  const serviceName = req.params.sName;
+  try {
+    const existingService = await Service.findOne({ sName: serviceName });
+    res.status(200).json({ exists: !!existingService });
+  } catch (error) {
+    console.error("Error checking service name:", error);
+    res.status(500).json({ error: "Error checking service name" });
+  }
+});
+
 module.exports = router;
