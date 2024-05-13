@@ -88,3 +88,19 @@
     width: 100px;
 
 }
+
+.generate_report_btn {
+    width: 150px;
+    height: 40px;
+    display: block !important;
+    margin-left: 760px; /* Adjust margin as needed */
+    background: rgb(51, 51, 51);
+    color: white;
+    font-size: 14px;
+    border-radius: 10px;
+    border: none !important;
+}
+
+.generate_report_btn:hover {
+    background-color: rgba(0, 0, 0, 0.721);
+}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Customer.css';
 import { useAuthToken } from '../../auth';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 function Customer() {
     const token = useAuthToken();
@@ -32,6 +32,9 @@ function Customer() {
             navigate("/signout");
         }
     }, [token, navigate]);
+
+
+
 
     function searchCustomerId() {
         setUpdate(update + 1);
@@ -87,8 +90,6 @@ function Customer() {
                         <th onClick={() => handleSort('mobile_number')}>Contact number</th>
                         <th onClick={() => handleSort('email')}>Email</th>
                         <th>Password</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -104,16 +105,7 @@ function Customer() {
                             <td>{customer.mobile_number}</td>
                             <td>{customer.email}</td>
                             <td>{'*'.repeat(customer.password.length)}</td>
-                            <td>
-                                <Link to={`/edit/${customer._id}`}>
-                                    <button className='edt_btn'>Edit</button>
-                                </Link>
-                            </td>
-                            <td>
-                                <Link to={`/delete/${customer._id}`}>
-                                    <button className='delete_btn'>Delete</button>
-                                </Link>
-                            </td>
+                             
                         </tr>
                     ))}
                 </tbody>

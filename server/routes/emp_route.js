@@ -92,8 +92,6 @@ route.route("/edit").post((req, res) => {
             var lastName = req.body.last_name;
             var mobileNumber = req.body.mobile_number;
             var email = req.body.email;
-            var password = req.body.password;
-            var empType = req.body.emp_type;
             var nic = req.body.nic;
 
             //validate details
@@ -102,8 +100,6 @@ route.route("/edit").post((req, res) => {
                 lastName == null || lastName == "" ||
                 mobileNumber == null || mobileNumber == "" ||
                 email == null || email == "" ||
-                password == null || password == "" ||
-                empType == null || empType == "" ||
                 nic == null || nic == "") {
 
                 res.send({ "status": "required_failed", "message": "Please send required details." });
@@ -111,7 +107,7 @@ route.route("/edit").post((req, res) => {
                 return;
             }
 
-            User.findOneAndUpdate({_id:empId},{}).then(()=>{
+            User.findOneAndUpdate({_id:empId},{first_name:firstName,last_name:lastName,mobile_number:mobileNumber,email:email,nic:nic}).then(()=>{
                 res.send({ "status": "success", "message": "Emp details changed." });
             }).catch((e) => {
                 res.send({ "status": "failed", "message": "Somthing error. Please try again." });
@@ -181,22 +177,12 @@ route.route("/get_emp").post((req,res)=>{
               return;
             }
 
-            User.find({_id:empId,type:"employee"}).then(async (doc)=>{
+            User.findOne({_id:empId,type:"employee"}).then(async (doc)=>{
 
-                var empDoc = doc;
-                var fullName = empDoc.first_name + " " + empDoc.last_name;
-                var emp = { employee_id: empDoc._id,
-                        name:fullName,
-                        contact_number:empDoc.mobile_number,
-                        job_role: empTypeResult.type,
-                        email: empDoc.email,
-                        password: empDoc.password
-                        };
-
-                res.send({ status: "success", emp });
+                res.send({ status: "success", doc });
 
             }).catch((e)=>{
-                res.send(e);
+                res.send("Error - "+e);
             });
 
 

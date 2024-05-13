@@ -79,7 +79,7 @@
   padding-top: 100px;
 }
 
-.lower-container {
+.lower_pcontainer{
   width: 800px;
   height: 620px;
   background-color: white;
@@ -92,7 +92,7 @@
 }
 
 .profile_details {
-  height: 600px;
+  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,11 +101,11 @@
 
 }
 
-.profile_details-form {
+.profile_details_form {
   background-color: rgba(175, 175, 175, 0.353);
   backdrop-filter: blur(30px);
-  width: 500px;
-  height: 600px;
+  width: 770px;
+  height: 550px;
   padding-left: 140px;
   padding-right: 140px;
   color: black;
@@ -117,7 +117,7 @@
   box-shadow: none !important;
 }
 
-.card-title {
+.card_title {
   text-align: center;
   color: black;
 }
@@ -128,14 +128,15 @@
   background-color: white !important;
   border: white !important;
   width: 500px;
-  height: 35px;
+  height: 40px;
   padding: 5px;
   margin-top: 10px;
   margin-bottom: 50px;
-  color: black;
   font-weight: bold;
   border-radius: 5px;
   color: rgb(94, 94, 94);
+
+  
 }
 
 .profile_input:focus {
@@ -156,6 +157,7 @@
   margin-bottom: 20px;
   margin-right: 35px;
   border-radius: 5px;
+  padding: 5px;
   border: none !important;
 }
 

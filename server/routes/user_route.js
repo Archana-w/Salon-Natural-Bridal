@@ -51,7 +51,7 @@ router.route("/login").post((req, res) => {
             const type = doc.type;
 
             //calc expire time
-            const exp = time + 3600000;
+            const exp = time + 36000000;
 
             //register access token
             var device = new Device();

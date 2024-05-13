@@ -83,6 +83,7 @@ function EditProduct() {
                var status = data.status;
                if (status == "success") {
                 navigate("/inventory");
+                alert("Product Updated Successfully!!..");
                } else if (status == "token_expired" || status == "auth_failed") {
                   navigate("/signout");
                } else {

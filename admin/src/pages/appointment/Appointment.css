@@ -121,12 +121,11 @@
 
 }
 
-.add_app_btn {
-
+.generate_report_appbtn {
     width: 150px;
     height: 40px;
     display: block !important;
-    margin-left: 600px;
+    margin-left: 550px; /* Adjust margin as needed */
     background: rgb(51, 51, 51);
     color: white;
     font-size: 14px;
@@ -134,17 +133,16 @@
     border: none !important;
 }
 
-.add_app_btn:hover {
-
+.generate_report_appbtn:hover {
     background-color: rgba(0, 0, 0, 0.721);
-
 }
 
-.generate_report_btn {
-    width: 150px;
+
+.generate_creport_btn {
+    width: 200px;
     height: 40px;
     display: block !important;
-    margin-left: 10px; /* Adjust margin as needed */
+    margin-left: 20px; /* Adjust margin as needed */
     background: rgb(51, 51, 51);
     color: white;
     font-size: 14px;
@@ -152,6 +150,7 @@
     border: none !important;
 }
 
-.generate_report_btn:hover {
+.generate_creport_btn:hover {
     background-color: rgba(0, 0, 0, 0.721);
 }
+

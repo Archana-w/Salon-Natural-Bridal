@@ -22,6 +22,11 @@ import Inventory from './pages/inventory/Inventory';
 import ProductForm from './pages/inventory/ProductForm';
 import IncomeEp from './pages/income/Homepage'
 import EditProduct from './pages/inventory/EditProduct'
+import FeedbackHome from './pages/customer_feedback/FeedbackHome';
+import PostDetails from './pages/customer_feedback/PostDetails';
+import FeedBackReply from './pages/customer_feedback/FeedbackReply';
+import Order from './pages/orders/OrderView';
+
 
 function App() {
   var token = useAuthToken();
@@ -51,18 +56,21 @@ function App() {
           <Route path='/emp_salary' Component={Emp_salary}></Route>
           <Route path='/emp_leaves' Component={Emp_leaves}></Route>
           <Route path='/orders' Component={Orders}></Route>
-          <Route path='/orders' Component={Orders}></Route>
+          <Route path='/order/:id' Component={Order}></Route>
           <Route path='/emp_add' Component={AddEmp}></Route>
           <Route path='/emp_add:id' Component={AddEmp}></Route>
           <Route path='/service_view' Component={Service_view}></Route>
           <Route path='/add_service' Component={Add_Service}></Route>
-          <Route path='/emp_details/EditEmployee/:employee_id' Component={EditEmployee}></Route>
+          <Route path='/edit/:employee_id' Component={EditEmployee}></Route>
           <Route path='/inventory' Component={Inventory}></Route>
           <Route path='/inventory/ProductForm' Component={ProductForm}></Route>
           <Route path='/income_expenses' Component={IncomeEp}></Route>   
           <Route path='/editProduct/:id' Component={EditProduct}></Route>
           <Route path='/income_expenses' Component={IncomeEp}></Route>
           <Route path='/inventory' Component={Inventory}></Route>
+          <Route path='/feedback_home' Component={FeedbackHome}></Route>
+          <Route path='/post/:id' Component={PostDetails}></Route>
+          <Route path='/feedbackreply/:id' Component={FeedBackReply}></Route>
 
         </Routes>
 
