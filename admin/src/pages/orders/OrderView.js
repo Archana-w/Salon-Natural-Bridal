@@ -21,6 +21,7 @@ function OrderView() {
                 var data = response.data;
                 var status = data.status;
                 if (status == "success") {
+                    console.log(data);
                     setOrderData(data);
                 } else if (status == "token_expired" || status == "auth_failed" || status == "access_denied") {
                     navigate("/signout");
@@ -94,6 +95,52 @@ function OrderView() {
                     </select>
                 </div>
             </div>
+
+            <div className="order-summary">
+                <p><strong>Payment Method:</strong> {orderData.paymentMethod}</p>
+                <p><strong>Payment Status:</strong> {orderData.paymentStatus}</p>
+                <p><strong>Total:</strong> Rs {orderData.total}</p>
+            </div>
+
+            <div className="order-products">
+                <h3>Products:</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Thumbnail</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {(orderData.products != undefined) ? (
+                            orderData.products.map((product) => (
+
+                                <tr>
+                                    <td><img src={"http://localhost:5000/image/"+product.thumbnail} alt={product.product_name} /></td>
+                                    <td>{product.product_name}</td>
+                                    <td>{product.quantity}</td>
+                                </tr>
+
+                            ))
+                        ) : ("")}
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div className="delivery-address">
+                <h3>Delivery Address:</h3>
+                {(orderData.address != undefined)?(
+                    <center>
+                        <p><strong>Name:</strong> {orderData.address.name}</p>
+                        <p><strong>Address:</strong> {orderData.address.address}</p>
+                        <p><strong>Phone Number:</strong> {orderData.address.phone_number}</p>
+                    </center>
+                ):("")}
+            </div>
+
 
         </>
 

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Leave = require("../models/Leave");
+const User = require("../models/User");
 
 router.route("/add").post((req,res)=>{
 
@@ -54,8 +55,21 @@ router.route("/get").post((req,res)=>{
 
             const userId = req.current_user.user_id;
 
-            Leave.find().then((doc)=>{
-                res.send({status:"success",data:doc});
+            Leave.find().then(async (doc)=>{
+
+                var arr = new Array();
+                for(var i = 0; i < doc.length; i++){
+
+                    var item = doc[i];
+
+                    var userResult = await User.findOne({_id:item.user_id});
+
+                    var result = {item,user:userResult}
+                    arr.push(result);
+                }
+
+
+                res.send({status:"success",data:arr});
             });
 
         } else {
