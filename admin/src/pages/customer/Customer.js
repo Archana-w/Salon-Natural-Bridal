@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Customer.css';
 import { useAuthToken } from '../../auth';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 function Customer() {
     const token = useAuthToken();

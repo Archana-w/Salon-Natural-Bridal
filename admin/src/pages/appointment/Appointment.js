@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuthToken } from '../../auth';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import './Appointment.css';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
