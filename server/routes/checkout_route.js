@@ -16,6 +16,7 @@ router.route("/place").post(async (req,res)=>{
         const userId = req.current_user.user_id;
         const addressId = req.body.address_id;
         const paymentMethod = req.body.payment_method;
+        const dCost = req.body.d_cost;
 
         if (addressId == null || addressId == "" ||
             paymentMethod == null || paymentMethod == ""){
@@ -109,6 +110,7 @@ router.route("/place").post(async (req,res)=>{
             await orderItem.save();
 
         }
+        total = total + parseInt(dCost);
 
         //update order
         await Order.findOneAndUpdate({ _id: orderResult._id }, { total: total,status:"pending"});
@@ -133,11 +135,13 @@ router.route("/address/add").post((req,res)=>{
         const name = req.body.name;
         const addressInput = req.body.address;
         const phoneNumber = req.body.phone_number;
+        const cost = req.body.cost;
 
         //validate data
         if (name == null || name == "" ||
             addressInput == null || addressInput == "" ||
-            phoneNumber == null || phoneNumber == "") {
+            phoneNumber == null || phoneNumber == "" ||
+            cost == null || cost== "") {
             res.send({ status: "required_failed", "message": "Required values are not received." });
             return;
         }
@@ -147,6 +151,7 @@ router.route("/address/add").post((req,res)=>{
         address.name = name;
         address.address = addressInput;
         address.phone_number = phoneNumber;
+        address.delevery_cost = cost;
 
         address.save().then(()=>{
             res.send({ status: "success", message: "Address saved." });

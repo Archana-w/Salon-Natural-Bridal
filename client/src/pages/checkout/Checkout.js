@@ -17,8 +17,10 @@ function Checkout(){
     const [addressPhoneNumber, setAddressPhoneNumber] = useState(null);
     const [total, setTotal] = useState(0);
     const [cartData, setCartData] = useState([]);
-
+    const[deliveryCost,setDeliveryCost] = useState(0);
     const[deliveryAddressId,setDeliveryAddressId] = useState(null);
+    const[selectedDeliveryCost,setSelectedDeliveryCost] = useState(0);
+
 
     const [paymentMethod, setPaymentMethod] = useState('COD');
     const [cardDetails, setCardDetails] = useState({
@@ -27,6 +29,14 @@ function Checkout(){
         expiryDate: '',
         cvv: ''
     });
+
+    const shippingConstData = [
+        {d_name:"Kurunegala",cost:200},
+        {d_name:"Puttalam",cost:300},
+        {d_name:"Colombo",cost:150},
+        {d_name:"Gampaha",cost:150},
+        {d_name:"Jafna",cost:400}
+    ]
 
     const handlePaymentMethodChange = (event) => {
         setPaymentMethod(event.target.value);
@@ -84,6 +94,7 @@ function Checkout(){
             var data = response.data;
             var status = data.status;
             if (status == "success") {
+                console.log(data.data);
                 setAddressData(data.data);
                 setLoading(false);
             } else if (status == "token_expired" || status == "auth_failed") {
@@ -110,12 +121,18 @@ function Checkout(){
     }
 
     function saveAddress(){
-        
+
+        //check d address ready
+        if(deliveryCost == 0){
+            alert("Please select your district.");
+            return;
+        }
+
         if(addressName != null && addressText != null && addressPhoneNumber != null){
 
             setLoading(true);
 
-            axios.post("http://localhost:5000/checkout/address/add", { token: token, name: addressName, address: addressText, phone_number: addressPhoneNumber }).then((response) => {
+            axios.post("http://localhost:5000/checkout/address/add", { token: token, cost: deliveryCost, name: addressName, address: addressText, phone_number: addressPhoneNumber }).then((response) => {
 
                 var data = response.data;
                 var status = data.status;
@@ -164,9 +181,9 @@ function Checkout(){
         
         var requestBody;
         if (paymentMethod == "COD"){
-            requestBody = { token: token, address_id: deliveryAddressId, payment_method:"cash_on_delivery" };    
+            requestBody = { token: token, d_cost: selectedDeliveryCost, address_id: deliveryAddressId, payment_method:"cash_on_delivery" };    
         }else{
-            requestBody = { token: token, address_id: deliveryAddressId, payment_method: "card", card_holder_name: cardDetails.cardHolderName, card_number: cardDetails.cardNumber, card_expire: cardDetails.expiryDate, card_security_code: cardDetails.cvv};    
+            requestBody = { token: token, d_cost: selectedDeliveryCost, address_id: deliveryAddressId, payment_method: "card", card_holder_name: cardDetails.cardHolderName, card_number: cardDetails.cardNumber, card_expire: cardDetails.expiryDate, card_security_code: cardDetails.cvv};    
         }
 
         axios.post("http://localhost:5000/checkout/place", requestBody).then((response) => {
@@ -224,7 +241,7 @@ function Checkout(){
 
                                     <div className="address">
                                         <div className="address-radio">
-                                            <input onChange={() => setDeliveryAddressId(item._id)} type="radio" name="address" />
+                                            <input onChange={()=>{setDeliveryAddressId(item._id); setSelectedDeliveryCost(item.delevery_cost);}} type="radio" name="address" />
                                         </div>
                                         <div className="address-main">
                                             <label className="address-name">{item.name}</label>
@@ -317,7 +334,9 @@ function Checkout(){
                             <div className="order-summary">
                                 <h3>Order Summary</h3>
                                 {/* Your order summary content goes here */}
-                                <p>Total: Rs {total}</p>
+                                <p>Products Total: Rs {total}</p>
+                                <p>Delivery cost: Rs {selectedDeliveryCost}</p>
+                                <p>Total: Rs {total+selectedDeliveryCost}</p>
                                 <button onClick={placeOrder} className="place-order-button">Place Order</button>
                             </div>
 
@@ -340,6 +359,16 @@ function Checkout(){
                             <input onChange={(e) => setAddressName(e.target.value)} placeholder='Name' type='text' /><br />
                             <input onChange={(e) => setAddressText(e.target.value)} placeholder='Address' type='text' /><br />
                             <input onChange={(e) => setAddressPhoneNumber(e.target.value)} placeholder='Phone number' type='text' /><br />
+                          
+                            <select onChange={(e)=>setDeliveryCost(parseInt(e.target.value))}>
+                                <option value="0">Select destrict</option>
+                                {shippingConstData.map((item)=>(
+                                    <option value={item.cost}>{item.d_name}</option>
+                                ))}
+                            </select>
+
+                            <br></br>
+                            
                             <button onClick={saveAddress}>Save</button>
                         </div>
                     </div>

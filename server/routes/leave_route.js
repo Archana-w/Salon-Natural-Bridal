@@ -64,8 +64,14 @@ router.route("/get").post((req,res)=>{
 
                     var userResult = await User.findOne({_id:item.user_id});
 
-                    var result = {item,user:userResult}
-                    arr.push(result);
+                    if(userResult){
+
+                        var result = {item,user:userResult}
+                        arr.push(result);
+
+
+                    }
+
                 }
 
 

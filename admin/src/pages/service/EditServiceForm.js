@@ -47,7 +47,7 @@ function EditServiceForm({ service, onUpdate, onCancel }) {
                 <textarea id="sDescription" name="sDescription" className="form-control" value={editedService.sDescription} onChange={handleChange} />
             </div>
             <button type="submit" className="service-btn-primary">Update</button>
-            <button onClick={handleCancel} className="service-btn-primary">Cancel</button>
+            <button onClick={handleCancel} className="service-btn-primary1">Cancel</button>
         </form>
     );
 }

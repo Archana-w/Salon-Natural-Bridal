@@ -39,7 +39,7 @@ function AddEmp() {
                 var status = data.status;
                 if (status == "success") {
                     alert("Employee added");
-                    sendWelcomeEmail(jsonData.email, jsonData.password);
+                    //sendWelcomeEmail(jsonData.email, jsonData.password);
                 } else if (status == "token_expired" || status == "auth_failed") {
                     navigate("/signout");
                 } else {
@@ -74,17 +74,6 @@ function AddEmp() {
             navigate("/signout");
         }
     }, []);
-
-    const sendWelcomeEmail = (email, password) => {
-        emailjs.send("service_cdlk97d", "template_ccwq2z9", {
-            to_email: email,
-            password: password
-        }).then((response) => {
-            console.log("Email sent successfully", response);
-        }).catch((error) => {
-            console.error("Error sending email", error);
-        });
-    };
 
     return (
 

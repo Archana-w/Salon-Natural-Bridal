@@ -142,26 +142,21 @@
   }
 
   .edit-btn {
-    background-color: #558fce;
+    background-color: #4f8ecece;
     color: #fff;
   }
   
   .delete-btn {
-    background-color: #da4655;
+    background-color: #da4655ce;
     color: #fff;
   }
   
 
   .service_report{
     margin-left: 5%;
-    margin-top: 20px;
-    height: 30px;
+    margin-bottom: 20px;
+    height: 20px;
     float: right;
-    margin-bottom: 40px;
-  }
-  
-  .service_report_button{
-    height: 30px;
-    
+    border-radius: 10px;
   }
   

@@ -6,7 +6,7 @@ function AddService() {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [priceError, setPriceError] = useState("");
   
-  function sentData(data) {
+  async function sentData(data) {
     const formData = new FormData();
     formData.append("sName", data.sName);
     formData.append("sPrice", data.sPrice);
@@ -14,23 +14,34 @@ function AddService() {
     formData.append("sType", data.sType);
     formData.append("image", data.image[0]); 
   
-    axios.post("http://localhost:5000/service/add", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
-      .then(() => {
-        alert("Service added");
-        reset(); // Reset the form after successfully adding the service
+    try {
+      const response = await axios.get(`http://localhost:5000/service/check/${data.sName}`);
+      if (response.data.exists) {
+        alert("Service name already exists, please choose a different name.");
+        return;
+      }
+  
+      axios.post("http://localhost:5000/service/add", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       })
-      .catch((err) => {
-        if (err.response && err.response.data && err.response.data.error) {
-          alert(err.response.data.error); // Display error message from the server
-        } else {
-          console.error("Error:", err); // Log the full error for debugging
-          alert("An error occurred while adding the service.");
-        }
-      });
+        .then(() => {
+          alert("Service added");
+          reset();
+        })
+        .catch((err) => {
+          if (err.response && err.response.data && err.response.data.error) {
+            alert(err.response.data.error); 
+          } else {
+            console.error("Error:", err); 
+            alert("An error occurred while adding the service.");
+          }
+        });
+    } catch (error) {
+      console.error("Error checking service name:", error);
+      alert("An error occurred while checking the service name.");
+    }
   }
 
   function onSubmit(data) {

@@ -5,7 +5,8 @@ const addressSchema = new Schema({
     user_id: { type: String, required: true },
     name:{type:String,required:true},
     address:{type:String,required:true},
-    phone_number:{type:String,required:true}
+    phone_number:{type:String,required:true},
+    delevery_cost:{type:Number,required:true}
 });
 
 const address = mongoose.model("address", addressSchema);

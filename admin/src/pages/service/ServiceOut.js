@@ -90,19 +90,21 @@ function ServiceList() {
   });
 
   const handleDownloadReport = () => {
-    const columns = ["sType", "sName", "sPrice", "createdAt"];
-    const title = "Bidding Report";
+    // Get current date and time
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.toLocaleDateString()} ${currentDate.toLocaleTimeString()}`;
+  
+    const columns = ["sType", "sName", "sPrice", "createdAt", "Downloaded At"];
+    const title = `Service - ${formattedDate}`;
     const fileName = "bidding_report";
     const formattedData = filteredServices.map((service) => ({
       ...service,
       createdAt: service.createdAt.split("T")[0],
+      "Downloaded At": formattedDate, // Add downloaded date and time to each row
     }));
     generatePDF(title, columns, formattedData, fileName);
   };
-
-  const expandDescription = (description) => {
-    alert(description);
-  };
+  
 
   return (
     <div className="containerso">
