@@ -43,6 +43,8 @@ function Appointment() {
         // Filter appointment data based on search text
         const filteredData = originalAppointmentData.filter(appointment =>
             appointment.appointment_id.toLowerCase().includes(searchText.toLowerCase()) ||
+            appointment.customer_name.toLowerCase().includes(searchText.toLowerCase()) ||
+            appointment.customer_mobile_number.toLowerCase().includes(searchText.toLowerCase()) ||
             appointment.service.toLowerCase().includes(searchText.toLowerCase()) ||
             appointment.name.toLowerCase().includes(searchText.toLowerCase()) ||
             appointment.date.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -179,6 +181,8 @@ const generateCurrentReport = () => {
    // Filtered appointment data based on search text
    const filteredData = originalAppointmentData.filter(appointment =>
        appointment.appointment_id.toLowerCase().includes(searchText.toLowerCase()) ||
+       appointment.customer_name.toLowerCase().includes(searchText.toLowerCase()) ||
+       appointment.customer_mobile_number.toLowerCase().includes(searchText.toLowerCase()) ||
        appointment.service.toLowerCase().includes(searchText.toLowerCase()) ||
        appointment.name.toLowerCase().includes(searchText.toLowerCase()) ||
        appointment.date.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -187,8 +191,8 @@ const generateCurrentReport = () => {
 
    // Generate report content from filtered appointments data
    doc.autoTable({
-       head: [['Appointment ID', 'Service Name', 'Date', 'Time', 'Stylist Name']],
-       body: filteredData.map(appointment => [appointment.appointment_id, appointment.service, appointment.date, appointment.time, appointment.name]),
+       head: [['Appointment ID','Customer Name', 'Contact Number','Service Name', 'Date', 'Time', 'Stylist Name']],
+       body: filteredData.map(appointment => [appointment.appointment_id,appointment.customer_name,appointment.customer_mobile_number, appointment.service, appointment.date, appointment.time, appointment.name]),
        theme: 'plain', // Set theme to 'plain' to disable styling
        headStyles: { fillColor: [0, 0, 0], textColor: [255, 255, 255] }, // Set text color of table header cells to black
        alternateRowStyles: { fillColor: [242, 242, 242], textColor: [0, 0, 0] } // Set styles for alternate rows
@@ -212,6 +216,8 @@ const generateCurrentReport = () => {
                 <thead>
                     <tr>
                         <th onClick={() => sortData('appointment_id')}>Appointment ID</th>
+                        <th onClick={() => sortData('customer_name')}>Customer Name</th>
+                        <th onClick={() => sortData('customer_mobile_number')}>Contact Number</th>
                         <th onClick={() => sortData('service')}>Service Name</th>
                         <th onClick={() => sortData('date')}>Date</th>
                         <th onClick={() => sortData('time')}>Time</th>
@@ -227,6 +233,8 @@ const generateCurrentReport = () => {
                                     <span onClick={() => copyAppointmentId(appointment.appointment_id)} className="material-icons-round">copy</span>
                                 </div>
                             </td>
+                            <td>{appointment.customer_name}</td>
+                            <td>{appointment.customer_mobile_number}</td>
                             <td>{appointment.service}</td>
                             <td>{appointment.date}</td>
                             <td>{appointment.time}</td>

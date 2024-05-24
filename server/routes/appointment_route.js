@@ -237,6 +237,7 @@ router.route("/admin_get").post((req, res) => {
                     var item = doc[i];
 
                     var id = item._id;
+                    var appUserId = item.user_id;
                     var stylishId = item.stylist_id;
                     var appTime = item.appoinment_time;
                     var appDate = item.appoinment_date;
@@ -266,13 +267,20 @@ router.route("/admin_get").post((req, res) => {
                     //remove first comma
                     service = service.substring(1,service.length);
 
+                    
+                    var userResult = await User.findOne({_id:appUserId});
+
+                   
+
                     var stylistResult = await User.findOne({ _id: stylishId });
                     //check stylish available
-                    if (stylistResult){
+                    if (stylistResult && userResult){
+
+                        var fullName = userResult.first_name+" "+userResult.last_name;
 
                         var stylishName = stylistResult.first_name + " " + stylistResult.last_name;
 
-                        array.push({ appointment_id: id, time: appTime, date: appDate, create_time: time, status: status, service: service, name: stylishName });
+                        array.push({ customer_name: fullName, customer_mobile_number: userResult.mobile_number,  appointment_id: id, time: appTime, date: appDate, create_time: time, status: status, service: service, name: stylishName });
 
 
                     }

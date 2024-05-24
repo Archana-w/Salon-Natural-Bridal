@@ -166,8 +166,7 @@ function Inventory() {
     const filteredProducts = productData.filter(product => {
       // Convert both product name and search text to lowercase for case-insensitive search
       return product.category.toLowerCase().includes(searchText.toLowerCase());
-      
-   });
+});
 
   // Update productData state with filtered products
   setProductData(filteredProducts);
